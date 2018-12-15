@@ -1,1 +1,14 @@
 export const img_logo = require('./logo.png');
+export const img_rb = require('./image1.png');
+export const img_finance = require('./finance.png');
+export const img_news = require('./news.png');
+export const img_chat = require('./chat.png');
+export const img_timetable = require('./timetable.png');
+export const img_library = require('./library.png');
+export const img_marker = require('./marker.png');
+export const img_person = require('./person.png');
+export const img_rating = require('./rating.png');
+export const img_wifi = require('./wifi.png');
+export const img_parent = require('./parent.png');
+export const img_question = require('./question.png');
+export const img_student = require('./student.png');
