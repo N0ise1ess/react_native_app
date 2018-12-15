@@ -1,4 +1,5 @@
 import React, { Component }  from 'react';
+import { connect } from 'react-redux';
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -10,20 +11,26 @@ import {
 class AuthLoadingScreen extends Component {
   constructor(props) {
     super(props);
-    this._bootstrapAsync();
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+  componentWillReceiveProps(newProps) {
+    if(newProps.token === null) {
+      this.props.navigation.navigate('Auth');
+    }
+    if(newProps.isRehydrated) {
+      this.props.navigation.navigate(this.props.token !== null ? 'App' : 'Auth');
+    }
+  }
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  };
+  componentWillMount() {
+    if(this.props.isRehydrated){
+      this.props.navigation.navigate(this.props.token !== null ? 'App' : 'Auth');
+    }
+  }
 
   // Render any loading content that you like here
   render() {
+    console.log(this.props.token);
     return (
       <View style={styles.container}>
         <ActivityIndicator />
@@ -36,8 +43,14 @@ class AuthLoadingScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: '#1f1f1f',
   }
 })
 
-export default AuthLoadingScreen;
+const mapStateToProps = (state) => {
+  return {
+    ...state.authReducer,
+  }
+}
+
+export default connect(mapStateToProps, null)(AuthLoadingScreen);
