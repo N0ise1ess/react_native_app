@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const endpoint = 'http://46.20.75.133:4002/uaa/oauth/token';
 
+const endpointLibraryCard = 'http://46.20.75.133:4002/library/card';
+const endpointLibraryBook = 'http://46.20.75.133:4002/library/book/me';
+
 export function loginApi(values) {
 
   let data = new FormData();
@@ -14,6 +17,24 @@ export function loginApi(values) {
     headers: {
       'Authorization': 'Basic bW9iaWxlOg==',
       'Content-Type': 'application/x-www-form-urlencoded',
+    }
+  })
+};
+
+export function libCardApi(token) {
+
+  return axios.get(endpointLibraryCard, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+}
+
+export function libBookApi(token) {
+
+  return axios.get(endpointLibraryBook, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
     }
   })
 }
