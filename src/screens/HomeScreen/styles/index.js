@@ -20,7 +20,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    bottom: 50,
+    bottom: 20,
   },
   buttonSelected: {
     color: '#0E63EE'

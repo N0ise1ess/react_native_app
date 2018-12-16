@@ -8,7 +8,7 @@ import { img_rb } from '../../assets/images';
 
 
 export default function CardItem(props) {
-    return <TouchableOpacity onPress={() => console.log('asdasd')}>
+    return <TouchableOpacity onPress={props.navigate}>
       <Card style={styles.cardStyle}>
         <Image source={props.image} style={styles.imageStyle} />
         <Text style={styles.textStyle}>{props.title}</Text>

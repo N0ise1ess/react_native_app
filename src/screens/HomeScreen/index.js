@@ -62,6 +62,7 @@ const cardList = [
       },
       {
         title: 'Библиотека',
+        route: 'Library',
         image: img_library,
       },
     ]
@@ -99,19 +100,11 @@ const cardList = [
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    header: <Header style={styles.headerStyle}>
-      <Left>
-        <Image style={styles.headerImageStyle} source={img_student} />
-      </Left>
-      <Body>
-        <Text style={{color: '#fff', width: '100%', fontSize: 14,}}>Иванов Иван Иванович</Text>
-      </Body>
-      <Right>
-        <Button transparent>
-          <Icon type='Feather' name='settings' style={{color: 'white'}} />
-        </Button>
-      </Right>
-    </Header>
+    title: 'Иванов Иван Иванович',
+    headerLeft: <Left>
+      <Image style={styles.headerImageStyle} source={img_student} />
+    </Left>
+
   };
 
   render(){
@@ -122,9 +115,13 @@ class HomeScreen extends Component {
             customSlide={({ index, item, style, width }) => (
             // It's important to put style here because it's got offset inside
               <View key={index} style={[style, styles.customSlide]}>
-                <View key={index} style={styles.flatListStyle}>
+                <View style={styles.flatListStyle}>
                   {item.list.map(item =>
-                    <CardItem image={item.image} title={item.title}/>
+                    <CardItem
+                      image={item.image}
+                      title={item.title}
+                      navigate={() => this.props.navigation.navigate(item.route)}
+                    />
                   )}
                 </View>
               </View>
@@ -134,6 +131,7 @@ class HomeScreen extends Component {
               {cardList.map((image, index) => {
                 return (
                   <View
+                    key={index}
                     style={styles.button}
                   >
                     <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />

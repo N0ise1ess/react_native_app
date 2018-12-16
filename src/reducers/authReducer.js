@@ -1,15 +1,11 @@
+import initialState from '../store/initialState';
 import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from '../constants';
 
-const initialState = {
-  token: null,
-  errorMessage: '',
-}
-
-export default authReducer = (state = initialState, action) => {
+export default authReducer = (state = initialState.authReducer, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
