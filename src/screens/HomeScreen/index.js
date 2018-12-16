@@ -104,7 +104,7 @@ class HomeScreen extends Component {
         <Image style={styles.headerImageStyle} source={img_student} />
       </Left>
       <Body>
-        <Text style={{color: '#fff', width: '100%', fontSize: 12,}}>Иванов Иван Иванович</Text>
+        <Text style={{color: '#fff', width: '100%', fontSize: 14,}}>Иванов Иван Иванович</Text>
       </Body>
       <Right>
         <Button transparent>
