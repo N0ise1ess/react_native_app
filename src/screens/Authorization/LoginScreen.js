@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
   StatusBar,
-  Image
+  Image,
+  View,
 } from 'react-native';
 import {
   Content,
@@ -127,15 +128,17 @@ class LoginScreen extends Component {
     return (
       <MainView>
         <StatusBar />
-        <Content style={styles.content}>
-          <Image
-            source={img_logo}
-            resizeMode='contain'
-            style={styles.imageStyle}
-          />
-        {this.renderInputForm()}
-        <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-        <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+        <Content>
+          <View style={styles.content}>
+            <Image
+              source={img_logo}
+              resizeMode='contain'
+              style={styles.imageStyle}
+            />
+          {this.renderInputForm()}
+          <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+          <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+          </View>
         </Content>
       </MainView>
     )
