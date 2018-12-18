@@ -4,6 +4,7 @@ const endpoint = 'http://46.20.75.133:4002/uaa/oauth/token';
 
 const endpointLibraryCard = 'http://46.20.75.133:4002/library/card';
 const endpointLibraryBook = 'http://46.20.75.133:4002/library/book/me';
+const endpointNewsAll = 'http://46.20.75.133:4002/integration/api/news/all';
 
 export function loginApi(values) {
 
@@ -37,4 +38,8 @@ export function libBookApi(token) {
       'Authorization': `Bearer ${token}`,
     }
   })
+}
+
+export function newsApi() {
+  return axios.get(endpointNewsAll)
 }

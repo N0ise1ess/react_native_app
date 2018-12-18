@@ -5,5 +5,8 @@ export default {
   },
   libraryReducer: {
 
+  },
+  newsReducer: {
+    
   }
 }

@@ -13,12 +13,16 @@ import {
   HomeScreen,
   LibraryScreen,
   LibraryCardScreen,
+  NewsScreen,
+  NewsDetailsScreen,
 } from '../screens';
 
 const AppStack = createStackNavigator({
   Home: HomeScreen,
   Library: LibraryScreen,
-  LibraryCard: LibraryCardScreen
+  LibraryCard: LibraryCardScreen,
+  News: NewsScreen,
+  NewsDetails: NewsDetailsScreen,
 },
 {
   initialRouteName: 'Home',
