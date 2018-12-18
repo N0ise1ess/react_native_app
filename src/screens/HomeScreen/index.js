@@ -46,6 +46,7 @@ const cardList = [
       },
       {
         title: 'Новости',
+        route: 'News',
         image: img_news,
       },
       {
@@ -127,19 +128,19 @@ class HomeScreen extends Component {
               </View>
             )}
             customButtons={(position, move) => (
-            <View style={styles.buttons}>
-              {cardList.map((image, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={styles.button}
-                  >
-                    <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />
-                  </View>
-                );
-              })}
-            </View>
-          )}
+              <View style={styles.buttons}>
+                {cardList.map((image, index) => {
+                  return (
+                    <View
+                      key={index}
+                      style={styles.button}
+                    >
+                      <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />
+                    </View>
+                  );
+                })}
+              </View>
+            )}
         />
       </Container>
     )
