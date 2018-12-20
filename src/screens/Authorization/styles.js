@@ -1,9 +1,17 @@
 import Reac from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 export default StyleSheet.create({
   content: {
-    width: 250,
+    flex: 1,
+    width: width,
+    height,
+  },
+  section: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: (width / 5) * 3,
   },
   item: {
     marginTop: 25,

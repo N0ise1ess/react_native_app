@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, Dimensions, TouchableOpacity, Linking } from 'react-native';
+import { Image, Dimensions, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Card, CardItem, Text, Body } from 'native-base';
+import m from 'moment/min/moment-with-locales';
 import HTML from 'react-native-render-html';
 
 import styles from './styles';
@@ -8,15 +9,29 @@ import styles from './styles';
 const { width, height } = Dimensions.get('window');
 
 const htmlProps = {
-  onLinkPress: (evt, href) => { Linking.openURL(href); },
+  onLinkPress: (evt, href) => {
+    console.log(href);
+    Alert.alert(
+      'Хотите открыть ссылку в браузере?',
+      'чтобы открыть ссылку ...',
+      [
+        {text: 'Открыть в браузере', onPress: () => Linking.openURL(href).catch(err => console.error('An error occurred', err))},
+        {text: 'Отмена', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: false }
+    )
+   }
 }
+
 export const News = (props) => {
+  m.locale('ru');
+  const cleanText = props.description && props.description.replace(/<\/?[^>]+(>|$)/g, "");
   return (
-    <TouchableOpacity disabled={!props.onPress} onPress={props.onPress}>
+    <TouchableOpacity style={styles.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
         {props.image && <Image style={styles.imageStyle} source={{uri: `data:image/png;base64,${props.image}`}} />}
         <CardItem>
-          <Text>{props.time && props.time}</Text>
+          <Text style={styles.timeStyle}>{props.time && m(props.time).format('LL')}</Text>
         </CardItem>
         <CardItem header>
           {props.newsType === 'advertisement' ?
@@ -25,7 +40,13 @@ export const News = (props) => {
         </CardItem>
         <CardItem>
           <Body>
-            <HTML html={props.description && props.description} imagesMaxWidth={width} />
+            {props.description && props.isTruncate ?
+              <Text style={styles.textStyle} numberOfLines={3}>{cleanText}</Text> :
+              <HTML
+                {...htmlProps}
+                html={props.description}
+                imagesMaxWidth={width}
+              />}
           </Body>
         </CardItem>
      </Card>

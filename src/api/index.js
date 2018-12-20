@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const endpoint = 'http://46.20.75.133:4002/uaa/oauth/token';
+const endpoint = 'http://opencode.su/campus/uaa/oauth/token';
 
-const endpointLibraryCard = 'http://46.20.75.133:4002/library/card';
-const endpointLibraryBook = 'http://46.20.75.133:4002/library/book/me';
-const endpointNewsAll = 'http://46.20.75.133:4002/integration/api/news/all';
+const endpointLibraryCard = 'http://opencode.su/campus/library/card';
+const endpointLibraryBook = 'http://opencode.su/campus/library/book/me';
+const endpointNewsAll = 'http://opencode.su/campus/integration/api/news/all';
 
 export function loginApi(values) {
 

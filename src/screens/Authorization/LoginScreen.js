@@ -8,6 +8,7 @@ import {
 import {
   Content,
   Item,
+  ListItem,
   Icon,
   Input,
   CheckBox,
@@ -67,7 +68,7 @@ class LoginScreen extends Component {
   }
 
   onInputUsernameChange = (event) => {
-    console.log(event.type);
+    console.log(event);
     this.setState(prevState => ({
       values: {
         ...prevState.values,
@@ -77,7 +78,7 @@ class LoginScreen extends Component {
   }
 
   onInputPasswordChange = (event) => {
-    console.log(event.type);
+    console.log(event);
     this.setState(prevState => ({
       values: {
         ...prevState.values,
@@ -107,16 +108,15 @@ class LoginScreen extends Component {
           style={styles.inputIcon}/>
         <Input
           onChangeText={this.onInputPasswordChange}
+          secureTextEntry={true}
           value={this.state.values.password}
           style={styles.inputStyle}
           placeholder='Пароль'/>
       </Item>
-      <Item style={[styles.item, {borderBottomWidth: 0}]}>
+      <ListItem style={{borderBottomWidth: 0, justifyContent: 'center', flexDirection: 'row'}}>
         <CheckBox checked={true} color="#163D7D"/>
-        <Body>
-          <Text>Запомнить</Text>
-        </Body>
-      </Item>
+        <Text>Запомнить</Text>
+      </ListItem>
       <Button onPress={this.onButtonPress} full rounded style={styles.buttonStyle}>
         <Text>Войти</Text>
       </Button>
@@ -124,20 +124,21 @@ class LoginScreen extends Component {
   }
 
   render(){
-    console.log(this.props);
     return (
       <MainView>
         <StatusBar />
         <Content>
           <View style={styles.content}>
-            <Image
-              source={img_logo}
-              resizeMode='contain'
-              style={styles.imageStyle}
-            />
-          {this.renderInputForm()}
-          <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-          <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+            <View style={styles.section}>
+              <Image
+                source={img_logo}
+                resizeMode='contain'
+                style={styles.imageStyle}
+              />
+            {this.renderInputForm()}
+            <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+            <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+            </View>
           </View>
         </Content>
       </MainView>

@@ -25,7 +25,7 @@ const AppStack = createStackNavigator({
   NewsDetails: NewsDetailsScreen,
 },
 {
-  initialRouteName: 'Home',
+  initialRouteName: 'News',
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: '#163D7D',
