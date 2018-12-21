@@ -18,6 +18,7 @@ import {
 import ImageSlider from 'react-native-image-slider';
 
 import { News } from '../../components/News';
+import FooterSection from '../../components/Footer';
 
 import styles from './styles';
 
@@ -39,6 +40,7 @@ class NewsDetailsScreen extends Component {
 
 
   render () {
+    const { userStatus, navigation } = this.props;
     const { params } = this.props.navigation.state
     return (
       <Container>
@@ -51,9 +53,19 @@ class NewsDetailsScreen extends Component {
             description={params.description}
           />
         </Content>
+        <FooterSection
+          userStatus = {userStatus}
+          navigate={navigation.navigate}
+        />
       </Container>
     )
   }
 }
 
-export default NewsDetailsScreen;
+const mapStateToProps = state => {
+  return {
+    ...state.authReducer,
+  }
+}
+
+export default connect(mapStateToProps, null)(NewsDetailsScreen);

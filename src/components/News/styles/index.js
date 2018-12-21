@@ -7,7 +7,8 @@ const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   cardItem: {
-    marginTop: 10,
+    marginBottom: 0,
+    paddingBottom: 0,
   },
   imageStyle: {
     resizeMode: 'cover',

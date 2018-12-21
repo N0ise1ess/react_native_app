@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#C8D1D3',
+    backgroundColor: '#CED8DA',
   },
   label: {
     fontSize: 14,
@@ -44,5 +44,44 @@ export default StyleSheet.create({
   issueDate:{
     fontSize: 12,
     fontWeight: '300',
-  }
+  },
+
+  tabHeaderStyle:{
+    backgroundColor: '#CED8DA',
+    borderBottomWidth: 0,
+    justifyContent: 'center',
+  },
+  tabHeadingStyle: {
+    marginTop: 10,
+    marginBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#fff',
+    backgroundColor: '#163D7D'
+  },
+  tabHeadingRight: {
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    marginRight: 15,
+  },
+  tabHeadingLeft: {
+    marginLeft: 15,
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+  },
+  tabTitleStyle: {
+    color: '#fff',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  tabSectionStyle: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: '#CED8DA',
+  },
+  activeTabStyle: {
+    backgroundColor: '#0E63EE'
+  },
 })

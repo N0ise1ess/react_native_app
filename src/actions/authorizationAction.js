@@ -6,6 +6,9 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_PENDING,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from '../constants';
 
 export const login = (values) => async dispatch => {
@@ -33,8 +36,14 @@ export const login = (values) => async dispatch => {
     console.log(err);
     dispatch({
       type: LOGIN_FAILURE,
-      payload: err,
+      payload: err.response.data.error_description,
       error: true
     });
   }
 };
+
+export const logout = () => async dispatch => {
+  dispatch({
+    type: LOGOUT_SUCCESS
+  });
+}

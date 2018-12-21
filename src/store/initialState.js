@@ -1,12 +1,14 @@
 export default {
   authReducer: {
     token: null,
-    errorMessage: '',
+    errorMessage: null,
+    authLoading: false,
+    userStatus: 'guest',
   },
   libraryReducer: {
 
   },
   newsReducer: {
-    
+
   }
 }

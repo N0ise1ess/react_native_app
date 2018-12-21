@@ -8,10 +8,12 @@ import {
   Dimensions,
 } from 'react-native';
 import {
+  Button,
   Container,
   Content,
   Text,
   Icon,
+  Left,
   Tab,
   TabHeading,
   Tabs,
@@ -20,6 +22,7 @@ import {
 import ImageSlider from 'react-native-image-slider';
 
 import { News } from '../../components/News';
+import FooterSection from '../../components/Footer';
 
 import {
   getAllNews
@@ -30,12 +33,19 @@ import styles from './styles';
 const imagesOnLoading = [{ isLoading: true }]
 
 class NewsScreen extends Component {
-  static navigationOptions = {
-    title: 'Новости университета',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Новости университета',
+      headerLeft: <Left>
+        <Button transparent onPress={() => navigation.replace('Home')}>
+          <Icon name='arrow-back' style={{color: 'white'}}/>
+        </Button>
+      </Left>
+    }
   };
 
   constructor(props){
-    super(props)
+    super(props);
 
     this.state = {
       slider: props.slider,
@@ -91,7 +101,7 @@ class NewsScreen extends Component {
   renderEvents = (events) => {
     return events.map((item, index) =>
       <View>
-        <Text style={{alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 15, paddingBottom: 15, }}>{m(item.time).format('LL')}</Text>
+        <Text style={{alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 10, }}>{m(item.time).format('LL')}</Text>
         <News
           newsType='events'
           key={index}
@@ -148,10 +158,10 @@ class NewsScreen extends Component {
 
 
   render () {
-    const { slider, news, advertisement, event } = this.props;
+    const { slider, news, advertisement, event, userStatus, navigation } = this.props;
     const { isLoading, isSliderShown, currentTab } = this.state;
     if (!slider || !news) <Text>Laoding..</Text>
-  
+
     return (
       <Container>
         {isSliderShown && (slider ? this.renderSlider(slider) : this.renderSlider(imagesOnLoading))}
@@ -161,46 +171,44 @@ class NewsScreen extends Component {
         >
           <Tab
             heading={<TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab % 3 === 0 && styles.activeTabStyle]}>
+              <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
                 {this._upperCase('Новости')}
               </View>
             </TabHeading>}
           >
             <Content
               style={styles.tabSectionStyle}
-              scrollEventThrottle={1}
-              onScroll={(event) => this.onScrollGetsHeight(event.nativeEvent.contentOffset.y)}
             >
               {news ? this.renderNews(news) : <Spinner color='blue' />}
             </Content>
           </Tab>
           <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, currentTab % 3 === 1 && styles.activeTabStyle]}>
+              <View style={[styles.tabHeadingStyle, currentTab === 1 && styles.activeTabStyle]}>
                 {this._upperCase('Обновления')}
               </View>
             </TabHeading>}>
             <Content
               style={styles.tabSectionStyle}
-              scrollEventThrottle={1}
-              onScroll={(event) => this.onScrollGetsHeight(event.nativeEvent.contentOffset.y)}
             >
               {advertisement ? this.renderUpdates(advertisement) : <Spinner color='blue' />}
             </Content>
           </Tab>
           <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 2 && styles.activeTabStyle]}>
+              <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab === 2 && styles.activeTabStyle]}>
                 {this._upperCase('Мероприятия')}
               </View>
             </TabHeading>}>
             <Content
               style={styles.tabSectionStyle}
-              scrollEventThrottle={1}
-              onScroll={(event) => this.onScrollGetsHeight(event.nativeEvent.contentOffset.y)}
             >
               {event ? this.renderEvents(event) : <Spinner color='blue' />}
             </Content>
           </Tab>
         </Tabs>
+        <FooterSection
+          userStatus = {userStatus}
+          navigate={navigation.navigate}
+        />
       </Container>
     )
   }
@@ -208,6 +216,7 @@ class NewsScreen extends Component {
 
 const mapStateToProps = state => {
   return {
+    ...state.authReducer,
     ...state.newsReducer,
   }
 }

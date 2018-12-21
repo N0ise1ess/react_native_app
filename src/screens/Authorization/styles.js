@@ -12,6 +12,8 @@ export default StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: (width / 5) * 3,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
   },
   item: {
     marginTop: 25,

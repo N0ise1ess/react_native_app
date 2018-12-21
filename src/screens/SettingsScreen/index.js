@@ -12,6 +12,8 @@ import {
   ListItem,
 } from 'native-base';
 
+import { logout } from '../../actions/authorizationAction';
+
 import FooterSection from '../../components/Footer';
 
 import {
@@ -23,49 +25,38 @@ import {
   img_collection,
   img_list,
   img_search,
+  img_logout,
 } from '../../assets/images';
 
 import styles from './styles';
 
 const itemList = [
   {
-    title: 'Поиск книг',
+    title: 'Уведомления',
     image: img_search,
   },
   {
-    title: 'Избранное',
+    title: 'Учетная запись',
     image: img_star,
   },
   {
-    title: 'Коллекции',
+    title: 'Основные',
     image: img_collection,
   },
   {
-    title: 'Список книг',
+    title: 'О приложении',
     image: img_list,
   },
   {
-    title: 'Услуги',
-    image: img_services,
+    title: 'Выход из учетной записи',
+    route: 'Login',
+    image: img_logout,
   },
-  {
-    title: 'Читательский билет',
-    route: 'LibraryCard',
-    image: img_membership,
-  },
-  {
-    title: 'Оповещения библиотеки',
-    image: img_notification,
-  },
-  {
-    title: 'Переход на сайт ЭБС',
-    image: img_link,
-  }
 ]
 
-class LibraryScreen extends Component {
+class SettingsScreen extends Component {
   static navigationOptions = {
-    title: 'Библиотека',
+    title: 'Настройки',
   };
 
 
@@ -76,17 +67,26 @@ class LibraryScreen extends Component {
     }
   }
 
+  onAuthHandle = () => {
+    if(this.props.token) {
+      this.props.logout();
+      this.props.navigation.navigate('Login');
+    } else {
+      this.props.navigation.navigate('Login');
+    }
+  }
+
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus, navigation, token } = this.props;
     return (
       <Container style={styles.container}>
         <Content>
           <List style={styles.listStyle} dataArray={itemList}
             renderRow={(item) =>
-              <ListItem button onPress={() => this.props.navigation.navigate(item.route ? item.route : '')} style={styles.listItemStyle} >
+              <ListItem button onPress={() => item.route === 'Login' ? this.onAuthHandle() : this.props.navigation.navigate(item.route ? item.route : '')} style={styles.listItemStyle} >
                 <Image source={item.image} style={styles.iconStyle} />
-                <Text style={styles.textStyle}>{item.title}</Text>
+                <Text style={styles.textStyle}>{item.route === 'Login' ? (token ? item.title : 'Войти в учетную запись') : item.title}</Text>
               </ListItem>
             }>
           </List>
@@ -106,4 +106,9 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(LibraryScreen);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
+  dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

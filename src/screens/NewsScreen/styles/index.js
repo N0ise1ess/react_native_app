@@ -7,11 +7,10 @@ export default StyleSheet.create({
   },
   customSlide: {
     width,
-    height: height / 5,
     flex: 0,
   },
   sliderImage: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width,
     height: height / 5,
   },
