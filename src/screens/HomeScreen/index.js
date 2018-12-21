@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   FlatList,
   Image,
@@ -19,6 +20,7 @@ import {
 } from 'native-base';
 import ImageSlider from 'react-native-image-slider';
 import CardItem from '../../components/CardItem';
+import FooterSection from '../../components/Footer';
 import styles from './styles';
 
 import {
@@ -41,7 +43,7 @@ const cardList = [
   {
     list: [
       {
-        title: 'Зачетная книжка',
+        title: 'Зачетная\nкнижка',
         image: img_rb,
       },
       {
@@ -59,6 +61,7 @@ const cardList = [
       },
       {
         title: 'Расписание',
+        route: 'TimeTable',
         image: img_timetable,
       },
       {
@@ -108,43 +111,47 @@ class HomeScreen extends Component {
 
   };
 
+  
+
   render(){
+    const { navigation, userStatus } = this.props;
     return (
-      <Container>
-          <ImageSlider
-            images={cardList}
-            customSlide={({ index, item, style, width }) => (
-            // It's important to put style here because it's got offset inside
-              <View key={index} style={[style, styles.customSlide]}>
-                <View style={styles.flatListStyle}>
-                  {item.list.map(item =>
-                    <CardItem
-                      image={item.image}
-                      title={item.title}
-                      navigate={() => this.props.navigation.navigate(item.route)}
-                    />
-                  )}
-                </View>
+      <Container style={styles.container}>
+        <ImageSlider
+          images={cardList}
+          customSlide={({ index, item, style, width }) => (
+          // It's important to put style here because it's got offset inside
+            <View key={index} style={[style, styles.customSlide]}>
+              <View style={styles.flatListStyle}>
+                {item.list.map(item =>
+                  <CardItem
+                    image={item.image}
+                    title={item.title}
+                    navigate={() => this.props.navigation.navigate(item.route ? item.route : '')}
+                  />
+                )}
               </View>
-            )}
-            customButtons={(position, move) => (
-              <View style={styles.buttons}>
-                {cardList.map((image, index) => {
-                  return (
-                    <View
-                      key={index}
-                      style={styles.button}
-                    >
-                      <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />
-                    </View>
-                  );
-                })}
-              </View>
-            )}
+            </View>
+          )}
+          customButtons={(position, move) => (
+            <View style={styles.buttons}>
+              {cardList.map((image, index) => <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />)}
+            </View>
+          )}
+        />
+        <FooterSection
+          userStatus = {userStatus}
+          navigate={navigation.navigate}
         />
       </Container>
     )
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = state => {
+  return {
+    ...state.authReducer,
+  }
+}
+
+export default connect(mapStateToProps, null)(HomeScreen);

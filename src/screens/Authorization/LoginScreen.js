@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { reset } from 'redux-form';
 import {
   StatusBar,
   Image,
@@ -19,11 +20,14 @@ import {
   Right,
   Left,
   Title,
+  Toast,
 } from 'native-base';
 
 import { login } from '../../actions/authorizationAction';
+import { LoginForm } from '../../components/Forms';
 
 import { MainView } from '../../components/Views/MainView';
+import FooterSection from '../../components/Footer';
 import { img_logo } from '../../assets/images';
 import styles from './styles';
 
@@ -39,95 +43,42 @@ class LoginScreen extends Component {
   }
 
   static navigationOptions = {
-    header: <Header style={styles.headerStyle}>
-      <Left>
-        <Button transparent>
-          <Icon name='arrow-back' style={{color: 'white'}}/>
-        </Button>
-      </Left>
-      <Body>
-        <Title style={{color: '#fff'}}>Авторизация</Title>
-      </Body>
-      <Right>
-        <Button transparent>
-          <Icon type='Feather' name='settings' style={{color: 'white'}} />
-        </Button>
-      </Right>
-    </Header>
+    headerTitle: 'Авторизация',
   };
 
   componentWillReceiveProps(newProps) {
     if(this.props.token !== newProps.token) {
-      this.props.navigation.navigate('App');
+      this.props.navigation.navigate('News');
+    }
+    if(this.props.errorMessage !== newProps.errorMessage) {
+      this.showToast(newProps.errorMessage);
     }
   }
 
-  onButtonPress = () => {
-    console.log('login is precessing');
-    this.props.login(this.state.values);
+  onButtonPress = async () => {
+    const { form } = this.props;
+    await this.props.login(form.values);
+    !form.values.checkbox && this.props.reset();
   }
 
-  onInputUsernameChange = (event) => {
-    console.log(event);
-    this.setState(prevState => ({
-      values: {
-        ...prevState.values,
-        username: event
-      }
-    }))
-  }
-
-  onInputPasswordChange = (event) => {
-    console.log(event);
-    this.setState(prevState => ({
-      values: {
-        ...prevState.values,
-        password: event
-      }
-    }))
-  }
-
-  renderInputForm = () => {
-    return <Fragment>
-      <Item regular style={styles.item}>
-        <Icon
-          type="FontAwesome"
-          name='user'
-          style={styles.inputIcon}
-        />
-        <Input
-          onChangeText={this.onInputUsernameChange}
-          value={this.state.values.username}
-          style={styles.inputStyle}
-          placeholder='Логин'/>
-      </Item>
-      <Item regular style={styles.item} >
-        <Icon
-          type="FontAwesome"
-          name='lock'
-          style={styles.inputIcon}/>
-        <Input
-          onChangeText={this.onInputPasswordChange}
-          secureTextEntry={true}
-          value={this.state.values.password}
-          style={styles.inputStyle}
-          placeholder='Пароль'/>
-      </Item>
-      <ListItem style={{borderBottomWidth: 0, justifyContent: 'center', flexDirection: 'row'}}>
-        <CheckBox checked={true} color="#163D7D"/>
-        <Text>Запомнить</Text>
-      </ListItem>
-      <Button onPress={this.onButtonPress} full rounded style={styles.buttonStyle}>
-        <Text>Войти</Text>
-      </Button>
-    </Fragment>
+  showToast(message) {
+    return (
+      Toast.show({
+        text: message,
+        buttonText: 'Ок',
+        duration: 2000,
+        type: 'danger'
+      })
+    );
   }
 
   render(){
+    const { authLoading, errorMessage, userStatus, navigation } = this.props;
+
     return (
       <MainView>
         <StatusBar />
-        <Content>
+        <View>
           <View style={styles.content}>
             <View style={styles.section}>
               <Image
@@ -135,12 +86,20 @@ class LoginScreen extends Component {
                 resizeMode='contain'
                 style={styles.imageStyle}
               />
-            {this.renderInputForm()}
-            <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-            <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+              <LoginForm
+                errorMessage
+                handleSubmit={this.onButtonPress}
+                isLoading={authLoading}
+              />
+              <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+              <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
             </View>
           </View>
-        </Content>
+          <FooterSection
+            userStatus = {userStatus}
+            navigate={navigation.navigate}
+          />
+        </View>
       </MainView>
     )
   }
@@ -149,11 +108,13 @@ class LoginScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
+    form: state.form.login,
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   login: (values) => dispatch(login(values)),
+  reset: () => dispatch(reset('login')),
   dispatch,
 })
 

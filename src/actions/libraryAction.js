@@ -1,6 +1,7 @@
 import {
   libCardApi,
-  libBookApi
+  libBookApi,
+  libQRCodeApi
 } from '../api';
 
 import {
@@ -10,6 +11,9 @@ import {
   LIBRARY_BOOK_PENDING,
   LIBRARY_BOOK_SUCCESS,
   LIBRARY_BOOK_FAILURE,
+  LIBRARY_QRCODE_PENDING,
+  LIBRARY_QRCODE_SUCCESS,
+  LIBRARY_QRCODE_FAILURE,
 } from '../constants';
 
 export const getLibraryCard = (token) => async dispatch => {
@@ -37,6 +41,37 @@ export const getLibraryCard = (token) => async dispatch => {
     console.log(err);
     dispatch({
       type: LIBRARY_CARD_FAILURE,
+      payload: err,
+      error: true
+    });
+  }
+};
+
+export const getLibraryQRCode = (token) => async dispatch => {
+  dispatch({
+    type: LIBRARY_QRCODE_PENDING
+  });
+  try {
+    const response = await libQRCodeApi(token);
+    if (response && response.data) {
+      console.log(response);
+      if(response.status == '200'){
+        dispatch({
+          type: LIBRARY_QRCODE_SUCCESS,
+          payload: response.data
+        });
+      }
+      else{
+        dispatch({
+          type: LIBRARY_QRCODE_FAILURE,
+          payload: response
+        })
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: LIBRARY_QRCODE_FAILURE,
       payload: err,
       error: true
     });

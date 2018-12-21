@@ -23,3 +23,5 @@ export const img_services = require('./services.png');
 export const img_collection = require('./collection.png');
 export const img_list = require('./list.png');
 export const img_search = require('./search.png');
+
+export const img_logout = require('./logout.png');

@@ -3,8 +3,12 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
+  container: {
+    backgroundColor: '#CED8DA',
+  },
   flatListStyle: {
     flexDirection: 'row',
+    flex: 1,
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     paddingLeft: 10,
@@ -16,11 +20,9 @@ export default StyleSheet.create({
     backgroundColor: '#CED8DA'
   },
   buttons: {
-    position: 'absolute',
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    bottom: 20,
   },
   buttonSelected: {
     color: '#0E63EE'

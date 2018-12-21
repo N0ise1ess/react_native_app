@@ -15,6 +15,8 @@ import {
   LibraryCardScreen,
   NewsScreen,
   NewsDetailsScreen,
+  TimeTableScreen,
+  SettingsScreen
 } from '../screens';
 
 const AppStack = createStackNavigator({
@@ -23,10 +25,12 @@ const AppStack = createStackNavigator({
   LibraryCard: LibraryCardScreen,
   News: NewsScreen,
   NewsDetails: NewsDetailsScreen,
+  TimeTable: TimeTableScreen,
+  Settings: SettingsScreen,
 },
 {
-  initialRouteName: 'News',
-  defaultNavigationOptions: {
+  initialRouteName: 'Home',
+  defaultNavigationOptions: ({ navigation }) => ({
     headerStyle: {
       backgroundColor: '#163D7D',
     },
@@ -36,11 +40,11 @@ const AppStack = createStackNavigator({
       fontWeight: 'normal',
     },
     headerRight: <Right>
-      <Button transparent>
-        <Icon type='Feather' name='settings' style={{color: 'white'}} />
+      <Button transparent onPress={() => navigation.navigate('Settings')}>
+        <Icon type='EvilIcons' name='gear' style={{color: 'white', fontSize: 30}} />
       </Button>
     </Right>
-  },
+  }),
 })
 
 export default createAppContainer(AppStack);

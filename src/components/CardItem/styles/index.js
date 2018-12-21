@@ -1,15 +1,18 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-
+console.log(height);
+const MIN_WIDTH = width / 3;
 export default StyleSheet.create({
   cardStyle: {
-    width: (width - 60) / 2,
-    height: (width - 60) / 2,
+    width: (height - 100) / 5,
+    minWidth: MIN_WIDTH,
+    height: (MIN_WIDTH > (height - 100) / 5) ? MIN_WIDTH : (height - 60) / 5,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 20,
-    borderRadius: 5, 
+    marginBottom: 15,
+    padding: 4,
+    borderRadius: 5,
   },
   imageStyle: {
     resizeMode: 'contain',
@@ -20,5 +23,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     height: 45,
     color: '#2E518A',
+  },
+  borderStyle: {
+    flex: 1,
+    width: '100%',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#CED8DA',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   }
 })
