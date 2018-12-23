@@ -3,7 +3,7 @@ import axios from 'axios';
 const endpoint = 'http://opencode.su/campus/uaa/oauth/token';
 
 const endpointLibraryCard = 'http://opencode.su/campus/library/card';
-const endpointQRCode = 'https://opencode.su/campus/library/card/qr';
+const endpointQRCode = 'http://opencode.su/campus/library/card/qr';
 const endpointLibraryBook = 'http://opencode.su/campus/library/book/me';
 const endpointNewsAll = 'http://opencode.su/campus/integration/api/news/all';
 

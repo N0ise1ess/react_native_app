@@ -103,18 +103,28 @@ const cardList = [
 
 
 class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Иванов Иван Иванович',
-    headerLeft: <Left>
-      <Image style={styles.headerImageStyle} source={img_student} />
-    </Left>
+  static navigationOptions = ({navigation}) => {
 
+    return {
+      title: navigation.state.params && navigation.state.params.userFullName,
+      headerLeft: <Left>
+        <Image style={styles.headerImageStyle} source={img_student} />
+      </Left>
+    }
   };
 
-  
+  componentWillMount() {
+    const {firstName, secondName, lastName } = this.props;
+    this.props.navigation.setParams({
+      userFullName: lastName || firstName || secondName ? `${lastName} ${firstName} ${secondName}` : 'Гость'
+    })
+  }
+
+
 
   render(){
     const { navigation, userStatus } = this.props;
+    console.log(this.props);
     return (
       <Container style={styles.container}>
         <ImageSlider
