@@ -6,6 +6,7 @@ import {
   LIBRARY_BOOK_PENDING,
   LIBRARY_BOOK_SUCCESS,
   LIBRARY_BOOK_FAILURE,
+  LIBRARY_QRCODE_SUCCESS,
 } from '../constants';
 
 export default libraryReducer = (state= initialState.libraryReducer, action) => {
@@ -19,6 +20,11 @@ export default libraryReducer = (state= initialState.libraryReducer, action) => 
       return {
         ...state,
         bookInfo: action.payload,
+      }
+    case LIBRARY_QRCODE_SUCCESS:
+      return {
+        ...state,
+        qrcodeData: action.payload,
       }
     default:
       return state;

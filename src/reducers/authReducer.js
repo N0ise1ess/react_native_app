@@ -12,14 +12,13 @@ export default authReducer = (state = initialState.authReducer, action) => {
   switch (action.type) {
     case LOGOUT_SUCCESS:
       return {
-        ...state,
         token: null,
         userStatus: 'guest',
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.payload,
+        ...action.payload,
         authLoading: false,
         userStatus: 'student',
       }

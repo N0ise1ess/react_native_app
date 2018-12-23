@@ -3,18 +3,24 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
+    flex: 1,
   },
   label: {
     fontSize: 14,
     fontWeight: '300',
     marginTop: 10,
-    marginBottom: 5,
+    marginBottom: 3,
   },
   dataText: {
     fontSize: 16,
     fontWeight: 'bold',
   },
   listItemStyle: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
+  },
+  listStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     paddingTop: 15,
@@ -28,24 +34,33 @@ export default StyleSheet.create({
     marginRight: 0,
     alignItems: 'flex-start',
   },
-  listStyle: {
-  },
   textStyle: {
     color: '#163D7D',
   },
   bookTitle: {
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 13,
+    lineHeight: 18,
+    paddingRight: 10,
   },
   bookAuthor: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '300',
+    paddingTop: 5,
+    paddingLeft: 22,
   },
   issueDate:{
-    fontSize: 12,
+    fontSize: 13,
+    fontWeight: '300',
+    paddingTop: 15,
+    paddingBottom: 5,
+    paddingLeft: 22,
+  },
+  returnStyle: {
+    fontSize: 13,
+    paddingLeft: 7,
     fontWeight: '300',
   },
-
   tabHeaderStyle:{
     backgroundColor: '#CED8DA',
     borderBottomWidth: 0,
@@ -77,11 +92,38 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   tabSectionStyle: {
+    backgroundColor: '#CED8DA',
+  },
+  dataSection: {
+    paddingBottom: 20,
+    paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: '#CED8DA',
   },
   activeTabStyle: {
     backgroundColor: '#0E63EE'
   },
+  noDataStyle: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#CED8DA',
+  },
+  noDataTextStyle: {
+    color: 'red',
+    fontSize: 12,
+  },
+  qrcodeSection: {
+    flex: 1,
+    marginTop: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  qrcodeImage: {
+    width: 350,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: 200,
+    resizeMode: 'contain',
+  }
 })
