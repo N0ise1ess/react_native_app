@@ -81,16 +81,14 @@ class LibraryScreen extends Component {
     const { userStatus, navigation } = this.props;
     return (
       <Container style={styles.container}>
-        <Content>
-          <List style={styles.listStyle} dataArray={itemList}
-            renderRow={(item) =>
-              <ListItem button onPress={() => this.props.navigation.navigate(item.route ? item.route : '')} style={styles.listItemStyle} >
-                <Image source={item.image} style={styles.iconStyle} />
-                <Text style={styles.textStyle}>{item.title}</Text>
-              </ListItem>
-            }>
-          </List>
-        </Content>
+        <List scrollEnabled={false} style={styles.listStyle} dataArray={itemList}
+          renderRow={(item) =>
+            <ListItem button onPress={() => this.props.navigation.navigate(item.route ? item.route : '')} style={styles.listItemStyle} >
+              <Image source={item.image} style={styles.iconStyle} />
+              <Text style={styles.textStyle}>{item.title}</Text>
+            </ListItem>
+          }>
+        </List>
         <FooterSection
           userStatus = {userStatus}
           navigate={navigation.navigate}

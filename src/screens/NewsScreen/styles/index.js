@@ -55,6 +55,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   tabSectionStyle: {
+    paddingTop: 10,
     backgroundColor: '#CED8DA',
   },
   activeTabStyle: {

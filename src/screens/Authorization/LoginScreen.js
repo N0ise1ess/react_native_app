@@ -5,6 +5,8 @@ import {
   StatusBar,
   Image,
   View,
+  KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import {
   Content,
@@ -38,6 +40,7 @@ class LoginScreen extends Component {
       values: {
         username: '',
         password: '',
+        isScrollable: false
       }
     }
   }
@@ -79,22 +82,24 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <View>
-          <View style={styles.content}>
-            <View style={styles.section}>
-              <Image
-                source={img_logo}
-                resizeMode='contain'
-                style={styles.imageStyle}
-              />
-              <LoginForm
-                errorMessage
-                handleSubmit={this.onButtonPress}
-                isLoading={authLoading}
-              />
-              <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-              <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
-            </View>
-          </View>
+          <Content style={styles.content}  scrollEnabled={true}>
+            <KeyboardAvoidingView>
+              <View style={styles.section}>
+                <Image
+                  source={img_logo}
+                  resizeMode='contain'
+                  style={styles.imageStyle}
+                />
+                <LoginForm
+                  errorMessage
+                  handleSubmit={this.onButtonPress}
+                  isLoading={authLoading}
+                />
+                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+              </View>
+            </KeyboardAvoidingView>
+          </Content>
           <FooterSection
             userStatus = {userStatus}
             navigate={navigation.navigate}

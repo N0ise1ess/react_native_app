@@ -20,7 +20,7 @@ const htmlProps = {
       ],
       { cancelable: false }
     )
-   }
+  },
 }
 
 export const News = (props) => {
@@ -30,15 +30,15 @@ export const News = (props) => {
     <TouchableOpacity style={styles.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
         {props.image && <Image style={styles.imageStyle} source={{uri: `data:image/png;base64,${props.image}`}} />}
-        {props.time && <CardItem>
-          <Text style={styles.timeStyle}>{props.time && m(props.time).format('LL')}</Text>
+        {props.time && <CardItem style={styles.sectionTime}>
+          <Text style={styles.timeStyle}>{props.time && m(props.time).format('LL').replace("г.", "")}</Text>
         </CardItem>}
-        <CardItem header style={styles.cardItem}>
+        <CardItem header style={styles.sectionTitle}>
           {props.newsType === 'advertisement' ?
             <HTML {...htmlProps} html={props.title && props.title} imagesMaxWidth={width} /> :
             <Text style={styles.titleStyle}>{props.title && props.title}</Text>}
         </CardItem>
-        <CardItem>
+        <CardItem style={styles.sectionText}>
           <Body>
             {props.description && (props.isTruncate ?
               <Text style={styles.textStyle} numberOfLines={3}>{cleanText}</Text> :

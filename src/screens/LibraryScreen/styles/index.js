@@ -1,17 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
   iconStyle: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     marginLeft: 20,
     marginRight: 20,
     resizeMode: 'contain',
   },
   listItemStyle: {
+    maxHeight: height / 12,
     paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 5,
@@ -25,6 +28,7 @@ export default StyleSheet.create({
   listStyle: {
   },
   textStyle: {
+    fontSize: 14,
     color: '#163D7D',
   }
 })

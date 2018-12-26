@@ -5,11 +5,12 @@ export default StyleSheet.create({
     backgroundColor: '#C8D1D3',
   },
   iconStyle: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     marginLeft: 20,
     marginRight: 20,
     resizeMode: 'contain',
+    tintColor: '#163D7D',
   },
   listItemStyle: {
     paddingTop: 20,
@@ -26,5 +27,6 @@ export default StyleSheet.create({
   },
   textStyle: {
     color: '#163D7D',
+    fontSize: 14,
   }
 })

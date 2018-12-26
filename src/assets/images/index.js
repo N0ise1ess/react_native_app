@@ -24,4 +24,16 @@ export const img_collection = require('./collection.png');
 export const img_list = require('./list.png');
 export const img_search = require('./search.png');
 
+//Settings
 export const img_logout = require('./logout.png');
+export const img_login = require('./login.png');
+export const img_settings = require('./settings.png');
+export const img_about = require('./about.png');
+export const img_account = require('./account.png');
+
+//Footer menu
+export const img_timetable_white = require('./timetable-white.png');
+export const img_notification_white = require('./notification-white.png');
+export const img_chat_white = require('./chat-white.png');
+export const img_menu_white = require('./menu-white.png');
+export const img_finance_white = require('./finance-white.png');

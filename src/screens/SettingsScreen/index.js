@@ -17,15 +17,12 @@ import { logout } from '../../actions/authorizationAction';
 import FooterSection from '../../components/Footer';
 
 import {
-  img_star,
-  img_link,
-  img_membership,
-  img_notification,
-  img_services,
-  img_collection,
-  img_list,
-  img_search,
+  img_account,
+  img_notification_white,
+  img_about,
   img_logout,
+  img_login,
+  img_settings,
 } from '../../assets/images';
 
 import styles from './styles';
@@ -33,24 +30,25 @@ import styles from './styles';
 const itemList = [
   {
     title: 'Уведомления',
-    image: img_search,
+    image: img_notification_white,
   },
   {
     title: 'Учетная запись',
-    image: img_star,
+    image: img_account,
   },
   {
     title: 'Основные',
-    image: img_collection,
+    image: img_settings,
   },
   {
     title: 'О приложении',
-    image: img_list,
+    image: img_about,
   },
   {
     title: 'Выход из учетной записи',
     route: 'Login',
     image: img_logout,
+    image2: img_login
   },
 ]
 
@@ -85,7 +83,7 @@ class SettingsScreen extends Component {
           <List style={styles.listStyle} dataArray={itemList}
             renderRow={(item) =>
               <ListItem button onPress={() => item.route === 'Login' ? this.onAuthHandle() : this.props.navigation.navigate(item.route ? item.route : '')} style={styles.listItemStyle} >
-                <Image source={item.image} style={styles.iconStyle} />
+                <Image source={item.route === 'Login' ? (token ? item.image : item.image2) : item.image} style={styles.iconStyle} />
                 <Text style={styles.textStyle}>{item.route === 'Login' ? (token ? item.title : 'Войти в учетную запись') : item.title}</Text>
               </ListItem>
             }>

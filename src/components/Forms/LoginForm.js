@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Item, Icon, Input, Header, Form, Body, Content, CheckBox, ListItem, Title, Button, Text, Spinner } from 'native-base';
+import { Container, Item, Icon, Input, Header, Form, Body, Content, CheckBox, ListItem, Label, Title, Button, Text, Spinner } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 
 import styles from './styles';
@@ -40,6 +40,7 @@ const renderInput = ({ input, label, type, meta: { touched, error, warning }, ic
       <Input
         {...input}
         placeholder={placeholder}
+        placeholderTextColor='silver'
         secureTextEntry={type == 'password'}
         style={styles.inputStyle}
       />
@@ -64,11 +65,15 @@ const renderCheckbox = ({ input, label, type, meta: { touched, error, warning }}
   </ListItem>
 }
 
+const upperCaseWord = (word) => <Label style={styles.label}>{word.toUpperCase()}</Label>
+
 let LoginForm = props => {
   const { handleSubmit, reset, isLoading } = props;
   return <Form style={{justifyContent: 'space-around'}}>
-    <Field name="username" placeholder="Имя пользователя" iconName='user' type="username" component={renderInput} />
-    <Field name="password" placeholder="Пароль" iconName='lock' type="password" component={renderInput} />
+    {upperCaseWord('Логин')}
+    <Field name="username" placeholder="ivanov.ii" iconName='user' type="username" component={renderInput} />
+    {upperCaseWord('Пароль')}
+    <Field name="password" placeholder="*********" iconName='lock' type="password" component={renderInput} />
     <Field name="checkbox" type="checkbox" component={renderCheckbox} />
     <Button onPress={handleSubmit} full rounded style={styles.buttonStyle}>
       {isLoading ? <Spinner color='#fff' size="small" /> : <Text>Войти</Text>}

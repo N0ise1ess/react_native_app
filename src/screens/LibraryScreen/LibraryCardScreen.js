@@ -4,7 +4,6 @@ import {
   View,
   Image,
 } from 'react-native';
-import moment from 'moment';
 import {
   Container,
   Content,
@@ -17,6 +16,7 @@ import {
   Icon,
   Spinner,
 } from 'native-base';
+import moment from 'moment';
 
 import FooterSection from '../../components/Footer';
 
@@ -45,54 +45,74 @@ class LibraryCardScreen extends Component {
     return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
+
   renderLibraryCard = () => {
     const {
       firstName,
       lastName,
       secondName,
       role,
+      id,
       qrcodeData
     } = this.props;
     const { currentTab } = this.state;
+    const studentIndex = role.findIndex(item => item.type === 'STUDENT');
     return <Tab
       heading={<TabHeading style={styles.tabHeaderStyle}>
         <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab % 3 === 0 && styles.activeTabStyle]}>
           {this._upperCase('Читательский билет')}
         </View>
       </TabHeading>}>
-      {role[0].details && role[0].details.length === 0 ?
-        <View style={styles.noDataStyle}>
-          <Text style={styles.noDataTextStyle}>Пользователь не содержит данных</Text>
-        </View> :
         <Content style={styles.tabSectionStyle}>
-          <View style={styles.dataSection}>
-            <Text style={styles.label}>ФИО</Text>
-            <Text style={styles.dataText}>{`${lastName} ${firstName} ${secondName}`}</Text>
-            <Text style={styles.label}>Факультет</Text>
-            <Text style={styles.dataText}>{role[0].details[0].plan.speciality.name}</Text>
-            <Text style={styles.label}>Курс</Text>
-            <Text style={styles.dataText}>{role[0].details[0].course}</Text>
-            <Text style={styles.label}>Номер группы</Text>
-            <Text style={styles.dataText}>{role[0].details[0].group.name}</Text>
-            <Text style={styles.label}>Форма обучения</Text>
-            <Text style={styles.dataText}>{role[0].details[0].plan.studyform.name}</Text>
-            <Text style={styles.label}>Дата регистрации</Text>
-            <Text style={styles.dataText}>{'21.09.2015'}</Text>
-            <Text style={styles.label}>Идентификатор пользователя</Text>
-            <Text style={styles.dataText}>{role[0].details[0].id}</Text>
-          </View>
+          {role.some(item => item['type'] === 'STUDENT') ?
+            role[studentIndex].details && role[studentIndex].details.length === 0 ?
+              <View style={styles.noDataStyle}>
+                <Text style={styles.noDataTextStyle}>Пользователь не содержит данных</Text>
+              </View> :
+              <View style={styles.dataSection}>
+                <Text style={styles.label}>ФИО</Text>
+                <Text style={styles.dataText}>{`${lastName} ${firstName} ${secondName}`}</Text>
+                <Text style={styles.label}>Факультет</Text>
+                <Text style={styles.dataText}>{role[studentIndex].details[0].plan.speciality.name}</Text>
+                <Text style={styles.label}>Курс</Text>
+                <Text style={styles.dataText}>{role[studentIndex].details[0].course}</Text>
+                <Text style={styles.label}>Номер группы</Text>
+                <Text style={styles.dataText}>{role[studentIndex].details[0].group.name}</Text>
+                <Text style={styles.label}>Форма обучения</Text>
+                <Text style={styles.dataText}>{role[studentIndex].details[0].plan.studyform.name}</Text>
+                <Text style={styles.label}>Дата регистрации</Text>
+                <Text style={styles.dataText}>Нет данных</Text>
+                <Text style={styles.label}>Идентификатор пользователя</Text>
+                <Text style={styles.dataText}>{id}</Text>
+              </View> :
+              (role.some(item => item['type'] === 'EMPLOYEE_PPS') ||
+                role.some(item => item['type'] === 'EMPLOYEE')) &&
+                <View style={styles.dataSection}>
+                  <Text style={styles.label}>ФИО</Text>
+                  <Text style={styles.dataText}>{`${lastName} ${firstName} ${secondName}`}</Text>
+                  <Text style={styles.label}>Дата регистрации</Text>
+                  <Text style={styles.dataText}>Нет данных</Text>
+                  <Text style={styles.label}>Идентификатор пользователя</Text>
+                  <Text style={styles.dataText}>{id}</Text>
+                </View>
+          }
           <View style={styles.qrcodeSection}>
             {qrcodeData && <Image onLoad={() => <Spinner color='blue' />} source={{ uri: `data:image/png;base64,${qrcodeData}` }} style={styles.qrcodeImage} />}
           </View>
-        </Content>}
+        </Content>
     </Tab>
   }
 
   renderLibraryBook = () => {
     const { bookInfo } = this.props;
     const { currentTab } = this.state;
+    const formattedDate = (date) => {
+      console.log(date);
+      const newDt = moment(date,"MM-DD-YYYY HH:mm:ss")
+      console.log(newDt);
+      return moment(newDt).format("DD.MM.YYYY");
+    }
 
-    const formattedDate = (date) => moment(date).isValid() && moment(date).format('DD.MM.YYYY');
     return <Tab
       heading={<TabHeading style={styles.tabHeaderStyle}>
          <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 1 && styles.activeTabStyle]}>
@@ -101,7 +121,7 @@ class LibraryCardScreen extends Component {
        </TabHeading>}>
        {bookInfo && bookInfo.length === 0 ?
          <View style={styles.noDataStyle}>
-           <Text style={styles.noDataTextStyle}>Данный пользователь не имеет книг</Text>
+           <Text style={styles.noDataTextStyle}>Информация о выданной литературе отсутствует</Text>
          </View> :
         <Content style={{backgroundColor: '#CED8DA',}}>
             <List dataArray={bookInfo}
@@ -112,13 +132,13 @@ class LibraryCardScreen extends Component {
                     <Text style={styles.bookTitle} >{item.content.description}</Text>
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
-                  <Text style={styles.issueDate}>Выдано {formattedDate(item.dateFrom)}</Text>
+                  <Text style={styles.issueDate}>Выдано {formattedDate(item.dateTo)}</Text>
                   {item.returned ?
                     <View style={styles.listItemStyle}>
                       <Icon type='Octicons' name='check' style={{ color: '#163D7D', fontSize: 15 }} />
                       <Text style={[styles.returnStyle, {color: '#163D7D'}]}>Возвращено</Text>
                     </View> :
-                    <Text style={[styles.returnStyle, item.isDelayes && {color: 'red'}, {paddingLeft: 22}]}>{`Вернуть до ${formattedDate(item.dateTo)}`}</Text>
+                    <Text style={[styles.returnStyle, item.isDelayes && {color: 'red'}, {paddingLeft: 22}]}>{`Вернуть до ${formattedDate(item.dateFrom)}`}</Text>
                   }
 
                 </View>
