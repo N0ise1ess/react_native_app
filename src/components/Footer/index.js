@@ -1,5 +1,15 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { Footer, FooterTab, Button, Icon } from 'native-base';
+
+import {
+  img_menu_white,
+  img_notification_white,
+  img_timetable_white,
+  img_chat_white,
+  img_finance_white
+} from '../../assets/images';
+import styles from './styles';
 
 const FooterSection = ({ userStatus, navigate }) => {
 
@@ -9,27 +19,27 @@ const FooterSection = ({ userStatus, navigate }) => {
       <Button
         vertical
         onPress={() => navigate('')}>
-        {userStatus !== 'guest' && <Icon type="Entypo" name="wallet" style={{fontSize: 28,color: '#fff'}} />}
+        {userStatus !== 'guest' && <Image source={img_finance_white} style={styles.image} />}
       </Button>
       <Button
         vertical
         onPress={() => navigate('')}>
-        {userStatus !== 'guest' && <Icon type="Ionicons" name="text" style={{fontSize: 28,color: '#fff'}} />}
+        {userStatus !== 'guest' && <Image source={img_chat_white} style={styles.image} />}
       </Button>
       <Button
         vertical
         onPress={() => navigate('TimeTable')}>
-        <Icon type="EvilIcons" name="calendar" style={{fontSize: 28,color: '#fff'}} />
+        <Image source={img_timetable_white} style={styles.image} />
       </Button>
       <Button
         vertical
         onPress={() => navigate('')}>
-        <Icon type="Ionicons" name="notifications" style={{fontSize: 28,color: '#fff'}} />
+        <Image source={img_notification_white} style={styles.image} />
       </Button>
       <Button
         vertical
         onPress={() => navigate('Home')}>
-        <Icon type="Ionicons" name="menu" style={{fontSize: 28,color: '#fff'}} />
+        <Image source={img_menu_white} style={styles.image} />
       </Button>
     </FooterTab>
   </Footer>;

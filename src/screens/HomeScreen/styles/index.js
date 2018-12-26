@@ -10,9 +10,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    paddingLeft: 10,
-    paddingRight: 10,
+    justifyContent: 'space-evenly',
     paddingTop: 20,
   },
   customSlide: {

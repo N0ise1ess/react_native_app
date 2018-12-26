@@ -101,7 +101,7 @@ class NewsScreen extends Component {
   renderEvents = (events) => {
     return events.map((item, index) =>
       <View>
-        <Text style={{alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 10, }}>{m(item.time).format('LL')}</Text>
+        <Text style={{alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 10, }}>{m(item.time).format('LL').replace("г.", "")}</Text>
         <News
           newsType='events'
           key={index}
@@ -144,15 +144,11 @@ class NewsScreen extends Component {
     return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
-  onScrollGetsHeight = (height) => {
-    if(height > 400) {
-      this.setState({
-        isSliderShown: false
-      })
-    } else {
-      this.setState({
-        isSliderShown: true,
-      })
+  onScroll = (event) => {
+    if(event.nativeEvent.contentOffset.y > 20) {
+      this.setState({isSliderShown: false})
+    } else if(event.nativeEvent.contentOffset.y < 20) {
+      this.setState({isSliderShown: true})
     }
   }
 
@@ -177,6 +173,7 @@ class NewsScreen extends Component {
             </TabHeading>}
           >
             <Content
+              onScroll={this.onScroll}
               style={styles.tabSectionStyle}
             >
               {news ? this.renderNews(news) : <Spinner color='blue' />}
@@ -184,10 +181,11 @@ class NewsScreen extends Component {
           </Tab>
           <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
               <View style={[styles.tabHeadingStyle, currentTab === 1 && styles.activeTabStyle]}>
-                {this._upperCase('Обновления')}
+                {this._upperCase('Объявления')}
               </View>
             </TabHeading>}>
             <Content
+              onScroll={this.onScroll}
               style={styles.tabSectionStyle}
             >
               {advertisement ? this.renderUpdates(advertisement) : <Spinner color='blue' />}
@@ -199,6 +197,7 @@ class NewsScreen extends Component {
               </View>
             </TabHeading>}>
             <Content
+              onScroll={this.onScroll}
               style={styles.tabSectionStyle}
             >
               {event ? this.renderEvents(event) : <Spinner color='blue' />}

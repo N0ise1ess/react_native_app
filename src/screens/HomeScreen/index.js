@@ -36,7 +36,8 @@ import {
   img_parent,
   img_wifi,
   img_marker,
-  img_student
+  img_student,
+  img_account
 } from '../../assets/images';
 
 const cardList = [
@@ -74,11 +75,11 @@ const cardList = [
   {
     list: [
       {
-        title: 'Анкетные опросы',
+        title: 'Анкетные\nопросы',
         image: img_question,
       },
       {
-        title: 'Персональный рейтинг',
+        title: 'Персональный\nрейтинг',
         image: img_rating,
       },
       {
@@ -90,7 +91,7 @@ const cardList = [
         image: img_person,
       },
       {
-        title: 'Контакты университета',
+        title: 'Контакты\nуниверситета',
         image: img_marker,
       },
       {
@@ -101,6 +102,38 @@ const cardList = [
   }
 ];
 
+const cardGuestList = [
+  {
+    list: [
+      {
+        title: 'Новости',
+        route: 'News',
+        image: img_news,
+      },
+      {
+        title: 'Расписание',
+        route: 'TimeTable',
+        image: img_timetable,
+      },
+      {
+        title: 'Библиотека',
+        route: 'Library',
+        image: img_library,
+      },
+      {
+        title: 'Персоналии',
+        image: img_person,
+      },
+      {
+        title: 'Контакты\nуниверситета',
+        image: img_marker,
+      },
+      {
+        hidden: true
+      }
+    ]
+  },
+];
 
 class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -108,15 +141,18 @@ class HomeScreen extends Component {
     return {
       title: navigation.state.params && navigation.state.params.userFullName,
       headerLeft: <Left>
-        <Image style={styles.headerImageStyle} source={img_student} />
+        {navigation.state.params && navigation.state.params.userStatus === 'student' ?
+          <Image style={styles.headerImageStyle} source={img_student} /> :
+          <Image style={[styles.headerImageStyle, { marginLeft: 10 }]} source={img_account} />}
       </Left>
     }
   };
 
   componentWillMount() {
-    const {firstName, secondName, lastName } = this.props;
+    const {firstName, secondName, lastName, userStatus } = this.props;
     this.props.navigation.setParams({
-      userFullName: lastName || firstName || secondName ? `${lastName} ${firstName} ${secondName}` : 'Гость'
+      userFullName: lastName || firstName || secondName ? `${lastName} ${firstName} ${secondName}` : 'Гость',
+      userStatus: userStatus
     })
   }
 
@@ -128,7 +164,7 @@ class HomeScreen extends Component {
     return (
       <Container style={styles.container}>
         <ImageSlider
-          images={cardList}
+          images={userStatus === 'guest' ? cardGuestList : cardList}
           customSlide={({ index, item, style, width }) => (
           // It's important to put style here because it's got offset inside
             <View key={index} style={[style, styles.customSlide]}>
@@ -145,7 +181,8 @@ class HomeScreen extends Component {
           )}
           customButtons={(position, move) => (
             <View style={styles.buttons}>
-              {cardList.map((image, index) => <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />)}
+              {userStatus === 'guest'  ? <Text/> :
+              cardList.map((image, index) => <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />)}
             </View>
           )}
         />

@@ -93,6 +93,7 @@ export default StyleSheet.create({
   },
   tabSectionStyle: {
     backgroundColor: '#CED8DA',
+    minHeight: 300,
   },
   dataSection: {
     paddingBottom: 20,

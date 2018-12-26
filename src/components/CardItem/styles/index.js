@@ -21,8 +21,14 @@ export default StyleSheet.create({
   },
   textStyle: {
     textAlign: 'center',
-    height: 45,
     color: '#2E518A',
+    fontSize: 14,
+  },
+  textSectionStyle: {
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   borderStyle: {
     flex: 1,

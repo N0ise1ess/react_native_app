@@ -10,6 +10,17 @@ export default StyleSheet.create({
     marginBottom: 0,
     paddingBottom: 0,
   },
+  sectionTime: {
+    paddingBottom: 0,
+    paddingTop: 10,
+  },
+  sectionTitle: {
+    paddingBottom: 0,
+    paddingTop: 7,
+  },
+  sectionText: {
+    paddingTop: 5,
+  },
   imageStyle: {
     resizeMode: 'cover',
     height: 200,
@@ -20,6 +31,7 @@ export default StyleSheet.create({
   timeStyle: {
     color: '#2F528B',
     fontSize: 14,
+    fontWeight: '400',
   },
   textStyle: {
     fontSize: 14,

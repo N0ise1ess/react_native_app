@@ -36,6 +36,7 @@ export default StyleSheet.create({
     color: '#163D7D',
     marginTop: 25,
     textAlign: 'center',
+    fontSize: 14,
   },
   headerStyle: {
     backgroundColor: '#163D7D'

@@ -8,12 +8,18 @@ import { img_rb } from '../../assets/images';
 
 
 export default function CardItem(props) {
+  if(props.image && props.title) {
     return <TouchableOpacity onPress={props.navigate}>
       <Card style={styles.cardStyle}>
         <View style={styles.borderStyle}>
           <Image source={props.image} style={styles.imageStyle} />
-          <Text style={styles.textStyle}>{props.title}</Text>
+          <View style={styles.textSectionStyle}>
+            <Text style={styles.textStyle}>{props.title}</Text>
+          </View>
         </View>
       </Card>
     </TouchableOpacity>
+  } else {
+    return <View style={[{visibility:'hidden'}, styles.cardStyle]} />
+  }
 }
