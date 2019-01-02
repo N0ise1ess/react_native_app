@@ -18,7 +18,7 @@ const FooterSection = ({ userStatus, navigate }) => {
     <FooterTab style={{backgroundColor: '#163D7D',}}>
       <Button
         vertical
-        onPress={() => navigate('')}>
+        onPress={() => navigate('Finance')}>
         {userStatus !== 'guest' && <Image source={img_finance_white} style={styles.image} />}
       </Button>
       <Button

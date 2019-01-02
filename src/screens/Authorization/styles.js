@@ -13,7 +13,7 @@ export default StyleSheet.create({
     marginRight: 'auto',
     width: (width / 5) * 3,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
   item: {
     marginTop: 25,
@@ -27,6 +27,7 @@ export default StyleSheet.create({
   },
   imageStyle: {
     width: 'auto',
+    height: height / 4,
   },
   buttonStyle: {
     marginTop: 25,

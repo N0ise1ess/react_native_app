@@ -82,7 +82,7 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <View>
-          <Content style={styles.content}  scrollEnabled={true}>
+          <Content style={styles.content}  scrollEnabled={false}>
             <KeyboardAvoidingView>
               <View style={styles.section}>
                 <Image

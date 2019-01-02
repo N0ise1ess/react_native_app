@@ -6,6 +6,7 @@ const endpointLibraryCard = 'http://opencode.su/campus/library/card';
 const endpointQRCode = 'http://opencode.su/campus/library/card/qr';
 const endpointLibraryBook = 'http://opencode.su/campus/library/book/me';
 const endpointNewsAll = 'http://opencode.su/campus/integration/api/news/all';
+const endpointFinance = 'http://opencode.su/campus/integration/api/finance/document';
 
 export function loginApi(values) {
 
@@ -43,6 +44,15 @@ export function libQRCodeApi(token) {
 export function libBookApi(token) {
 
   return axios.get(endpointLibraryBook, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+}
+
+export function financePaymentApi(token) {
+
+  return axios.get(endpointFinance, {
     headers: {
       'Authorization': `Bearer ${token}`,
     }
