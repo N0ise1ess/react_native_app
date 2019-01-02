@@ -16,7 +16,8 @@ import {
   NewsScreen,
   NewsDetailsScreen,
   TimeTableScreen,
-  SettingsScreen
+  SettingsScreen,
+  FinanceScreen,
 } from '../screens';
 
 const AppStack = createStackNavigator({
@@ -27,6 +28,7 @@ const AppStack = createStackNavigator({
   NewsDetails: NewsDetailsScreen,
   TimeTable: TimeTableScreen,
   Settings: SettingsScreen,
+  Finance: FinanceScreen,
 },
 {
   initialRouteName: 'Home',

@@ -54,6 +54,7 @@ const cardList = [
       },
       {
         title: 'Финансы',
+        route: 'Finance',
         image: img_finance,
       },
       {
