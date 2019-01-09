@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 50 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-405,-786)">
+        <g transform="matrix(2.1107,0,0,1.42024,300.755,1942.52)">
+            <g id="чат" transform="matrix(0.473776,0,0,0.704104,-75.7093,64.7567)">
+                <g transform="matrix(1.06667,0,0,1.00524,161,-2512.95)">
+                    <g transform="matrix(1,0,0,1,-2132.25,-9)">
+                        <circle cx="2239.75" cy="1289.75" r="1.75" style="fill:none;stroke:white;stroke-width:1.93px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,-2122.63,-9)">
+                        <circle cx="2239.75" cy="1289.75" r="1.75" style="fill:none;stroke:white;stroke-width:1.93px;"/>
+                    </g>
+                    <g transform="matrix(1,0,0,1,-2113,-9)">
+                        <circle cx="2239.75" cy="1289.75" r="1.75" style="fill:none;stroke:white;stroke-width:1.93px;"/>
+                    </g>
+                </g>
+                <g transform="matrix(1.06667,0,0,1.00524,165.619,-2517.9)">
+                    <path d="M127.971,1271.44C129.983,1271.46 131.59,1273.17 131.59,1275.29L131.59,1295.04C131.59,1297.15 129.968,1298.88 127.971,1298.88L116.053,1298.88L107.5,1308.75L107.5,1298.88L97.619,1298.88C95.622,1298.88 94,1297.15 94,1295.04L94,1275.29C94,1273.17 95.607,1271.46 97.619,1271.44L127.971,1271.44Z" style="fill:none;stroke:white;stroke-width:1.93px;"/>
+                </g>
+                <g transform="matrix(0.891025,0,0,0.713569,-1746.8,-2146.55)">
+                    <path d="M2266,1270.72L2266,1266.04C2266,1263.3 2267.76,1261.06 2270.04,1261L2306.96,1261C2309.24,1261.06 2311,1263.3 2311,1266.04L2311,1296.6C2311,1299.38 2309.19,1301.64 2306.96,1301.64L2303.82,1301.64" style="fill:none;stroke:white;stroke-width:2.48px;stroke-linecap:butt;stroke-linejoin:round;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

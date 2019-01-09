@@ -4,10 +4,12 @@ import authReducer from './authReducer';
 import libraryReducer from './libraryReducer';
 import newsReducer from './newsReducer';
 import financeReducer from './financeReducer';
+import timetableReducer from './timetableReducer';
 export default combineReducers({
     authReducer,
     libraryReducer,
     newsReducer,
     financeReducer,
+    timetableReducer,
     form: formReducer,
 });

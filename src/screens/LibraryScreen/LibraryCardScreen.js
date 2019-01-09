@@ -103,15 +103,14 @@ class LibraryCardScreen extends Component {
     </Tab>
   }
 
+  formattedDate = (date) => {
+    const newDate = moment(date,"MM-DD-YYYY HH:mm:ss")._i;
+    return moment(newDate).format("DD.MM.YYYY");
+  }
+
   renderLibraryBook = () => {
     const { bookInfo } = this.props;
     const { currentTab } = this.state;
-    const formattedDate = (date) => {
-      console.log(date);
-      const newDt = moment(date,"MM-DD-YYYY HH:mm:ss")
-      console.log(newDt);
-      return moment(newDt).format("DD.MM.YYYY");
-    }
 
     return <Tab
       heading={<TabHeading style={styles.tabHeaderStyle}>
@@ -132,13 +131,13 @@ class LibraryCardScreen extends Component {
                     <Text style={styles.bookTitle} >{item.content.description}</Text>
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
-                  <Text style={styles.issueDate}>Выдано {formattedDate(item.dateTo)}</Text>
+                  <Text style={styles.issueDate}>Выдано {item.dateTo ? this.formattedDate(item.dateTo) : <Spinner />}</Text>
                   {item.returned ?
                     <View style={styles.listItemStyle}>
                       <Icon type='Octicons' name='check' style={{ color: '#163D7D', fontSize: 15 }} />
                       <Text style={[styles.returnStyle, {color: '#163D7D'}]}>Возвращено</Text>
                     </View> :
-                    <Text style={[styles.returnStyle, item.isDelayes && {color: 'red'}, {paddingLeft: 22}]}>{`Вернуть до ${formattedDate(item.dateFrom)}`}</Text>
+                    <Text style={[styles.returnStyle, item.isDelayes && {color: 'red'}, {paddingLeft: 22}]}>{item.dateFrom ? `Вернуть до ${this.formattedDate(item.dateFrom)}` : <Spinner />}</Text>
                   }
 
                 </View>
