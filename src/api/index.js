@@ -7,6 +7,7 @@ const endpointQRCode = 'http://opencode.su/campus/library/card/qr';
 const endpointLibraryBook = 'http://opencode.su/campus/library/book/me';
 const endpointNewsAll = 'http://opencode.su/campus/integration/api/news/all';
 const endpointFinance = 'http://opencode.su/campus/integration/api/finance/document';
+const endpointTimetableSearch = 'https://opencode.su/campus/integration/api/timetable/search';
 
 export function loginApi(values) {
 
@@ -61,4 +62,13 @@ export function financePaymentApi(token) {
 
 export function newsApi() {
   return axios.get(endpointNewsAll)
+}
+
+export function timeTableGetApi(searchedText, token) {
+  return axios.post(endpointTimetableSearch, searchedText, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'text/plain'
+    }
+  })
 }

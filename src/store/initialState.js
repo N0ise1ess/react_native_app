@@ -12,6 +12,10 @@ export default {
 
   },
   financeReducer: {
-    
+
+  },
+  timetableReducer: {
+    timeTableLoading: false,
+    errorCode: null,
   }
 }

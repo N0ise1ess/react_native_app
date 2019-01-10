@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 50 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-118,-215)">
+        <g transform="matrix(2.1107,0,0,1.42024,300.755,1942.52)">
+            <g id="финансы" transform="matrix(0.473776,0,0,0.704104,-100.324,-2103.41)">
+                <g transform="matrix(0.578313,0,0,1.15,-1243.45,-193.75)">
+                    <path d="M2210.75,1265C2205.92,1265 2202,1266.97 2202,1269.4L2202,1300.6C2202,1303.03 2205.92,1305 2210.75,1305L2276.25,1305C2281.08,1305 2285,1303.03 2285,1300.6L2285,1274.13L2217.56,1274.13" style="fill:none;stroke:white;stroke-width:2.2px;"/>
+                </g>
+                <g transform="matrix(0.979592,0,0,0.875,-2126.08,157.625)">
+                    <path d="M2245.92,1261L2207.13,1261C2203.74,1261 2201,1263.69 2201,1267C2201,1270.31 2203.74,1273 2207.13,1273L2245.92,1273L2245.92,1261Z" style="fill:none;stroke:white;stroke-width:2.15px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1.42857,-2172,-544.929)">
+                    <path d="M2208,1271.5L2208,1266.25L2241.5,1266.25L2241.5,1271.5" style="fill:none;stroke:white;stroke-width:1.62px;"/>
+                </g>
+                <g transform="matrix(1,0,0,0.714286,-2172,363.286)">
+                    <path d="M2208,1271.5L2208,1266.25L2241.5,1266.25L2241.5,1271.5" style="fill:none;stroke:white;stroke-width:2.3px;"/>
+                </g>
+                <g transform="matrix(1.13333,0,0,1.2,-2472,-259)">
+                    <path d="M2250,1285C2250,1285 2244.61,1285 2240.29,1285C2238.89,1285 2237.54,1285.53 2236.55,1286.46C2235.56,1287.4 2235,1288.67 2235,1290C2235,1290 2235,1290 2235,1290C2235,1291.33 2235.56,1292.6 2236.55,1293.54C2237.54,1294.47 2238.89,1295 2240.29,1295C2244.61,1295 2250,1295 2250,1295L2250,1285Z" style="fill:none;stroke:white;stroke-width:1.71px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,-2172,-0.75)">
+                    <circle cx="2239.75" cy="1289.75" r="1.75" style="fill:none;stroke:white;stroke-width:2px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

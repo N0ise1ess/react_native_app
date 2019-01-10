@@ -100,7 +100,7 @@ class NewsScreen extends Component {
 
   renderEvents = (events) => {
     return events.map((item, index) =>
-      <View>
+      <View key={index}>
         <Text style={{alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 10, }}>{m(item.time).format('LL').replace("г.", "")}</Text>
         <News
           newsType='events'

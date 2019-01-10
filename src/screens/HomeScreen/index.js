@@ -161,7 +161,6 @@ class HomeScreen extends Component {
 
   render(){
     const { navigation, userStatus } = this.props;
-    console.log(this.props);
     return (
       <Container style={styles.container}>
         <ImageSlider
@@ -170,8 +169,9 @@ class HomeScreen extends Component {
           // It's important to put style here because it's got offset inside
             <View key={index} style={[style, styles.customSlide]}>
               <View style={styles.flatListStyle}>
-                {item.list.map(item =>
+                {item.list.map((item, index) =>
                   <CardItem
+                    key={index}
                     image={item.image}
                     title={item.title}
                     navigate={() => this.props.navigation.navigate(item.route ? item.route : '')}
@@ -183,7 +183,13 @@ class HomeScreen extends Component {
           customButtons={(position, move) => (
             <View style={styles.buttons}>
               {userStatus === 'guest'  ? <Text/> :
-              cardList.map((image, index) => <Icon onPress={() => move(index)} type='Octicons' name='primitive-dot' style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]} />)}
+              cardList.map((image, index) => <Icon
+                style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]}
+                key={index}
+                onPress={() => move(index)}
+                type='Octicons'
+                name='primitive-dot'
+              />)}
             </View>
           )}
         />

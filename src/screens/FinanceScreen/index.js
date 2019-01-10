@@ -46,7 +46,7 @@ class FinanceScreen extends Component {
 
     return <Tab
       heading={<TabHeading style={styles.tabHeaderStyle}>
-        <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab % 3 === 0 && styles.activeTabStyle]}>
+        <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
           {this._upperCase('Оплата')}
         </View>
       </TabHeading>}>
@@ -73,7 +73,7 @@ class FinanceScreen extends Component {
 
     return <Tab
       heading={<TabHeading style={styles.tabHeaderStyle}>
-         <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 1 && styles.activeTabStyle]}>
+         <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab === 1 && styles.activeTabStyle]}>
            {this._upperCase('Стипендии')}
          </View>
        </TabHeading>}>

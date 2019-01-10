@@ -26,6 +26,9 @@ const htmlProps = {
 export const News = (props) => {
   m.locale('ru');
   const cleanText = props.description && props.description.replace(/<\/?[^>]+(>|$)/g, "");
+  const textWithoutEmptyLines = cleanText.replace(/\r?\n|\r/, "");
+  const cleanTitle = props.title && props.title.replace(/<\/?[^>]+(>|$)/g, "");
+  const titleWithoutEmptyLines = cleanTitle.replace(/\r?\n|\r/, "");
   return (
     <TouchableOpacity style={styles.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
@@ -35,13 +38,13 @@ export const News = (props) => {
         </CardItem>}
         <CardItem header style={styles.sectionTitle}>
           {props.newsType === 'advertisement' ?
-            <HTML {...htmlProps} html={props.title && props.title} imagesMaxWidth={width} /> :
+            <Text style={styles.titleStyle}>{titleWithoutEmptyLines}</Text>:
             <Text style={styles.titleStyle}>{props.title && props.title}</Text>}
         </CardItem>
         <CardItem style={styles.sectionText}>
           <Body>
             {props.description && (props.isTruncate ?
-              <Text style={styles.textStyle} numberOfLines={3}>{cleanText}</Text> :
+              <Text style={styles.textStyle} numberOfLines={3}>{textWithoutEmptyLines}</Text> :
               <HTML
                 {...htmlProps}
                 html={props.description}
