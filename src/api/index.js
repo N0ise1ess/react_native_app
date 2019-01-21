@@ -7,7 +7,9 @@ const endpointQRCode = 'http://opencode.su/campus/library/card/qr';
 const endpointLibraryBook = 'http://opencode.su/campus/library/book/me';
 const endpointNewsAll = 'http://opencode.su/campus/integration/api/news/all';
 const endpointFinance = 'http://opencode.su/campus/integration/api/finance/document';
-const endpointTimetableSearch = 'https://opencode.su/campus/integration/api/timetable/search';
+const endpointTimetableSearch = 'http://opencode.su/campus/integration/api/timetable/search';
+const endpointDepartments = 'http://opencode.su/campus/integration/api/departments/searchByName';
+const endpointEditPhoneNumber = 'http://opencode.su/campus/integration/api/users/edit/phoneNumber';
 
 export function loginApi(values) {
 
@@ -71,4 +73,8 @@ export function timeTableGetApi(searchedText, token) {
       'Content-Type': 'text/plain'
     }
   })
+}
+
+export function departmentsGetApi(searchedText) {
+  return axios.get(`${endpointDepartments}?search=${searchedText}`)
 }

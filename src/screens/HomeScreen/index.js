@@ -77,10 +77,12 @@ const cardList = [
     list: [
       {
         title: 'Анкетные\nопросы',
+        route: 'Questionnaires',
         image: img_question,
       },
       {
         title: 'Персональный\nрейтинг',
+        route: 'PersonalRating',
         image: img_rating,
       },
       {
@@ -93,6 +95,7 @@ const cardList = [
       },
       {
         title: 'Контакты\nуниверситета',
+        route: 'Contacts',
         image: img_marker,
       },
       {
@@ -127,6 +130,7 @@ const cardGuestList = [
       },
       {
         title: 'Контакты\nуниверситета',
+        route: 'Contacts',
         image: img_marker,
       },
       {

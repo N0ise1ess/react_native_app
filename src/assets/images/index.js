@@ -37,3 +37,8 @@ export const img_notification_white = require('./notification-white.png');
 export const img_chat_white = require('./chat-white.png');
 export const img_menu_white = require('./menu-white.png');
 export const img_finance_white = require('./finance-white.png');
+
+//University ContactsScreen
+
+export const img_campus_dorm = require('./campus-dorm.png');
+export const img_university_section = require('./university-section.png');
