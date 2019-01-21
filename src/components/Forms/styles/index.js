@@ -4,11 +4,15 @@ export default StyleSheet.create({
   label: {
     fontSize: 10,
     paddingTop: 20,
+    color: '#747A7B',
   },
   inputStyle: {
     fontSize: 16,
     padding: 0,
     height: 34
+  },
+  resetInputStyle: {
+    backgroundColor: '#fff',
   },
   inputIcon: {
     fontSize: 16,
@@ -26,5 +30,9 @@ export default StyleSheet.create({
     color: 'red',
     fontSize: 10,
     marginRight: 10,
+  },
+  resetButtonStyle: {
+    backgroundColor: '#ED3944',
+    marginTop: 30,
   }
 })

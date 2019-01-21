@@ -82,7 +82,7 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <View>
-          <Content style={styles.content}  scrollEnabled={false}>
+          <Content style={styles.content} scrollEnabled={false}>
             <KeyboardAvoidingView>
               <View style={styles.section}>
                 <Image
@@ -95,8 +95,13 @@ class LoginScreen extends Component {
                   handleSubmit={this.onButtonPress}
                   isLoading={authLoading}
                 />
-                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-                <Text style={styles.linkedTextStyle}>Восстановить пароль</Text>
+                <Text
+                  style={styles.linkedTextStyle}
+                >Зарегистрироваться</Text>
+                <Text
+                  onPress={() => navigation.navigate('ResetPassword')}
+                  style={styles.linkedTextStyle}
+                >Восстановить пароль</Text>
               </View>
             </KeyboardAvoidingView>
           </Content>

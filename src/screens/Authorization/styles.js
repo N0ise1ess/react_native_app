@@ -8,12 +8,24 @@ export default StyleSheet.create({
     width: width,
     height,
   },
+  resetContainer: {
+    backgroundColor: '#ced8da',
+  },
   section: {
     marginLeft: 'auto',
     marginRight: 'auto',
     width: (width / 5) * 3,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  resetSection: {
+    flex: 1,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: (width / 5) * 3,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: height - 200,
   },
   item: {
     marginTop: 25,
@@ -38,6 +50,10 @@ export default StyleSheet.create({
     marginTop: 25,
     textAlign: 'center',
     fontSize: 14,
+  },
+  textStyle: {
+    fontSize: 14,
+    color: '#747A7B',
   },
   headerStyle: {
     backgroundColor: '#163D7D'

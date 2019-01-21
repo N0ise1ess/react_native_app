@@ -10,9 +10,11 @@ import {
   Icon
 } from 'native-base';
 import LoginScreen from '../screens/Authorization/LoginScreen';
+import ResetPasswordScreen from '../screens/Authorization/ResetPasswordScreen';
 
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
+  ResetPassword: ResetPasswordScreen,
 },
 {
   initialRouteName: 'Login',
