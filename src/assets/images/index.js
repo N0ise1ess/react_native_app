@@ -42,3 +42,5 @@ export const img_finance_white = require('./finance-white.png');
 
 export const img_campus_dorm = require('./campus-dorm.png');
 export const img_university_section = require('./university-section.png');
+
+export const img_teacher = require('./teacher.png');

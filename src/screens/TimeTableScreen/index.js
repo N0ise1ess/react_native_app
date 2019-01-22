@@ -134,7 +134,7 @@ class TimeTableScreen extends Component {
             value={this.state.searchedText}
             onChangeText={(text) => this.setState({searchedText: text}) } />
           <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Search</Text>
+            <Text>Найти</Text>
           </Button>
         </Item>
         {userStatus !== 'guest' && !errorCode ? <Tabs

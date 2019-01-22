@@ -91,6 +91,7 @@ const cardList = [
       },
       {
         title: 'Персоналии',
+        route: 'Personalities',
         image: img_person,
       },
       {
@@ -126,6 +127,7 @@ const cardGuestList = [
       },
       {
         title: 'Персоналии',
+        route: 'Personalities',
         image: img_person,
       },
       {

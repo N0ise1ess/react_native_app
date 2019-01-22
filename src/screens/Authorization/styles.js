@@ -15,8 +15,9 @@ export default StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: (width / 5) * 3,
+    height: height,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   resetSection: {
     flex: 1,
@@ -39,7 +40,7 @@ export default StyleSheet.create({
   },
   imageStyle: {
     width: 'auto',
-    height: height / 4,
+    height: height / 5,
   },
   buttonStyle: {
     marginTop: 25,
