@@ -24,7 +24,9 @@ import {
   ContactsScreen,
   DivisionsScreen,
   BuildingDormsScreen,
-  MainConfigScreen
+  MainConfigScreen,
+  PersonalitiesScreen,
+  PersonalityScreen,
 } from '../screens';
 
 const AppStack = createStackNavigator({
@@ -43,6 +45,8 @@ const AppStack = createStackNavigator({
   Divisions: DivisionsScreen,
   BuildingDorms: BuildingDormsScreen,
   MainConfig: MainConfigScreen,
+  Personalities: PersonalitiesScreen,
+  Personality: PersonalityScreen,
 },
 {
   initialRouteName: 'Home',

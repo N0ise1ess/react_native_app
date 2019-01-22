@@ -51,7 +51,7 @@ class FinanceScreen extends Component {
         </View>
       </TabHeading>}>
         <Content style={{backgroundColor: '#CED8DA',}}>
-          {!financeData ? <Spinner color='blue' /> : <List dataArray={financeData[0].charges}
+          {!financeData ? <Spinner color='blue' /> : <List dataArray={financeData[0] && financeData[0].charges}
             renderRow={(item) =>
               <View style={styles.listStyle}>
                 <View>

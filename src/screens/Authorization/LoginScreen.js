@@ -82,33 +82,33 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <View>
-          <Content style={styles.content} scrollEnabled={false}>
-            <KeyboardAvoidingView>
-              <View style={styles.section}>
-                <Image
-                  source={img_logo}
-                  resizeMode='contain'
-                  style={styles.imageStyle}
-                />
-                <LoginForm
-                  errorMessage
-                  handleSubmit={this.onButtonPress}
-                  isLoading={authLoading}
-                />
-                <Text
-                  style={styles.linkedTextStyle}
-                >Зарегистрироваться</Text>
-                <Text
-                  onPress={() => navigation.navigate('ResetPassword')}
-                  style={styles.linkedTextStyle}
-                >Восстановить пароль</Text>
-              </View>
-            </KeyboardAvoidingView>
-          </Content>
-          <FooterSection
-            userStatus = {userStatus}
-            navigate={navigation.navigate}
-          />
+          <KeyboardAvoidingView>
+            <Content style={styles.content} scrollEnabled={false}>
+                <View style={styles.section}>
+                  <Image
+                    source={img_logo}
+                    resizeMode='contain'
+                    style={styles.imageStyle}
+                  />
+                  <LoginForm
+                    errorMessage
+                    handleSubmit={this.onButtonPress}
+                    isLoading={authLoading}
+                  />
+                  <Text
+                    style={styles.linkedTextStyle}
+                  >Зарегистрироваться</Text>
+                  <Text
+                    onPress={() => navigation.navigate('ResetPassword')}
+                    style={styles.linkedTextStyle}
+                  >Восстановить пароль</Text>
+                </View>
+            </Content>
+            <FooterSection
+              userStatus = {userStatus}
+              navigate={navigation.navigate}
+            />
+          </KeyboardAvoidingView>
         </View>
       </MainView>
     )
