@@ -23,7 +23,7 @@ const FooterSection = ({ userStatus, navigate }) => {
       </Button>
       <Button
         vertical
-        onPress={() => navigate('')}>
+        onPress={() => navigate('Chat')}>
         {userStatus !== 'guest' && <Image source={img_chat_white} style={styles.image} />}
       </Button>
       <Button

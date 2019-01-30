@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 export default StyleSheet.create({
   label: {
     fontSize: 10,
-    paddingTop: 20,
+    paddingTop: height < 550 ? 10 : 20,
     color: '#747A7B',
   },
   inputStyle: {
@@ -20,10 +21,10 @@ export default StyleSheet.create({
     paddingTop: 0,
   },
   item: {
-    marginTop: 5,
+    marginTop: height < 550 ? 0 : 5,
   },
   buttonStyle: {
-    marginTop: 10,
+    marginTop: height < 550 ? 0 : 10,
     backgroundColor: '#0C68FF',
   },
   errorStyle: {

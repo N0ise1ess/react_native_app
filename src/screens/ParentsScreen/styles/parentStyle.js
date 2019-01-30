@@ -7,12 +7,13 @@ export default StyleSheet.create({
   content: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   sectionStyle: {
     flexDirection: 'row',
     paddingLeft: 20,
-    paddingTop: 20,
   },
   photoStyle: {
     width: 150,
@@ -32,7 +33,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   label: {
-    fontSize: 12,
+    fontSize: 10,
     paddingTop: 12,
   },
   textStyle: {
@@ -41,23 +42,16 @@ export default StyleSheet.create({
   },
   dataStyle: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: '#4099F4',
+    paddingTop: 5,
   },
   dataSection: {
-    paddingTop: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  inputStyle: {
-    fontSize: 14,
-    marginTop: 5,
-    marginRight: 5,
-    padding: 5,
     borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 2,
+    borderTopWidth: 1,
+    paddingTop: 10,
+    paddingBottom: 20,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   errorText: {
     color: 'red',
@@ -65,9 +59,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   info: {
-    borderColor: 'black',
-    borderBottomWidth: 1,
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
   buttonSection: {
     flexDirection: 'row',
@@ -76,20 +68,10 @@ export default StyleSheet.create({
     marginBottom: 50,
   },
   buttonStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
+    paddingLeft: 25,
+    paddingRight: 25,
     margin: 5,
-  },
-  editStyle: {
     backgroundColor: '#ED3944',
+    alignSelf: 'flex-end',
   },
-  cancelStyle: {
-    backgroundColor: '#1166F6',
-  },
-  iconStyle: {
-    fontSize: 18,
-    color: '#fff',
-  },
-
 })
