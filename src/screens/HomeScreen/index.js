@@ -59,6 +59,7 @@ const cardList = [
       },
       {
         title: 'Чат',
+        route: 'Chat',
         image: img_chat,
       },
       {
@@ -87,6 +88,7 @@ const cardList = [
       },
       {
         title: 'Родители',
+        route: 'Parents',
         image: img_parent,
       },
       {

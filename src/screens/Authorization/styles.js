@@ -1,4 +1,4 @@
-import Reac from 'react';
+import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -12,12 +12,12 @@ export default StyleSheet.create({
     backgroundColor: '#ced8da',
   },
   section: {
+    flex: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
     width: (width / 5) * 3,
-    height: height,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: height < 550 ? 'center' : 'flex-start',
   },
   resetSection: {
     flex: 1,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
     marginRight: 'auto',
     width: (width / 5) * 3,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: height < 550 ? 'center' : 'flex-start',
     height: height - 200,
   },
   item: {
@@ -39,8 +39,9 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   imageStyle: {
-    width: 'auto',
-    height: height / 5,
+    flex: height < 550 ? 0.5 : 0,
+    width: (width / 5) * 3,
+    backgroundColor: 'yellow',
   },
   buttonStyle: {
     marginTop: 25,
@@ -48,9 +49,9 @@ export default StyleSheet.create({
   },
   linkedTextStyle: {
     color: '#163D7D',
-    marginTop: 25,
     textAlign: 'center',
     fontSize: 14,
+    paddingTop: height < 550 ? 10 : 15,
   },
   textStyle: {
     fontSize: 14,

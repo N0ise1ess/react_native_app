@@ -27,6 +27,9 @@ import {
   MainConfigScreen,
   PersonalitiesScreen,
   PersonalityScreen,
+  ChatScreen,
+  ParentsScreen,
+  ParentScreen,
 } from '../screens';
 
 const AppStack = createStackNavigator({
@@ -47,6 +50,9 @@ const AppStack = createStackNavigator({
   MainConfig: MainConfigScreen,
   Personalities: PersonalitiesScreen,
   Personality: PersonalityScreen,
+  Chat: ChatScreen,
+  Parents: ParentsScreen,
+  Parent: ParentScreen,
 },
 {
   initialRouteName: 'Home',

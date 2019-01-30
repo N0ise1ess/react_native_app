@@ -46,8 +46,8 @@ class PersonalityScreen extends Component {
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            <Image source={img_teacher} style={styles.imageStyle} />
-            <Image source={img_teacher} style={styles.imageStyle} />
+            <View style={styles.imageStyle} />
+            <Image source={{uri: 'https://i.imgur.com/Fy3Xj9j.png'}} style={styles.photoStyle} />
           </View>
           <View style={styles.sectionStyle}>
             <Image source={img_teacher} style={styles.imageStyle} />
@@ -56,13 +56,30 @@ class PersonalityScreen extends Component {
               <View style={styles.info}>
                 <View>
                   <Text style={styles.textStyle}>Проректор</Text>
-                  <Text style={styles.textStyle}>Администрация</Text>
+                  <Text style={[styles.textStyle, {fontWeight: 'bold'}]}>Администрация</Text>
                 </View>
               </View>
-              {this.renderLabel('Телефон')}
-              <Text style={styles.textStyle}>Телефон</Text>
-              {this.renderLabel('E-mail')}
-              <Text style={styles.textStyle}>example@example.com</Text>
+              <View style={styles.dataSection}>
+                <View style={{flexDirection: 'column'}}>
+                  {this.renderLabel('E-mail')}
+                  <Text style={styles.dataStyle}>example@example.com</Text>
+                </View>
+                <Image source={img_teacher} style={styles.imageStyle} />
+              </View>
+              <View style={styles.dataSection}>
+                <View style={{flexDirection: 'column'}}>
+                  {this.renderLabel('Телефон')}
+                  <Text style={styles.dataStyle}>+7 (979) 234-56-78</Text>
+                </View>
+                <Image source={img_teacher} style={styles.imageStyle} />
+              </View>
+              <View style={styles.dataSection}>
+                <View style={{flexDirection: 'column'}}>
+                  {this.renderLabel('Чат')}
+                  <Text style={styles.dataStyle}>Написать в чат</Text>
+                </View>
+                <Image source={img_teacher} style={styles.imageStyle} />
+              </View>
             </View>
           </View>
         </View>

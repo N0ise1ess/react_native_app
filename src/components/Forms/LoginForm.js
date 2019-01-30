@@ -1,8 +1,11 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import { Container, Item, Icon, Input, Header, Form, Body, Content, CheckBox, ListItem, Label, Title, Button, Text, Spinner } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 
 import styles from './styles';
+const { width, height } = Dimensions.get('window');
+
 
 const validate = values => {
   const error= {};
@@ -54,7 +57,7 @@ const renderCheckbox = ({ input, label, type, meta: { touched, error, warning }}
   if(input.value === '') {
     input.onChange(!input.value);
   }
-  return <ListItem style={{borderBottomWidth: 0, justifyContent: 'center', flexDirection: 'row', marginTop: 10, marginLeft: 0,}}>
+  return <ListItem style={{borderBottomWidth: 0, justifyContent: 'center', flexDirection: 'row', marginTop: height < 550 ? 0 : 10, marginLeft: 0,}}>
     <CheckBox
       {...input}
       onPress={() => input.onChange(!input.value)}

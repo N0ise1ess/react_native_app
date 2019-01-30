@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import {
+  Dimensions,
   StatusBar,
   Image,
   View,
@@ -32,6 +33,8 @@ import { MainView } from '../../components/Views/MainView';
 import FooterSection from '../../components/Footer';
 import { img_logo } from '../../assets/images';
 import styles from './styles';
+
+const { width, height } = Dimensions.get('window');
 
 class LoginScreen extends Component {
   constructor(props){
@@ -77,39 +80,39 @@ class LoginScreen extends Component {
 
   render(){
     const { authLoading, errorMessage, userStatus, navigation } = this.props;
-
+    console.log('height is: ', height);
     return (
       <MainView>
         <StatusBar />
-        <View>
-          <KeyboardAvoidingView>
-            <Content style={styles.content} scrollEnabled={false}>
-                <View style={styles.section}>
-                  <Image
-                    source={img_logo}
-                    resizeMode='contain'
-                    style={styles.imageStyle}
-                  />
-                  <LoginForm
-                    errorMessage
-                    handleSubmit={this.onButtonPress}
-                    isLoading={authLoading}
-                  />
-                  <Text
-                    style={styles.linkedTextStyle}
-                  >Зарегистрироваться</Text>
-                  <Text
-                    onPress={() => navigation.navigate('ResetPassword')}
-                    style={styles.linkedTextStyle}
-                  >Восстановить пароль</Text>
-                </View>
-            </Content>
-            <FooterSection
-              userStatus = {userStatus}
-              navigate={navigation.navigate}
-            />
-          </KeyboardAvoidingView>
-        </View>
+        <KeyboardAvoidingView>
+          <View style={styles.content}>
+            <View style={styles.section}>
+              <Image
+                source={img_logo}
+                resizeMode='contain'
+                style={styles.imageStyle}
+              />
+              <LoginForm
+                errorMessage
+                handleSubmit={this.onButtonPress}
+                isLoading={authLoading}
+              />
+              <View>
+                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text
+                  onPress={() => navigation.navigate('ResetPassword')}
+                  style={styles.linkedTextStyle}
+                >
+                  Восстановить пароль
+                </Text>
+              </View>
+            </View>
+          </View>
+          <FooterSection
+            userStatus = {userStatus}
+            navigate={navigation.navigate}
+          />
+        </KeyboardAvoidingView>
       </MainView>
     )
   }
