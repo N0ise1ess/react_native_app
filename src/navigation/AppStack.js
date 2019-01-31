@@ -18,6 +18,7 @@ import {
   TimeTableScreen,
   SettingsScreen,
   AccountScreen,
+  AboutAppScreen,
   FinanceScreen,
   PersonalRatingScreen,
   QuestionnairesScreen,
@@ -33,6 +34,7 @@ import {
 } from '../screens';
 
 const AppStack = createStackNavigator({
+  AboutApp: AboutAppScreen,
   Home: HomeScreen,
   Library: LibraryScreen,
   LibraryCard: LibraryCardScreen,

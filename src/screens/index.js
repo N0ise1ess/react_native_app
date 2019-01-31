@@ -1,3 +1,4 @@
+export { default as AboutAppScreen } from './AboutAppScreen';
 export { default as HomeScreen } from './HomeScreen';
 export { default as NewsScreen } from './NewsScreen';
 export { default as NewsDetailsScreen } from './NewsScreen/NewsDetailsScreen';
