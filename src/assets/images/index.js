@@ -1,4 +1,5 @@
 export const img_logo = require('./logo.png');
+export const img_logo_notext = require('./logo-notext.png');
 export const img_rb = require('./image1.png');
 export const img_finance = require('./finance.png');
 export const img_news = require('./news.png');
