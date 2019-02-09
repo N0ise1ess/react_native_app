@@ -33,7 +33,7 @@ const FooterSection = ({ userStatus, navigate }) => {
       </Button>
       <Button
         vertical
-        onPress={() => navigate('')}>
+        onPress={() => navigate('Notifications')}>
         <Image source={img_notification_white} style={styles.image} />
       </Button>
       <Button
