@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     width: width,
     height,
+    minHeight: 450,
   },
   resetContainer: {
     backgroundColor: '#ced8da',

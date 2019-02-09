@@ -6,6 +6,7 @@ import {
   StatusBar,
   Image,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
@@ -33,6 +34,7 @@ import { MainView } from '../../components/Views/MainView';
 import FooterSection from '../../components/Footer';
 import { img_logo } from '../../assets/images';
 import styles from './styles';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
@@ -85,7 +87,7 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <KeyboardAvoidingView>
-          <View style={styles.content}>
+          <ScrollView contentContainerStyle={styles.content}>
             <View style={styles.section}>
               <Image
                 source={img_logo}
@@ -107,7 +109,7 @@ class LoginScreen extends Component {
                 </Text>
               </View>
             </View>
-          </View>
+          </ScrollView>
           <FooterSection
             userStatus = {userStatus}
             navigate={navigation.navigate}
