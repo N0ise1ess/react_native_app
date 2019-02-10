@@ -8,7 +8,7 @@ export default StyleSheet.create({
     color: '#747A7B',
   },
   inputStyle: {
-    fontSize: 16,
+    fontSize: height < 550 ? 12 : 16,
     padding: 0,
     height: 34
   },
@@ -19,6 +19,7 @@ export default StyleSheet.create({
     fontSize: 16,
     color: '#163D7D',
     paddingTop: 0,
+    paddingRight: 0
   },
   item: {
     marginTop: height < 550 ? 0 : 5,
