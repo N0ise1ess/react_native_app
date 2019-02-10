@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
 import {
   AsyncStorage,
-  Slider,
   View,
+  Text,
 } from 'react-native'
 import {
   Container,
   Label,
   List,
   ListItem,
-  Text,
+  Button,
 } from 'native-base';
+import Slider from "react-native-slider";
+
 
 import FooterSection from '../../components/Footer';
 import store from '../../store/configureStore';
 import styles from './styles/mainConfigStyles';
-
-const itemList = [
-  {
-    title: 'Размер шрифта',
-  },
-  {
-    title: 'Очистка кэш памяти',
-  },
-];
 
 class MainConfigScreen extends Component {
   static navigationOptions = {
@@ -65,16 +58,35 @@ class MainConfigScreen extends Component {
             <Label style={styles.mediumTitle}>A</Label>
             <Label style={styles.largeTitle}>A</Label>
           </View>
-          <Slider
-            step={3}
-            style={{width: '100%'}}
-            maximumValue={100}
-            minimumValue={0}
-          />
+          <View style={styles.sliderView}>
+            <View style={styles.sliderCircleOne}></View>
+            <Slider
+              style={styles.slider}
+              thumbStyle={styles.thumbSlider}
+              maximumValue={2}
+              minimumValue={0}
+              step={1}
+              thumbTintColor={'#0060f7'}
+              minimumTrackTintColor={'#26518f'}
+              maximumTrackTintColor={'#26518f'}
+            />
+            <View style={styles.sliderCircleTwo}></View>
+          </View>
         </ListItem>
         <ListItem button style={styles.listItemStyle} >
           <Text style={styles.textStyle}>Очистка кэш памяти</Text>
-          <Text>Занимаемая память</Text>
+          <View style={styles.textRam}>
+            <Text style={styles.textRam_title}>Занимаемая память</Text>
+            <View style={styles.textRam_description}>
+              <Text style={styles.textRam_number}>25</Text>
+              <Text style={styles.textRam_size}>GB</Text>
+            </View>
+          </View>
+          <View style={styles.buttonClear_box}>
+            <Button block rounded style={styles.buttonClear}>
+              <Text style={styles.buttonClear_text}>ОЧИСТИТЬ</Text>
+            </Button>
+          </View>
         </ListItem>
       </Container>
     )
