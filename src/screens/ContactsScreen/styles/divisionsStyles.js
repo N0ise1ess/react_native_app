@@ -6,12 +6,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   iconStyle: {
-    width: 32,
-    height: 32,
-    marginLeft: 20,
-    marginRight: 20,
-    resizeMode: 'contain',
-    tintColor: '#163D7D',
+    fontSize: 32,
+    color: '#163D7D'
   },
   listItemStyle: {
     paddingTop: 15,
@@ -20,7 +16,7 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'space-between',
     marginLeft: 0,
-    paddingLeft: 40,
+    paddingLeft: 0,
     paddingRight: 20,
     marginRight: 0,
   },
@@ -28,7 +24,7 @@ export default StyleSheet.create({
   },
   columnStyle: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   iconStyle: {
     fontSize: 32,
@@ -37,11 +33,10 @@ export default StyleSheet.create({
   titleStyle: {
     color: '#163D7D',
     fontSize: 14,
-    alignSelf: 'flex-start',
-  },
-  textStyle: {
-    fontSize: 12,
-    color: '#ADADAD',
-    alignSelf: 'flex-start',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginLeft: 55,
+    paddingRight: 5
   }
 })

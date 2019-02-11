@@ -27,7 +27,7 @@ const itemList = [
     title: 'Академия, институты, факультеты,\nкафедры и учебные центры',
   },
   {
-    title: 'Административные-управленческие подразделения',
+    title: 'Административно-управленческие подразделения',
   },
   {
     title: 'Научно-исследовательская часть',
@@ -42,6 +42,12 @@ const itemList = [
 
 class DivisionsScreen extends Component {
   static navigationOptions = {
+    headerTitleStyle: {
+      paddingLeft: 0,
+      marginLeft: 0,
+      fontSize: 16,
+      fontWeight: 'normal'
+    },
     title: 'Подразделения',
   };
 
