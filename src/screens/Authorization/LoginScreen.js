@@ -82,7 +82,6 @@ class LoginScreen extends Component {
 
   render(){
     const { authLoading, errorMessage, userStatus, navigation } = this.props;
-    console.log('height is: ', height);
     return (
       <MainView>
         <StatusBar />

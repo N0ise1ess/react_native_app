@@ -1,38 +1,41 @@
 import initialState from '../store/initialState';
-import {
-  LOGIN_PENDING,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  LOGOUT_PENDING,
-} from '../constants';
+import * as constants from '../constants';
 
 export default authReducer = (state = initialState.authReducer, action) => {
   switch (action.type) {
-    case LOGOUT_SUCCESS:
+    case constants.LOGOUT_SUCCESS:
       return {
         token: null,
         userStatus: 'guest',
       }
-    case LOGIN_SUCCESS:
+    case constants.LOGIN_SUCCESS:
       return {
         ...state,
         ...action.payload,
         authLoading: false,
         userStatus: 'student',
       }
-    case LOGIN_PENDING:
+    case constants.LOGIN_PENDING:
       return {
         ...state,
         authLoading: true,
       }
-    case LOGIN_FAILURE:
+    case constants.LOGIN_FAILURE:
       return {
         ...state,
         authLoading: false,
         errorMessage: action.payload,
         userStatus: 'guest'
+      }
+    case constants.RESET_PASSWORD:
+      return {
+        ...state,
+        authLoading: true,
+      }
+    case constants.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        authLoading: false,
       }
     default:
       return state;
