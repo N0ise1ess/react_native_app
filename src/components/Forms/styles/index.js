@@ -30,11 +30,20 @@ export default StyleSheet.create({
   },
   errorStyle: {
     color: 'red',
-    fontSize: 10,
+    height: 30,
+    fontSize: 12,
+    marginTop: 10,
     marginRight: 10,
   },
   resetButtonStyle: {
     backgroundColor: '#ED3944',
     marginTop: 30,
-  }
+  },
+  resetButtonStyle_text: {
+    fontSize: 12,
+  },
+  textStyle: {
+    fontSize: 14,
+    color: '#747A7B',
+  },
 })

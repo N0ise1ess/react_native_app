@@ -22,62 +22,46 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
-import { ResetPasswordForm } from '../../components/Forms';
-
-import { getSearchedTimetable } from '../../actions/timetableAction';
-
+import { ResetPasswordForm, ResetPasswordFormSuccess } from '../../components/Forms';
 import styles from './styles';
 
-const timeTableList = [
-  {
-    title: 'Разработка программного обеспечения обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-  {
-    title: 'ИНО, практика',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '18:00-19.30',
-  },
-  {
-    title: 'Иностранный язык',
-    text: 'Сергеев, Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-  {
-    title: 'Разработка программного обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-];
-
 class ResetPasswordScreen extends Component {
+
   static navigationOptions = {
     title: 'Восстановление пароля',
   };
 
-
   constructor(props) {
     super(props);
     this.state = {
+      isFirstStep: true,
     }
   }
 
+  onButtonPress = (email) => {
+    this.setState({isFirstStep: false, email})
+  }
+
   render() {
-    const { userStatus, navigation, timeTableLoading, authLoading, errorCode, error, errorDescription } = this.props;
+    const { userStatus, navigation, timeTableLoading, authLoading, errorDescription } = this.props;
     return (
       <Container style={styles.resetContainer}>
         <Content style={styles.content} scrollEnabled={false}>
+        { this.state.isFirstStep &&
           <KeyboardAvoidingView>
-            <View style={styles.resetSection}>
-              <Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</Text>
-              <ResetPasswordForm
-                errorMessage
-                handleSubmit={this.onButtonPress}
-                isLoading={authLoading}
-              />
-            </View>
-          </KeyboardAvoidingView>
+              <View style={styles.resetSection}>
+                <Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</Text>
+                <ResetPasswordForm
+                  errorDescription
+                  handleSubmit={this.onButtonPress}
+                  isLoading={authLoading}
+                />
+              </View>
+            
+          </KeyboardAvoidingView> || <View style={styles.resetSection}>
+            <ResetPasswordFormSuccess email={this.state.email}/>
+          </View>
+        } 
         </Content>
         <FooterSection
           userStatus = {userStatus}
