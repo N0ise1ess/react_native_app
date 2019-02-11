@@ -8,7 +8,7 @@ export default StyleSheet.create({
     color: '#747A7B',
   },
   inputStyle: {
-    fontSize: height < 550 ? 12 : 16,
+    fontSize: height < 750 ? 12 : 16,
     padding: 0,
     height: 34
   },
