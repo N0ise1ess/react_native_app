@@ -3,100 +3,59 @@ import { connect } from 'react-redux';
 import {
   View,
   KeyboardAvoidingView,
-  Keyboard
 } from 'react-native';
-import {
-  Header,
-  Item,
-  Icon,
-  Input,
-  Button,
-  Tab,
-  Tabs,
-  TabHeading,
-  Text,
-  Content,
-  List,
-  Container,
-  Spinner,
-} from 'native-base';
-
+import * as NB from 'native-base';
+import * as action from '../../actions/authorizationAction';
 import FooterSection from '../../components/Footer';
-import { ResetPasswordForm } from '../../components/Forms';
-
-import { getSearchedTimetable } from '../../actions/timetableAction';
-
+import { ResetPasswordForm, ResetPasswordFormSuccess } from '../../components/Forms';
 import styles from './styles';
 
-const timeTableList = [
-  {
-    title: 'Разработка программного обеспечения обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-  {
-    title: 'ИНО, практика',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '18:00-19.30',
-  },
-  {
-    title: 'Иностранный язык',
-    text: 'Сергеев, Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-  {
-    title: 'Разработка программного обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00',
-  },
-];
-
 class ResetPasswordScreen extends Component {
+
   static navigationOptions = {
     title: 'Восстановление пароля',
   };
 
-
   constructor(props) {
     super(props);
     this.state = {
+      isFirstStep: true,
     }
   }
 
+  onButtonPress = (email) => {
+    this.setState({isFirstStep: false, email})
+    this.props.resetPassword(email);
+  }
+
   render() {
-    const { userStatus, navigation, timeTableLoading, authLoading, errorCode, error, errorDescription } = this.props;
+    const { userStatus, navigation, authLoading, } = this.props;
     return (
-      <Container style={styles.resetContainer}>
-        <Content style={styles.content} scrollEnabled={false}>
+      <NB.Container style={styles.resetContainer}>
+        <NB.Content style={styles.content} scrollEnabled={false}>
+        { this.state.isFirstStep &&
           <KeyboardAvoidingView>
             <View style={styles.resetSection}>
-              <Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</Text>
+              <NB.Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</NB.Text>
               <ResetPasswordForm
-                errorMessage
+                errorDescription
                 handleSubmit={this.onButtonPress}
                 isLoading={authLoading}
               />
             </View>
-          </KeyboardAvoidingView>
-        </Content>
+          </KeyboardAvoidingView> 
+          || <View style={styles.resetSection}>
+            <ResetPasswordFormSuccess email={this.state.email} goBack={this.props.navigation.goBack}/>
+          </View>
+        } 
+        </NB.Content>
         <FooterSection
           userStatus = {userStatus}
           navigate={navigation.navigate}
         />
-      </Container>
+      </NB.Container>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    ...state.authReducer,
-    form: state.form.resetPassword,
-  }
-}
-
-const mapDispatchToProps = dispatch => ({
-  dispatch
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordScreen);
+export default connect((state) => ({...state.authReducer}), {...action})(ResetPasswordScreen);

@@ -28,6 +28,7 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     height: height - 200,
+    position: 'relative',
   },
   item: {
     marginTop: 25,
