@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, Icon, Input, Label, Button, Text, Spinner } from 'native-base';
+import * as NB from 'native-base';
 
 import styles from './styles';
 
@@ -22,19 +22,19 @@ class LoginForm extends React.Component {
 
   handleChangeInput = (e) => this.setState({email: e});
 
-  upperCaseWord = (word) => <Label style={styles.label}>{word.toUpperCase()}</Label>;
+  upperCaseWord = (word) => <NB.Label style={styles.label}>{word.toUpperCase()}</NB.Label>;
 
   render() {
     return (
       <React.Fragment>
         {this.upperCaseWord('E-mail:')}
-        <Item regular style={[styles.item, styles.resetInputStyle]}>
-          <Icon
+        <NB.Item regular style={[styles.item, styles.resetInputStyle]}>
+          <NB.Icon
             type="FontAwesome"
             name={'user'}
             style={styles.inputIcon}
           />
-          <Input
+          <NB.Input
             type="email"
             name="email" 
             placeholder="ivanov.ivan@example.com"
@@ -42,14 +42,14 @@ class LoginForm extends React.Component {
             style={styles.inputStyle}
             onChangeText={this.handleChangeInput}
           />
-        </Item>
-        <Text style={styles.errorStyle}>{this.state.textError}</Text>
-        <Button onPress={() => this.handleSubmit(this.state.email)} full rounded style={styles.resetButtonStyle}>
+        </NB.Item>
+        <NB.Text style={styles.errorStyle}>{this.state.textError}</NB.Text>
+        <NB.Button onPress={() => this.handleSubmit(this.state.email)} full rounded style={styles.resetButtonStyle}>
           {this.props.isLoading ?
-            <Spinner color='#fff' size="small" /> 
-            : <Text style={styles.resetButtonStyle_text}>Выслать пароль</Text>
+            <NB.Spinner color='#fff' size="small" /> 
+            : <NB.Text style={styles.resetButtonStyle_text}>Выслать пароль</NB.Text>
           }
-        </Button>
+        </NB.Button>
       </React.Fragment>
     )
   }

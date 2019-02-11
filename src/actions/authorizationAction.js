@@ -1,36 +1,19 @@
 import jwtDecode from 'jwt-decode';
-import {
-  loginApi
-} from '../api';
-
-
-import {
-  LOGIN_PENDING,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_PENDING,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-} from '../constants';
-
-function parseJwt (token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace('-', '+').replace('_', '/');
-  return JSON.parse(window.atob(base64));
-};
+import * as api from '../api';
+import * as constants from '../constants';
 
 export const login = (values) => async dispatch => {
   dispatch({
-    type: LOGIN_PENDING
+    type: constants.LOGIN_PENDING
   });
   try {
-    const response = await loginApi(values);
+    const response = await api.loginApi(values);
     if (response && response.data) {
       console.log(response);
       if(response.status == '200'){
         const decoded = jwtDecode(response.data.access_token);
         dispatch({
-          type: LOGIN_SUCCESS,
+          type: constants.LOGIN_SUCCESS,
           payload: {
             ...decoded,
             token: response.data.access_token
@@ -39,7 +22,7 @@ export const login = (values) => async dispatch => {
       }
       else{
         dispatch({
-          type: LOGIN_FAILURE,
+          type: constants.LOGIN_FAILURE,
           payload: response
         })
       }
@@ -47,7 +30,7 @@ export const login = (values) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: LOGIN_FAILURE,
+      type: constants.LOGIN_FAILURE,
       payload: err.response.data.error_description,
       error: true
     });
@@ -56,6 +39,20 @@ export const login = (values) => async dispatch => {
 
 export const logout = () => async dispatch => {
   dispatch({
-    type: LOGOUT_SUCCESS
+    type: constants.LOGOUT_SUCCESS
   });
+}
+
+export const resetPassword = (payload) => async dispatch => {
+  try {
+    dispatch({
+      type: constants.RESET_PASSWORD,
+    })
+    const {data} = await api.resetPassword(payload);
+    data && dispatch({
+      type: constants.RESET_PASSWORD_SUCCESS,
+    })
+  } catch(e) {
+    console.log(e)
+  }
 }

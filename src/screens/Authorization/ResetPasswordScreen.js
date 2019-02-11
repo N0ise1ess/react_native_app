@@ -3,24 +3,9 @@ import { connect } from 'react-redux';
 import {
   View,
   KeyboardAvoidingView,
-  Keyboard
 } from 'react-native';
-import {
-  Header,
-  Item,
-  Icon,
-  Input,
-  Button,
-  Tab,
-  Tabs,
-  TabHeading,
-  Text,
-  Content,
-  List,
-  Container,
-  Spinner,
-} from 'native-base';
-
+import * as NB from 'native-base';
+import * as action from '../../actions/authorizationAction';
 import FooterSection from '../../components/Footer';
 import { ResetPasswordForm, ResetPasswordFormSuccess } from '../../components/Forms';
 import styles from './styles';
@@ -40,47 +25,37 @@ class ResetPasswordScreen extends Component {
 
   onButtonPress = (email) => {
     this.setState({isFirstStep: false, email})
+    this.props.resetPassword(email);
   }
 
   render() {
-    const { userStatus, navigation, timeTableLoading, authLoading, errorDescription } = this.props;
+    const { userStatus, navigation, authLoading, } = this.props;
     return (
-      <Container style={styles.resetContainer}>
-        <Content style={styles.content} scrollEnabled={false}>
+      <NB.Container style={styles.resetContainer}>
+        <NB.Content style={styles.content} scrollEnabled={false}>
         { this.state.isFirstStep &&
           <KeyboardAvoidingView>
-              <View style={styles.resetSection}>
-                <Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</Text>
-                <ResetPasswordForm
-                  errorDescription
-                  handleSubmit={this.onButtonPress}
-                  isLoading={authLoading}
-                />
-              </View>
-            
-          </KeyboardAvoidingView> || <View style={styles.resetSection}>
-            <ResetPasswordFormSuccess email={this.state.email}/>
+            <View style={styles.resetSection}>
+              <NB.Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</NB.Text>
+              <ResetPasswordForm
+                errorDescription
+                handleSubmit={this.onButtonPress}
+                isLoading={authLoading}
+              />
+            </View>
+          </KeyboardAvoidingView> 
+          || <View style={styles.resetSection}>
+            <ResetPasswordFormSuccess email={this.state.email} goBack={this.props.navigation.goBack}/>
           </View>
         } 
-        </Content>
+        </NB.Content>
         <FooterSection
           userStatus = {userStatus}
           navigate={navigation.navigate}
         />
-      </Container>
+      </NB.Container>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    ...state.authReducer,
-    form: state.form.resetPassword,
-  }
-}
-
-const mapDispatchToProps = dispatch => ({
-  dispatch
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordScreen);
+export default connect((state) => ({...state.authReducer}), {...action})(ResetPasswordScreen);

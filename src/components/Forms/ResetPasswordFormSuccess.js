@@ -17,7 +17,7 @@ class ResetPasswordFormSuccess extends React.Component {
                     Пожалуйста, следуйте указанным в{"\n"}
                     письме инструкциям.
                 </Text>
-                <Button full rounded style={styles.resetButtonStyle}>
+                <Button full rounded style={styles.resetButtonStyle} onPress={() => this.props.goBack()}>
                     <Text style={styles.resetButtonStyle_text}>Вернуться к авторизации</Text>
                 </Button>
             </React.Fragment>

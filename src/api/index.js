@@ -10,6 +10,7 @@ const endpointFinance = 'http://opencode.su/campus/integration/api/finance/docum
 const endpointTimetableSearch = 'http://opencode.su/campus/integration/api/timetable/search';
 const endpointDepartments = 'http://opencode.su/campus/integration/api/departments/searchByName';
 const endpointEditPhoneNumber = 'http://opencode.su/campus/integration/api/users/edit/phoneNumber';
+const endpointResetPassword = 'http://opencode.su/campus/integration/api/users/reset/password';
 
 export function loginApi(values) {
 
@@ -77,4 +78,16 @@ export function timeTableGetApi(searchedText, token) {
 
 export function departmentsGetApi(searchedText) {
   return axios.get(`${endpointDepartments}?search=${searchedText}`)
+}
+
+export function resetPassword(email) {
+  let data = new FormData();
+
+  data.append('email', email);
+
+  return axios.post(endpointResetPassword, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    }
+  });
 }
