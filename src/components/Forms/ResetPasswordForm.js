@@ -45,7 +45,10 @@ class LoginForm extends React.Component {
         </Item>
         <Text style={styles.errorStyle}>{this.state.textError}</Text>
         <Button onPress={() => this.handleSubmit(this.state.email)} full rounded style={styles.resetButtonStyle}>
-          {this.props.isLoading ? <Spinner color='#fff' size="small" /> : <Text>Выслать пароль</Text>}
+          {this.props.isLoading ?
+            <Spinner color='#fff' size="small" /> 
+            : <Text style={styles.resetButtonStyle_text}>Выслать пароль</Text>
+          }
         </Button>
       </React.Fragment>
     )

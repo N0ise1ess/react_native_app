@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+
 export default StyleSheet.create({
   label: {
     fontSize: 10,
@@ -37,13 +38,19 @@ export default StyleSheet.create({
   },
   resetButtonStyle: {
     backgroundColor: '#ED3944',
-    marginTop: 30,
+    position: 'absolute', 
+    bottom: 50,
+    width: '100%',
   },
   resetButtonStyle_text: {
-    fontSize: 12,
+    fontSize: width > 360 ? 14 : 12,
   },
   textStyle: {
     fontSize: 14,
     color: '#747A7B',
+  },
+  textStyle__email: {
+    color: '#0067f6',
+    fontSize: 14,
   },
 })

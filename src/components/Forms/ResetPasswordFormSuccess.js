@@ -9,13 +9,13 @@ class ResetPasswordFormSuccess extends React.Component {
         return (
             <React.Fragment>
                 <Text style={styles.textStyle}>
-                    На адрес {this.props.email} 
+                    На адрес <Text style={styles.textStyle__email}>{this.props.email}{"\n"}</Text>
                     направлена ссылка для{"\n"}
                     восстановления пароля.
                 </Text>
                 <Text style={styles.textStyle}>
-                    Пожалуйста, следуйте указанным{"\n"}
-                    в письме инструкциям.
+                    Пожалуйста, следуйте указанным в{"\n"}
+                    письме инструкциям.
                 </Text>
                 <Button full rounded style={styles.resetButtonStyle}>
                     <Text style={styles.resetButtonStyle_text}>Вернуться к авторизации</Text>
