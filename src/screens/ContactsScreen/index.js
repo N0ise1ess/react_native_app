@@ -26,7 +26,7 @@ import {
 const itemList = [
   {
     title: 'Подразделения',
-    text: 'Информация о структура университета',
+    text: 'Информация о структуре университета',
     image: img_university_section,
     route: 'Divisions'
   },
