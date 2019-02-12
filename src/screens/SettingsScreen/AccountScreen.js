@@ -4,7 +4,6 @@ import { View, TextInput } from 'react-native';
 import { Button, Icon, Container, Content, Text } from 'native-base';
 import styles from './styles/accountStyles';
 import FooterSection from '../../components/Footer';
-import Image from 'react-native-remote-svg';
 import CustomIcon from '../../components/CustomIcon/CustomIcon.js';
 import { editPhoneNumber } from '../../actions/authorizationAction';
 
@@ -33,7 +32,9 @@ class AccountScreen extends Component {
             {/* <Image source={img_account} style={styles.imageStyle} /> */}
             <CustomIcon name={'account'} style={styles.imageStyle} />
             <View style={{ flex: 1 }}>
-              {this.renderFullname(lastName, firstName, secondName)}
+              <Text style={styles.nameStyle}>
+                {lastName && lastName} {firstName && firstName} {secondName && secondName}
+              </Text>
               <View style={styles.info}>
                 {role.some(item => item['type'] === 'STUDENT') ? (
                   role[studentIndex].details && role[studentIndex].details.length === 0 ? (
