@@ -3,6 +3,9 @@ export default {
     token: null,
     errorMessage: null,
     authLoading: false,
+    sendEmailLoading: false,
+    errorText: '',
+    isFirstStepResetPassword: true,
     userStatus: 'guest',
   },
   libraryReducer: {

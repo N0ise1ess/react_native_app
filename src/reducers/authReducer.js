@@ -30,12 +30,31 @@ export default authReducer = (state = initialState.authReducer, action) => {
     case constants.RESET_PASSWORD:
       return {
         ...state,
-        authLoading: true,
+        sendEmailLoading: true,
       }
     case constants.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        authLoading: false,
+        sendEmailLoading: false,
+        isSendEmailFail: false,
+        isFirstStepResetPassword: false,
+      }
+    case constants.RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        sendEmailLoading: false,
+        isSendEmailFail: true,
+      }
+    case constants.INIT_FIRST_STEP_RESET_PASSWORD: 
+      return {
+        ...state,
+        isFirstStepResetPassword: true,
+      }
+    case constants.SET_ERROR_RESET_PASSWORD:
+      return {
+        ...state,
+        sendEmailLoading: false,
+        errorText: action.payload,
       }
     default:
       return state;

@@ -11,10 +11,14 @@ export default StyleSheet.create({
   inputStyle: {
     fontSize: height < 750 ? 12 : 16,
     padding: 0,
-    height: 34
+    height: 34,
   },
   resetInputStyle: {
     backgroundColor: '#fff',
+  },
+  resetInputStyle_error: {
+    borderColor: '#ED3944',
+    borderWidth: 1,
   },
   inputIcon: {
     fontSize: 16,

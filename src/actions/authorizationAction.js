@@ -43,6 +43,12 @@ export const logout = () => async dispatch => {
   });
 }
 
+export const initFirstStepResetPassword = () => async dispatch => {
+  dispatch({
+    type: constants.INIT_FIRST_STEP_RESET_PASSWORD,
+  });
+}
+
 export const resetPassword = (payload) => async dispatch => {
   try {
     dispatch({
@@ -53,6 +59,16 @@ export const resetPassword = (payload) => async dispatch => {
       type: constants.RESET_PASSWORD_SUCCESS,
     })
   } catch(e) {
-    console.log(e)
+    dispatch({
+      type: constants.SET_ERROR_RESET_PASSWORD,
+      payload: "Адрес отсутствует в системе, \nпроверьте его правильность",
+    })
   }
+}
+
+export const setErrorResetPassword = (payload) => async dispatch => {
+  dispatch({
+    type: constants.SET_ERROR_RESET_PASSWORD,
+    payload,
+  })
 }

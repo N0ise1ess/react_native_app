@@ -3,20 +3,15 @@ import * as NB from 'native-base';
 
 import styles from './styles';
 
-const errorText = ({
-  notFound: (<React.Fragment>Адрес отсутствует в системе, {"\n"}проверьте его правильность</React.Fragment>),
-  null: 'Пустое поле',
-})
-
 class LoginForm extends React.Component {
 
-  state = ({
-    textError: '',
-  })
+  state = {
+    email: '',
+  }
 
   handleSubmit = (email) => {
-    const isValid = email !== ''; 
-    isValid ? this.setState({textError: ''}) : this.setState({textError: errorText['null']});
+    const isValid = email !== '' && email !== undefined; 
+    isValid ? this.props.handleError('') : this.props.handleError('Пустое поле');
     this.props.handleSubmit && isValid && this.props.handleSubmit(email);
   }
 
@@ -28,7 +23,11 @@ class LoginForm extends React.Component {
     return (
       <React.Fragment>
         {this.upperCaseWord('E-mail:')}
-        <NB.Item regular style={[styles.item, styles.resetInputStyle]}>
+        <NB.Item regular style={[
+          styles.item, 
+          styles.resetInputStyle, 
+          this.props.errorText !== '' ? styles.resetInputStyle_error : {}
+        ]}>
           <NB.Icon
             type="FontAwesome"
             name={'user'}
@@ -39,11 +38,11 @@ class LoginForm extends React.Component {
             name="email" 
             placeholder="ivanov.ivan@example.com"
             placeholderTextColor='silver'
-            style={styles.inputStyle}
+            style={[styles.inputStyle]}
             onChangeText={this.handleChangeInput}
           />
         </NB.Item>
-        <NB.Text style={styles.errorStyle}>{this.state.textError}</NB.Text>
+        <NB.Text style={styles.errorStyle}>{this.props.errorText}</NB.Text>
         <NB.Button onPress={() => this.handleSubmit(this.state.email)} full rounded style={styles.resetButtonStyle}>
           {this.props.isLoading ?
             <NB.Spinner color='#fff' size="small" /> 
