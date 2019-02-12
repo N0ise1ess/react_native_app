@@ -45,4 +45,9 @@ export const img_finance_white = require('./finance-white.png');
 export const img_campus_dorm = require('./campus-dorm.png');
 export const img_university_section = require('./university-section.png');
 
+
+//Personality
 export const img_teacher = require('./teacher.png');
+export const img_email = require('./email.png');
+export const img_make_call = require('./make_call.png');
+export const img_start_chat = require('./start_chat.png');
