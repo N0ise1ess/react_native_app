@@ -18,6 +18,8 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
     marginRight: 10,
+    fontSize: 40,
+    color: '#0e63ee'
   },
   nameStyle: {
     fontWeight: 'bold',
