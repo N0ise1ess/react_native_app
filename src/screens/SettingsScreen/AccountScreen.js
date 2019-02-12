@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { View, Image, TextInput } from 'react-native';
-import { Button, Icon, Container, Content, Text, Spinner } from 'native-base';
-
+import { View, TextInput } from 'react-native';
+import { Button, Icon, Container, Content, Text } from 'native-base';
 import styles from './styles/accountStyles';
-
 import FooterSection from '../../components/Footer';
+import Image from 'react-native-remote-svg';
 
 import { img_account } from '../../assets/images';
 import { editPhoneNumber } from '../../actions/authorizationAction';
@@ -32,13 +31,10 @@ class AccountScreen extends Component {
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            <Image source={img_account} style={styles.imageStyle} />
-
+            {/* <Image source={img_account} style={styles.imageStyle} /> */}
+            <Image source={require('../../assets/images/account.svg')} style={styles.imageStyle} />
             <View style={{ flex: 1 }}>
-              <Text style={styles.nameStyle}>
-                {lastName && lastName} {firstName && firstName} {secondName && secondName}
-              </Text>
-
+              {this.renderFullname(lastName, firstName, secondName)}
               <View style={styles.info}>
                 {role.some(item => item['type'] === 'STUDENT') ? (
                   role[studentIndex].details && role[studentIndex].details.length === 0 ? (
