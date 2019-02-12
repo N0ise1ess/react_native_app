@@ -12,14 +12,14 @@ import { editPhoneNumber } from '../../actions/authorizationAction';
 
 class AccountScreen extends Component {
   static navigationOptions = {
-    title: 'Учетная запись'
+    title: 'Учетная запись',
   };
 
   constructor(props) {
     super(props);
     this.state = {
       editableMode: false,
-      phoneNumber: props.phoneNumber
+      phoneNumber: props.phoneNumber,
     };
   }
 
@@ -111,16 +111,16 @@ class AccountScreen extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
-    ...state.accountReducer
+    ...state.accountReducer,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   editPhone: (phoneNumber, token) => dispatch(editPhoneNumber(phoneNumber, token)),
-  dispatch
+  dispatch,
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AccountScreen);

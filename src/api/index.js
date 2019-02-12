@@ -22,40 +22,40 @@ export function loginApi(values) {
   return axios.post(endpoint, data, {
     headers: {
       Authorization: 'Basic bW9iaWxlOg==',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
   });
 }
 
 export function libCardApi(token) {
   return axios.get(endpointLibraryCard, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 }
 
 export function libQRCodeApi(token) {
   return axios.get(endpointQRCode, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 }
 
 export function libBookApi(token) {
   return axios.get(endpointLibraryBook, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 }
 
 export function financePaymentApi(token) {
   return axios.get(endpointFinance, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 }
 
@@ -67,8 +67,8 @@ export function timeTableGetApi(searchedText, token) {
   return axios.post(endpointTimetableSearch, searchedText, {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'text/plain'
-    }
+      'Content-Type': 'text/plain',
+    },
   });
 }
 
@@ -83,8 +83,8 @@ export function resetPassword(email) {
 
   return axios.post(endpointResetPassword, data, {
     headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+      'Content-Type': 'multipart/form-data',
+    },
   });
 }
 
@@ -96,7 +96,7 @@ export function editPhoneNumber(phoneNumber, token) {
   return axios.post(endpointEditPhoneNumber, data, {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
-    }
+      'Content-Type': 'multipart/form-data',
+    },
   });
 }
