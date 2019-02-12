@@ -30,10 +30,12 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   label: {
+    color: 'gray',
     fontSize: 12,
     paddingTop: 12,
   },
   textStyle: {
+    color: 'gray',
     fontSize: 14,
     marginTop: 5,
   },
@@ -52,7 +54,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   info: {
-    borderColor: 'black',
+    borderColor: 'gray',
     borderBottomWidth: 1,
     paddingBottom: 10,
   },
