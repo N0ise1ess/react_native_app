@@ -19,13 +19,20 @@ export default StyleSheet.create({
     height: 200,
     resizeMode: 'contain',
   },
+    btnImageStyle: {
+      borderRadius: 45,
+      marginRight: 10,
+      height: 45,
+      width:45,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#0C68FF',
+    },
   imageStyle: {
-    width: 40,
-    height: 40,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
-    tintColor: '#4099F4',
-    marginLeft: 10,
-    marginRight: 10,
+    tintColor: 'white'
   },
   nameStyle: {
     fontWeight: 'bold',
