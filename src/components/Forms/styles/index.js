@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   errorStyle: {
     color: 'red',
-    height: 30,
+    height: 40,
     fontSize: 12,
     marginTop: 10,
     marginRight: 10,
