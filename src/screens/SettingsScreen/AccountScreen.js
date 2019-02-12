@@ -13,7 +13,7 @@ import {
 } from 'native-base';
 import styles from './styles/accountStyles';
 import FooterSection from '../../components/Footer';
-import Image from 'react-native-remote-svg'
+import CustomIcon from '../../components/CustomIcon/CustomIcon.js'
 
 
 class AccountScreen extends Component {
@@ -45,8 +45,8 @@ class AccountScreen extends Component {
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
             {/* <Image source={img_account} style={styles.imageStyle} /> */}
-            <Image
-              source={require('../../assets/images/account.svg')}
+            <CustomIcon
+              name={'account'}
               style={styles.imageStyle}
             />
             <View style={{flex: 1}}>
