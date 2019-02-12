@@ -21,6 +21,7 @@ class ResetPasswordScreen extends Component {
     this.state = {
       isFirstStep: true,
     }
+    props.initFirstStepResetPassword();
   }
 
   onButtonPress = (email) => {
@@ -29,18 +30,20 @@ class ResetPasswordScreen extends Component {
   }
 
   render() {
-    const { userStatus, navigation, authLoading, } = this.props;
+    const { userStatus, navigation, sendEmailLoading, errorText, isFirstStepResetPassword, setErrorResetPassword} = this.props;
     return (
       <NB.Container style={styles.resetContainer}>
         <NB.Content style={styles.content} scrollEnabled={false}>
-        { this.state.isFirstStep &&
+        { isFirstStepResetPassword &&
           <KeyboardAvoidingView>
             <View style={styles.resetSection}>
               <NB.Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</NB.Text>
               <ResetPasswordForm
                 errorDescription
                 handleSubmit={this.onButtonPress}
-                isLoading={authLoading}
+                isLoading={sendEmailLoading}
+                errorText={errorText}
+                handleError={setErrorResetPassword}
               />
             </View>
           </KeyboardAvoidingView> 
