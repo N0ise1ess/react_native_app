@@ -1,48 +1,31 @@
 import React, { Component, Fragment } from 'react';
-import {connect} from 'react-redux';
-import {
-  View,
-  Image,
-  TextInput
-} from 'react-native';
-import {
-  Button,
-  Icon,
-  Container,
-  Content,
-  Text,
-} from 'native-base';
+import { connect } from 'react-redux';
+import { View, Image, TextInput } from 'react-native';
+import { Button, Icon, Container, Content, Text, Spinner } from 'native-base';
 
 import styles from './styles/accountStyles';
 
 import FooterSection from '../../components/Footer';
 
-import {
-  img_account,
-} from '../../assets/images';
+import { img_account } from '../../assets/images';
+import { editPhoneNumber } from '../../actions/authorizationAction';
 
 class AccountScreen extends Component {
   static navigationOptions = {
     title: 'Учетная запись'
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       editableMode: false,
-      text: props.phoneNumber,
-    }
+      phoneNumber: props.phoneNumber
+    };
   }
 
-  renderFullname = (lastName, firstName, secondName) => <Text style={styles.nameStyle}>{lastName && lastName} {firstName && firstName} {secondName && secondName}</Text>
-  renderLabel = (text) => <Text style={styles.label}>{text.toUpperCase()}</Text>
-  onHandleEdit = () => {
-    this.setState(prevState => ({editableMode : !prevState.editableMode}))
-    this.state.editableMode && console.log('saved in server'); 
-  }
-  render () {
-    const { userStatus, navigation, lastName, firstName, secondName, phoneNumber, role, email, id } = this.props;
-    const { editableMode, text } = this.state;
+  render() {
+    const { userStatus, navigation, lastName, firstName, secondName, role, email } = this.props;
+    const { editableMode, phoneNumber } = this.state;
     const studentIndex = role.findIndex(item => item.type === 'STUDENT');
 
     return (
@@ -50,55 +33,94 @@ class AccountScreen extends Component {
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
             <Image source={img_account} style={styles.imageStyle} />
-            <View style={{flex: 1}}>
-              {this.renderFullname(lastName, firstName, secondName)}
+
+            <View style={{ flex: 1 }}>
+              <Text style={styles.nameStyle}>
+                {lastName && lastName} {firstName && firstName} {secondName && secondName}
+              </Text>
+
               <View style={styles.info}>
-                {role.some(item => item['type'] === 'STUDENT') ?
-                  role[studentIndex].details && role[studentIndex].details.length === 0 ?
-                    <Text style={styles.errorText}>Пользователь не содержит данных</Text> :
+                {role.some(item => item['type'] === 'STUDENT') ? (
+                  role[studentIndex].details && role[studentIndex].details.length === 0 ? (
+                    <Text style={styles.errorText}>Пользователь не содержит данных</Text>
+                  ) : (
                     <View>
                       <Text style={styles.textStyle}>Факультет: {role[studentIndex].details[0].plan.faculty.name}</Text>
-                      <Text style={styles.textStyle}>Направление: {role[studentIndex].details[0].plan.speciality.name}</Text>
+                      <Text style={styles.textStyle}>
+                        Направление: {role[studentIndex].details[0].plan.speciality.name}
+                      </Text>
                       <Text style={styles.textStyle}>Группа: {role[studentIndex].details[0].group.name}</Text>
-                    </View> : <Text/>}
+                    </View>
+                  )
+                ) : (
+                  <Text />
+                )}
               </View>
+
               {this.renderLabel('Телефон')}
-              {editableMode ?
+              {editableMode ? (
                 <TextInput
                   style={styles.inputStyle}
-                  onChangeText={(text) => this.setState({text})}
-                  value={text} />:
-                <Text style={phoneNumber ? styles.textStyle : styles.errorText}>{text ? text : 'Номер отсутствует'}</Text>}
+                  onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                  value={phoneNumber}
+                />
+              ) : (
+                <Text style={phoneNumber ? styles.textStyle : styles.errorText}>
+                  {phoneNumber ? phoneNumber : 'Номер отсутствует'}
+                </Text>
+              )}
+
               {this.renderLabel('E-mail')}
               {email && <Text style={styles.textStyle}>{email}</Text>}
             </View>
           </View>
+
           <View style={styles.buttonSection}>
-              {editableMode && <Button light style={[styles.buttonStyle, styles.cancelStyle]}>
-                <Icon type='MaterialCommunityIcons' name='cancel' style={styles.iconStyle} />
-              </Button>}
-              <Button light style={[styles.buttonStyle, styles.editStyle]} onPress={this.onHandleEdit}>
-                <Icon type='MaterialCommunityIcons' name={editableMode ? 'check' : 'pencil'} style={styles.iconStyle} />
+            {editableMode ? (
+              <>
+                <Button light style={[styles.buttonStyle, styles.cancelStyle]} onPress={this.onToggleEdit}>
+                  <Icon type="MaterialCommunityIcons" name="cancel" style={styles.iconStyle} />
+                </Button>
+                <Button light style={[styles.buttonStyle, styles.editStyle]} onPress={this.onSubmitEdit}>
+                  <Icon type="MaterialCommunityIcons" name="check" style={styles.iconStyle} />
+                </Button>
+              </>
+            ) : (
+              <Button light style={[styles.buttonStyle, styles.editStyle]} onPress={this.onToggleEdit}>
+                <Icon type="MaterialCommunityIcons" name="pencil" style={styles.iconStyle} />
               </Button>
+            )}
           </View>
         </View>
-        <FooterSection
-          userStatus = {userStatus}
-          navigate={navigation.navigate}
-        />
+
+        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
-    )
+    );
   }
+
+  renderLabel = text => <Text style={styles.label}>{text.toUpperCase()}</Text>;
+  onToggleEdit = () => {
+    this.setState(prevState => ({ editableMode: !prevState.editableMode, phoneNumber: this.props.phoneNumber }));
+  };
+  onSubmitEdit = () => {
+    this.setState(prevState => ({ editableMode: !prevState.editableMode }));
+    this.props.editPhone(this.state.phoneNumber, this.props.token);
+  };
 }
 
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
-  }
-}
+    ...state.accountReducer
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
-})
+  editPhone: (phoneNumber, token) => dispatch(editPhoneNumber(phoneNumber, token)),
+  dispatch
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountScreen);
