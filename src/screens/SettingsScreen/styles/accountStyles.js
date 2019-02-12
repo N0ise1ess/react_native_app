@@ -17,12 +17,6 @@ export default StyleSheet.create({
   imageStyle: {
     width: 40,
     height: 40,
-    resizeMode: 'contain',
-    tintColor: '#163D7D',
-    borderWidth: 1,
-    borderColor: '#163D7D',
-    borderRadius: 20,
-    marginLeft: 10,
     marginRight: 10,
   },
   nameStyle: {
