@@ -86,7 +86,7 @@ class LoginScreen extends Component {
       <MainView>
         <StatusBar />
         <KeyboardAvoidingView>
-          <ScrollView contentContainerStyle={styles.content}>
+          <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps={'handled'}>
             <View style={styles.section}>
               <Image
                 source={img_logo}

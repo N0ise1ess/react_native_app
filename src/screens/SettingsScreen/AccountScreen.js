@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import {
   View,
-  Image,
   TextInput
 } from 'react-native';
 import {
@@ -12,14 +11,10 @@ import {
   Content,
   Text,
 } from 'native-base';
-
 import styles from './styles/accountStyles';
-
 import FooterSection from '../../components/Footer';
+import CustomIcon from '../../components/CustomIcon/CustomIcon.js'
 
-import {
-  img_account,
-} from '../../assets/images';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -49,7 +44,11 @@ class AccountScreen extends Component {
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            <Image source={img_account} style={styles.imageStyle} />
+            {/* <Image source={img_account} style={styles.imageStyle} /> */}
+            <CustomIcon
+              name={'account'}
+              style={styles.imageStyle}
+            />
             <View style={{flex: 1}}>
               {this.renderFullname(lastName, firstName, secondName)}
               <View style={styles.info}>
