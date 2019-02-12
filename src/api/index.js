@@ -13,7 +13,6 @@ const endpointEditPhoneNumber = 'http://opencode.su/campus/integration/api/users
 const endpointResetPassword = 'http://opencode.su/campus/integration/api/users/reset/password';
 
 export function loginApi(values) {
-
   let data = new FormData();
 
   data.append('username', values.username);
@@ -22,62 +21,59 @@ export function loginApi(values) {
 
   return axios.post(endpoint, data, {
     headers: {
-      'Authorization': 'Basic bW9iaWxlOg==',
+      Authorization: 'Basic bW9iaWxlOg==',
       'Content-Type': 'application/x-www-form-urlencoded',
-    }
-  })
-};
+    },
+  });
+}
 
 export function libCardApi(token) {
-
   return axios.get(endpointLibraryCard, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export function libQRCodeApi(token) {
   return axios.get(endpointQRCode, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export function libBookApi(token) {
-
   return axios.get(endpointLibraryBook, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export function financePaymentApi(token) {
-
   return axios.get(endpointFinance, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export function newsApi() {
-  return axios.get(endpointNewsAll)
+  return axios.get(endpointNewsAll);
 }
 
 export function timeTableGetApi(searchedText, token) {
   return axios.post(endpointTimetableSearch, searchedText, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'text/plain'
-    }
-  })
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'text/plain',
+    },
+  });
 }
 
 export function departmentsGetApi(searchedText) {
-  return axios.get(`${endpointDepartments}?search=${searchedText}`)
+  return axios.get(`${endpointDepartments}?search=${searchedText}`);
 }
 
 export function resetPassword(email) {
@@ -88,6 +84,19 @@ export function resetPassword(email) {
   return axios.post(endpointResetPassword, data, {
     headers: {
       'Content-Type': 'multipart/form-data',
-    }
+    },
+  });
+}
+
+export function editPhoneNumber(phoneNumber, token) {
+  let data = new FormData();
+
+  data.append('phoneNumber', phoneNumber);
+
+  return axios.post(endpointEditPhoneNumber, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
   });
 }
