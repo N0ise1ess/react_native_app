@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'react-native-remote-svg'
-import { Footer, FooterTab, Button, Icon } from 'native-base';
+import { Footer, FooterTab, Button} from 'native-base';
 
 import {
   img_menu_white,
