@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -15,22 +16,22 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
   photoStyle: {
-    width: 150,
-    height: 200,
-    resizeMode: 'contain',
+    width: width * 0.35,
+    minHeight: height * 0.24,
+    resizeMode: 'contain'
   },
   btnImageStyle: {
-    borderRadius: 45,
+    borderRadius: width * 0.1,
     marginRight: 10,
-    height: 45,
-    width: 45,
+    height: width * 0.1,
+    width: width * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0C68FF'
   },
   imageStyle: {
-    width: 20,
-    height: 20,
+    width: width * 0.05,
+    height: width * 0.05,
     resizeMode: 'contain',
     tintColor: 'white'
   },
