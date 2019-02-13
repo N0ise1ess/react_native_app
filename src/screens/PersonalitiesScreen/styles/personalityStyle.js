@@ -47,7 +47,7 @@ export default StyleSheet.create({
   nameStyle: {
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#B6B6B6'
+    color: '#1e1e1e'
   },
   label: {
     fontSize: 12,
@@ -113,7 +113,7 @@ export default StyleSheet.create({
   departmentLabel: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#B6B6B6',
+    color: '#1e1e1e',
     marginTop: 0
   }
 })
