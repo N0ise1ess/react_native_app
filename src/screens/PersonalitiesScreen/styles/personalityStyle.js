@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -15,29 +16,47 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
   photoStyle: {
-    width: 150,
-    height: 200,
-    resizeMode: 'contain',
+    width: width * 0.35,
+    minHeight: height * 0.24,
+    resizeMode: 'contain'
+  },
+  btnImageStyle: {
+    borderRadius: width * 0.1,
+    marginRight: 10,
+    height: width * 0.1,
+    width: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0C68FF'
   },
   imageStyle: {
+    width: width * 0.05,
+    height: width * 0.05,
+    resizeMode: 'contain',
+    tintColor: 'white'
+  },
+  imgTeacher: {
     width: 40,
     height: 40,
     resizeMode: 'contain',
     tintColor: '#4099F4',
     marginLeft: 10,
     marginRight: 10,
+    marginTop: 5
   },
   nameStyle: {
     fontWeight: 'bold',
     marginBottom: 5,
+    color: '#1e1e1e'
   },
   label: {
     fontSize: 12,
-    paddingTop: 12,
+    color: "#979797"
   },
   textStyle: {
     fontSize: 14,
     marginTop: 5,
+    color: "#979797"
   },
   dataStyle: {
     fontSize: 14,
@@ -45,7 +64,7 @@ export default StyleSheet.create({
     color: '#4099F4',
   },
   dataSection: {
-    paddingTop: 5,
+    paddingTop: 7,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -65,7 +84,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   info: {
-    borderColor: 'black',
+    borderColor: "#979797",
     borderBottomWidth: 1,
     paddingBottom: 10,
   },
@@ -79,7 +98,7 @@ export default StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 25,
-    margin: 5,
+    margin: 5
   },
   editStyle: {
     backgroundColor: '#ED3944',
@@ -91,5 +110,10 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
-
+  departmentLabel: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#1e1e1e',
+    marginTop: 0
+  }
 })
