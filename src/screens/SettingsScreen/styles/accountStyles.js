@@ -18,7 +18,7 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
     marginRight: 10,
-    fontSize: 40,
+    fontSize: 38,
     color: '#0e63ee'
   },
   nameStyle: {
