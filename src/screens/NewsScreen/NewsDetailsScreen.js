@@ -19,15 +19,18 @@ import ImageSlider from 'react-native-image-slider';
 
 import { News } from '../../components/News';
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import styles from './styles';
 
 const imagesOnLoading = [{ isLoading: true }]
 
 class NewsDetailsScreen extends Component {
-  static navigationOptions = {
-    title: 'Новости университета',
-  };
+  
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Новости университета',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props){
     super(props)

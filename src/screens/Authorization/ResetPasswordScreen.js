@@ -9,12 +9,14 @@ import * as action from '../../actions/authorizationAction';
 import FooterSection from '../../components/Footer';
 import { ResetPasswordForm, ResetPasswordFormSuccess } from '../../components/Forms';
 import styles from './styles';
+import ButtonBack from '../../components/ButtonBack';
 
 class ResetPasswordScreen extends Component {
 
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: 'Восстановление пароля',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);

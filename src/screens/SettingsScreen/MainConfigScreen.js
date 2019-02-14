@@ -15,13 +15,16 @@ import Slider from "react-native-slider";
 
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 import store from '../../store/configureStore';
 import styles from './styles/mainConfigStyles';
 
 class MainConfigScreen extends Component {
-  static navigationOptions = {
-    title: 'Основные'
-  }
+  
+  static navigationOptions = ({navigation}) => ({
+    title: 'Основные',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);

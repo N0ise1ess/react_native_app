@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import {
   img_star,
@@ -64,9 +65,10 @@ const itemList = [
 ]
 
 class LibraryScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: 'Библиотека',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
 
   constructor(props) {

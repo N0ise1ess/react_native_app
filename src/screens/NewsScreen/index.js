@@ -20,9 +20,9 @@ import {
   Spinner,
 } from 'native-base';
 import ImageSlider from 'react-native-image-slider';
-
 import { News } from '../../components/News';
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import {
   getAllNews
@@ -36,13 +36,14 @@ class NewsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Новости университета',
-      headerLeft: <Left>
-        <Button transparent onPress={() => navigation.replace('Home')}>
-          <Icon name='arrow-back' style={{color: 'white'}}/>
-        </Button>
-      </Left>
+      headerLeft: <ButtonBack onPress={() => navigation.replace('Home')}/>,
     }
   };
+
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Читательский билет',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>
+  });
 
   constructor(props){
     super(props);

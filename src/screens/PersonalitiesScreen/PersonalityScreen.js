@@ -14,7 +14,7 @@ import {
 } from 'native-base';
 
 import styles from './styles/personalityStyle';
-
+import ButtonBack from '../../components/ButtonBack';
 import FooterSection from '../../components/Footer';
 
 import {
@@ -25,9 +25,10 @@ import {
 } from '../../assets/images';
 
 class PersonalityScreen extends Component {
-  static navigationOptions = {
-    title: 'Персоналии'
-  }
+  static navigationOptions = ({navigation}) => ({
+    title: 'Персоналии',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);

@@ -15,6 +15,7 @@ import {
 import { logout } from '../../actions/authorizationAction';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import styles from './styles';
 
@@ -27,9 +28,11 @@ const itemList = [
 ]
 
 class NotificationsScreen extends Component {
-  static navigationOptions = {
-    title: 'Уведомления',
-  };
+  
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Уведомления',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   onAuthHandle = () => {
     if(this.props.token) {

@@ -18,6 +18,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import { getSearchedTimetable } from '../../actions/timetableAction';
 
@@ -47,9 +48,11 @@ const timeTableList = [
 ];
 
 class TimeTableScreen extends Component {
-  static navigationOptions = {
-    title: 'Расписание',
-  };
+  
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Расписание',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
 
   constructor(props) {
