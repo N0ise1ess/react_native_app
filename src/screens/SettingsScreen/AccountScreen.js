@@ -4,13 +4,15 @@ import { View, TextInput } from 'react-native';
 import { Button, Icon, Container, Content, Text } from 'native-base';
 import styles from './styles/accountStyles';
 import FooterSection from '../../components/Footer';
-import CustomIcon from '../../components/CustomIcon/CustomIcon.js';
+import ButtonBack from '../../components/ButtonBack';
 import { editPhoneNumber } from '../../actions/authorizationAction';
 
 class AccountScreen extends Component {
-  static navigationOptions = {
-    title: 'Учетная запись',
-  };
+
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Учетная запись',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);

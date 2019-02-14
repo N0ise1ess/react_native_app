@@ -15,7 +15,7 @@ import {
   Input,
   Button,
 } from 'native-base';
-
+import ButtonBack from '../../components/ButtonBack';
 import FooterSection from '../../components/Footer';
 
 import { getDepartments } from '../../actions/contactsAction';
@@ -67,9 +67,11 @@ const itemList = [
 ]
 
 class PersonalitiesScreen extends Component {
-  static navigationOptions = {
+  
+  static navigationOptions = ({navigation}) => ({
     title: 'Персоналии',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

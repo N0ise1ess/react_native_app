@@ -14,7 +14,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
-
+import ButtonBack from '../../components/ButtonBack';
 import styles from './styles/buildingDormsStyles';
 
 import {
@@ -51,9 +51,11 @@ const itemList = [
 ]
 
 class BuildingDormsScreen extends Component {
-  static navigationOptions = {
+
+  static navigationOptions = ({navigation}) => ({
     title: 'Корпуса и общежития',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

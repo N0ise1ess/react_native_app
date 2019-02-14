@@ -18,6 +18,7 @@ import {
 import { logout } from '../../actions/authorizationAction';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import {
   img_account,
@@ -57,9 +58,11 @@ const itemList = [
 ]
 
 class QuestionnairesScreen extends Component {
-  static navigationOptions = {
-    title: 'Анкетные опросы',
-  };
+  
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Анкетные опросы',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
 
   constructor(props) {

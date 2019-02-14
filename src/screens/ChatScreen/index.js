@@ -17,7 +17,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
-
+import ButtonBack from '../../components/ButtonBack';
 import { getDepartments } from '../../actions/contactsAction';
 
 import styles from './styles';
@@ -63,9 +63,11 @@ const itemList = [
 ]
 
 class ChatScreen extends Component {
-  static navigationOptions = {
+  
+  static navigationOptions = ({navigation}) => ({
     title: 'Чат',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

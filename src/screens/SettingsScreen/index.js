@@ -15,6 +15,7 @@ import {
 import { logout } from '../../actions/authorizationAction';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import {
   img_account,
@@ -79,9 +80,12 @@ const itemGuestList = [
 ];
 
 class SettingsScreen extends Component {
-  static navigationOptions = {
-    title: 'Настройки',
-  };
+
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Настройки',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
+
 
 
   constructor(props) {

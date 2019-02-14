@@ -15,7 +15,7 @@ import {
   Input,
   Button,
 } from 'native-base';
-
+import ButtonBack from '../../components/ButtonBack';
 import FooterSection from '../../components/Footer';
 
 import { getDepartments } from '../../actions/contactsAction';
@@ -46,9 +46,11 @@ const itemList = [
 ]
 
 class ParentsScreen extends Component {
-  static navigationOptions = {
+  
+  static navigationOptions = ({navigation}) => ({
     title: 'Родители',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

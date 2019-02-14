@@ -19,6 +19,7 @@ import {
 import moment from 'moment';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import { getLibraryCard, getLibraryBook, getLibraryQRCode } from '../../actions/libraryAction';
 import styles from './styles/libraryCardStyle';
@@ -31,9 +32,10 @@ class LibraryCardScreen extends Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'Читательский билет',
-  };
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Читательский билет',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   componentWillMount() {
     this.props.getLibraryQRCode(this.props.token)

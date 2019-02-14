@@ -9,6 +9,7 @@ import {
   View,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import {
   Content,
@@ -32,6 +33,7 @@ import { LoginForm } from '../../components/Forms';
 
 import { MainView } from '../../components/Views/MainView';
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 import { img_logo_notext } from '../../assets/images';
 import styles from './styles';
 
@@ -46,9 +48,10 @@ class AboutAppScreen extends Component {
     }
   }
 
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     headerTitle: 'О приложении',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   render(){
     const { authLoading, errorMessage, userStatus, navigation } = this.props;

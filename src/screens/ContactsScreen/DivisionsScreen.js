@@ -14,7 +14,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
-
+import ButtonBack from '../../components/ButtonBack';
 import styles from './styles/divisionsStyles';
 
 import {
@@ -41,7 +41,8 @@ const itemList = [
 ]
 
 class DivisionsScreen extends Component {
-  static navigationOptions = {
+
+  static navigationOptions = ({navigation}) => ({
     headerTitleStyle: {
       paddingLeft: 0,
       marginLeft: 0,
@@ -49,7 +50,8 @@ class DivisionsScreen extends Component {
       fontWeight: 'normal'
     },
     title: 'Подразделения',
-  };
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

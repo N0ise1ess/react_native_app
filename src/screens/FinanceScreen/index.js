@@ -16,15 +16,17 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
-
+import ButtonBack from '../../components/ButtonBack';
 import { getFinancePayment } from '../../actions/financeAction';
 
 import styles from './styles';
 
 class FinanceScreen extends Component {
-  static navigationOptions = {
-    title: 'Финансы',
-  };
+
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Финансы',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);

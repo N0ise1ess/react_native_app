@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 
 import FooterSection from '../../components/Footer';
+import ButtonBack from '../../components/ButtonBack';
 
 import { getDepartments } from '../../actions/contactsAction';
 
@@ -39,9 +40,11 @@ const itemList = [
 ]
 
 class ContactsScreen extends Component {
-  static navigationOptions = {
-    title: 'Контакты университета',
-  };
+
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Контакты университета',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props)

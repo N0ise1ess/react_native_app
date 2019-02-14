@@ -14,7 +14,7 @@ import {
 } from 'native-base';
 
 import styles from './styles/parentStyle';
-
+import ButtonBack from '../../components/ButtonBack';
 import FooterSection from '../../components/Footer';
 import { ParentControlForm } from '../../components/Forms';
 
@@ -24,9 +24,11 @@ import {
 } from '../../assets/images';
 
 class ParentScreen extends Component {
-  static navigationOptions = {
-    title: 'Родители'
-  }
+  
+  static navigationOptions = ({navigation}) => ({
+    title: 'Родители',
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+  });
 
   constructor(props) {
     super(props);
