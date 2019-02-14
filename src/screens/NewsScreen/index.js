@@ -39,12 +39,6 @@ class NewsScreen extends Component {
       headerLeft: <ButtonBack onPress={() => navigation.replace('Home')}/>,
     }
   };
-
-  static navigationOptions = ({navigation}) => ({
-    headerTitle: 'Читательский билет',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>
-  });
-
   constructor(props){
     super(props);
 
