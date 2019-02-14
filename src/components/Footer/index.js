@@ -1,7 +1,5 @@
 import React from 'react';
-import Image from 'react-native-remote-svg'
 import { Footer, FooterTab, Button} from 'native-base';
-
 import styles from './styles';
 import CustomIcon from '../CustomIcon'
 
