@@ -1,7 +1,5 @@
 deploy:android:
   stage: deploy
-  tags:
-    - rnbuild
   before_script:
     - yarn
     - yarn link
