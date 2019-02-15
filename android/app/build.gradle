@@ -71,7 +71,7 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
-
+project.buildDir = "../../build/android"
 project.ext.react = [
     entryFile: "index.js"
 ]
@@ -97,15 +97,28 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    defaultConfig {
+ def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def code = versionProps['VERSION_CODE'].toInteger() + 1
+
+        versionProps['VERSION_CODE']=code.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
         applicationId "com.campus"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode code
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+    }
     }
     signingConfigs {
         release {
