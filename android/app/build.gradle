@@ -93,28 +93,22 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
- def versionPropsFile = file('version.properties')
-
+    def versionPropsFile = file('version.properties')
+    
     if (versionPropsFile.canRead()) {
         def Properties versionProps = new Properties()
-
         versionProps.load(new FileInputStream(versionPropsFile))
-
-        def code = versionProps['VERSION_CODE'].toInteger() + 1
-
-        versionProps['VERSION_CODE']=code.toString()
-        versionProps.store(versionPropsFile.newWriter(), null)
 
         defaultConfig {
         applicationId "com.campus"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode code
-        versionName "1.0"
+        versionCode versionProps['VERSION_CODE'].toInteger()
+        versionName versionProps['VERSION_NAME']
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -159,8 +153,26 @@ android {
         }
     }
 }
+increaseVersionCodeOnRelease();
+def increaseVersionCodeOnRelease() {
+    gradle.taskGraph.whenReady { taskGraph ->
+        if (taskGraph.hasTask(assembleRelease)) {
+            def versionPropsFile = file('version.properties')
+            if (versionPropsFile.canRead()) {
+                def Properties versionProps = new Properties()
+                versionProps.load(new FileInputStream(versionPropsFile))
+                def code = versionProps['VERSION_CODE'].toInteger() + 1
+                versionProps['VERSION_CODE'] = code.toString()
+                versionProps.store(versionPropsFile.newWriter(), null)
+            } else {
+                throw new GradleException("Could not read version.properties!")
+            }
+        }
+    }
+}
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-text-input-mask')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
