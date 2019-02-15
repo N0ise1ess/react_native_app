@@ -1,17 +1,20 @@
+import { isEmpty } from 'lodash';
+import { Button, Container, Icon, Text } from 'native-base';
 import React, { Component, Fragment } from 'react';
+import { View } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 import { connect } from 'react-redux';
-import { View, TextInput } from 'react-native';
-import { Button, Icon, Container, Content, Text } from 'native-base';
-import styles from './styles/accountStyles';
-import FooterSection from '../../components/Footer';
-import ButtonBack from '../../components/ButtonBack';
+
 import { editPhoneNumber } from '../../actions/authorizationAction';
+import ButtonBack from '../../components/ButtonBack';
+import CustomIcon from '../../components/CustomIcon';
+import FooterSection from '../../components/Footer';
+import styles from './styles/accountStyles';
 
 class AccountScreen extends Component {
-
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Учетная запись',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
   constructor(props) {
@@ -26,12 +29,41 @@ class AccountScreen extends Component {
     const { userStatus, navigation, lastName, firstName, secondName, role, email } = this.props;
     const { editableMode, phoneNumber } = this.state;
     const studentIndex = role.findIndex(item => item.type === 'STUDENT');
+    const renderPhone = () => {
+      return (
+        <>
+          <Text style={styles.label}>{'Телефон'.toUpperCase()}</Text>
+          {!editableMode && isEmpty(phoneNumber) ? (
+            <Text style={styles.errorText}>Номер отсутствует</Text>
+          ) : (
+            <TextInputMask
+              editable={editableMode}
+              value={phoneNumber}
+              style={editableMode ? styles.inputStyle : styles.textStyle}
+              onChangeText={(formatted, extracted) => {
+                this.setState({ phoneNumber: extracted });
+              }}
+              mask="8([000])[000]-[00]-[00]"
+            />
+          )}
+        </>
+      );
+    };
+
+    const renderEmail = () => {
+      return (
+        <>
+          <Text style={styles.label}>{'E-mail'.toUpperCase()}</Text>
+
+          {email && <Text style={styles.textStyle}>{email}</Text>}
+        </>
+      );
+    };
 
     return (
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            {/* <Image source={img_account} style={styles.imageStyle} /> */}
             <CustomIcon name={'account'} style={styles.imageStyle} />
             <View style={{ flex: 1 }}>
               <Text style={styles.nameStyle}>
@@ -54,22 +86,8 @@ class AccountScreen extends Component {
                   <Text />
                 )}
               </View>
-
-              {this.renderLabel('Телефон')}
-              {editableMode ? (
-                <TextInput
-                  style={styles.inputStyle}
-                  onChangeText={phoneNumber => this.setState({ phoneNumber })}
-                  value={phoneNumber}
-                />
-              ) : (
-                <Text style={phoneNumber ? styles.textStyle : styles.errorText}>
-                  {phoneNumber ? phoneNumber : 'Номер отсутствует'}
-                </Text>
-              )}
-
-              {this.renderLabel('E-mail')}
-              {email && <Text style={styles.textStyle}>{email}</Text>}
+              {renderPhone()}
+              {renderEmail()}
             </View>
           </View>
 
@@ -95,8 +113,6 @@ class AccountScreen extends Component {
       </Container>
     );
   }
-
-  renderLabel = text => <Text style={styles.label}>{text.toUpperCase()}</Text>;
   onToggleEdit = () => {
     this.setState(prevState => ({ editableMode: !prevState.editableMode, phoneNumber: this.props.phoneNumber }));
   };

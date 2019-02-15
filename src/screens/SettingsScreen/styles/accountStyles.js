@@ -19,7 +19,7 @@ export default StyleSheet.create({
     height: 40,
     marginRight: 10,
     fontSize: 38,
-    color: '#0e63ee'
+    color: '#0e63ee',
   },
   nameStyle: {
     fontWeight: 'bold',
@@ -32,11 +32,11 @@ export default StyleSheet.create({
   },
   textStyle: {
     color: 'gray',
-    fontSize: 14,
-    marginTop: 5,
+    fontSize: 16,
   },
   inputStyle: {
-    fontSize: 14,
+    color: 'gray',
+    fontSize: 16,
     marginTop: 5,
     marginRight: 5,
     padding: 5,
@@ -46,7 +46,7 @@ export default StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 5,
   },
   info: {
@@ -76,5 +76,4 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
-
-})
+});
