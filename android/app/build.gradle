@@ -71,7 +71,7 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
-project.buildDir = "../../build/android"
+// project.buildDir = "../../build/android"
 project.ext.react = [
     entryFile: "index.js"
 ]
