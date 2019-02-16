@@ -15,6 +15,7 @@ before_script:
   - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+  - cd android
   - chmod +x ./gradlew
   # temporarily disable checking for EPIPE error and use yes to accept all licenses
   - set +o pipefail
@@ -28,11 +29,13 @@ stages:
 lintDebug:
   stage: build
   script:
+    - cd android
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
 assembleDebug:
   stage: build
   script:
+    - cd android
     - ./gradlew assembleDebug
   artifacts:
     paths:
@@ -41,4 +44,5 @@ assembleDebug:
 debugTests:
   stage: test
   script:
+    - cd android
     - ./gradlew -Pci --console=plain :app:testDebug
