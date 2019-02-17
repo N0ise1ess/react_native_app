@@ -1,8 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
-
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
   },
@@ -15,7 +13,7 @@ export default StyleSheet.create({
   },
   customSlide: {
     flex: 1,
-    backgroundColor: '#CED8DA'
+    backgroundColor: '#CED8DA',
   },
   buttons: {
     flexDirection: 'row',
@@ -23,10 +21,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   buttonSelected: {
-    color: '#0E63EE'
+    color: '#0E63EE',
   },
   headerImageStyle: {
     resizeMode: 'contain',
     height: 30,
-  }
-})
+  },
+});

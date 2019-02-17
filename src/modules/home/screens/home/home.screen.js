@@ -19,9 +19,9 @@ import {
   img_student,
   img_timetable,
   img_wifi,
-} from '../../assets/images';
-import { CardItem, FooterSection } from '../shared/components';
-import styles from './styles';
+} from '../../../../assets/images';
+import { CardItem, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const cardList = [
   {
@@ -127,7 +127,7 @@ const cardGuestList = [
   },
 ];
 
-class HomeScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params && navigation.state.params.userFullName,
@@ -202,7 +202,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+export const HomeScreen = connect(
   mapStateToProps,
   null,
-)(HomeScreen);
+)(InnerComponent);

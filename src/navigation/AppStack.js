@@ -1,29 +1,30 @@
+import { Button, Icon, Right } from 'native-base';
 import React from 'react';
-import { Text, Header, Left, Body, Right, Button, Icon } from 'native-base';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+
 import {
-  HomeScreen,
-  LibraryScreen,
-  LibraryCardScreen,
-  NewsScreen,
-  NewsDetailsScreen,
-  TimeTableScreen,
-  SettingsScreen,
-  AccountScreen,
   AboutScreen,
-  FinanceScreen,
-  NotificationsScreen,
-  PersonalRatingScreen,
-  QuestionnairesScreen,
+  AccountScreen,
+  BuildingDormsScreen,
+  ChatScreen,
   ContactsScreen,
   DivisionsScreen,
-  BuildingDormsScreen,
+  FinanceScreen,
+  HomeScreen,
+  LibraryCardScreen,
+  LibraryScreen,
   MainConfigScreen,
+  NewsDetailsScreen,
+  NewsScreen,
+  NotificationsScreen,
+  ParentScreen,
+  ParentsScreen,
   PersonalitiesScreen,
   PersonalityScreen,
-  ChatScreen,
-  ParentsScreen,
-  ParentScreen,
+  PersonalRatingScreen,
+  QuestionnairesScreen,
+  SettingsScreen,
+  TimeTableScreen,
 } from '../modules';
 
 const AppStack = createStackNavigator(
