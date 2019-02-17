@@ -4,11 +4,11 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../actions/libraryAction';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles/libraryCardStyle';
+import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../../../actions/libraryAction';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
-class LibraryCardScreen extends Component {
+class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -197,7 +197,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const LibraryCardScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LibraryCardScreen);
+)(InnerComponent);

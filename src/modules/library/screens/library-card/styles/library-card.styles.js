@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
   listItemStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   listStyle: {
     flexDirection: 'column',
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     paddingTop: 5,
     paddingLeft: 22,
   },
-  issueDate:{
+  issueDate: {
     fontSize: 13,
     fontWeight: '300',
     paddingTop: 15,
@@ -61,7 +61,7 @@ export default StyleSheet.create({
     paddingLeft: 7,
     fontWeight: '300',
   },
-  tabHeaderStyle:{
+  tabHeaderStyle: {
     backgroundColor: '#CED8DA',
     borderBottomWidth: 0,
     justifyContent: 'center',
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: '#fff',
-    backgroundColor: '#163D7D'
+    backgroundColor: '#163D7D',
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
@@ -102,7 +102,7 @@ export default StyleSheet.create({
     paddingRight: 20,
   },
   activeTabStyle: {
-    backgroundColor: '#0E63EE'
+    backgroundColor: '#0E63EE',
   },
   noDataStyle: {
     flex: 1,
@@ -126,5 +126,5 @@ export default StyleSheet.create({
     marginRight: 'auto',
     height: 200,
     resizeMode: 'contain',
-  }
-})
+  },
+});

@@ -12,9 +12,9 @@ import {
   img_search,
   img_services,
   img_star,
-} from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+} from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -52,7 +52,7 @@ const itemList = [
   },
 ];
 
-class LibraryScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Библиотека',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -94,7 +94,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+export const LibraryScreen = connect(
   mapStateToProps,
   null,
-)(LibraryScreen);
+)(InnerComponent);

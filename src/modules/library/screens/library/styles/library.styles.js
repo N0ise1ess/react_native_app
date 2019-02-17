@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
@@ -23,12 +23,11 @@ export default StyleSheet.create({
     marginLeft: 0,
     paddingLeft: 0,
     paddingRight: 0,
-    marginRight: 0
+    marginRight: 0,
   },
-  listStyle: {
-  },
+  listStyle: {},
   textStyle: {
     fontSize: 14,
     color: '#163D7D',
-  }
-})
+  },
+});
