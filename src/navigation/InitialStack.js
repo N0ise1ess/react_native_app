@@ -1,8 +1,8 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+
+import { AuthLoadingScreen } from '../modules/authorization';
 import AppStack from './AppStack';
 import AuthStack from './AuthStack';
-import AuthLoadingScreen from '../modules/AuthLoadingScreen';
-import BottomTabStack from './BottomTabStack';
 
 const InitialStack = createSwitchNavigator(
   {

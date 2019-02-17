@@ -1,29 +1,24 @@
-import React, { Component }  from 'react';
+import React from 'react';
+import { ActivityIndicator, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { styles } from './styles';
 
-class AuthLoadingScreen extends Component {
+class InnerComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.token === null) {
+    if (newProps.token === null) {
       this.props.navigation.navigate('Auth');
     }
-    if(newProps.isRehydrated) {
+    if (newProps.isRehydrated) {
       this.props.navigation.navigate(this.props.token !== null ? 'App' : 'Auth');
     }
   }
 
   componentWillMount() {
-    if(this.props.isRehydrated){
+    if (this.props.isRehydrated) {
       this.props.navigation.navigate(this.props.token !== null ? 'App' : 'Auth');
     }
   }
@@ -40,17 +35,13 @@ class AuthLoadingScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1f1f1f',
-  }
-})
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     ...state.authReducer,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, null)(AuthLoadingScreen);
+export const AuthLoadingScreen = connect(
+  mapStateToProps,
+  null,
+)(InnerComponent);
