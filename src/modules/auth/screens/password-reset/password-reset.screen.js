@@ -4,7 +4,7 @@ import { KeyboardAvoidingView, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as action from '../../../../actions/authorizationAction';
-import { ResetPasswordForm, ResetPasswordFormSuccess } from '../../../../components/Forms';
+import { PasswordReset, PasswordResetSuccess } from '../../components';
 import { styles } from '../../styles';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 
@@ -43,7 +43,7 @@ class InnerComponent extends React.Component {
             <KeyboardAvoidingView>
               <View style={styles.resetSection}>
                 <Text style={styles.textStyle}>Пожалуйста, укажите адрес электронной почты от учетной записи.</Text>
-                <ResetPasswordForm
+                <PasswordReset
                   errorDescription
                   handleSubmit={this.onButtonPress}
                   isLoading={sendEmailLoading}
@@ -54,7 +54,7 @@ class InnerComponent extends React.Component {
             </KeyboardAvoidingView>
           )) || (
             <View style={styles.resetSection}>
-              <ResetPasswordFormSuccess email={this.state.email} goBack={this.props.navigation.goBack} />
+              <PasswordResetSuccess email={this.state.email} goBack={this.props.navigation.goBack} />
             </View>
           )}
         </Content>

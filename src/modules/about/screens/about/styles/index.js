@@ -1,1 +1,1 @@
-export * from './about-app.styles';
+export * from './about.styles';

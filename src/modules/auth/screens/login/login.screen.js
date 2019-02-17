@@ -6,8 +6,8 @@ import { reset } from 'redux-form';
 
 import { login } from '../../../../actions/authorizationAction';
 import { img_logo } from '../../../../assets/images';
-import { LoginForm } from '../../../../components/Forms';
 import { MainView } from '../../../../components/Views/MainView';
+import { Login } from '../../components';
 import { FooterSection } from '../../../shared/components';
 import { styles } from '../../styles';
 
@@ -60,7 +60,7 @@ class InnerComponent extends React.Component {
           <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps={'handled'}>
             <View style={styles.section}>
               <Image source={img_logo} resizeMode="contain" style={styles.imageStyle} />
-              <LoginForm errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
+              <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
                 <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
                 <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
