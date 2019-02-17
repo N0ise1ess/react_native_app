@@ -13,7 +13,7 @@ export { default as FinanceScreen } from './FinanceScreen';
 export { default as PersonalRatingScreen } from './PersonalRatingScreen';
 export { default as QuestionnairesScreen } from './QuestionnairesScreen';
 export { default as ContactsScreen } from './ContactsScreen';
-export { default as ChatScreen } from './ChatScreen';
+export { ChatScreen } from './chats';
 export { default as ParentsScreen } from './ParentsScreen';
 export { default as ParentScreen } from './ParentsScreen/ParentScreen';
 export { default as DivisionsScreen } from './ContactsScreen/DivisionsScreen';

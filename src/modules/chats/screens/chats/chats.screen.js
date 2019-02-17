@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_account, img_students } from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { img_account, img_students } from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -40,7 +40,7 @@ const itemList = [
   },
 ];
 
-class ChatScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Чат',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -98,7 +98,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const ChatScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ChatScreen);
+)(InnerComponent);
