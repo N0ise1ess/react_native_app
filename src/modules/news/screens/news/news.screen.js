@@ -5,15 +5,15 @@ import * as RN from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
 
-import { getAllNews } from '../../actions/newsAction';
-import { News } from '../../components/News';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { getAllNews } from '../../../../actions/newsAction';
+import { News } from '../../components';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const { height: NAVBAR_HEIGHT } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
-class NewsScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Новости университета',
@@ -257,7 +257,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const NewsScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(NewsScreen);
+)(InnerComponent);

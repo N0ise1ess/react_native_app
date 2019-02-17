@@ -1,11 +1,8 @@
-import {
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   cardItem: {
     marginBottom: 0,
     paddingBottom: 0,
@@ -35,5 +32,5 @@ export default StyleSheet.create({
   },
   textStyle: {
     fontSize: 14,
-  }
-})
+  },
+});

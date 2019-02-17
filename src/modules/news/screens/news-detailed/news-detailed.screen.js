@@ -2,10 +2,10 @@ import { Container, Content } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { News } from '../../components/News';
-import { ButtonBack, FooterSection } from '../shared/components';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { News } from '../../components';
 
-class NewsDetailsScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Новости университета',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+export const NewsDetailsScreen = connect(
   mapStateToProps,
   null,
-)(NewsDetailsScreen);
+)(InnerComponent);

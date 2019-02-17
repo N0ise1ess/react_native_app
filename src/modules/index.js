@@ -1,7 +1,6 @@
 export { AboutScreen } from './about';
 export { HomeScreen } from './home';
-export { default as NewsScreen } from './NewsScreen';
-export { default as NewsDetailsScreen } from './NewsScreen/NewsDetailsScreen';
+export { NewsScreen, NewsDetailsScreen } from './news';
 export { LibraryScreen, LibraryCardScreen } from './library';
 export { default as TimeTableScreen } from './TimeTableScreen';
 export { default as NotificationsScreen } from './NotificationsScreen';
