@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { AsyncStorage, Text, View } from 'react-native';
 import Slider from 'react-native-slider';
 
-import { ButtonBack, FooterSection } from '../shared/components';
+import { ButtonBack } from '../shared/components';
+import styles from './styles/mainConfigStyles';
 
 class MainConfigScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
