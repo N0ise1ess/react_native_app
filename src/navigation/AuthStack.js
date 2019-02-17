@@ -2,7 +2,7 @@ import { Button, Icon, Right } from 'native-base';
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
-import { LoginScreen, PasswordResetScreen } from '../modules/authorization';
+import { LoginScreen, PasswordResetScreen } from '../modules/auth';
 
 const AuthStack = createStackNavigator(
   {
