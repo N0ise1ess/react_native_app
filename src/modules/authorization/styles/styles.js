@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: width,
@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   inputIcon: {
     fontSize: 18,
-    color: '#163D7D'
+    color: '#163D7D',
   },
   inputStyle: {
     fontSize: 16,
@@ -59,6 +59,6 @@ export default StyleSheet.create({
     color: '#747A7B',
   },
   headerStyle: {
-    backgroundColor: '#163D7D'
-  }
-})
+    backgroundColor: '#163D7D',
+  },
+});

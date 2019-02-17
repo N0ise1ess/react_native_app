@@ -1,36 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import { Text, Toast } from 'native-base';
+import React from 'react';
+import { Image, KeyboardAvoidingView, ScrollView, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
-import { Dimensions, StatusBar, Image, View, ScrollView, KeyboardAvoidingView, Keyboard } from 'react-native';
-import {
-  Content,
-  Item,
-  ListItem,
-  Icon,
-  Input,
-  CheckBox,
-  Text,
-  Body,
-  Button,
-  Header,
-  Right,
-  Left,
-  Title,
-  Toast,
-} from 'native-base';
 
-import { login } from '../../actions/authorizationAction';
-import { LoginForm } from '../../components/Forms';
+import { login } from '../../../../actions/authorizationAction';
+import { img_logo } from '../../../../assets/images';
+import { LoginForm } from '../../../../components/Forms';
+import { MainView } from '../../../../components/Views/MainView';
+import { FooterSection } from '../../../shared/components';
+import { styles } from '../../styles';
 
-import { MainView } from '../../components/Views/MainView';
-import { FooterSection } from '../shared/components';
-import { img_logo } from '../../assets/images';
-import styles from './styles';
-// import { ScrollView } from 'react-native-gesture-handler';
-
-const { width, height } = Dimensions.get('window');
-
-class LoginScreen extends Component {
+class InnerComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,7 +89,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const LoginScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginScreen);
+)(InnerComponent);

@@ -1,13 +1,13 @@
+import { Button, Icon, Right } from 'native-base';
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { Text, Header, Left, Body, Right, Button, Icon } from 'native-base';
-import LoginScreen from '../modules/Authorization/LoginScreen';
-import ResetPasswordScreen from '../modules/Authorization/ResetPasswordScreen';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+
+import { LoginScreen, PasswordResetScreen } from '../modules/authorization';
 
 const AuthStack = createStackNavigator(
   {
     Login: LoginScreen,
-    ResetPassword: ResetPasswordScreen,
+    ResetPassword: PasswordResetScreen,
   },
   {
     initialRouteName: 'Login',
