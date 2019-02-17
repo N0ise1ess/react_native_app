@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getDepartments } from '../../actions/contactsAction';
-import { img_campus_dorm, img_university_section } from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { getDepartments } from '../../../../actions/contactsAction';
+import { img_campus_dorm, img_university_section } from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -23,7 +23,7 @@ const itemList = [
   },
 ];
 
-class ContactsScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Контакты университета',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -78,7 +78,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const ContactsScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ContactsScreen);
+)(InnerComponent);

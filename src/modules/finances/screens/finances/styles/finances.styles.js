@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -8,7 +8,7 @@ export default StyleSheet.create({
   listItemStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   listStyle: {
     flexDirection: 'row',
@@ -27,7 +27,7 @@ export default StyleSheet.create({
   textStyle: {
     color: '#163D7D',
   },
-  tabHeaderStyle:{
+  tabHeaderStyle: {
     backgroundColor: '#CED8DA',
     borderBottomWidth: 0,
     justifyContent: 'center',
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: '#fff',
-    backgroundColor: '#163D7D'
+    backgroundColor: '#163D7D',
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     paddingRight: 20,
   },
   activeTabStyle: {
-    backgroundColor: '#0E63EE'
+    backgroundColor: '#0E63EE',
   },
   noDataStyle: {
     flex: 1,
@@ -85,5 +85,5 @@ export default StyleSheet.create({
   },
   paymentAmount: {
     fontSize: 18,
-  }
-})
+  },
+});

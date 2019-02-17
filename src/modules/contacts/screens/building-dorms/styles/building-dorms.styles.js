@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
   },
-  iconStyle: {
-    fontSize: 32,
-    color: '#163D7D'
+  imageStyle: {
+    width: 36,
+    height: 36,
+    marginLeft: 20,
+    marginRight: 20,
+    resizeMode: 'contain',
+    tintColor: '#163D7D',
   },
   listItemStyle: {
     paddingTop: 15,
@@ -20,7 +24,9 @@ export default StyleSheet.create({
     paddingRight: 20,
     marginRight: 0,
   },
-  listStyle: {
+  listStyle: {},
+  viewStyle: {
+    flexDirection: 'row',
   },
   columnStyle: {
     flexDirection: 'column',
@@ -28,15 +34,16 @@ export default StyleSheet.create({
   },
   iconStyle: {
     fontSize: 32,
-    color: '#163D7D'
+    color: '#163D7D',
   },
   titleStyle: {
-    color: '#163D7D',
+    fontWeight: '500',
     fontSize: 14,
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginLeft: 55,
-    paddingRight: 5
-  }
-})
+    alignSelf: 'flex-start',
+  },
+  textStyle: {
+    fontSize: 12,
+    fontWeight: '300',
+    alignSelf: 'flex-start',
+  },
+});

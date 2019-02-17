@@ -1,43 +1,37 @@
 import { Container, Content, Icon, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_campus_dorm } from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles/buildingDormsStyles';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
-    title: 'Корпус 1',
-    text: 'Учебный',
-    image: img_campus_dorm,
+    title: 'Академия, институты, факультеты,\nкафедры и учебные центры',
   },
   {
-    title: 'Корпус 2',
-    text: 'Учебный',
-    image: img_campus_dorm,
+    title: 'Административно-управленческие подразделения',
   },
   {
-    title: 'Корпус 3',
-    text: 'Учебный',
-    image: img_campus_dorm,
+    title: 'Научно-исследовательская часть',
   },
   {
-    title: 'Корпус 4',
-    text: 'Административный',
-    image: img_campus_dorm,
+    title: 'Подразделение воспитательной и социальной сферы',
   },
   {
-    title: 'Корпус 5',
-    text: 'Учебный',
-    image: img_campus_dorm,
+    title: 'Подразделение обслуживания',
   },
 ];
 
-class BuildingDormsScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Корпуса и общежития',
+    headerTitleStyle: {
+      paddingLeft: 0,
+      marginLeft: 0,
+      fontSize: 16,
+      fontWeight: 'normal',
+    },
+    title: 'Подразделения',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
@@ -60,13 +54,7 @@ class BuildingDormsScreen extends Component {
                 onPress={() => navigation.navigate(item.route ? item.route : '')}
                 style={styles.listItemStyle}
               >
-                <View style={styles.viewStyle}>
-                  <Image source={item.image} style={styles.imageStyle} />
-                  <View style={styles.columnStyle}>
-                    <Text style={styles.titleStyle}>{item.title}</Text>
-                    <Text style={styles.textStyle}>{item.text}</Text>
-                  </View>
-                </View>
+                <Text style={styles.titleStyle}>{item.title}</Text>
                 <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
               </ListItem>
             )}
@@ -88,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const DivisionsScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BuildingDormsScreen);
+)(InnerComponent);

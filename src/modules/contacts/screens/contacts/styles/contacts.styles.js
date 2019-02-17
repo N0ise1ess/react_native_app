@@ -1,50 +1,42 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
   },
-  imageStyle: {
-    width: 36,
-    height: 36,
+  iconStyle: {
+    width: 32,
+    height: 32,
     marginLeft: 20,
     marginRight: 20,
     resizeMode: 'contain',
     tintColor: '#163D7D',
   },
   listItemStyle: {
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 20,
+    paddingBottom: 20,
     marginBottom: 5,
     backgroundColor: '#fff',
-    justifyContent: 'space-between',
+    width: '100%',
     marginLeft: 0,
     paddingLeft: 0,
-    paddingRight: 20,
+    paddingRight: 0,
     marginRight: 0,
   },
-  listStyle: {
-  },
-  viewStyle: {
-    flexDirection: 'row'
-  },
+  listStyle: {},
   columnStyle: {
     flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  iconStyle: {
-    fontSize: 32,
-    color: '#163D7D'
+    alignItems: 'flex-start',
   },
   titleStyle: {
-    fontWeight: '500',
+    color: '#163D7D',
     fontSize: 14,
     alignSelf: 'flex-start',
   },
   textStyle: {
     fontSize: 12,
-    fontWeight: '300',
+    color: '#ADADAD',
     alignSelf: 'flex-start',
-  }
-})
+  },
+});

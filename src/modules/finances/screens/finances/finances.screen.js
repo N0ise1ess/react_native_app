@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getFinancePayment } from '../../actions/financeAction';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { getFinancePayment } from '../../../../actions/financeAction';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
-class FinanceScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Финансы',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -135,7 +135,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const FinanceScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FinanceScreen);
+)(InnerComponent);
