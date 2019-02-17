@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -14,10 +14,9 @@ export default StyleSheet.create({
     width: '100%',
     marginLeft: 0,
     marginRight: 0,
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  listStyle: {
-  },
+  listStyle: {},
   columnStyle: {
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -40,5 +39,5 @@ export default StyleSheet.create({
     padding: 2,
     color: '#ADADAD',
     alignSelf: 'flex-start',
-  }
-})
+  },
+});

@@ -3,7 +3,7 @@ export { HomeScreen } from './home';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { LibraryScreen, LibraryCardScreen } from './library';
 export { default as TimeTableScreen } from './TimeTableScreen';
-export { default as NotificationsScreen } from './NotificationsScreen';
+export { NotificationsScreen } from './notifications';
 export { default as SettingsScreen } from './SettingsScreen';
 export { default as AccountScreen } from './SettingsScreen/AccountScreen';
 export { default as MainConfigScreen } from './SettingsScreen/MainConfigScreen';
