@@ -8,7 +8,7 @@ import { MainView } from '../../../../components/Views/MainView';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
-export class AboutAppScreen extends Component {
+export class AboutScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

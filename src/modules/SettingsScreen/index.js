@@ -32,7 +32,7 @@ const itemList = [
   },
   {
     title: 'О приложении',
-    route: 'AboutApp',
+    route: 'About',
     image: img_about,
   },
   {
@@ -55,7 +55,7 @@ const itemGuestList = [
   },
   {
     title: 'О приложении',
-    route: 'AboutApp',
+    route: 'About',
     image: img_about,
   },
   {
