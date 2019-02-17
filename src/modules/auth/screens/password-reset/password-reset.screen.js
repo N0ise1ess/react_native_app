@@ -4,9 +4,9 @@ import { KeyboardAvoidingView, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as action from '../../../../actions/authorizationAction';
-import { PasswordReset, PasswordResetSuccess } from '../../components';
-import { styles } from '../../styles';
 import { ButtonBack, FooterSection } from '../../../shared/components';
+import { PasswordReset, PasswordResetSuccess } from '../../components';
+import { styles } from './styles';
 
 class InnerComponent extends React.Component {
   static navigationOptions = ({ navigation }) => ({

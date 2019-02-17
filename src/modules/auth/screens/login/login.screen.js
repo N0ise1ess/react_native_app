@@ -9,7 +9,7 @@ import { img_logo } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
 import { FooterSection } from '../../../shared/components';
-import { styles } from '../../styles';
+import { styles } from './styles';
 
 class InnerComponent extends React.Component {
   constructor(props) {
