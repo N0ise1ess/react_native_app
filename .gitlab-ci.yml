@@ -26,11 +26,13 @@ before_script:
   - today=`date '+%d.%m.%Y 00:00'`
 
 stages:
-  - test
+  # - test
   - build
 
 build:
   stage: build
+  only:
+    - develop
   script:
     - ./gradlew assembleRelease
     - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk
@@ -39,8 +41,9 @@ build:
   artifacts:
     paths:
       - app/build/outputs/
-
-unitTests:
-  stage: test
-  script:
-    - ./gradlew test
+# unitTests:
+#   stage: test
+#   only:
+#     - develop
+#   script:
+#     - ./gradlew test
