@@ -5,6 +5,7 @@ import libraryReducer from './libraryReducer';
 import newsReducer from './newsReducer';
 import financeReducer from './financeReducer';
 import timetableReducer from './timetableReducer';
+import departmentReducer from "./departmentReducer";
 export default combineReducers({
     authReducer,
     libraryReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
     financeReducer,
     timetableReducer,
     form: formReducer,
+    departmentReducer
 });
