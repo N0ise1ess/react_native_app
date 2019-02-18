@@ -3,11 +3,11 @@ import React, { Component, Fragment } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_email, img_make_call, img_start_chat, img_teacher } from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles/personalityStyle';
+import { img_email, img_make_call, img_start_chat, img_teacher } from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
-class PersonalityScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Персоналии',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const PersonalityScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PersonalityScreen);
+)(InnerComponent);

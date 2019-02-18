@@ -13,5 +13,4 @@ export { default as QuestionnairesScreen } from './QuestionnairesScreen';
 export { BuildingDormsScreen, ContactsScreen, DivisionsScreen } from './contacts';
 export { ChatScreen } from './chats';
 export { ParentScreen, ParentsListScreen } from './parents';
-export { default as PersonalitiesScreen } from './PersonalitiesScreen';
-export { default as PersonalityScreen } from './PersonalitiesScreen/PersonalityScreen';
+export { PersonalitiesScreen, PersonalityScreen } from './personalities';

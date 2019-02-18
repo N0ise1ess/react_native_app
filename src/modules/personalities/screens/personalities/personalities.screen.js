@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_teacher } from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { img_teacher } from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -46,7 +46,7 @@ const itemList = [
   },
 ];
 
-class PersonalitiesScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Персоналии',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -105,7 +105,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const PersonalitiesScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PersonalitiesScreen);
+)(InnerComponent);
