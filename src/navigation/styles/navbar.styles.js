@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   headerStyle: {
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     color: '#fff',
-    fontSize: 27,
+    fontSize: height < 550 ? 27 : 30,
     paddingRight: 17
   }
 });
