@@ -2,7 +2,7 @@ export { AboutScreen } from './about';
 export { HomeScreen } from './home';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { LibraryScreen, LibraryCardScreen } from './library';
-export { default as TimeTableScreen } from './TimeTableScreen';
+export { TimeTableScreen } from './timetable';
 export { NotificationsScreen } from './notifications';
 export { AccountScreen, MainConfigScreen, SettingsScreen } from './settings';
 export { FinanceScreen } from './finances';

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -8,18 +8,18 @@ export default StyleSheet.create({
   searchBar: {
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   searchInput: {
     fontSize: 14,
   },
   searchIcon: {
-    color: '#4D6270'
+    color: '#4D6270',
   },
   listItemStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   listStyle: {
     flexDirection: 'row',
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     marginRight: 0,
     alignItems: 'flex-start',
   },
-  tabHeaderStyle:{
+  tabHeaderStyle: {
     backgroundColor: '#CED8DA',
     borderBottomWidth: 0,
     justifyContent: 'center',
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: '#fff',
-    backgroundColor: '#163D7D'
+    backgroundColor: '#163D7D',
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
@@ -76,7 +76,7 @@ export default StyleSheet.create({
     paddingRight: 20,
   },
   activeTabStyle: {
-    backgroundColor: '#0E63EE'
+    backgroundColor: '#0E63EE',
   },
   noDataStyle: {
     flex: 1,
@@ -111,5 +111,5 @@ export default StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 15,
-  }
-})
+  },
+});

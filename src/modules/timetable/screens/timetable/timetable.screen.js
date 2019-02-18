@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getSearchedTimetable } from '../../actions/timetableAction';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { getSearchedTimetable } from '../../../../actions/timetableAction';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const timeTableList = [
   {
@@ -30,7 +30,7 @@ const timeTableList = [
   },
 ];
 
-class TimeTableScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Расписание',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -172,7 +172,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const TimeTableScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TimeTableScreen);
+)(InnerComponent);
