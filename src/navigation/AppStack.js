@@ -1,6 +1,9 @@
-import { Button, Icon, Right } from 'native-base';
+import { Button, Right } from 'native-base';
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { CustomIcon } from '../modules/shared/components/custom-icon';
+
+import { styles } from './styles';
 
 import {
   AboutScreen,
@@ -55,18 +58,13 @@ const AppStack = createStackNavigator(
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: ({ navigation }) => ({
-      headerStyle: {
-        backgroundColor: '#163D7D',
-      },
+      headerStyle: styles.headerStyle,
       headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontSize: 16,
-        fontWeight: 'normal',
-      },
+      headerTitleStyle: styles.headerTitleStyle,
       headerRight: (
         <Right>
           <Button transparent onPress={() => navigation.navigate('Settings')}>
-            <Icon type="EvilIcons" name="gear" style={{ color: 'white', fontSize: 30 }} />
+            <CustomIcon name={"settings"} style={styles.rightIconStyle} />
           </Button>
         </Right>
       ),

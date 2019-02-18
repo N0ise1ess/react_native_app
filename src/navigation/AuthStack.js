@@ -3,6 +3,9 @@ import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import { LoginScreen, PasswordResetScreen } from '../modules/auth';
+import { CustomIcon } from '../modules/shared/components/custom-icon';
+
+import { styles } from './styles';
 
 const AuthStack = createStackNavigator(
   {
@@ -12,18 +15,13 @@ const AuthStack = createStackNavigator(
   {
     initialRouteName: 'Login',
     defaultNavigationOptions: ({ navigation }) => ({
-      headerStyle: {
-        backgroundColor: '#163D7D',
-      },
+      headerStyle: styles.headerStyle,
       headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontSize: 16,
-        fontWeight: 'normal',
-      },
+      headerTitleStyle: styles.headerTitleStyle,
       headerRight: (
         <Right>
           <Button transparent onPress={() => navigation.navigate('Settings')}>
-            <Icon type="EvilIcons" name="gear" style={{ color: 'white', fontSize: 30 }} />
+            <CustomIcon name={"settings"} style={styles.rightIconStyle} />
           </Button>
         </Right>
       ),
