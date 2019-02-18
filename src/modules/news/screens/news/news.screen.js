@@ -181,6 +181,7 @@ class InnerComponent extends Component {
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
           })}
+          ref={ref => (this._scrollView = ref)}
         >
           <NB.Tabs
             renderTabBar={props => (
@@ -202,7 +203,13 @@ class InnerComponent extends Component {
                 />
               </RN.Animated.View>
             )}
-            onChangeTab={({ i }) => this.setState({ currentTab: i })}
+            onChangeTab={({ i }) => {
+              this._scrollView.getNode().scrollTo({
+                y: 0,
+                animated: true,
+              });
+              this.setState({ currentTab: i });
+            }}
           >
             <NB.Tab
               heading={
