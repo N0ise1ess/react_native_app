@@ -8,20 +8,17 @@ export default {
     isFirstStepResetPassword: true,
     userStatus: 'guest',
   },
-  libraryReducer: {
-
-  },
-  newsReducer: {
-
-  },
+  libraryReducer: {},
+  newsReducer: {},
   financeReducer: {
-
+    payments: [],
+    scholarships: [],
   },
   timetableReducer: {
     timeTableLoading: false,
     errorCode: null,
   },
-  departmentReducer : {
-    departments : []
-  }
-}
+  departmentReducer: {
+    departments: [],
+  },
+};

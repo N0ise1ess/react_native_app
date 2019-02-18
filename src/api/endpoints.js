@@ -9,7 +9,7 @@ export const endpoints = {
     /** Договор на обучение*/
     document: 'http://opencode.su/campus/integration/api/finance/document',
     /** Стипендия */
-    stipend: 'http://opencode.su/campus/integration/api/finance/stipend',
+    scholarships: 'http://opencode.su/campus/integration/api/finance/stipend',
   },
   /** Расписание */
   timetable: {

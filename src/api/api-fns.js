@@ -48,6 +48,14 @@ export function financePaymentApi(token) {
   });
 }
 
+export function financeScholarshipsApi(token) {
+  return axios.get(endpoints.finance.scholarships, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export function newsApi() {
   return axios.get(endpoints.news.getAll);
 }
