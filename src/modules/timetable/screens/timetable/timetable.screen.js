@@ -43,7 +43,9 @@ class InnerComponent extends Component {
       searchedText: '',
     };
   }
-
+  componentWillMount() {
+    this.props.getSearchedTimetable('', this.props.token);
+  }
   _upperCase(word) {
     return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
