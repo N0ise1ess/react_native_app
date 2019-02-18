@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 
-import { logout } from '../../actions/authorizationAction';
+import { logout } from '../../../../actions/authorizationAction';
 import {
   img_about,
   img_account,
@@ -11,9 +11,9 @@ import {
   img_logout,
   img_notification_white,
   img_settings,
-} from '../../assets/images';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+} from '../../../../assets/images';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -66,7 +66,7 @@ const itemGuestList = [
   },
 ];
 
-class SettingsScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Настройки',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -132,7 +132,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const SettingsScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SettingsScreen);
+)(InnerComponent);

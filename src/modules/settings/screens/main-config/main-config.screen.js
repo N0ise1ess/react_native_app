@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { AsyncStorage, Text, View } from 'react-native';
 import Slider from 'react-native-slider';
 
-import { ButtonBack } from '../shared/components';
-import styles from './styles/mainConfigStyles';
+import { ButtonBack } from '../../../shared/components';
+import { styles } from './styles';
 
-class MainConfigScreen extends Component {
+export class MainConfigScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Основные',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -77,5 +77,3 @@ class MainConfigScreen extends Component {
     );
   }
 }
-
-export default MainConfigScreen;

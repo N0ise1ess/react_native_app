@@ -5,11 +5,11 @@ import { View } from 'react-native';
 import TextInputMask from 'react-native-text-input-mask';
 import { connect } from 'react-redux';
 
-import { editPhoneNumber } from '../../actions/authorizationAction';
-import { ButtonBack, CustomIcon, FooterSection } from '../shared/components';
-import styles from './styles/accountStyles';
+import { editPhoneNumber } from '../../../../actions/authorizationAction';
+import { ButtonBack, CustomIcon, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
-class AccountScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Учетная запись',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -132,7 +132,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const AccountScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AccountScreen);
+)(InnerComponent);

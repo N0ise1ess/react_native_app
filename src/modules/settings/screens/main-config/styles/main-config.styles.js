@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
@@ -18,13 +18,12 @@ export default StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
   },
-  listStyle: {
-  },
+  listStyle: {},
   textStyle: {
     color: '#000',
     fontWeight: 'bold',
     fontSize: 16,
-    textAlign: 'left', 
+    textAlign: 'left',
     alignSelf: 'stretch',
   },
   fontTitle: {
@@ -82,39 +81,39 @@ export default StyleSheet.create({
     fontSize: 20,
   },
   buttonClear_box: {
-    marginTop: 20, 
+    marginTop: 20,
     width: '100%',
   },
   buttonClear: {
     backgroundColor: '#ff003c',
-    color: '#fff'
+    color: '#fff',
   },
   buttonClear_text: {
     color: '#fff',
   },
   textRam: {
-    marginTop: 10, 
-    color: '#000', 
-    flexDirection: 'row', 
+    marginTop: 10,
+    color: '#000',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     alignSelf: 'stretch',
   },
   textRam_title: {
-    fontSize: 12, 
+    fontSize: 12,
     color: '#333',
   },
   textRam_number: {
     paddingLeft: 10,
-    color: '#ff003c', 
+    color: '#ff003c',
     fontSize: 20,
   },
   textRam_size: {
-    color: '#ff003c', 
+    color: '#ff003c',
     fontSize: 14,
   },
   textRam_description: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
-  }
-})
+  },
+});
