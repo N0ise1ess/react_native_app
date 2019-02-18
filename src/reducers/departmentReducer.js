@@ -11,7 +11,20 @@ export default departmentReducer = (state = initialState.departmentReducer, acti
       return {
         ...state,
         departments: action.payload,
+        departmentsLoading : false
       }
+    case DEPARTMENTS_PENDING: {
+      return {
+        ...state,
+        departmentsLoading : true
+      }
+    }
+    case DEPARTMENTS_FAILURE: {
+      return {
+        ...state,
+        departmentsLoading : false
+      }
+    }
     default:
       return state;
   }
