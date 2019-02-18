@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -32,7 +32,7 @@ const itemList = [
   },
 ];
 
-class QuestionnairesScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Анкетные опросы',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -84,7 +84,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const QuestionnairesScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(QuestionnairesScreen);
+)(InnerComponent);

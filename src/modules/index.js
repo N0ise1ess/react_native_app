@@ -9,7 +9,7 @@ export { default as AccountScreen } from './SettingsScreen/AccountScreen';
 export { default as MainConfigScreen } from './SettingsScreen/MainConfigScreen';
 export { FinanceScreen } from './finances';
 export { PersonalRatingScreen } from './personal-rating';
-export { default as QuestionnairesScreen } from './QuestionnairesScreen';
+export { QuestionnairesScreen } from './questionnaires';
 export { BuildingDormsScreen, ContactsScreen, DivisionsScreen } from './contacts';
 export { ChatScreen } from './chats';
 export { ParentScreen, ParentsListScreen } from './parents';
