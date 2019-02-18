@@ -60,7 +60,7 @@ const renderCheckbox = ({ input, label, type, meta: { touched, error, warning } 
       }}
     >
       <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
-      <Text style={{ paddingLeft: 10, fontSize: 14, color: 'silver', fontFamily: 'MyriadPro-Light' }}>Запомнить</Text>
+      <Text style={{ paddingLeft: 10, fontSize: 14, color: 'silver', fontFamily: 'MyriadPro-Regular' }}>Запомнить</Text>
     </ListItem>
   );
 };

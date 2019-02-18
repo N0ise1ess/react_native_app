@@ -62,6 +62,7 @@
 		FF920BCF45094BD1B6554F50 /* libRNTextInputMask.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEA7C62A666402789DED188 /* libRNTextInputMask.a */; };
 		970E4AECE2434FDD9295527B /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2FB8F675ED7C417F806B91DC /* MyriadPro-Bold.otf */; };
 		0E23A5372FB44AC5A15914D8 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5CC31107D79F41FA8AAD536D /* MyriadPro-Regular.otf */; };
+		A2BF6BDC6AE244F28A2F7823 /* MyriadPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B785AB778244C8193BF5E60 /* MyriadPro-Light.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -451,6 +452,7 @@
 		F6EE075C27554D9DA60E1452 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		2FB8F675ED7C417F806B91DC /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; name = "MyriadPro-Bold.otf"; path = "../resources/fonts/MyriadPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5CC31107D79F41FA8AAD536D /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; name = "MyriadPro-Regular.otf"; path = "../resources/fonts/MyriadPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B785AB778244C8193BF5E60 /* MyriadPro-Light.otf */ = {isa = PBXFileReference; name = "MyriadPro-Light.otf"; path = "../resources/fonts/MyriadPro-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -736,6 +738,7 @@
 				DFA043F9FEDD4D559CC694B5 /* Zocial.ttf */,
 				2FB8F675ED7C417F806B91DC /* MyriadPro-Bold.otf */,
 				5CC31107D79F41FA8AAD536D /* MyriadPro-Regular.otf */,
+				3B785AB778244C8193BF5E60 /* MyriadPro-Light.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				59FFEBBA6FCB4E2EA68639A5 /* Zocial.ttf in Resources */,
 				970E4AECE2434FDD9295527B /* MyriadPro-Bold.otf in Resources */,
 				0E23A5372FB44AC5A15914D8 /* MyriadPro-Regular.otf in Resources */,
+				A2BF6BDC6AE244F28A2F7823 /* MyriadPro-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
