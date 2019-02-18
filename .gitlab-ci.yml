@@ -1,0 +1,46 @@
+image: openjdk:8-jdk
+
+variables:
+  ANDROID_COMPILE_SDK: '28'
+  ANDROID_BUILD_TOOLS: '28.0.3'
+  SDK_TOOLS: '4333796'
+  EMULATOR_VERSION: '22'
+
+before_script:
+  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS}.zip
+  - unzip -q android-sdk.zip -d android-sdk-linux
+
+  - mkdir android-sdk-linux/licenses
+  - printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > android-sdk-linux/licenses/android-sdk-license
+  - printf "84831b9409646a918e30573bab4c9c91346d8abd" > android-sdk-linux/licenses/android-sdk-preview-license
+  - android-sdk-linux/tools/bin/sdkmanager --update > update.log
+  - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}" "extras;google;m2repository" "extras;android;m2repository" > installPlatform.log
+
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+  - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+  - npm install
+  - cp ~/my-release-key.keystore ./android/app
+  - cd android
+  - chmod +x ./gradlew
+  - latest=`date '+%Y%m%d-%H%M%S'`
+  - today=`date '+%d.%m.%Y 00:00'`
+
+stages:
+  - test
+  - build
+
+build:
+  stage: build
+  script:
+    - ./gradlew assembleRelease
+    - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk
+    - git log --merges --first-parent develop --after="$today" --format='%cd %h %s' --date=format:"%d-%m-%Y" > ~/release/$latest-release.txt
+    - sudo cp ~/release/$latest-release.txt ~/release/$latest-app-release.apk /home/coder/uploads/files/campus
+  artifacts:
+    paths:
+      - app/build/outputs/
+
+unitTests:
+  stage: test
+  script:
+    - ./gradlew test
