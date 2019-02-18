@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
@@ -14,7 +14,7 @@ export default StyleSheet.create({
     width: '100%',
     marginLeft: 0,
     marginRight: 0,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   lastItemStyle: {
     backgroundColor: '#ED3944',
@@ -22,12 +22,11 @@ export default StyleSheet.create({
   lastTextStyle: {
     color: '#fff',
   },
-  listStyle: {
-  },
+  listStyle: {},
   textStyle: {
     fontSize: 14,
   },
   scoreStyle: {
     color: 'red',
-  }
-})
+  },
+});

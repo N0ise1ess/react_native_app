@@ -2,9 +2,9 @@ import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { logout } from '../../actions/authorizationAction';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles';
+import { logout } from '../../../../actions/authorizationAction';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
 const itemList = [
   {
@@ -30,7 +30,7 @@ const itemList = [
   },
 ];
 
-class PersonalRatingScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Персональный рейтинг',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -76,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const PersonalRatingScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PersonalRatingScreen);
+)(InnerComponent);
