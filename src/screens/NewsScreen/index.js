@@ -154,6 +154,7 @@ class NewsScreen extends Component {
             [{nativeEvent: {contentOffset: {y: this.scroll}}}],
             {useNativeDriver: true},
           )}
+          ref={ref => this._scrollView = ref}
         >
           <NB.Tabs renderTabBar={(props) => <RN.Animated.View
             style={[{
@@ -164,7 +165,13 @@ class NewsScreen extends Component {
             }, RN.Platform.OS === "ios" ? {paddingTop: 20} : null]}>
             <NB.ScrollableTab {...props} style={{backgroundColor: '#CED8DA',}} underlineStyle={{backgroundColor: "transparent"}}/>
           </RN.Animated.View>
-          } onChangeTab={({i}) => this.setState({ currentTab: i})}>
+          } onChangeTab={({i}) => {
+            this._scrollView.getNode().scrollTo({
+              y: 0,
+              animated: true,
+            });;
+            this.setState({ currentTab: i})
+          }}>
           
             <NB.Tab
               heading={<NB.TabHeading style={[styles.tabStyle, styles.tabLeft, currentTab === 0 && styles.activeTabStyle]}>{
