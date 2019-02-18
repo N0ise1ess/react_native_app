@@ -27,10 +27,12 @@ before_script:
 
 stages:
   - test
-  - build
+  # - build
 
 build:
   stage: build
+  only:
+    - develop
   script:
     - ./gradlew assembleRelease
     - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk
@@ -42,5 +44,7 @@ build:
 
 unitTests:
   stage: test
+  only:
+    - develop
   script:
     - ./gradlew test
