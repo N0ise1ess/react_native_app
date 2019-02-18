@@ -3,12 +3,12 @@ import React, { Component, Fragment } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_parent } from '../../assets/images';
-import { ParentControlForm } from '../../components/Forms';
-import { ButtonBack, FooterSection } from '../shared/components';
-import styles from './styles/parentStyle';
+import { img_parent } from '../../../../assets/images';
+import { Parent } from '../../components';
+import { ButtonBack, FooterSection } from '../../../shared/components';
+import { styles } from './styles';
 
-class ParentScreen extends Component {
+class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Родители',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -50,7 +50,7 @@ class ParentScreen extends Component {
               </View>
               <View style={styles.dataSection}>
                 {this.renderLabel('Доступ')}
-                <ParentControlForm />
+                <Parent />
               </View>
             </View>
           </View>
@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(
+export const ParentScreen = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ParentScreen);
+)(InnerComponent);

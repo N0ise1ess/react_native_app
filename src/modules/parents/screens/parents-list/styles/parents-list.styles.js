@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -35,8 +35,7 @@ export default StyleSheet.create({
     paddingRight: 0,
     marginRight: 0,
   },
-  listStyle: {
-  },
+  listStyle: {},
   columnStyle: {
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -57,12 +56,12 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   searchInput: {
     fontSize: 14,
   },
   searchIcon: {
-    color: '#4D6270'
+    color: '#4D6270',
   },
-})
+});

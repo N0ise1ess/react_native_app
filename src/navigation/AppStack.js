@@ -18,7 +18,7 @@ import {
   NewsScreen,
   NotificationsScreen,
   ParentScreen,
-  ParentsScreen,
+  ParentsListScreen,
   PersonalitiesScreen,
   PersonalityScreen,
   PersonalRatingScreen,
@@ -49,7 +49,7 @@ const AppStack = createStackNavigator(
     Personalities: PersonalitiesScreen,
     Personality: PersonalityScreen,
     Chat: ChatScreen,
-    Parents: ParentsScreen,
+    Parents: ParentsListScreen,
     Parent: ParentScreen,
   },
   {

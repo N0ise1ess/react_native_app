@@ -1,8 +1,6 @@
+import { CheckBox, Form, ListItem, Text } from 'native-base';
 import React from 'react';
-import { Container, Item, Icon, Input, Header, Form, Body, Content, CheckBox, ListItem, Label, Title, Button, Text, Spinner } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
-
-import styles from './styles';
 
 const renderCheckbox = ({ input, label, type, meta: { touched, error, warning }}) => {
   if(input.value === '') {
@@ -19,7 +17,7 @@ const renderCheckbox = ({ input, label, type, meta: { touched, error, warning }}
   </ListItem>
 }
 
-let ParentControlForm = props => {
+let innerComponent = props => {
   const { handleSubmit, reset, isLoading } = props;
   return <Form style={{justifyContent: 'flex-start', alignItems: 'flex-start'}}>
     <Field name="recordBookField" label="Зачетная книжка" type="checkbox" component={renderCheckbox} />
@@ -30,8 +28,7 @@ let ParentControlForm = props => {
   </Form>
 }
 
-export default ParentControlForm = reduxForm({
-  // a unique name for the form
+export const Parent = reduxForm({
   form: 'parentControl',
   destroyOnUnmount: false,
-})(ParentControlForm)
+})(innerComponent)
