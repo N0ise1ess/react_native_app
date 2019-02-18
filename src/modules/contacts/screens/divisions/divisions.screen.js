@@ -54,7 +54,7 @@ class InnerComponent extends Component {
             onChangeText={text => this.setState({searchedText: text})}
           />
           <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
+            <Text style={{color: "#163D7D"}}>Найти</Text>
           </Button>
         </Item>
         <Content>
