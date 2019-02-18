@@ -5,10 +5,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#CED8DA',
     flex: 1,
   },
-  iconStyle: {
-    fontSize: 32,
-    color: '#163D7D',
-  },
   listItemStyle: {
     paddingTop: 15,
     paddingBottom: 15,
@@ -19,6 +15,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 20,
     marginRight: 0,
+    flexDirection: 'row'
   },
   listStyle: {},
   columnStyle: {
@@ -27,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   iconStyle: {
     fontSize: 32,
-    color: '#163D7D',
+    color: '#163D7D'
   },
   titleStyle: {
     color: '#163D7D',
@@ -36,6 +33,20 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginLeft: 55,
-    paddingRight: 5,
+    paddingRight: 5
   },
-});
+  //Search tabSectionStyle
+  searchBar: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 10,
+    backgroundColor: '#fff'
+  },
+  searchInput: {
+    fontSize: 14,
+  },
+  searchIcon: {
+    color: '#4D6270'
+  },
+
+})
