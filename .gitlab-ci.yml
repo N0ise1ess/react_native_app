@@ -26,8 +26,8 @@ before_script:
   - today=`date '+%d.%m.%Y 00:00'`
 
 stages:
-  - test
-  # - build
+  # - test
+  - build
 
 build:
   stage: build
@@ -41,10 +41,9 @@ build:
   artifacts:
     paths:
       - app/build/outputs/
-
-unitTests:
-  stage: test
-  only:
-    - develop
-  script:
-    - ./gradlew test
+# unitTests:
+#   stage: test
+#   only:
+#     - develop
+#   script:
+#     - ./gradlew test
