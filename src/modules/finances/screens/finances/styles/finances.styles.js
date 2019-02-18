@@ -84,6 +84,7 @@ export const styles = StyleSheet.create({
     fontWeight: '300',
   },
   paymentAmount: {
-    fontSize: 18,
+    fontFamily: 'MyriadPro-Light',
+    fontSize: 22,
   },
 });

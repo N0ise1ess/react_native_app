@@ -1,9 +1,10 @@
+import moment from 'moment';
 import { Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getFinancePayment } from '../../../../actions/financeAction';
+import { getFinancePayment, getFinanceScholarships } from '../../../../actions/financeAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
