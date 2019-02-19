@@ -33,29 +33,24 @@ class InnerComponent extends Component {
         <Content>
           <View style={styles.section}>
             <View style={styles.dataSection}>
+              <View style={styles.dummy}/>
               <Text style={styles.title}>Для подключение к сети Wi-Fi университета:</Text>
             </View>
             <View style={styles.dataSection}>
-              <View style={styles.numberStep}>
-                <Text style={styles.stepText}>1)</Text>
-              </View>
+              <Text style={styles.stepText}>1)</Text>
               <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
             </View>
             <View style={styles.dataSection}>
-              <View style={styles.numberStep}>
-                <Text style={styles.stepText}>2)</Text>
-              </View>
-              <Text style={styles.dataText}>Сгенерируйте пароль для данной сети:</Text>
+              <Text style={styles.stepText}>2)</Text>
+              <Text style={[styles.dataText, {marginTop: 0}]}>Сгенерируйте пароль для данной сети:</Text>
             </View>
             <View>
-              <Button onPress={this.onHandleSubmit} full rounded style={styles.buttonStyle}>
+              <Button onPress={this.onHandleSubmit} full rounded style={[styles.buttonStyle, styles.dummy]}>
                 <Text style={{fontSize: 12}}>Сгенерировать пароль</Text>
               </Button>
             </View>
             <View style={styles.dataSection}>
-              <View style={styles.numberStep}>
-                <Text style={styles.stepText}>3)</Text>
-              </View>
+              <Text style={styles.stepText}>3)</Text>
               <Text style={styles.dataText}>Введите пароль в соответсвующее поле "Пароль"
                 при подключении к сети.
               </Text>
