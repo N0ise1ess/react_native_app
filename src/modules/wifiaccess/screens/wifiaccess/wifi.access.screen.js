@@ -33,7 +33,6 @@ class InnerComponent extends Component {
         <Content>
           <View style={styles.section}>
             <View style={styles.dataSection}>
-              <View style={styles.numberStep}/>
               <Text style={styles.title}>Для подключение к сети Wi-Fi университета:</Text>
             </View>
             <View style={styles.dataSection}>
@@ -41,6 +40,25 @@ class InnerComponent extends Component {
                 <Text style={styles.stepText}>1)</Text>
               </View>
               <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
+            </View>
+            <View style={styles.dataSection}>
+              <View style={styles.numberStep}>
+                <Text style={styles.stepText}>2)</Text>
+              </View>
+              <Text style={styles.dataText}>Сгенерируйте пароль для данной сети:</Text>
+            </View>
+            <View>
+              <Button onPress={this.onHandleSubmit} full rounded style={styles.buttonStyle}>
+                <Text style={{fontSize: 12}}>Сгенерировать пароль</Text>
+              </Button>
+            </View>
+            <View style={styles.dataSection}>
+              <View style={styles.numberStep}>
+                <Text style={styles.stepText}>3)</Text>
+              </View>
+              <Text style={styles.dataText}>Введите пароль в соответсвующее поле "Пароль"
+                при подключении к сети.
+              </Text>
             </View>
           </View>
         </Content>
