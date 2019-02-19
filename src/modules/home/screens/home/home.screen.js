@@ -86,6 +86,7 @@ const cardList = [
       },
       {
         title: 'Доступ к Wi-Fi',
+        route: "WifiAccess",
         image: img_wifi,
       },
     ],

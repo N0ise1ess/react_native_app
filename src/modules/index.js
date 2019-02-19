@@ -12,3 +12,4 @@ export { PersonalRatingScreen } from './personal-rating';
 export { QuestionnairesScreen } from './questionnaires';
 export { AccountScreen, MainConfigScreen, SettingsScreen } from './settings';
 export { TimeTableScreen } from './timetable';
+export { WifiAccessScreen } from './wifiaccess';
