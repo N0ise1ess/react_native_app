@@ -1,10 +1,13 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, {Component} from 'react';
+import {Dimensions, View} from 'react-native';
 import {connect} from 'react-redux';
 import {ButtonBack} from "../../../shared/components/button-back";
-import {styles} from "../../../contacts/screens/divisions/styles";
+import {styles} from "./styles";
 import {FooterSection} from "../../../shared/components/footer";
 import {getDepartments} from "../../../../actions/contactsAction";
+
+const {width, height} = Dimensions.get('window');
 
 class InnerComponent extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -24,11 +27,22 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const {userStatus, navigation, token } = this.props;
+    const {userStatus, navigation, token} = this.props;
     return (
       <Container style={styles.container}>
         <Content>
-
+          <View style={styles.section}>
+            <View style={styles.dataSection}>
+              <View style={styles.numberStep}/>
+              <Text style={styles.title}>Для подключение к сети Wi-Fi университета:</Text>
+            </View>
+            <View style={styles.dataSection}>
+              <View style={styles.numberStep}>
+                <Text style={styles.stepText}>1)</Text>
+              </View>
+              <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
+            </View>
+          </View>
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
       </Container>
