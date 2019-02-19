@@ -34,7 +34,7 @@ class InnerComponent extends Component {
           <View style={styles.section}>
             <View style={styles.dataSection}>
               <View style={styles.dummy}/>
-              <Text style={styles.title}>Для подключение к сети Wi-Fi университета:</Text>
+              <Text style={styles.title}>Для подключения к сети Wi-Fi университета:</Text>
             </View>
             <View style={styles.dataSection}>
               <Text style={styles.stepText}>1)</Text>
