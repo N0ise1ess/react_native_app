@@ -40,7 +40,7 @@ class InnerComponent extends Component {
               <Text style={styles.stepText}>1)</Text>
               <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
             </View>
-            <View style={styles.dataSection}>
+            <View style={[styles.dataSection, {paddingBottom: 0}]}>
               <Text style={styles.stepText}>2)</Text>
               <Text style={[styles.dataText, {marginTop: 0}]}>Сгенерируйте пароль для данной сети:</Text>
             </View>
