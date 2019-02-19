@@ -7,9 +7,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  section : {
+  content : {
     marginTop: height * 0.05,
-    maxWidth: width * 0.8
+    width: width * 0.7,
+    marginRight: 55
   },
   dataSection : {
     paddingTop: 10,
@@ -31,17 +32,17 @@ export const styles = StyleSheet.create({
     marginTop: 5
   },
   stepText: {
-    fontSize: width * 0.07,
+    fontSize: 22,
     color: 'grey'
   },
   buttonStyle: {
     alignSelf: 'center',
     backgroundColor: '#ff5064',
     height: height * 0.06,
-    maxWidth: width * 0.6
+    width: width * 0.7,
   },
   dummy: {
     // font size of stepText + static margin of dataText
-    marginLeft: width * 0.07 + 5
+    marginLeft: 22 + 5
   }
 });

@@ -31,7 +31,7 @@ class InnerComponent extends Component {
     return (
       <Container style={styles.container}>
         <Content>
-          <View style={styles.section}>
+          <View style={styles.content}>
             <View style={styles.dataSection}>
               <View style={styles.dummy}/>
               <Text style={styles.title}>Для подключения к сети Wi-Fi университета:</Text>
@@ -44,8 +44,9 @@ class InnerComponent extends Component {
               <Text style={styles.stepText}>2)</Text>
               <Text style={[styles.dataText, {marginTop: 0}]}>Сгенерируйте пароль для данной сети:</Text>
             </View>
-            <View>
-              <Button onPress={this.onHandleSubmit} full rounded style={[styles.buttonStyle, styles.dummy]}>
+            <View style={styles.dataSection}>
+              <View style={styles.dummy}/>
+              <Button onPress={this.onHandleSubmit} full rounded style={styles.buttonStyle}>
                 <Text style={{fontSize: 12}}>Сгенерировать пароль</Text>
               </Button>
             </View>
