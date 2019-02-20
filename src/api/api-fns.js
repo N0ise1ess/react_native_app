@@ -56,7 +56,7 @@ export function financeScholarshipsApi(token) {
   });
 }
 
-export function getDashboard() {
+export function newsApi() {
   return axios.get(endpoints.news.getAll);
 }
 

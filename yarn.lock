@@ -841,6 +841,11 @@ async@^2.1.4, async@^2.4.0, async@^2.5.0:
   dependencies:
     lodash "^4.17.10"
 
+asyncjs@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/asyncjs/-/asyncjs-0.0.12.tgz#a720f5ecf8b0f79118062221c1ccc2477694fd9c"
+  integrity sha512-FElqwANhaaRJWi1xH8NtjnzRbO7QaaDDYioVgxiNUtzKsVi7IP0q2FkSOWBEJD6MVOEFPm4L0os2HiPaVxsEGQ==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
