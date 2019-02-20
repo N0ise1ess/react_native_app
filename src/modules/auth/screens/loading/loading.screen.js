@@ -36,7 +36,7 @@ const mapStateToProps = state => {
   };
 };
 
-export const AuthLoadingScreen = connect(
+export const LoadingScreen = connect(
   mapStateToProps,
   null,
 )(InnerComponent);
