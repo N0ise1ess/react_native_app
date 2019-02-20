@@ -69,9 +69,9 @@ class InnerComponent extends Component {
             value={this.state.searchedText}
             onChangeText={text => this.setState({ searchedText: text })}
           />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
-          </Button>
+          {/*<Button transparent onPress={this.onHandleSubmit}>*/}
+            {/*<Text>Найти</Text>*/}
+          {/*</Button>*/}
         </Item>
         <Content>
           <List
