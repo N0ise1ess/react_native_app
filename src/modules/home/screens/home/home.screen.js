@@ -87,7 +87,7 @@ const cardList = [
       {
         title: 'Доступ к Wi-Fi',
         route: "WifiAccess",
-        image: img_wifi,
+        image: img_wifi
       },
     ],
   },
@@ -120,12 +120,6 @@ const cardGuestList = [
         title: 'Контакты\nуниверситета',
         route: 'Contacts',
         image: img_marker,
-      },
-      // TODO remove wifi access from here
-      {
-        title: 'Доступ к Wi-Fi',
-        route: "WifiAccess",
-        image: img_wifi,
       },
       {
         hidden: true,

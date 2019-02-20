@@ -61,5 +61,14 @@ export const styles = StyleSheet.create({
     flex: 0.1,
     marginLeft: 10,
     fontSize: 17
+  },
+  pickerShadow:{
+    flex : 0.9,
+    backgroundColor:'white',
+    shadowColor: 'rgba(0,0,0, .4)',
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+    elevation: 0
   }
 });
