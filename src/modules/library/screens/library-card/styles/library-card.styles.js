@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#CED8DA',
     flex: 1,
   },
+  tabHeader: {
+    paddingBottom: 20, 
+    paddingTop: 20, 
+    height: 80,
+  },
   label: {
     fontSize: 14,
     fontWeight: '300',
