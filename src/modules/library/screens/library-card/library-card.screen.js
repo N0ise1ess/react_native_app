@@ -38,7 +38,7 @@ class InnerComponent extends Component {
     return (
       <Tab
         heading={
-          <TabHeading style={styles.tabHeaderStyle}>
+          <TabHeading style={[styles.tabHeaderStyle, styles.tabHeader]}>
             <View
               style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab % 3 === 0 && styles.activeTabStyle]}
             >
@@ -109,7 +109,7 @@ class InnerComponent extends Component {
     return (
       <Tab
         heading={
-          <TabHeading style={styles.tabHeaderStyle}>
+          <TabHeading style={[styles.tabHeaderStyle, styles.tabHeader]}>
             <View
               style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 1 && styles.activeTabStyle]}
             >
@@ -123,7 +123,7 @@ class InnerComponent extends Component {
             <Text style={styles.noDataTextStyle}>Информация о выданной литературе отсутствует</Text>
           </View>
         ) : (
-          <Content style={{ backgroundColor: '#CED8DA' }}>
+          <Content style={{ backgroundColor: '#CED8DA', marginTop: 40 }}>
             <List
               dataArray={bookInfo}
               renderRow={item => (

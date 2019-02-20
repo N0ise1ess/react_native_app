@@ -62,6 +62,6 @@ export const endpoints = {
     /** QR */
     qr: 'http://opencode.su/campus/integration/api/library/card/qr',
     /** ??? */
-    books: 'http://opencode.su/campus/integration/api/book/me',
+    books: 'http://opencode.su/campus/library/book/me',
   },
 };
