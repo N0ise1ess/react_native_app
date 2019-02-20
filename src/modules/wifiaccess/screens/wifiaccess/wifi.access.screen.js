@@ -1,4 +1,4 @@
-import {Button, Container, Content, Icon, Picker, List, ListItem, Item, Text} from 'native-base';
+import {Button, Container, Content, Icon, Picker, List, ListItem, Toast, Text, CardItem, Card} from 'native-base';
 import React, {Component} from 'react';
 import {Dimensions, View} from 'react-native';
 import {connect} from 'react-redux';
@@ -23,7 +23,8 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected : 'SSTU-main'
+      selected: 'SSTU-main',
+      wifiPass: ""
     };
   }
 
@@ -34,7 +35,7 @@ class InnerComponent extends Component {
         <Picker
           mode="dropdown"
           iosHeader="Wi-fi"
-          iosIcon={<Icon name="arrow-dropdown-circle" style={{ color: "#007aff", fontSize: 25 }} />}
+          iosIcon={<Icon name="arrow-dropdown-circle" style={{color: "#007aff", fontSize: 25}}/>}
           style={styles.pickerShadow}
           selectedValue={this.state.selected}
           onValueChange={this.onValueChange}
@@ -52,6 +53,7 @@ class InnerComponent extends Component {
 
   render() {
     const {userStatus, navigation, token} = this.props;
+    let wifiPassIsPresent = this.state.wifiPass.length > 0;
     return (
       <Container style={styles.container}>
         <Content>
@@ -74,7 +76,9 @@ class InnerComponent extends Component {
             </View>
             <View style={styles.dataSection}>
               <View style={styles.dummy}/>
-              <Button onPress={this.onHandleSubmit} full rounded style={styles.buttonStyle}>
+              <Button onPress={this.generatePassword}
+                      disabled={wifiPassIsPresent}
+                      full rounded style={!wifiPassIsPresent ? styles.activeButtonStyle : styles.inactiveButtonStyle}>
                 <Text style={{fontSize: 12}}>Сгенерировать пароль</Text>
               </Button>
             </View>
@@ -84,6 +88,19 @@ class InnerComponent extends Component {
                 при подключении к сети.
               </Text>
             </View>
+            {wifiPassIsPresent ?
+              <View style={styles.dataSection}>
+                <View style={styles.dummy}/>
+                <View style={styles.card}>
+                  <View style={styles.cardPassText}>
+                    <Text style={{color: 'grey', fontSize: 12}}>Ваш пароль:</Text>
+                    <Text style={{color: 'grey', fontSize: 25}}>{this.state.wifiPass}</Text>
+                  </View>
+                  <Button onPress={this.copyPass} full rounded style={styles.copyPassBtn}>
+                    <Text style={{fontSize: 12}}>Скопировать пароль</Text>
+                  </Button>
+                </View>
+              </View> : null}
           </View>
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
@@ -92,8 +109,22 @@ class InnerComponent extends Component {
 
   }
 
-  onHandleSubmit = () => {
+  copyPass = () => {
+    Toast.show({
+      text: "Скопированно в буфер обмена",
+      buttonText: 'Ок',
+      duration: 2000,
+      type: 'warning',
+    });
+  }
 
+  generatePassword = () => {
+    const chars = ['1', '2', '3', '4', '5', '6', '7', 'a', 'B', 'w', 'e', 'i', 'p', 'Y'];
+    let pass = '';
+    while (pass.length !== 5) {
+      pass += chars[Math.floor(Math.random() * chars.length)]
+    }
+    this.setState({wifiPass: pass})
   };
 }
 
