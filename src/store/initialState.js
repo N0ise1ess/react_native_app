@@ -21,4 +21,9 @@ export default {
   departmentReducer: {
     departments: [],
   },
+  loadingScreen: {
+    progress: 0,
+    isLoaded: false,
+    text: 'Загрузка...',
+  },
 };

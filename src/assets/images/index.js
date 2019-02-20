@@ -1,4 +1,5 @@
 export const img_logo = require('./logo.png');
+export const img_logo_white = require('./logo-white.png');
 export const img_logo_notext = require('./logo-notext.png');
 export const img_rb = require('./image1.png');
 export const img_finance = require('./finance.png');
@@ -37,7 +38,6 @@ export const img_account = require('./account.png');
 
 export const img_campus_dorm = require('./campus-dorm.png');
 export const img_university_section = require('./university-section.png');
-
 
 //Personality
 export const img_teacher = require('./teacher.png');

@@ -60,6 +60,25 @@ export function newsApi() {
   return axios.get(endpoints.news.getAll);
 }
 
+export function getNews(page = 1, size = 10) {
+  return axios.get(endpoints.news.getNews, {
+    params: {
+      page,
+      size,
+    },
+  });
+}
+
+export function getEvents() {
+  return axios.get(endpoints.news.getEvents);
+}
+export function getAdvertisement() {
+  return axios.get(endpoints.news.getAdvertisements);
+}
+export function getSlider() {
+  return axios.get(endpoints.news.getSliders);
+}
+
 export function timeTableGetApi(searchedText, token) {
   return axios.post(endpoints.timetable.search, searchedText, {
     headers: {
