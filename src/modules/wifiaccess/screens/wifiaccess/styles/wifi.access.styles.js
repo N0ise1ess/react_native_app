@@ -99,6 +99,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ff5064',
     height: height * 0.06,
-    marginTop: 10
+    marginTop: height > 550 ? 20 : 10
   }
 });
