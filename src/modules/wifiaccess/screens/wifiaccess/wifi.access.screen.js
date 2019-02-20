@@ -1,4 +1,4 @@
-import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
+import {Button, Container, Content, Icon, Picker, List, ListItem, Item, Text} from 'native-base';
 import React, {Component} from 'react';
 import {Dimensions, View} from 'react-native';
 import {connect} from 'react-redux';
@@ -23,7 +23,32 @@ class InnerComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selected : 'SSTU-main'
+    };
+  }
+
+  renderPicker = () => {
+    return (
+      //{/*<View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
+        // {/*<Icon name={'home'} style={styles.pickerIcon}/>*/}
+        <Picker
+          mode="dropdown"
+          iosHeader="Wi-fi"
+          iosIcon={<Icon name="arrow-dropdown-circle" style={{ color: "#007aff", fontSize: 25 }} />}
+          style={styles.picker}
+          selectedValue={this.state.selected}
+          onValueChange={this.onValueChange}
+        >
+          <Picker.Item label="SSTU-main" value="key0"/>
+          <Picker.Item label='SSTU-main2' value="key1"/>
+        </Picker>
+      // </View>
+    )
+  }
+
+  onValueChange = text => {
+    console.log(text)
   }
 
   render() {
@@ -39,6 +64,10 @@ class InnerComponent extends Component {
             <View style={styles.dataSection}>
               <Text style={styles.stepText}>1)</Text>
               <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
+            </View>
+            <View style={styles.dataSection}>
+              <View style={styles.dummy}/>
+              {this.renderPicker()}
             </View>
             <View style={[styles.dataSection, {paddingBottom: 0}]}>
               <Text style={styles.stepText}>2)</Text>

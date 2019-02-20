@@ -44,5 +44,26 @@ export const styles = StyleSheet.create({
   dummy: {
     // font size of stepText + static margin of dataText
     marginLeft: 22 + 5
+  },
+  picker: {
+    width: width * 0.7,
+    backgroundColor:'white',
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 2, // Android
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  pickerIcon: {
+    height: 50,
+    backgroundColor: 'white',
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 2, // Android
   }
 });
