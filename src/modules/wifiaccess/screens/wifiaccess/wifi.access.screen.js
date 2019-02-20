@@ -6,6 +6,7 @@ import {ButtonBack} from "../../../shared/components/button-back";
 import {styles} from "./styles";
 import {FooterSection} from "../../../shared/components/footer";
 import {getDepartments} from "../../../../actions/contactsAction";
+import {CustomIcon} from "../../../shared/components/custom-icon";
 
 const {width, height} = Dimensions.get('window');
 
@@ -30,20 +31,25 @@ class InnerComponent extends Component {
 
   renderPicker = () => {
     return (
-      //{/*<View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
-        // {/*<Icon name={'home'} style={styles.pickerIcon}/>*/}
+      <View style={styles.picker}>
+        <CustomIcon name={'wifi'} style={styles.pickerIcon}/>
         <Picker
           mode="dropdown"
           iosHeader="Wi-fi"
           iosIcon={<Icon name="arrow-dropdown-circle" style={{ color: "#007aff", fontSize: 25 }} />}
-          style={styles.picker}
+          style={{flex : 0.9, backgroundColor:'white',
+            shadowColor: 'rgba(0,0,0, .4)', // IOS
+            shadowOffset: { height: 1, width: 1 }, // IOS
+            shadowOpacity: 1, // IOS
+            shadowRadius: 1, //IOS
+            elevation: 0}}
           selectedValue={this.state.selected}
           onValueChange={this.onValueChange}
         >
           <Picker.Item label="SSTU-main" value="key0"/>
           <Picker.Item label='SSTU-main2' value="key1"/>
         </Picker>
-      // </View>
+      </View>
     )
   }
 
