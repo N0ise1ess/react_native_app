@@ -28,6 +28,7 @@ import {
   QuestionnairesScreen,
   SettingsScreen,
   TimeTableScreen,
+  WifiAccessScreen
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -54,6 +55,7 @@ const AppStack = createStackNavigator(
     Chat: ChatScreen,
     Parents: ParentsListScreen,
     Parent: ParentScreen,
+    WifiAccess: WifiAccessScreen,
   },
   {
     initialRouteName: 'Home',
