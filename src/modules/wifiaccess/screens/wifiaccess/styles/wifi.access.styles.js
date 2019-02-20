@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     marginRight: 55
   },
   dataSection : {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 7,
+    paddingBottom: 7,
     flexDirection: 'row',
     marginLeft: 20,
     alignItems: 'center'
@@ -35,11 +35,18 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     color: 'grey'
   },
-  buttonStyle: {
+  activeButtonStyle: {
     alignSelf: 'center',
     backgroundColor: '#ff5064',
     height: height * 0.06,
     width: width * 0.7,
+  },
+  inactiveButtonStyle: {
+    alignSelf: 'center',
+    backgroundColor: '#d23f50',
+    height: height * 0.06,
+    width: width * 0.7,
+    opacity: 0.7
   },
   dummy: {
     // font size of stepText + static margin of dataText
@@ -70,5 +77,28 @@ export const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
     elevation: 0
+  },
+  card : {
+    width: width * 0.7,
+    flexDirection:'column',
+    justifyContent: 'space-around'
+  },
+  cardPassText: {
+    flex: 1,
+    flexDirection:'column',
+    justifyContent: 'space-around',
+    paddingLeft: 10,
+    backgroundColor:'white',
+    shadowColor: 'rgba(0,0,0, .4)',
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+    elevation: 2,
+  },
+  copyPassBtn: {
+    flex: 1,
+    backgroundColor: '#ff5064',
+    height: height * 0.06,
+    marginTop: 10
   }
 });
