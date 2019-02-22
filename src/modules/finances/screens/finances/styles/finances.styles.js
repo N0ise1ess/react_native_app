@@ -14,11 +14,11 @@ export const styles = StyleSheet.create({
   listStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 15,
+    marginTop: 10,
     backgroundColor: '#fff',
     width: '100%',
     marginLeft: 0,
@@ -89,10 +89,8 @@ export const styles = StyleSheet.create({
     fontSize: 22,
   },
   paymentButton: {
-    flex:1,
-    alignSelf:'flex-end',
-    width: '40%',
-    paddingBottom: 15,
-    marginBottom: 15,
+    width: '60%',
+    alignSelf: 'center',
+    marginBottom: 15
   }
 });

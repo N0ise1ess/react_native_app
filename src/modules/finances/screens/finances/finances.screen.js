@@ -1,7 +1,7 @@
 import moment from 'moment';
 import {Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text} from 'native-base';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Linking } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getFinancePayment, getFinanceScholarships } from '../../../../actions/financeAction';
@@ -34,12 +34,9 @@ class InnerComponent extends Component {
   render() {
     const { userStatus, navigation, finances } = this.props;
     const { currentTab } = this.state;
+    const debt = finances && finances[0] ? finances[0].debt : 0;
     const renderPayment = () => {
-      const { finances } = this.props;
       const { currentTab } = this.state;
-
-      //TODO fix amount in list, fix debt
-      let debt = 6200;
 
       return (
         <Tab
@@ -56,7 +53,7 @@ class InnerComponent extends Component {
               <Spinner color="blue" />
             ) : (
               <List
-                dataArray={[{amount: 5600}, {amount: 600}]}
+                dataArray={finances[0] && finances[0].charges}
                 renderRow={item => (
                   <View style={styles.listStyle}>
                     <View>
@@ -66,22 +63,17 @@ class InnerComponent extends Component {
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.paymentAmount}>{item.amount} P</Text>
+                      <Text style={styles.paymentAmount}>{item.amount} ₽</Text>
                     </View>
                   </View>
                 )}
               />
             )}
-            <View style={[styles.listStyle, {backgroundColor: '#ff5064', height : 50}]}>
+            {debt > 0 && currentTab === 0 ?
+            <View style={[styles.listStyle, {backgroundColor: '#e91b47', height : 50}]}>
               <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'white' }}>К оплате</Text>
-              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} P</Text>
-            </View>
-            <View style={styles.paymentButton}>
-              <Button onPress={() => {}}
-                      full rounded style={{backgroundColor: '#ff5064'}}>
-                <Text style={{fontSize: 12}}>Оплатить</Text>
-              </Button>
-            </View>
+              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} ₽</Text>
+            </View> : null }
           </Content>
         </Tab>
       );
@@ -133,9 +125,21 @@ class InnerComponent extends Component {
           {renderPayment()}
           {renderScholarships()}
         </Tabs>
+
+        {debt > 0 && this.state.currentTab === 0 ?
+        <View style={styles.paymentButton}>
+          <Button onPress={this.openSberbank}
+                  full rounded style={{backgroundColor: '#e91b47'}}>
+            <Text style={{fontSize: 12}}>{this._upperCase("оплата в сбербанк-онлайн")}</Text>
+          </Button>
+        </View> : null }
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
+  }
+
+  openSberbank = () => {
+    Linking.openURL('https://online.sberbank.ru/')
   }
 
   formatDate(dateString) {
