@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text } from 'native-base';
+import {Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text} from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
@@ -38,6 +38,9 @@ class InnerComponent extends Component {
       const { finances } = this.props;
       const { currentTab } = this.state;
 
+      //TODO fix amount in list, fix debt
+      let debt = 6200;
+
       return (
         <Tab
           heading={
@@ -48,27 +51,37 @@ class InnerComponent extends Component {
             </TabHeading>
           }
         >
-          <Content style={{ backgroundColor: '#CED8DA' }}>
+          <Content style={{ backgroundColor: '#CED8DA'}}>
             {!finances ? (
               <Spinner color="blue" />
             ) : (
               <List
-                dataArray={finances[0] && finances[0].charges}
+                dataArray={[{amount: 5600}, {amount: 600}]}
                 renderRow={item => (
                   <View style={styles.listStyle}>
                     <View>
-                      <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Задолженность по оплате{'\n'}за обучение</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Обучение, {this.getSemesterNumber('29-10-18')}</Text>
                       <Text style={styles.deadline}>
                         Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.paymentAmount}>5600 P</Text>
+                      <Text style={styles.paymentAmount}>{item.amount} P</Text>
                     </View>
                   </View>
                 )}
               />
             )}
+            <View style={[styles.listStyle, {backgroundColor: '#ff5064', height : 50}]}>
+              <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'white' }}>К оплате</Text>
+              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} P</Text>
+            </View>
+            <View style={styles.paymentButton}>
+              <Button onPress={() => {}}
+                      full rounded style={{backgroundColor: '#ff5064'}}>
+                <Text style={{fontSize: 12}}>Оплатить</Text>
+              </Button>
+            </View>
           </Content>
         </Tab>
       );

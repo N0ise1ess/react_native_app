@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -87,4 +88,11 @@ export const styles = StyleSheet.create({
     fontFamily: 'MyriadPro-Light',
     fontSize: 22,
   },
+  paymentButton: {
+    flex:1,
+    alignSelf:'flex-end',
+    width: '40%',
+    paddingBottom: 15,
+    marginBottom: 15,
+  }
 });
