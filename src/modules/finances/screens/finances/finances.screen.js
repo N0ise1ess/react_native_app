@@ -126,7 +126,7 @@ class InnerComponent extends Component {
           {renderScholarships()}
         </Tabs>
 
-        {debt > 0 && this.state.currentTab === 0 ?
+        {debt > 0 && currentTab === 0 ?
         <View style={styles.paymentButton}>
           <Button onPress={this.openSberbank}
                   full rounded style={{backgroundColor: '#e91b47'}}>
