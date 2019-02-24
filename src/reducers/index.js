@@ -7,6 +7,7 @@ import financeReducer from './financeReducer';
 import timetableReducer from './timetableReducer';
 import departmentReducer from './departmentReducer';
 import loadingReducer from './loadingReducer';
+import settings from './settingsReducer';
 export default combineReducers({
   authReducer,
   libraryReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   form: formReducer,
   departmentReducer,
   loadingScreen: loadingReducer,
+  settings,
 });

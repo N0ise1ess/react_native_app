@@ -129,15 +129,22 @@ const cardGuestList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      styles: styles(props.fontSize),
+    }
+  }
+
+  static navigationOptions = (props) => {
     return {
-      title: navigation.state.params && navigation.state.params.userFullName,
+      title: props.navigation.state.params && props.navigation.state.params.userFullName,
       headerLeft: (
         <Left>
-          {navigation.state.params && navigation.state.params.userStatus === 'student' ? (
-            <Image style={styles.headerImageStyle} source={img_student} />
+          {props.navigation.state.params && props.navigation.state.params.userStatus === 'student' ? (
+            <Image style={{resizeMode: 'contain',height: 30,}} source={img_student} />
           ) : (
-            <Image style={[styles.headerImageStyle, { marginLeft: 10 }]} source={img_account} />
+            <Image style={{resizeMode: 'contain',height: 30, marginLeft: 10 }} source={img_account} />
           )}
         </Left>
       ),
@@ -152,8 +159,13 @@ class InnerComponent extends Component {
     });
   }
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
+
   render() {
     const { navigation, userStatus } = this.props;
+    const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <ImageSlider
@@ -166,7 +178,7 @@ class InnerComponent extends Component {
                   <CardItem
                     key={index}
                     image={item.image}
-                    title={item.title}
+                    title={<Text style={styles.text}>{item.title}</Text>}
                     navigate={() => this.props.navigation.navigate(item.route ? item.route : '')}
                   />
                 ))}
@@ -200,6 +212,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

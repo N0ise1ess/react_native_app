@@ -8,6 +8,7 @@ export class PasswordReset extends React.Component {
     super(props);
     this.state = {
       email: '',
+      styles: styles(props.fontSize),
     };
   }
 
@@ -19,9 +20,14 @@ export class PasswordReset extends React.Component {
 
   handleChangeInput = e => this.setState({ email: e });
 
-  upperCaseWord = word => <Label style={styles.label}>{word.toUpperCase()}</Label>;
+  upperCaseWord = word => <Label style={this.state.styles.label}>{word.toUpperCase()}</Label>;
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
 
   render() {
+    const {styles} = this.state;
     return (
       <React.Fragment>
         {this.upperCaseWord('E-mail:')}

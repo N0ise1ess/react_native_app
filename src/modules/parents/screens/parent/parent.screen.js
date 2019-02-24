@@ -18,6 +18,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       editableMode: false,
+      styles: styles(props.fontSize),
     };
   }
 
@@ -26,10 +27,12 @@ class InnerComponent extends Component {
     this.setState(prevState => ({ editableMode: !prevState.editableMode }));
     this.state.editableMode && console.log('saved in server');
   };
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
   render() {
     const { userStatus, navigation, lastName, firstName, secondName, phoneNumber, role, email, id } = this.props;
-    const { editableMode, text } = this.state;
-
+    const { editableMode, text, styles } = this.state;
     return (
       <Container style={styles.container}>
         <View style={styles.content}>
@@ -67,6 +70,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

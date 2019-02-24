@@ -1,9 +1,17 @@
 import { StyleSheet, Dimensions } from 'react-native';
-
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 const { width, height } = Dimensions.get('window');
-export const styles = StyleSheet.create({
+
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
+  },
+  textEvent: { 
+    alignSelf: 'center', 
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
+    color: '#2F528B', 
+    paddingTop: 10,
   },
   customSlide: {
     width,
@@ -36,17 +44,9 @@ export const styles = StyleSheet.create({
     paddingBottom: 0,
     borderWidth: 1,
     borderColor: '#fff',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   activeTabStyle: {
-    width: width / 3,
-    marginTop: 10,
-    marginBottom: 5,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: 0,
-    paddingBottom: 0,
-    borderWidth: 1,
-    borderColor: '#fff',
     backgroundColor: '#0E63EE',
   },
   tabRight: {
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: getSizeFonts(10, fontSize),
     textAlign: 'center',
   },
   tabSectionStyle: {

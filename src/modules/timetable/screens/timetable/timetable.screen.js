@@ -41,6 +41,7 @@ class InnerComponent extends Component {
     this.state = {
       currentTab: 0,
       searchedText: '',
+      styles: styles(props.fontSize),
     };
   }
   componentWillMount() {
@@ -85,9 +86,12 @@ class InnerComponent extends Component {
     );
   };
 
-  renderEven = () => {
-    const { currentTab } = this.state;
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
 
+  renderEven = () => {
+    const { currentTab, styles } = this.state;
     return (
       <Tab
         heading={
@@ -166,6 +170,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.timetableReducer,
+    ...state.settings,
   };
 };
 

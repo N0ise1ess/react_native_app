@@ -1,7 +1,9 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 const { width, height } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -20,19 +22,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     alignSelf: 'center'
   },
   dataText: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: 'normal',
     color: 'grey',
     marginLeft: 10,
     marginTop: 5
   },
   stepText: {
-    fontSize: 22,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
     color: 'grey'
   },
   activeButtonStyle: {
@@ -67,7 +69,7 @@ export const styles = StyleSheet.create({
   pickerIcon: {
     flex: 0.1,
     marginLeft: 10,
-    fontSize: 17
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
   },
   pickerShadow:{
     flex : 0.9,
