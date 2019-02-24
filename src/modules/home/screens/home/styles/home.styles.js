@@ -1,8 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
+  },
+  text: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    color: '#3f5d8d',
   },
   flatListStyle: {
     flexDirection: 'row',

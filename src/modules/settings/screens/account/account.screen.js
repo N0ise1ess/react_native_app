@@ -20,12 +20,17 @@ class InnerComponent extends Component {
     this.state = {
       editableMode: false,
       phoneNumber: props.phoneNumber,
+      styles: styles(props.fontSize),
     };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   render() {
     const { userStatus, navigation, lastName, firstName, secondName, role, email } = this.props;
-    const { editableMode, phoneNumber } = this.state;
+    const { editableMode, phoneNumber, styles } = this.state;
     const studentIndex = role.findIndex(item => item.type === 'STUDENT');
     const renderPhone = () => {
       return (
@@ -124,6 +129,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.accountReducer,
+    ...state.settings,
   };
 };
 

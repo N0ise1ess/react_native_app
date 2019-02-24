@@ -19,6 +19,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       currentTab: 0,
+      styles: styles(props.fontSize),
       groupName : ''
     };
   }
@@ -40,14 +41,17 @@ class InnerComponent extends Component {
     return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
+
   render() {
     const { userStatus, navigation, finances, role } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
     const debt = finances && finances[0] ? finances[0].debt : 0;
     const { groupName } = this.state;
 
     // TODO check what field holds amount of finances[0].charges ?
-
     const renderPayment = () => {
       const { currentTab } = this.state;
 
@@ -61,7 +65,7 @@ class InnerComponent extends Component {
             </TabHeading>
           }
         >
-          <Content style={{ backgroundColor: '#CED8DA'}}>
+          <Content style={{ backgroundColor: '#CED8DA' }}>
             {!finances ? (
               <Spinner color="blue" />
             ) : (
@@ -200,6 +204,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     finances: state.financeReducer,
+    ...state.settings,
   };
 };
 

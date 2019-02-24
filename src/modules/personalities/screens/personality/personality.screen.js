@@ -17,9 +17,12 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       editableMode: false,
+      styles: styles(props.fontSize),
     };
   }
-
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
   renderLabel = text => <Text style={styles.label}>{text.toUpperCase()}</Text>;
   onHandleEdit = () => {
     this.setState(prevState => ({ editableMode: !prevState.editableMode }));
@@ -27,7 +30,7 @@ class InnerComponent extends Component {
   };
   render() {
     const { userStatus, navigation, lastName, firstName, secondName, phoneNumber, role, email, id } = this.props;
-    const { editableMode, text } = this.state;
+    const { editableMode, text, styles } = this.state;
 
     return (
       <Container style={styles.container}>
@@ -84,6 +87,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

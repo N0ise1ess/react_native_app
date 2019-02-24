@@ -74,7 +74,13 @@ class InnerComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      styles: styles(props.fontSize),
+    };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   onAuthHandle = () => {
@@ -88,6 +94,7 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus, navigation, token } = this.props;
+    const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <Content>
@@ -124,6 +131,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

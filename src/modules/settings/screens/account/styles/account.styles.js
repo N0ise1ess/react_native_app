@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
@@ -27,16 +29,16 @@ export const styles = StyleSheet.create({
   },
   label: {
     color: 'gray',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingTop: 12,
   },
   textStyle: {
     color: 'gray',
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
   },
   inputStyle: {
     color: 'gray',
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     marginTop: 5,
     marginRight: 5,
     padding: 5,
@@ -46,7 +48,7 @@ export const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     marginBottom: 5,
   },
   info: {
@@ -73,7 +75,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#1166F6',
   },
   iconStyle: {
-    fontSize: 18,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#fff',
   },
 });

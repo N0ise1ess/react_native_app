@@ -10,6 +10,7 @@ import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
 import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
+import {setFontSize} from '../../../../actions/settingsAction';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -20,12 +21,17 @@ class InnerComponent extends React.Component {
         password: '',
         isScrollable: false,
       },
+      styles: styles(props.fontSize),
     };
   }
 
   static navigationOptions = {
     headerTitle: 'Авторизация',
   };
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
 
   componentWillReceiveProps(newProps) {
     if (this.props.token !== newProps.token) {
@@ -53,6 +59,7 @@ class InnerComponent extends React.Component {
 
   render() {
     const { authLoading, errorMessage, userStatus, navigation } = this.props;
+    const {styles} = this.state;
     return (
       <MainView>
         <StatusBar />
@@ -62,7 +69,7 @@ class InnerComponent extends React.Component {
               <Image source={img_logo} resizeMode="contain" style={styles.imageStyle} />
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
-                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text allowFontScaling={false} style={styles.linkedTextStyle}>Зарегистрироваться</Text>
                 <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
                   Восстановить пароль
                 </Text>
@@ -86,6 +93,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   login: values => dispatch(login(values)),
   reset: () => dispatch(reset('login')),
+  setFontSize: (fontSize) => dispatch(setFontSize(fontSize)),
   dispatch,
 });
 

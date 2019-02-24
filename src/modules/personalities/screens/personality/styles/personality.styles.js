@@ -1,7 +1,9 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 const { width, height } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
@@ -50,16 +52,16 @@ export const styles = StyleSheet.create({
     color: '#1e1e1e',
   },
   label: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#979797',
   },
   textStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
     color: '#979797',
   },
   dataStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     color: '#4099F4',
   },
@@ -70,7 +72,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
     marginRight: 5,
     padding: 5,
@@ -80,7 +82,7 @@ export const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginBottom: 5,
   },
   info: {
@@ -107,11 +109,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#1166F6',
   },
   iconStyle: {
-    fontSize: 18,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#fff',
   },
   departmentLabel: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     color: '#1e1e1e',
     marginTop: 0,

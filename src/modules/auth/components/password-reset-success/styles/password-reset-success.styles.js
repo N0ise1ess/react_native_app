@@ -1,15 +1,18 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
 const { width, height } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   label: {
     fontSize: 10,
-    paddingTop: height < 550 ? 10 : 20,
+    paddingTop: height < 550 ? getSizeFonts(10, fontSize)  : 20,
     color: '#747A7B',
   },
   inputStyle: {
-    fontSize: height < 750 ? 12 : 16,
+    fontSize: height < 750 ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize) 
+      : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     padding: 0,
     height: 34,
   },
@@ -21,7 +24,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   inputIcon: {
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#163D7D',
     paddingTop: 0,
     paddingRight: 0,
@@ -36,7 +39,7 @@ export const styles = StyleSheet.create({
   errorStyle: {
     color: 'red',
     height: 40,
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     marginTop: 10,
     marginRight: 10,
   },
@@ -47,14 +50,16 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   resetButtonStyle_text: {
-    fontSize: width > 360 ? 14 : 12,
+    fontSize: width > 360 ? 
+      getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize) 
+      : getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   textStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: '#747A7B',
   },
   textStyle__email: {
     color: '#0067f6',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
 });

@@ -1,8 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
-
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 const { width, height } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
   },
   listStyle: {},
   textStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: '#163D7D',
   },
 });
