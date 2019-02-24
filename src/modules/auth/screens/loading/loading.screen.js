@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { initLoad } from '../../../../actions/loadingAction';
 import { img_logo_white } from '../../../../assets/images';
 import { styles } from './styles';
+import {setFontSize} from '../../../../actions/settingsAction';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -20,6 +21,17 @@ class InnerComponent extends React.Component {
   componentWillMount() {
     this.props.initLoad();
   }
+
+  _retrieveData = async () => {
+    try {
+      const fontSize = await AsyncStorage.getItem('fontSize');
+      fontSize && this.props.setFontSize(fontSize);
+      console.log('fontSize', fontSize)
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+  };
 
   render() {
     return (
@@ -50,6 +62,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   initLoad: () => dispatch(initLoad()),
+  setFontSize: (fontSize) => dispatch(setFontSize(fontSize))
 });
 
 export const LoadingScreen = connect(

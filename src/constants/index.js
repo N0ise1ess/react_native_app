@@ -53,3 +53,6 @@ export const PHONE_EDIT_FAILURE = 'PHONE_EDIT_FAILURE';
 export const LOAD_PROGRESS = 'LOAD_PROGRESS';
 export const LOAD_SUCCESS = 'LOAD_SUCCESS';
 export const LOAD_FAILURE = 'LOAD_FAILURE';
+
+//Settings
+export const SET_FONT_SIZE = 'SET_FONT_SIZE';

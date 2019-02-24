@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-const { width, height } = Dimensions.get('window');
-
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   textStyle: {
     color: '#000',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     textAlign: 'left',
     alignSelf: 'stretch',
   },
@@ -72,13 +72,13 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
   },
   smallTitle: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   mediumTitle: {
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
   },
   largeTitle: {
-    fontSize: 20,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   buttonClear_box: {
     marginTop: 20,
@@ -89,6 +89,7 @@ export const styles = StyleSheet.create({
     color: '#fff',
   },
   buttonClear_text: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#fff',
   },
   textRam: {
@@ -100,17 +101,17 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   textRam_title: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#333',
   },
   textRam_number: {
     paddingLeft: 10,
     color: '#ff003c',
-    fontSize: 20,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
   },
   textRam_size: {
     color: '#ff003c',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   textRam_description: {
     flexDirection: 'row',

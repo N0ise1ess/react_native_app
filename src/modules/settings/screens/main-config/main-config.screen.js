@@ -2,11 +2,13 @@ import { Button, Container, Label, ListItem } from 'native-base';
 import React, { Component } from 'react';
 import { AsyncStorage, Text, View } from 'react-native';
 import Slider from 'react-native-slider';
-
+import { connect } from 'react-redux';
+import * as actions from '../../../../actions/settingsAction';
 import { ButtonBack } from '../../../shared/components';
 import { styles } from './styles';
 
-export class MainConfigScreen extends Component {
+class Settings extends Component {
+
   static navigationOptions = ({ navigation }) => ({
     title: 'Основные',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
@@ -14,10 +16,16 @@ export class MainConfigScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      styles: styles(props.fontSize),
+    };
   }
 
   componentDidMount() {}
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
 
   _retrieveData = async () => {
     try {
@@ -34,6 +42,7 @@ export class MainConfigScreen extends Component {
   };
 
   render() {
+    const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <ListItem button style={styles.listItemStyle}>
@@ -48,12 +57,15 @@ export class MainConfigScreen extends Component {
             <Slider
               style={styles.slider}
               thumbStyle={styles.thumbSlider}
-              maximumValue={2}
-              minimumValue={0}
+              // value=
+              maximumValue={1}
+              minimumValue={-1}
+              value={this.props.fontSize}
               step={1}
               thumbTintColor={'#0060f7'}
               minimumTrackTintColor={'#26518f'}
               maximumTrackTintColor={'#26518f'}
+              onSlidingComplete={(e) => this.props.setFontSize(e)}
             />
             <View style={styles.sliderCircleTwo} />
           </View>
@@ -77,3 +89,5 @@ export class MainConfigScreen extends Component {
     );
   }
 }
+
+export const MainConfigScreen = connect((state) => state.settings, actions)(Settings);
