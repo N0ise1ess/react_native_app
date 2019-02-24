@@ -19,6 +19,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       currentTab: 0,
+      groupName : ''
     };
   }
 
@@ -26,6 +27,13 @@ class InnerComponent extends Component {
     const { token } = this.props;
     this.props.getFinancePayment(token);
     this.props.getFinanceScholarships(token);
+
+    const { role } = this.props
+    role.forEach((localRole, index) => {
+      if (localRole.type === 'STUDENT') {
+        this.setState({groupName : role[index].details[0].group.name})
+      }
+    })
   }
 
   _upperCase(word) {
@@ -36,7 +44,7 @@ class InnerComponent extends Component {
     const { userStatus, navigation, finances, role } = this.props;
     const { currentTab } = this.state;
     const debt = finances && finances[0] ? finances[0].debt : 0;
-    const groupName = role[0].details[0].group.name;
+    const { groupName } = this.state;
 
     // TODO check what field holds amount of finances[0].charges ?
 
@@ -123,6 +131,7 @@ class InnerComponent extends Component {
 
     return (
       <Container style={styles.container}>
+        {groupName.length > 0 ?
         <View style={styles.groupSection}>
           <TouchableOpacity onPress={() => this.switchTab('left')}>
             <CustomIcon name='arrow_left' style={styles.iconLeft}/>
@@ -131,7 +140,7 @@ class InnerComponent extends Component {
           <TouchableOpacity onPress={() => this.switchTab('right')}>
             <CustomIcon name='arrow_right' style={styles.iconRight}/>
           </TouchableOpacity>
-        </View>
+        </View> : null }
 
         <Tabs
           page={this.state.currentTab}
