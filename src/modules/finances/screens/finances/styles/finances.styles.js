@@ -90,7 +90,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   paymentAmount: {
     fontFamily: 'MyriadPro-Light',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
   },
   paymentButton: {
     width: '60%',
@@ -117,5 +117,10 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: 23,
     color: '#1784d3',
     marginRight: 5
+  },
+  debtText: {
+    fontWeight: 'bold',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    color: 'white'
   }
 });

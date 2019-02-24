@@ -8,6 +8,8 @@ import { getFinancePayment, getFinanceScholarships } from '../../../../actions/f
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {CustomIcon} from "../../../shared/components/custom-icon";
+import {getSizeFonts} from "../../../shared/functions/styles";
+import * as settingsFonts from "../../../../constants/styles";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -37,8 +39,8 @@ class InnerComponent extends Component {
     })
   }
 
-  _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+  _upperCase(word, style = styles.tabTitleStyle) {
+    return <Text style={style}>{word.toUpperCase()}</Text>;
   }
 
   componentDidUpdate(props) {
@@ -46,9 +48,9 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, finances, role } = this.props;
+    const { userStatus, navigation, finances } = this.props;
     const { currentTab, styles } = this.state;
-    const debt = finances && finances[0] ? finances[0].debt : 0;
+    const debt = finances && finances[0] ? finances[0].debt : 3350;
     const { groupName } = this.state;
 
     // TODO check what field holds amount of finances[0].charges ?
@@ -70,7 +72,8 @@ class InnerComponent extends Component {
               <Spinner color="blue" />
             ) : (
               <List
-                dataArray={finances[0] && finances[0].charges}
+                // dataArray={finances[0] && finances[0].charges}
+                dataArray={[{amount: 600},{amount: 2750}]}
                 renderRow={(item, sectionId, index) => (
                   <View style={[styles.listStyle, index === '0' ? {marginTop: 0} : {}]}>
                     <View>
@@ -88,7 +91,7 @@ class InnerComponent extends Component {
             )}
             {debt > 0 && currentTab === 0 ?
             <View style={[styles.listStyle, {backgroundColor: '#e91b47', height : 50}]}>
-              <Text style={{ fontWeight: 'bold', fontSize: 14, color: 'white' }}>К оплате</Text>
+              <Text style={styles.debtText}>К оплате</Text>
               <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} ₽</Text>
             </View> : null }
           </Content>
@@ -160,7 +163,8 @@ class InnerComponent extends Component {
         <View style={styles.paymentButton}>
           <Button onPress={this.openSberbank}
                   full rounded style={{backgroundColor: '#e91b47'}}>
-            <Text style={{fontSize: 12}}>{this._upperCase("оплата в сбербанк-онлайн")}</Text>
+            {this._upperCase("оплата в сбербанк-онлайн",
+              {fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize), color: 'white'})}
           </Button>
         </View> : null }
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
