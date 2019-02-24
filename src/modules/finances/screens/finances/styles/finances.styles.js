@@ -44,6 +44,8 @@ export const styles = (fontSize) => StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     backgroundColor: '#163D7D',
+    justifyContent:'center',
+    alignItems:'center'
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
