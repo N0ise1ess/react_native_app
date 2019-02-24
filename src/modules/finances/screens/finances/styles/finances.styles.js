@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
   },
   groupSection: {
     alignSelf: 'center',
-    marginTop: 5,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
