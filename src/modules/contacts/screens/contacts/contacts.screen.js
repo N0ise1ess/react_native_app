@@ -2,9 +2,8 @@ import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import {CustomIcon} from '../../../shared/components/custom-icon';
 import { getDepartments } from '../../../../actions/contactsAction';
-import { img_campus_dorm, img_university_section } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
@@ -12,13 +11,13 @@ const itemList = [
   {
     title: 'Подразделения',
     text: 'Информация о структуре Университета',
-    image: img_university_section,
+    image: 'university',
     route: 'Divisions',
   },
   {
     title: 'Корпуса и общежития',
     text: 'Информация о корпусах и общежитиях',
-    image: img_campus_dorm,
+    image: 'hostel',
     route: 'BuildingDorms',
   },
 ];
@@ -58,7 +57,18 @@ class InnerComponent extends Component {
                 onPress={() => navigation.navigate(item.route ? item.route : '')}
                 style={styles.listItemStyle}
               >
-                <Image source={item.image} style={styles.iconStyle} />
+                {/* <Image source={item.image} style={styles.iconStyle} /> */}
+                <CustomIcon
+                  style={{
+                    width: 32,
+                    height: 32,
+                    marginLeft: 15,
+                    marginRight: 15,
+                    fontSize: 30,
+                    color: '#163D7D',
+                  }}
+                  name={item.image}
+                />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.title}</Text>
                   <Text style={styles.textStyle}>{item.text}</Text>
@@ -76,6 +86,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

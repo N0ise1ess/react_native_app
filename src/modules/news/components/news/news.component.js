@@ -32,7 +32,7 @@ export const News = props => {
   const textWithoutEmptyLines = cleanText.replace(/\r?\n|\r/, '');
   const cleanTitle = props.title && props.title.replace(/<\/?[^>]+(>|$)/g, '');
   const titleWithoutEmptyLines = cleanTitle.replace(/\r?\n|\r/, '');
-  const style = styles(props.fontSize)//styles(props.fontSize);
+  const style = styles(props.fontSize);
   return (
     <TouchableOpacity style={style.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
@@ -62,7 +62,7 @@ export const News = props => {
                   {textWithoutEmptyLines}
                 </Text>
               ) : (
-                <HTML {...htmlProps} html={props.description} imagesMaxWidth={width} />
+                <HTML baseFontStyle={style.textStyle} allowFontScaling {...htmlProps} html={props.description} imagesMaxWidth={width} />
               ))}
           </Body>
         </CardItem>
