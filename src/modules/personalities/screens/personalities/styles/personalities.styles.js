@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -31,11 +33,11 @@ export const styles = StyleSheet.create({
   },
   titleStyle: {
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     alignSelf: 'flex-start',
   },
   textStyle: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     color: '#000',
     alignSelf: 'flex-start',
@@ -48,7 +50,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   searchInput: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   searchIcon: {
     color: '#4D6270',

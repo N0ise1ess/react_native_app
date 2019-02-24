@@ -10,6 +10,9 @@ import { News } from '../../components';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
+import * as settingsFonts from '../../../../constants/styles';
+import {getSizeFonts} from '../../../shared/functions/styles';
+
 const { height: NAVBAR_HEIGHT } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
@@ -27,6 +30,7 @@ class InnerComponent extends Component {
       slider: props.slider,
       isSliderShown: true,
       currentTab: 0,
+      styles: styles(props.fontSize),
     };
     this.scroll = new RN.Animated.Value(0);
     this.headerY = RN.Animated.multiply(RN.Animated.diffClamp(this.scroll, 0, NAVBAR_HEIGHT / 5), -1);
@@ -40,6 +44,7 @@ class InnerComponent extends Component {
   renderNews = news => {
     return news.map((item, index) => (
       <News
+        fontSize={this.props.fontSize}
         key={index}
         title={item.title}
         time={item.time}
@@ -62,6 +67,7 @@ class InnerComponent extends Component {
   renderUpdates = updates => {
     return updates.map((item, index) => (
       <News
+        fontSize={this.props.fontSize}
         newsType="advertisement"
         key={index}
         title={item.title}
@@ -83,7 +89,7 @@ class InnerComponent extends Component {
   renderEvents = events => {
     return events.map((item, index) => (
       <RN.View key={index}>
-        <NB.Text style={{ alignSelf: 'center', fontSize: 14, color: '#2F528B', paddingTop: 10 }}>
+        <NB.Text style={styles.textEvent}>
           {m(item.time)
             .format('LL')
             .replace('г.', '')}
@@ -93,7 +99,7 @@ class InnerComponent extends Component {
     ));
   };
 
-  renderSlider = slider => {
+  renderSlider = (slider, styles) => {
     return (
       <ImageSlider
         style={styles.customSlide}
@@ -148,13 +154,18 @@ class InnerComponent extends Component {
   };
 
   _upperCase(word) {
-    return <NB.Text style={styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
+    return <NB.Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
     const { isSliderShown, currentTab } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
+    const {styles} = this.state;
 
     return (
       <NB.Container>
@@ -170,14 +181,14 @@ class InnerComponent extends Component {
             },
           ]}
         >
-          {isSliderShown && (slider ? this.renderSlider(slider) : this.renderSlider(imagesOnLoading))}
+          {isSliderShown && (slider ? this.renderSlider(slider, styles) : this.renderSlider(imagesOnLoading, styles))}
         </RN.Animated.View>
         <RN.Animated.ScrollView
           contentContainerStyle={{ paddingTop: NAVBAR_HEIGHT / 5 }}
           scrollEventThrottle={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{ zIndex: 0, backgroundColor: '#CED8DA' }}
+          style={{fontSize:getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize), zIndex: 0, backgroundColor: '#CED8DA' }}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
           })}
@@ -188,6 +199,7 @@ class InnerComponent extends Component {
               <RN.Animated.View
                 style={[
                   {
+                    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
                     transform: [{ translateY: tabY }],
                     zIndex: 1,
                     width: '100%',
@@ -256,6 +268,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.newsReducer,
+    ...state.settings,
   };
 };
 

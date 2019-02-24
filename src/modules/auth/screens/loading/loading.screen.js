@@ -10,6 +10,9 @@ import {setFontSize} from '../../../../actions/settingsAction';
 class InnerComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      styles: styles(props.fontSize),
+    };
   }
 
   componentWillReceiveProps(props) {
@@ -33,7 +36,12 @@ class InnerComponent extends React.Component {
     }
   };
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
+
   render() {
+    const {styles} = this.state;
     return (
       <View style={styles.container}>
         <Image source={img_logo_white} resizeMode="contain" style={styles.image} />
@@ -57,6 +65,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.loadingScreen,
+    ...state.settings,
   };
 };
 

@@ -13,7 +13,12 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       currentTab: 0,
+      styles: styles(props.fontSize),
     };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -33,7 +38,7 @@ class InnerComponent extends Component {
 
   renderLibraryCard = () => {
     const { firstName, lastName, secondName, role, id, qrcodeData } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
     const studentIndex = role.findIndex(item => item.type === 'STUDENT');
     return (
       <Tab
@@ -166,7 +171,7 @@ class InnerComponent extends Component {
       <Container style={styles.container}>
         {userStatus === 'guest' ? (
           <View style={styles.container}>
-            <Text>Вы гость, для вас нет информации</Text>
+            <Text style={styles.text}>Вы гость, для вас нет информации</Text>
           </View>
         ) : (
           <Tabs
@@ -187,6 +192,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.libraryReducer,
+    ...state.settings,
   };
 };
 

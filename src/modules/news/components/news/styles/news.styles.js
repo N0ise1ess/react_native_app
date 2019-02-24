@@ -1,8 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
 const { width, height } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   cardItem: {
     marginBottom: 0,
     paddingBottom: 0,
@@ -27,10 +29,10 @@ export const styles = StyleSheet.create({
   },
   timeStyle: {
     color: '#2F528B',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '400',
   },
   textStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
 });

@@ -2,18 +2,24 @@ import { Text } from 'native-base';
 import React, { Component, Fragment } from 'react';
 import { Image, KeyboardAvoidingView, Linking, StatusBar, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-
 import { img_logo_notext } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
+import { connect } from 'react-redux';
+import * as actions from '../../../../actions/settingsAction';
 
-export class AboutScreen extends Component {
+class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
       values: {},
+      styles: styles(props.fontSize),
     };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -23,6 +29,7 @@ export class AboutScreen extends Component {
 
   render() {
     const { authLoading, errorMessage, userStatus, navigation } = this.props;
+    const {styles} = this.state;
     return (
       <MainView>
         <StatusBar />
@@ -49,3 +56,5 @@ export class AboutScreen extends Component {
     );
   }
 }
+
+export const AboutScreen = connect((state) => state.settings, actions)(About);

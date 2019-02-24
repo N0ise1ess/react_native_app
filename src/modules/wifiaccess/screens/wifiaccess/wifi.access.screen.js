@@ -6,6 +6,8 @@ import {ButtonBack} from "../../../shared/components/button-back";
 import {styles} from "./styles";
 import {FooterSection} from "../../../shared/components/footer";
 import {CustomIcon} from "../../../shared/components/custom-icon";
+import * as settingsFonts from '../../../../constants/styles';
+import {getSizeFonts} from '../../../shared/functions/styles';
 
 
 class InnerComponent extends Component {
@@ -13,7 +15,7 @@ class InnerComponent extends Component {
     headerTitleStyle: {
       paddingLeft: 0,
       marginLeft: 0,
-      fontSize: 16,
+      // fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, this.props.fontSize),
       fontWeight: 'normal',
     },
     title: 'Доступ к Wi-Fi',
@@ -24,8 +26,13 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       selected: 'SSTU-main',
-      wifiPass: ""
+      wifiPass: "",
+      styles: styles(props.fontSize),
     };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   renderPicker = () => {
@@ -54,6 +61,7 @@ class InnerComponent extends Component {
   render() {
     const {userStatus, navigation, token} = this.props;
     let wifiPassIsPresent = this.state.wifiPass.length > 0;
+    const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <Content>
@@ -79,7 +87,7 @@ class InnerComponent extends Component {
               <Button onPress={this.generatePassword}
                       disabled={wifiPassIsPresent}
                       full rounded style={!wifiPassIsPresent ? styles.activeButtonStyle : styles.inactiveButtonStyle}>
-                <Text style={{fontSize: 12}}>Сгенерировать пароль</Text>
+                <Text style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Сгенерировать пароль</Text>
               </Button>
             </View>
             <View style={styles.dataSection}>
@@ -93,11 +101,11 @@ class InnerComponent extends Component {
                 <View style={styles.dummy}/>
                 <View style={styles.card}>
                   <View style={styles.cardPassText}>
-                    <Text style={{color: 'grey', fontSize: 12}}>Ваш пароль:</Text>
-                    <Text style={{color: 'grey', fontSize: 25}}>{this.state.wifiPass}</Text>
+                    <Text style={{color: 'grey', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Ваш пароль:</Text>
+                    <Text style={{color: 'grey', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>{this.state.wifiPass}</Text>
                   </View>
                   <Button onPress={this.copyPass} full rounded style={styles.copyPassBtn}>
-                    <Text style={{fontSize: 12}}>Скопировать пароль</Text>
+                    <Text style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Скопировать пароль</Text>
                   </Button>
                 </View>
               </View> : null}
@@ -131,6 +139,7 @@ class InnerComponent extends Component {
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.settings,
   };
 };
 

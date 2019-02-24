@@ -18,6 +18,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       currentTab: 0,
+      styles: styles(props.fontSize),
     };
   }
 
@@ -31,9 +32,13 @@ class InnerComponent extends Component {
     return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  }
+
   render() {
     const { userStatus, navigation, finances } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
     const renderPayment = () => {
       const { finances } = this.props;
       const { currentTab } = this.state;
@@ -147,6 +152,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     finances: state.financeReducer,
+    ...state.settings,
   };
 };
 

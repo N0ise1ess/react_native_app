@@ -4,7 +4,7 @@ import { Card, CardItem, Text, Body } from 'native-base';
 import m from 'moment/min/moment-with-locales';
 import HTML from 'react-native-render-html';
 
-import { styles } from './styles';
+import { styles } from './styles/news.styles'
 
 const { width, height } = Dimensions.get('window');
 
@@ -32,13 +32,14 @@ export const News = props => {
   const textWithoutEmptyLines = cleanText.replace(/\r?\n|\r/, '');
   const cleanTitle = props.title && props.title.replace(/<\/?[^>]+(>|$)/g, '');
   const titleWithoutEmptyLines = cleanTitle.replace(/\r?\n|\r/, '');
+  const style = styles(props.fontSize)//styles(props.fontSize);
   return (
-    <TouchableOpacity style={styles.cardItem} disabled={!props.onPress} onPress={props.onPress}>
+    <TouchableOpacity style={style.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
-        {props.image && <Image style={styles.imageStyle} source={{ uri: `data:image/png;base64,${props.image}` }} />}
+        {props.image && <Image style={style.imageStyle} source={{ uri: `data:image/png;base64,${props.image}` }} />}
         {props.time && (
-          <CardItem style={styles.sectionTime}>
-            <Text style={styles.timeStyle}>
+          <CardItem style={style.sectionTime}>
+            <Text style={style.timeStyle}>
               {props.time &&
                 m(props.time)
                   .format('LL')
@@ -46,18 +47,18 @@ export const News = props => {
             </Text>
           </CardItem>
         )}
-        <CardItem header style={styles.sectionTitle}>
+        <CardItem header style={style.sectionTitle}>
           {props.newsType === 'advertisement' ? (
-            <Text style={styles.titleStyle}>{titleWithoutEmptyLines}</Text>
+            <Text style={style.titleStyle}>{titleWithoutEmptyLines}</Text>
           ) : (
-            <Text style={styles.titleStyle}>{props.title && props.title}</Text>
+            <Text style={style.titleStyle}>{props.title && props.title}</Text>
           )}
         </CardItem>
-        <CardItem style={styles.sectionText}>
+        <CardItem style={style.sectionText}>
           <Body>
             {props.description &&
               (props.isTruncate ? (
-                <Text style={styles.textStyle} numberOfLines={3}>
+                <Text style={style.textStyle} numberOfLines={3}>
                   {textWithoutEmptyLines}
                 </Text>
               ) : (

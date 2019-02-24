@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
@@ -33,15 +35,15 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   label: {
-    fontSize: 10,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingTop: 12,
   },
   textStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
   },
   dataStyle: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     paddingTop: 5,
   },
   dataSection: {
@@ -55,7 +57,7 @@ export const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginBottom: 5,
   },
   info: {

@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
@@ -54,7 +56,7 @@ export const styles = StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
   tabSectionStyle: {
@@ -77,14 +79,14 @@ export const styles = StyleSheet.create({
   },
   noDataTextStyle: {
     color: 'red',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   deadline: {
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
   },
   paymentAmount: {
     fontFamily: 'MyriadPro-Light',
-    fontSize: 22,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
 });

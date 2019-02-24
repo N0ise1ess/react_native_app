@@ -89,7 +89,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#fff',
   },
   buttonClear_text: {
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
   },
   textRam: {

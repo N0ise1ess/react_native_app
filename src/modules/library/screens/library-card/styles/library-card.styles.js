@@ -1,9 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
     flex: 1,
+  },
+  text: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   tabHeader: {
     paddingBottom: 20, 
@@ -11,13 +16,13 @@ export const styles = StyleSheet.create({
     height: 80,
   },
   label: {
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '300',
     marginTop: 10,
     marginBottom: 3,
   },
   dataText: {
-    fontSize: 16,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     fontWeight: 'bold',
   },
   listItemStyle: {
@@ -41,28 +46,29 @@ export const styles = StyleSheet.create({
   },
   textStyle: {
     color: '#163D7D',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   bookTitle: {
     fontWeight: 'bold',
-    fontSize: 13,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     lineHeight: 18,
     paddingRight: 10,
   },
   bookAuthor: {
-    fontSize: 13,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 5,
     paddingLeft: 22,
   },
   issueDate: {
-    fontSize: 13,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 15,
     paddingBottom: 5,
     paddingLeft: 22,
   },
   returnStyle: {
-    fontSize: 13,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingLeft: 7,
     fontWeight: '300',
   },
@@ -93,7 +99,7 @@ export const styles = StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
   tabSectionStyle: {
@@ -113,10 +119,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#CED8DA',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   noDataTextStyle: {
     color: 'red',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   qrcodeSection: {
     flex: 1,
