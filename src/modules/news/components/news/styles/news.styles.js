@@ -29,10 +29,12 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   timeStyle: {
     color: '#2F528B',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '400',
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
 });

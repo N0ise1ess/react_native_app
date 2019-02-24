@@ -8,12 +8,14 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
   },
   label: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '300',
     marginTop: 10,
     marginBottom: 3,
   },
   dataText: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     fontWeight: 'bold',
   },
@@ -44,17 +46,20 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   bookTitle: {
     fontWeight: 'bold',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     lineHeight: 18,
     paddingRight: 10,
   },
   bookAuthor: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 5,
     paddingLeft: 22,
   },
   issueDate: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 15,
@@ -62,6 +67,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingLeft: 22,
   },
   returnStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingLeft: 7,
     fontWeight: '300',
@@ -93,6 +99,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
@@ -116,6 +123,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   noDataTextStyle: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   qrcodeSection: {

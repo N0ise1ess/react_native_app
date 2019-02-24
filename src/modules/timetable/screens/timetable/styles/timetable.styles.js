@@ -13,6 +13,7 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#fff',
   },
   searchInput: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   searchIcon: {
@@ -64,6 +65,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
@@ -87,16 +89,20 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   noDataTextStyle: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   time: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   title: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
   },
   text: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     marginTop: 7,
@@ -109,6 +115,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   errorText: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     paddingTop: 15,
     paddingBottom: 15,

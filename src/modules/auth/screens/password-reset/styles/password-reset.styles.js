@@ -37,10 +37,12 @@ export const styles = (fontSize) => StyleSheet.create({
     marginTop: 25,
   },
   inputIcon: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#163D7D',
   },
   inputStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
   },
   imageStyle: {
@@ -54,10 +56,12 @@ export const styles = (fontSize) => StyleSheet.create({
   linkedTextStyle: {
     color: '#163D7D',
     textAlign: 'center',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     paddingTop: 15,
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: '#747A7B',
   },
