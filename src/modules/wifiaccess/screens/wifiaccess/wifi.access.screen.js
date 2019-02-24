@@ -37,13 +37,13 @@ class InnerComponent extends Component {
 
   renderPicker = () => {
     return (
-      <View style={styles.picker}>
-        <CustomIcon name={'wifi'} style={styles.pickerIcon}/>
+      <View style={this.state.styles.picker}>
+        <CustomIcon name={'wifi'} style={this.state.styles.pickerIcon}/>
         <Picker
           mode="dropdown"
           iosHeader="Wi-fi"
           iosIcon={<Icon name="arrow-dropdown-circle" style={{color: "#007aff", fontSize: 25}}/>}
-          style={styles.pickerShadow}
+          style={this.state.styles.pickerShadow}
           selectedValue={this.state.selected}
           onValueChange={this.onValueChange}
         >
