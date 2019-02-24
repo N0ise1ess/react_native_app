@@ -92,5 +92,26 @@ export const styles = StyleSheet.create({
     width: '60%',
     alignSelf: 'center',
     marginBottom: 15
+  },
+  groupSection: {
+    alignSelf: 'center',
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  iconLeft: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginLeft: 5
+  },
+  iconRight: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginRight: 5
   }
 });

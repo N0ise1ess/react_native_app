@@ -1,12 +1,13 @@
 import moment from 'moment';
 import {Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text} from 'native-base';
 import React, { Component } from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getFinancePayment, getFinanceScholarships } from '../../../../actions/financeAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
+import {CustomIcon} from "../../../shared/components/custom-icon";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -32,9 +33,13 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, finances } = this.props;
+    const { userStatus, navigation, finances, role } = this.props;
     const { currentTab } = this.state;
     const debt = finances && finances[0] ? finances[0].debt : 0;
+    const groupName = role[0].details[0].group.name;
+
+    // TODO check what field holds amount of finances[0].charges ?
+
     const renderPayment = () => {
       const { currentTab } = this.state;
 
@@ -54,10 +59,10 @@ class InnerComponent extends Component {
             ) : (
               <List
                 dataArray={finances[0] && finances[0].charges}
-                renderRow={item => (
-                  <View style={styles.listStyle}>
+                renderRow={(item, sectionId, index) => (
+                  <View style={[styles.listStyle, index === '0' ? {marginTop: 0} : {}]}>
                     <View>
-                      <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Обучение, {this.getSemesterNumber('29-10-18')}</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Обучение, {this.getSemesterNumber('29-10-18')} семестр</Text>
                       <Text style={styles.deadline}>
                         Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
@@ -118,7 +123,19 @@ class InnerComponent extends Component {
 
     return (
       <Container style={styles.container}>
+        <View style={styles.groupSection}>
+          <TouchableOpacity onPress={() => this.switchTab('left')}>
+            <CustomIcon name='arrow_left' style={styles.iconLeft}/>
+          </TouchableOpacity>
+          <Text style={{color: "#1784d3"}}>Группа {groupName}</Text>
+          <TouchableOpacity onPress={() => this.switchTab('right')}>
+            <CustomIcon name='arrow_right' style={styles.iconRight}/>
+          </TouchableOpacity>
+        </View>
+
         <Tabs
+          page={this.state.currentTab}
+          tabContainerStyle={{elevation : 0}}
           onChangeTab={({ i }) => this.setState({ currentTab: i })}
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
         >
@@ -140,7 +157,17 @@ class InnerComponent extends Component {
 
   openSberbank = () => {
     Linking.openURL('https://online.sberbank.ru/')
-  }
+  };
+
+  switchTab(direction) {
+    const localCurrentTab = this.state.currentTab;
+    if (direction === 'left') {
+      this.setState({currentTab : localCurrentTab === 1 ? 0 : 1})
+    }
+    if (direction === 'right') {
+      this.setState({currentTab : localCurrentTab === 0 ? 1 : 0})
+    }
+  };
 
   formatDate(dateString) {
     return moment.utc(dateString, 'YYYY-MM-DD').format('DD.MM.YYYY');
