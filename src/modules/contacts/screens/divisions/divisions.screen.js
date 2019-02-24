@@ -40,6 +40,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      searchedDepartments: []
     };
   }
 
@@ -50,6 +51,7 @@ class InnerComponent extends Component {
   render() {
     const {userStatus, navigation, token, departments, departmentsLoading} = this.props;
     const {styles} = this.state;
+    const { searchedDepartments } = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
@@ -68,11 +70,11 @@ class InnerComponent extends Component {
           {!departmentsLoading ?
             <List
               style={styles.listStyle}
-              dataArray={departments.length < 0 ? itemList : departments}
+              dataArray={searchedDepartments.length > 0 ? searchedDepartments : departments}
               renderRow={item => (
                 <ListItem
                   button
-                  onPress={() => navigation.navigate(item.route ? item.route : '')}
+                  onPress={() => this.getIntoNextDepartments(item.departments)}
                   style={styles.listItemStyle}
                 >
                   <Text style={styles.titleStyle}>{item.name}</Text>
@@ -87,6 +89,14 @@ class InnerComponent extends Component {
     )
 
   }
+
+  getIntoNextDepartments(nextDepartments) {
+    if (nextDepartments !== null && nextDepartments.length > 0) {
+      this.setState({ searchedDepartments : nextDepartments})
+    } else {
+      alert('Screen for detailed contacts info is being developed...')
+    }
+  };
 
   onHandleSubmit = () => {
     const {searchedText} = this.state;
