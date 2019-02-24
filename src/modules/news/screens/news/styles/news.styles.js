@@ -9,6 +9,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   textEvent: { 
     alignSelf: 'center', 
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
     color: '#2F528B', 
     paddingTop: 10,
@@ -44,6 +45,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 0,
     borderWidth: 1,
     borderColor: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   activeTabStyle: {
@@ -59,6 +61,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(10, fontSize),
     textAlign: 'center',
   },

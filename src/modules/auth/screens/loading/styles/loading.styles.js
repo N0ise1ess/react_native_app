@@ -17,6 +17,7 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     position: 'absolute',
     bottom: '13%',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   progressBar: {

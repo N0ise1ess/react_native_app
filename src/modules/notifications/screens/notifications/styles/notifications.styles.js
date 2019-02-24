@@ -25,18 +25,21 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   dateStyle: {
     color: '#5b70a0',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     padding: 2,
     alignSelf: 'flex-start',
   },
   titleStyle: {
     color: '#000',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     padding: 2,
     paddingRight: 30,
     alignSelf: 'flex-start',
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     padding: 2,
     color: '#ADADAD',

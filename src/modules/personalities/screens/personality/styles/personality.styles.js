@@ -52,15 +52,18 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#1e1e1e',
   },
   label: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#979797',
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
     color: '#979797',
   },
   dataStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     color: '#4099F4',
@@ -72,6 +75,7 @@ export const styles = (fontSize) => StyleSheet.create({
     alignItems: 'center',
   },
   inputStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
     marginRight: 5,
@@ -82,6 +86,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   errorText: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginBottom: 5,
   },
@@ -109,10 +114,12 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#1166F6',
   },
   iconStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#fff',
   },
   departmentLabel: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     color: '#1e1e1e',

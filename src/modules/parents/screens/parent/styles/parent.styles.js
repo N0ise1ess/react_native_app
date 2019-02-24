@@ -35,14 +35,17 @@ export const styles = (fontSize) => StyleSheet.create({
     marginBottom: 5,
   },
   label: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingTop: 12,
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginTop: 5,
   },
   dataStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     paddingTop: 5,
   },
@@ -57,6 +60,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   errorText: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     marginBottom: 5,
   },

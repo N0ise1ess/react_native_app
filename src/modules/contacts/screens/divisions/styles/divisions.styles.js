@@ -30,6 +30,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   titleStyle: {
     color: '#163D7D',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     flex: 1,
     flexDirection: 'column',
@@ -45,6 +46,7 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#fff'
   },
   searchInput: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   searchIcon: {

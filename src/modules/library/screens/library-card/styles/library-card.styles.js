@@ -8,6 +8,7 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
   },
   text: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   tabHeader: {
@@ -16,12 +17,14 @@ export const styles = (fontSize) => StyleSheet.create({
     height: 80,
   },
   label: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '300',
     marginTop: 10,
     marginBottom: 3,
   },
   dataText: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     fontWeight: 'bold',
   },
@@ -46,21 +49,25 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   textStyle: {
     color: '#163D7D',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   bookTitle: {
     fontWeight: 'bold',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     lineHeight: 18,
     paddingRight: 10,
   },
   bookAuthor: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 5,
     paddingLeft: 22,
   },
   issueDate: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     paddingTop: 15,
@@ -68,6 +75,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingLeft: 22,
   },
   returnStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingLeft: 7,
     fontWeight: '300',
@@ -99,6 +107,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
@@ -119,10 +128,12 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#CED8DA',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   noDataTextStyle: {
     color: 'red',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   qrcodeSection: {

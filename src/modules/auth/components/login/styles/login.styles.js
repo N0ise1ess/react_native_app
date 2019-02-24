@@ -8,11 +8,11 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     paddingLeft: 10, 
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize), 
     color: 'silver', 
-    fontFamily: 'MyriadPro-Regular' 
+    fontFamily: 'MyriadPro-Regular',
   },
   label: {
     fontSize: 10,
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
     paddingTop: height < 550 
       ? getSizeFonts(settingsFonts.FONT_SIZE_10, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
@@ -22,7 +22,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     fontSize: height < 750 
       ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
     padding: 0,
     height: 34,
   },
@@ -35,7 +35,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   inputIcon: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
     color: '#163D7D',
     paddingTop: 0,
     paddingRight: 0,
@@ -51,7 +51,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     color: 'red',
     height: 40,
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
     marginTop: 10,
     marginRight: 10,
   },
@@ -65,16 +65,16 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     fontSize: width > 360 
       ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
   },
   textStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
     color: '#747A7B',
   },
   textStyle__email: {
     color: '#0067f6',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
-    fontFamily: 'MyriadPro-Light',
+    fontFamily: 'MyriadPro-Regular',
   },
 });
