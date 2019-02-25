@@ -37,7 +37,7 @@ class InnerComponent extends Component {
   }
 
   componentWillMount() {
-    this.props.getAllNews();
+    // this.props.getAllNews();
     m.locale('ru');
   }
 
@@ -137,12 +137,21 @@ class InnerComponent extends Component {
             {slider.map((image, index) => {
               return (
                 <RN.View key={index} style={styles.button}>
-                  <NB.Icon
+                  {/* <NB.Icon
                     onPress={() => move(index)}
                     type="Octicons"
                     name="primitive-dot"
                     style={[{ color: '#163D7D', fontSize: 18 }, position === index && styles.buttonSelected]}
-                  />
+                  /> */}
+                  <RN.View style={[
+                    {backgroundColor: '#163D7D',
+                     width: 10, 
+                     height: 10, 
+                     borderRadius: 20, 
+                     marginLeft: 5, 
+                     marginRight: 5,}, 
+                    position === index && styles.buttonSelected]
+                  }/>
                 </RN.View>
               );
             })}

@@ -31,7 +31,7 @@ export const styles = (fontSize) => StyleSheet.create({
     height: height / 5,
   },
   buttonSelected: {
-    color: 'red',
+    backgroundColor: 'red',
   },
   buttonsPagination: {
     borderRadius: 30,
