@@ -33,15 +33,22 @@ class InnerComponent extends Component {
       fontWeight: 'normal',
     },
     title: 'Подразделения',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+    headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack",() => {})}/>,
   });
 
   constructor(props) {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      searchedDepartments: []
+      searchedDepartments: [],
+      steps: {
+        counter: 0
+      }
     };
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({customGoBack:this.handleBackArrow});
   }
 
   componentDidUpdate(props) {
@@ -91,10 +98,28 @@ class InnerComponent extends Component {
   }
 
   getIntoNextDepartments(nextDepartments) {
+    let steps = {...this.state.steps}
     if (nextDepartments !== null && nextDepartments.length > 0) {
-      this.setState({ searchedDepartments : nextDepartments})
+      if (!steps[`step${steps.counter}`]) {
+        steps[`step${steps.counter}`] = nextDepartments;
+      }
+      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
+      steps.counter++;
+      this.setState({steps})
     } else {
       alert('Screen for detailed contacts info is being developed...')
+    }
+  };
+
+  handleBackArrow = () => {
+    let steps = {...this.state.steps}
+    if (steps[`step${steps.counter}`]) {
+      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
+      delete steps['step' + steps.counter];
+      steps.counter--
+      this.setState({steps})
+    } else {
+      this.props.navigation.goBack();
     }
   };
 
