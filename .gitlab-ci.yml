@@ -23,7 +23,7 @@ before_script:
   - cd android
   - chmod +x ./gradlew
   - latest=`date '+%Y%m%d-%H%M%S'`
-  - today=`date '+%d.%m.%Y 00:00'`
+  - today=`date -d'monday-7 days' '+%d.%m.%Y 00:00'`
 
 stages:
   # - test
