@@ -113,10 +113,13 @@ class InnerComponent extends Component {
 
   handleBackArrow = () => {
     let steps = {...this.state.steps}
-    if (steps[`step${steps.counter}`]) {
-      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
-      delete steps['step' + steps.counter];
-      steps.counter--
+    if (steps.counter - 1 === 0) {
+      this.setState({ searchedDepartments : this.props.departments});
+      return
+    }
+    if (steps[`step${steps.counter - 1}`]) {
+      this.setState({ searchedDepartments : steps[`step${steps.counter - 1}`]});
+      delete steps[`step${steps.counter - 1}`];
       this.setState({steps})
     } else {
       this.props.navigation.goBack();
