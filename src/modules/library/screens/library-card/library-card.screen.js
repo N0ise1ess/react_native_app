@@ -17,6 +17,10 @@ class InnerComponent extends Component {
     };
   }
 
+  componentWillMount() {
+    moment.locale('ru');
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
@@ -103,8 +107,9 @@ class InnerComponent extends Component {
   };
 
   formattedDate = date => {
-    const newDate = moment(date, 'MM-DD-YYYY HH:mm:ss')._i;
-    return moment(newDate).format('DD.MM.YYYY');
+    console.log('date', date)
+    // const newDate = moment(date, 'MM-DD-YYYY HH:mm:ss')._i;
+    return moment(date).format('DD.MM.YYYY');
   };
 
   renderLibraryBook = () => {
@@ -148,7 +153,7 @@ class InnerComponent extends Component {
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
                   <Text style={styles.issueDate}>
-                    Выдано {item.dateTo ? this.formattedDate(item.dateTo) : <Spinner />}
+                    Выдано {item.dateTo ? item.dateTo : <Spinner />}
                   </Text>
                   {item.returned ? (
                     <View style={styles.listItemStyle}>
@@ -157,7 +162,7 @@ class InnerComponent extends Component {
                     </View>
                   ) : (
                     <Text style={[styles.returnStyle, item.isDelayes && { color: 'red' }, { paddingLeft: 22 }]}>
-                      {item.dateFrom ? `Вернуть до ${this.formattedDate(item.dateFrom)}` : <Spinner />}
+                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner />}
                     </Text>
                   )}
                 </View>
