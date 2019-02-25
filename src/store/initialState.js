@@ -9,7 +9,10 @@ export default {
     userStatus: 'guest',
   },
   libraryReducer: {},
-  newsReducer: {},
+  newsReducer: {
+    newsPage: 1,
+    isLoading: false,
+  },
   financeReducer: {
     payments: [],
     scholarships: [],

@@ -14,6 +14,12 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#2F528B', 
     paddingTop: 10,
   },
+  textEventWhite: { 
+    alignSelf: 'center', 
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
+    color: '#fff', 
+  },
   customSlide: {
     width,
     flex: 0,
@@ -26,6 +32,12 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   buttonSelected: {
     color: 'red',
+  },
+  buttonsPagination: {
+    borderRadius: 30,
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginTop: 10,
   },
   buttons: {
     position: 'absolute',

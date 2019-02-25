@@ -5,7 +5,7 @@ import * as RN from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
 
-import { getAllNews } from '../../../../actions/newsAction';
+import { getAllNews, getNewsPagination } from '../../../../actions/newsAction';
 import { News } from '../../components';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
@@ -41,28 +41,35 @@ class InnerComponent extends Component {
     m.locale('ru');
   }
 
-  renderNews = news => {
-    return news.map((item, index) => (
-      <News
-        fontSize={this.props.fontSize}
-        key={index}
-        title={item.title}
-        time={item.time}
-        image={item.image}
-        description={item.text}
-        isTruncate={true}
-        onPress={() =>
-          this.props.navigation.navigate('NewsDetails', {
-            newsType: 'news',
-            title: item.title,
-            time: item.time,
-            image: item.image,
-            description: item.text,
-          })
-        }
+  renderNews = data => <React.Fragment>
+      <RN.FlatList
+        data={data}
+        renderItem={({item, index}) => <News
+          fontSize={this.props.fontSize}
+          key={index}
+          title={item.title}
+          time={item.time}
+          image={item.image}
+          description={item.text}
+          isTruncate={true}
+          onPress={() =>
+            this.props.navigation.navigate('NewsDetails', {
+              newsType: 'news',
+              title: item.title,
+              time: item.time,
+              image: item.image,
+              description: item.text,
+            })
+          }
+        />}
       />
-    ));
-  };
+      <RN.View style={{flexDirection: "row", justifyContent: "center"}}>
+        { this.props.isLoadingNews ? <NB.Spinner color="blue" /> :
+          <NB.Button style={this.state.styles.buttonsPagination} onPress={() => this.props.getNews(this.props.newsPage + 1)}>
+            <RN.Text style={this.state.styles.textEventWhite}>Показать еще</RN.Text>
+          </NB.Button>}
+      </RN.View>
+    </React.Fragment>
 
   renderUpdates = updates => {
     return updates.map((item, index) => (
@@ -274,6 +281,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getAllNews: () => dispatch(getAllNews()),
+  getNews: (page) => dispatch(getNewsPagination(page)),
   dispatch,
 });
 
