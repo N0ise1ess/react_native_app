@@ -5,7 +5,7 @@ import * as RN from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
 
-import { getAllNews, getNewsPagination } from '../../../../actions/newsAction';
+import { getNewsPagination } from '../../../../actions/newsAction';
 import { News } from '../../components';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
@@ -37,7 +37,6 @@ class InnerComponent extends Component {
   }
 
   componentWillMount() {
-    // this.props.getAllNews();
     m.locale('ru');
   }
 
@@ -289,7 +288,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getAllNews: () => dispatch(getAllNews()),
   getNews: (page) => dispatch(getNewsPagination(page)),
   dispatch,
 });
