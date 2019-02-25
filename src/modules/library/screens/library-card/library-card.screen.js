@@ -33,7 +33,7 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   renderLibraryCard = () => {
@@ -109,7 +109,7 @@ class InnerComponent extends Component {
 
   renderLibraryBook = () => {
     const { bookInfo } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
 
     return (
       <Tab
@@ -134,10 +134,15 @@ class InnerComponent extends Component {
               renderRow={item => (
                 <View style={styles.listStyle}>
                   <View style={styles.listItemStyle}>
-                    <Icon
-                      type="Octicons"
-                      name="primitive-dot"
-                      style={{ color: item.returned ? '#163D7D' : 'red', fontSize: 22 }}
+                    <View
+                      style={{ 
+                        backgroundColor: item.returned ? '#163D7D' : 'red', 
+                        width: 10, 
+                        height: 10, 
+                        borderRadius: 30, 
+                        marginTop: 5,
+                        marginRight: 10,
+                      }}
                     />
                     <Text style={styles.bookTitle}>{item.content.description}</Text>
                   </View>
@@ -166,7 +171,7 @@ class InnerComponent extends Component {
 
   render() {
     const { cardInfo, bookInfo, userStatus, navigation } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
     return (
       <Container style={styles.container}>
         {userStatus === 'guest' ? (
