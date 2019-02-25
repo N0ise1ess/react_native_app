@@ -36,7 +36,11 @@ build:
   script:
     - ./gradlew assembleRelease
     - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk
-    - git log --merges --first-parent develop --after="$today" --format='%cd %h %s' --date=format:"%d-%m-%Y" > ~/release/$latest-release.txt
+    - cd ..
+    - echo "Latest commits:" > ~/release/$latest-release.txt
+    - git log --merges --first-parent develop --after="$today" --format='%cd %h %s' --date=format:"%d-%m-%Y" >> ~/release/$latest-release.txt
+    - echo "Commits since last Monday:" >> ~/release/$latest-release.txt
+    - git log --merges --first-parent develop --after="date -d'monday-7 days' '+%d.%m.%Y 00:00'" --format='%cd %h %s' --date=format:"%d-%m-%Y" >> ~/release/$latest-release.txt
     - sudo cp ~/release/$latest-release.txt ~/release/$latest-app-release.apk /home/coder/uploads/files/campus
   artifacts:
     paths:
