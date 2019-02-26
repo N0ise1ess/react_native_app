@@ -57,8 +57,7 @@ class InnerComponent extends Component {
 
   render() {
     const {userStatus, navigation, token, departments, departmentsLoading} = this.props;
-    const {styles} = this.state;
-    const { searchedDepartments } = this.state;
+    const { styles, searchedDepartments } = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
