@@ -29,7 +29,7 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   componentDidUpdate(props) {
@@ -80,7 +80,7 @@ class InnerComponent extends Component {
     };
 
     const renderScholarships = () => {
-      const { currentTab } = this.state;
+      const { currentTab, styles } = this.state;
       return (
         <Tab
           heading={

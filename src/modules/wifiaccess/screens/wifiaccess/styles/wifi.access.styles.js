@@ -99,6 +99,7 @@ export const styles = (fontSize) => StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
     elevation: 2,
+    minHeight: height * 0.1
   },
   copyPassBtn: {
     flex: 1,
