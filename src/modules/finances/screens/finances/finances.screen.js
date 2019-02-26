@@ -77,7 +77,7 @@ class InnerComponent extends Component {
                 renderRow={(item, sectionId, index) => (
                   <View style={[styles.listStyle, index === '0' ? {marginTop: 0} : {}]}>
                     <View>
-                      <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Обучение, {this.getSemesterNumber('29-10-18')} семестр</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, this.props.fontSize) }}>Обучение, {this.getSemesterNumber('29-10-18')} семестр</Text>
                       <Text style={styles.deadline}>
                         Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
