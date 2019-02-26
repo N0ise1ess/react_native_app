@@ -100,7 +100,7 @@ class InnerComponent extends Component {
     };
 
     const renderScholarships = () => {
-      const { currentTab } = this.state;
+      const { currentTab, styles } = this.state;
       return (
         <Tab
           heading={

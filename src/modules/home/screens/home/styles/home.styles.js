@@ -28,7 +28,7 @@ export const styles = (fontSize) => StyleSheet.create({
     justifyContent: 'center',
   },
   buttonSelected: {
-    color: '#0E63EE',
+    backgroundColor: '#0E63EE',
   },
   headerImageStyle: {
     resizeMode: 'contain',

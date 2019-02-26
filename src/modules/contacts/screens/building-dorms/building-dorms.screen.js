@@ -2,7 +2,7 @@ import { Container, Content, Icon, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import {CustomIcon} from '../../../shared/components/custom-icon';
 import { img_campus_dorm } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
@@ -11,27 +11,27 @@ const itemList = [
   {
     title: 'Корпус 1',
     text: 'Учебный',
-    image: img_campus_dorm,
+    image: 'hostel',
   },
   {
     title: 'Корпус 2',
     text: 'Учебный',
-    image: img_campus_dorm,
+    image: 'hostel',
   },
   {
     title: 'Корпус 3',
     text: 'Учебный',
-    image: img_campus_dorm,
+    image: 'hostel',
   },
   {
     title: 'Корпус 4',
     text: 'Административный',
-    image: img_campus_dorm,
+    image: 'hostel',
   },
   {
     title: 'Корпус 5',
     text: 'Учебный',
-    image: img_campus_dorm,
+    image: 'hostel',
   },
 ];
 
@@ -68,7 +68,18 @@ class InnerComponent extends Component {
                 style={styles.listItemStyle}
               >
                 <View style={styles.viewStyle}>
-                  <Image source={item.image} style={styles.imageStyle} />
+                  {/* <Image source={item.image} style={styles.imageStyle} /> */}
+                  <CustomIcon
+                    style={{
+                      width: 32,
+                      height: 32,
+                      marginLeft: 15,
+                      marginRight: 15,
+                      fontSize: 30,
+                      color: '#163D7D',
+                    }}
+                    name={item.image}
+                  />
                   <View style={styles.columnStyle}>
                     <Text style={styles.titleStyle}>{item.title}</Text>
                     <Text style={styles.textStyle}>{item.text}</Text>
