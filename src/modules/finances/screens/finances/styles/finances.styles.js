@@ -126,5 +126,10 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: 'white'
+  },
+  debtSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 });

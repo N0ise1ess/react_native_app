@@ -39,7 +39,7 @@ class InnerComponent extends Component {
     })
   }
 
-  _upperCase(word, style = styles.tabTitleStyle) {
+  _upperCase(word, style = this.state.styles.tabTitleStyle) {
     return <Text style={style}>{word.toUpperCase()}</Text>;
   }
 
@@ -50,6 +50,7 @@ class InnerComponent extends Component {
   render() {
     const { userStatus, navigation, finances } = this.props;
     const { currentTab, styles } = this.state;
+    // TODO fix 3350 to 0 after testing
     const debt = finances && finances[0] ? finances[0].debt : 3350;
     const { groupName } = this.state;
 
@@ -82,8 +83,9 @@ class InnerComponent extends Component {
                         Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
                     </View>
-                    <View>
-                      <Text style={styles.paymentAmount}>{item.amount} ₽</Text>
+                    <View style={this.state.styles.debtSection}>
+                      <Text style={styles.paymentAmount}>{item.amount}</Text>
+                      <CustomIcon name={'money'} style={{marginTop: 5, color:'black', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_20, this.props.fontSize)}}/>
                     </View>
                   </View>
                 )}
@@ -92,7 +94,10 @@ class InnerComponent extends Component {
             {debt > 0 && currentTab === 0 ?
             <View style={[styles.listStyle, {backgroundColor: '#e91b47', height : 50}]}>
               <Text style={styles.debtText}>К оплате</Text>
-              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} ₽</Text>
+              <View style={this.state.styles.debtSection}>
+                <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt}</Text>
+                <CustomIcon name={'money'} style={{marginTop: 5, color:'white', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_20, this.props.fontSize)}}/>
+              </View>
             </View> : null }
           </Content>
         </Tab>
