@@ -28,6 +28,7 @@ export const styles = (fontSize) => StyleSheet.create({
   listStyle: {},
   textStyle: {
     color: '#163D7D',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
 });

@@ -40,10 +40,12 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   titleStyle: {
     fontWeight: '500',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     alignSelf: 'flex-start',
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     alignSelf: 'flex-start',

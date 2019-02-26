@@ -22,11 +22,13 @@ export const styles = (fontSize) => StyleSheet.create({
     alignItems: 'center'
   },
   title: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
     alignSelf: 'center'
   },
   dataText: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: 'normal',
     color: 'grey',
@@ -34,6 +36,7 @@ export const styles = (fontSize) => StyleSheet.create({
     marginTop: 5
   },
   stepText: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
     color: 'grey'
   },

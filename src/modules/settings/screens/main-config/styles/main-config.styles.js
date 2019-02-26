@@ -22,6 +22,7 @@ export const styles = (fontSize) => StyleSheet.create({
   textStyle: {
     color: '#000',
     fontWeight: 'bold',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     textAlign: 'left',
     alignSelf: 'stretch',
@@ -72,12 +73,15 @@ export const styles = (fontSize) => StyleSheet.create({
     borderRadius: 50,
   },
   smallTitle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   mediumTitle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
   },
   largeTitle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   buttonClear_box: {
@@ -89,6 +93,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#fff',
   },
   buttonClear_text: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
   },
@@ -101,16 +106,19 @@ export const styles = (fontSize) => StyleSheet.create({
     alignSelf: 'stretch',
   },
   textRam_title: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#333',
   },
   textRam_number: {
     paddingLeft: 10,
     color: '#ff003c',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
   },
   textRam_size: {
     color: '#ff003c',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
   textRam_description: {

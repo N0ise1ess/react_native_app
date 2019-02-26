@@ -7,6 +7,7 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#CED8DA',
   },
   text: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#3f5d8d',
   },

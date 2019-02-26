@@ -9,9 +9,16 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   textEvent: { 
     alignSelf: 'center', 
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
     color: '#2F528B', 
     paddingTop: 10,
+  },
+  textEventWhite: { 
+    alignSelf: 'center', 
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
+    color: '#fff', 
   },
   customSlide: {
     width,
@@ -24,7 +31,13 @@ export const styles = (fontSize) => StyleSheet.create({
     height: height / 5,
   },
   buttonSelected: {
-    color: 'red',
+    backgroundColor: 'red',
+  },
+  buttonsPagination: {
+    borderRadius: 30,
+    paddingRight: 15,
+    paddingLeft: 15,
+    marginTop: 10,
   },
   buttons: {
     position: 'absolute',
@@ -44,6 +57,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 0,
     borderWidth: 1,
     borderColor: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   activeTabStyle: {
@@ -59,6 +73,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(10, fontSize),
     textAlign: 'center',
   },

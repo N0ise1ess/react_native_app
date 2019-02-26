@@ -33,10 +33,12 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   titleStyle: {
     color: '#163D7D',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     alignSelf: 'flex-start',
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     color: '#ADADAD',
     alignSelf: 'flex-start',

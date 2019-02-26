@@ -7,10 +7,12 @@ const { width, height } = Dimensions.get('window');
 export const styles = (fontSize) => StyleSheet.create({
   label: {
     fontSize: getSizeFonts(10, fontSize),
+    fontFamily: 'MyriadPro-Regular',
     paddingTop: height < 550 ? 10 : 20,
     color: '#747A7B',
   },
   inputStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: height < 750 
       ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
@@ -25,6 +27,7 @@ export const styles = (fontSize) => StyleSheet.create({
     borderWidth: 1,
   },
   inputIcon: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#163D7D',
     paddingTop: 0,
@@ -40,6 +43,7 @@ export const styles = (fontSize) => StyleSheet.create({
   errorStyle: {
     color: 'red',
     height: 50,
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     marginTop: 10,
     marginRight: 10,
@@ -51,16 +55,19 @@ export const styles = (fontSize) => StyleSheet.create({
     width: '100%',
   },
   resetButtonStyle_text: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: width > 360 
       ? getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   textStyle: {
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: '#747A7B',
   },
   textStyle__email: {
     color: '#0067f6',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
   },
 });
