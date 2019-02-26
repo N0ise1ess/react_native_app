@@ -100,12 +100,10 @@ class InnerComponent extends Component {
   getIntoNextDepartments(nextDepartments) {
     let steps = {...this.state.steps}
     if (nextDepartments !== null && nextDepartments.length > 0) {
-      if (!steps[`step${steps.counter}`]) {
-        steps[`step${steps.counter}`] = nextDepartments;
-      }
-      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
       steps.counter++;
+      steps[`step${steps.counter}`] = nextDepartments;
       this.setState({steps})
+      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
     } else {
       alert('Screen for detailed contacts info is being developed...')
     }
@@ -115,11 +113,13 @@ class InnerComponent extends Component {
     let steps = {...this.state.steps}
     if (steps.counter - 1 === 0) {
       this.setState({ searchedDepartments : this.props.departments});
+      steps.counter--;
+      this.setState({steps})
       return
     }
     if (steps[`step${steps.counter - 1}`]) {
       this.setState({ searchedDepartments : steps[`step${steps.counter - 1}`]});
-      delete steps[`step${steps.counter - 1}`];
+      steps.counter--;
       this.setState({steps})
     } else {
       this.props.navigation.goBack();
@@ -129,7 +129,8 @@ class InnerComponent extends Component {
   onHandleSubmit = () => {
     const {searchedText} = this.state;
     this.props.getDepartments(searchedText);
-  };
+    this.setState({ searchedDepartments : []})
+    };
 }
 
 const mapStateToProps = state => {
