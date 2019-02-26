@@ -74,7 +74,8 @@ export const styles = (fontSize) => StyleSheet.create({
   tabTitleStyle: {
     color: '#fff',
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(10, fontSize),
+    fontSize: getSizeFonts(12, fontSize),
+    fontWeight: '300',
     textAlign: 'center',
   },
   tabSectionStyle: {

@@ -136,13 +136,7 @@ class InnerComponent extends Component {
             {slider.map((image, index) => {
               return (
                 <RN.View key={index} style={styles.button}>
-                  {/* <NB.Icon
-                    onPress={() => move(index)}
-                    type="Octicons"
-                    name="primitive-dot"
-                    style={[{ color: '#163D7D', fontSize: 18 }, position === index && styles.buttonSelected]}
-                  /> */}
-                  <RN.View style={[
+                  <RN.View key={index} style={[
                     {backgroundColor: '#163D7D',
                      width: 10, 
                      height: 10, 
