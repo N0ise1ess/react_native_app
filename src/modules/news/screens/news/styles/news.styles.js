@@ -38,6 +38,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     marginTop: 10,
+    marginBottom: 10,
   },
   buttons: {
     position: 'absolute',

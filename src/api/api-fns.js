@@ -69,11 +69,21 @@ export function getNews(page = 1, size = 10) {
   });
 }
 
-export function getEvents() {
-  return axios.get(endpoints.news.getEvents);
+export function getEvents(page = 1, size = 10) {
+  return axios.get(endpoints.news.getEvents, {
+    params: {
+      page,
+      size,
+    },
+  });
 }
-export function getAdvertisement() {
-  return axios.get(endpoints.news.getAdvertisements);
+export function getAdvertisement(page = 1, size = 10) {
+  return axios.get(endpoints.news.getAdvertisements, {
+    params: {
+      page,
+      size,
+    },
+  });
 }
 export function getSlider() {
   return axios.get(endpoints.news.getSliders);
