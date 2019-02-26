@@ -17,6 +17,10 @@ class InnerComponent extends Component {
     };
   }
 
+  componentWillMount() {
+    moment.locale('ru');
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
@@ -33,7 +37,7 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   renderLibraryCard = () => {
@@ -103,13 +107,14 @@ class InnerComponent extends Component {
   };
 
   formattedDate = date => {
-    const newDate = moment(date, 'MM-DD-YYYY HH:mm:ss')._i;
-    return moment(newDate).format('DD.MM.YYYY');
+    console.log('date', date)
+    // const newDate = moment(date, 'MM-DD-YYYY HH:mm:ss')._i;
+    return moment(date).format('DD.MM.YYYY');
   };
 
   renderLibraryBook = () => {
     const { bookInfo } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
 
     return (
       <Tab
@@ -134,16 +139,21 @@ class InnerComponent extends Component {
               renderRow={item => (
                 <View style={styles.listStyle}>
                   <View style={styles.listItemStyle}>
-                    <Icon
-                      type="Octicons"
-                      name="primitive-dot"
-                      style={{ color: item.returned ? '#163D7D' : 'red', fontSize: 22 }}
+                    <View
+                      style={{ 
+                        backgroundColor: item.returned ? '#163D7D' : 'red', 
+                        width: 10, 
+                        height: 10, 
+                        borderRadius: 30, 
+                        marginTop: 5,
+                        marginRight: 10,
+                      }}
                     />
                     <Text style={styles.bookTitle}>{item.content.description}</Text>
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
                   <Text style={styles.issueDate}>
-                    Выдано {item.dateTo ? this.formattedDate(item.dateTo) : <Spinner />}
+                    Выдано {item.dateTo ? item.dateTo : <Spinner />}
                   </Text>
                   {item.returned ? (
                     <View style={styles.listItemStyle}>
@@ -152,7 +162,7 @@ class InnerComponent extends Component {
                     </View>
                   ) : (
                     <Text style={[styles.returnStyle, item.isDelayes && { color: 'red' }, { paddingLeft: 22 }]}>
-                      {item.dateFrom ? `Вернуть до ${this.formattedDate(item.dateFrom)}` : <Spinner />}
+                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner />}
                     </Text>
                   )}
                 </View>
@@ -166,7 +176,7 @@ class InnerComponent extends Component {
 
   render() {
     const { cardInfo, bookInfo, userStatus, navigation } = this.props;
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
     return (
       <Container style={styles.container}>
         {userStatus === 'guest' ? (

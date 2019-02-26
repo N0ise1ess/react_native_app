@@ -109,6 +109,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#fff',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontWeight: '300',
     textAlign: 'center',
   },
   tabSectionStyle: {
@@ -123,6 +124,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   activeTabStyle: {
     backgroundColor: '#0E63EE',
+    fontWeight: '300',
   },
   noDataStyle: {
     flex: 1,
