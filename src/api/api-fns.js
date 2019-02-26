@@ -116,3 +116,7 @@ export function editPhoneNumber(phoneNumber, token) {
     },
   });
 }
+
+export function getPersonalityByName(name) {
+  return axios.get(`${endpoints.personality.findByName}?search=${name}&size=1&page=1`);
+}
