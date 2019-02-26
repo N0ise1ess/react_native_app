@@ -11,48 +11,48 @@ export function loginApi(values) {
   return axios.post(endpoints.auth.token, data, {
     headers: {
       Authorization: 'Basic bW9iaWxlOg==',
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   });
 }
 
 export function libCardApi(token) {
   return axios.get(endpoints.library.card, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
 }
 
 export function libQRCodeApi(token) {
   return axios.get(endpoints.library.qr, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
 }
 
 export function libBookApi(token) {
   return axios.get(endpoints.library.books, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
 }
 
 export function financePaymentApi(token) {
   return axios.get(endpoints.finance.document, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
 }
 
 export function financeScholarshipsApi(token) {
   return axios.get(endpoints.finance.scholarships, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
 }
 
@@ -64,8 +64,8 @@ export function getNews(page = 1, size = 10) {
   return axios.get(endpoints.news.getNews, {
     params: {
       page,
-      size,
-    },
+      size
+    }
   });
 }
 
@@ -80,16 +80,23 @@ export function getSlider() {
 }
 
 export function timeTableGetApi(searchedText, token) {
-  return axios.post(endpoints.timetable.search, searchedText, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'text/plain',
-    },
-  });
+  return axios.post(
+    endpoints.timetable.search,
+    searchedText,
+    token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      : {}
+  );
 }
 
 export function departmentsGetApi(searchedText) {
-  return axios.get(`${endpoints.departments.searchByName}?search=${searchedText}`);
+  return axios.get(
+    `${endpoints.departments.searchByName}?search=${searchedText}`
+  );
 }
 
 export function resetPassword(email) {
@@ -99,8 +106,8 @@ export function resetPassword(email) {
 
   return axios.post(endpoints.user.resetPassword, data, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+      'Content-Type': 'multipart/form-data'
+    }
   });
 }
 
@@ -112,7 +119,7 @@ export function editPhoneNumber(phoneNumber, token) {
   return axios.post(endpoints.user.editPhoneNumber, data, {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-    },
+      'Content-Type': 'multipart/form-data'
+    }
   });
 }
