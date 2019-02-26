@@ -48,11 +48,11 @@ class InnerComponent extends Component {
     this.props.getSearchedTimetable('', this.props.token);
   }
   _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   renderOdd = () => {
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
 
     return (
       <Tab
@@ -131,7 +131,7 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus, navigation, timeTableLoading, errorCode, error, errorDescription } = this.props;
-    console.log(this.props);
+    const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
