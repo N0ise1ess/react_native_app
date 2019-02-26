@@ -7,3 +7,4 @@ export const FONT_SIZE_14 = 14;
 export const FONT_SIZE_16 = 16;
 export const FONT_SIZE_18 = 18;
 export const FONT_SIZE_22 = 22;
+export const FONT_SIZE_26 = 26;
