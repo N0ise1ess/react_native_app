@@ -129,6 +129,7 @@ export const styles = (fontSize) => StyleSheet.create({
   noDataStyle: {
     flex: 1,
     padding: 20,
+    marginTop: 20,
     backgroundColor: '#CED8DA',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
