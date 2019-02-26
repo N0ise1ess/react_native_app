@@ -87,7 +87,7 @@ class InnerComponent extends Component {
                 <Image source={item.image} style={styles.iconStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
-                  <Text style={styles.textStyle}>{item.position}</Text>
+                  <Text style={[styles.textStyle, {color: '#979797'}]}>{item.position}</Text>
                   <Text style={styles.textStyle}>{item.workPlace}</Text>
                 </View>
               </ListItem>
