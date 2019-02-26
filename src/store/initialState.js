@@ -11,7 +11,8 @@ export default {
   libraryReducer: {},
   newsReducer: {
     newsPage: 1,
-    isLoading: false,
+    updatePage: 1,
+    eventPage: 1,
   },
   financeReducer: {
     payments: [],
