@@ -81,8 +81,13 @@ class InnerComponent extends Component {
     this.state = {
       currentTab: 0,
       currentYearId: 0,
-      currentSemesterId: 0
+      currentSemesterId: 0,
+      styles: styles(props.fontSize)
     };
+  }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
   previous = (field) => {
@@ -112,11 +117,11 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text style={styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   _renderResult = () => {
-    const { currentTab } = this.state;
+    const { currentTab, styles } = this.state;
 
     return (
       <Tab
@@ -138,20 +143,22 @@ class InnerComponent extends Component {
   };
 
   _renderAttendance = () => {
-    const { currentYearId, currentSemesterId } = this.state;
+    const { currentYearId, currentSemesterId, styles } = this.state;
     return <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
       <View
         style={[styles.tabHeadingStyle, styles.tabHeadingRight, this.state.currentTab % 3 === 0 && styles.activeTabStyle]}>
         {this._upperCase('Посещаемость')}
       </View>
       </TabHeading>}>
-      <Attendance data={dataList[currentYearId].semesters[currentSemesterId].disciplines} />
+      <Attendance 
+        data={dataList[currentYearId].semesters[currentSemesterId].disciplines}
+        fontSize={this.props.fontSize} />
     </Tab>
   };
 
   render() {
     const { userStatus, navigation } = this.props;
-    const { currentYearId, currentSemesterId } = this.state;
+    const { currentYearId, currentSemesterId, styles } = this.state;
     return (
     <Container style={styles.container}>
         <View style={styles.year}>

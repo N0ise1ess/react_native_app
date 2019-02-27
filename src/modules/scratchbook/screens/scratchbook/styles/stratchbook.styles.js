@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { Row } from 'native-base';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
   },
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   iconStyle: {
     color: '#58739d',
-    fontSize: 18,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     paddingRight: 10,
     alignSelf: "center"
   },
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     textAlign: 'center',
   },
   tabSectionStyle: {

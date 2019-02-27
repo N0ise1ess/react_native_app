@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { Row } from 'native-base';
+import * as settingsFonts from '../../../../../constants/styles';
+import {getSizeFonts} from '../../../../shared/functions/styles';
 
-export const styles = StyleSheet.create({
+export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
   },
@@ -26,24 +27,24 @@ export const styles = StyleSheet.create({
   },
   title: {
     width: '80%',
-    fontSize: 14,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: 'bold',
   },
   iconStyle: {
     color: '#58739d',
-    fontSize: 18,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     paddingRight: 10,
     alignSelf: "center"
   },
   text: {
     fontFamily: 'MyriadPro-Light',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     marginTop: 7,
   },
   detailsText: {
     fontFamily: 'MyriadPro-Light',
-    fontSize: 11,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
     fontWeight: '200',
     color: '#949394'
   },
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
   },
   list_header_text: {
     color: '#363a3a',
-    fontSize: 12,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
     paddingRight: 10,
   },
   sum_item: {
