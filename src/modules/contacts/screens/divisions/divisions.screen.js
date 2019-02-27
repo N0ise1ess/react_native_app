@@ -2,27 +2,10 @@ import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {ButtonBack, FooterSection} from '../../../shared/components';
+import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
 
-const itemList = [
-  {
-    name: 'Академия, институты, факультеты,\nкафедры и учебные центры',
-  },
-  {
-    name: 'Административно-управленческие подразделения',
-  },
-  {
-    name: 'Научно-исследовательская часть',
-  },
-  {
-    name: 'Подразделение воспитательной и социальной сферы',
-  },
-  {
-    name: 'Подразделение обслуживания',
-  },
-];
 
 class InnerComponent extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -32,7 +15,7 @@ class InnerComponent extends Component {
       fontSize: 16,
       fontWeight: 'normal',
     },
-    title: 'Подразделения',
+    title: navigation.getParam("currentTitle") || 'Подразделения',
     headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack",() => {})}/>,
   });
 
@@ -42,13 +25,14 @@ class InnerComponent extends Component {
       styles: styles(props.fontSize),
       searchedDepartments: [],
       steps: {
-        counter: 0
+        counter: 0,
+        prevTitle : undefined
       }
     };
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({customGoBack:this.handleBackArrow});
+    this.props.navigation.setParams({customGoBack: this.handleBackArrow});
   }
 
   componentDidUpdate(props) {
@@ -80,9 +64,20 @@ class InnerComponent extends Component {
               renderRow={item => (
                 <ListItem
                   button
-                  onPress={() => this.getIntoNextDepartments(item.departments)}
+                  onPress={() => this.getIntoNextDepartments(item.departments, item.name)}
                   style={styles.listItemStyle}
                 >
+                  <CustomIcon
+                    style={{
+                      width: 32,
+                      height: 32,
+                      marginLeft: 15,
+                      marginRight: 15,
+                      fontSize: 30,
+                      color: '#2386e1',
+                    }}
+                    name={'university'}
+                  />
                   <Text style={styles.titleStyle}>{item.name}</Text>
                   <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
                 </ListItem>
@@ -96,13 +91,15 @@ class InnerComponent extends Component {
 
   }
 
-  getIntoNextDepartments(nextDepartments) {
+  getIntoNextDepartments(nextDepartments, prevDepartmentName) {
     let steps = {...this.state.steps}
     if (nextDepartments !== null && nextDepartments.length > 0) {
       steps.counter++;
       steps[`step${steps.counter}`] = nextDepartments;
+      steps[`prevTitle${steps.counter}`] = prevDepartmentName
       this.setState({steps})
       this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
+      this.props.navigation.setParams({currentTitle: prevDepartmentName});
     } else {
       alert('Screen for detailed contacts info is being developed...')
     }
@@ -110,6 +107,7 @@ class InnerComponent extends Component {
 
   handleBackArrow = () => {
     let steps = {...this.state.steps}
+    this.props.navigation.setParams({currentTitle: steps[`prevTitle${steps.counter - 1}`]});
     if (steps.counter - 1 === 0) {
       this.setState({ searchedDepartments : this.props.departments});
       steps.counter--;
@@ -127,7 +125,7 @@ class InnerComponent extends Component {
 
   onHandleSubmit = () => {
     const {searchedText} = this.state;
-    this.props.getDepartments(searchedText);
+    this.props.getDepartments(searchedText.trim());
     this.setState({ searchedDepartments : []})
     };
 }
