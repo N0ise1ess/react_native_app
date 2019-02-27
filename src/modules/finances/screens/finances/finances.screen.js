@@ -195,18 +195,14 @@ class InnerComponent extends Component {
     let length = this.state.groupNames.length;
     let groupIndex = this.state.currentGroupIndex;
     if (length > 1) {
-      if (direction === 'left') {
-        if (groupIndex !== 0) {
-          this.setState(prevState => ({currentGroupIndex : prevState.currentGroupIndex - 1}))
-        } else {
-          this.setState({currentGroupIndex : length - 1})
+      switch (direction) {
+        case 'left' : {
+          this.setState(prevState => ({currentGroupIndex: groupIndex !== 0 ? prevState.currentGroupIndex - 1 : length - 1}));
+          break;
         }
-      }
-      if (direction === 'right') {
-        if (groupIndex !== length - 1) {
-          this.setState(prevState => ({currentGroupIndex : prevState.currentGroupIndex + 1}))
-        } else {
-          this.setState({currentGroupIndex: 0})
+        case 'right' : {
+          this.setState(prevState => ({currentGroupIndex : groupIndex !== length - 1 ? prevState.currentGroupIndex + 1 : 0}));
+          break;
         }
       }
     }
