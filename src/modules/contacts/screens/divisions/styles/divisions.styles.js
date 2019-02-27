@@ -12,7 +12,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 15,
     marginBottom: 5,
     backgroundColor: '#fff',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginLeft: 0,
     paddingLeft: 0,
     paddingRight: 20,
@@ -35,7 +35,6 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    marginLeft: 55,
     paddingRight: 5
   },
   //Search tabSectionStyle
