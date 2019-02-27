@@ -1,15 +1,29 @@
 import moment from 'moment';
-import {Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text} from 'native-base';
+import {
+  Button,
+  Container,
+  Content,
+  List,
+  Spinner,
+  Tab,
+  TabHeading,
+  Tabs,
+  Text,
+  Right,
+} from 'native-base';
 import React, { Component } from 'react';
 import { View, Linking, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getFinancePayment, getFinanceScholarships } from '../../../../actions/financeAction';
+import {
+  getFinancePayment,
+  getFinanceScholarships,
+} from '../../../../actions/financeAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
-import {CustomIcon} from "../../../shared/components/custom-icon";
-import {getSizeFonts} from "../../../shared/functions/styles";
-import * as settingsFonts from "../../../../constants/styles";
+import { CustomIcon } from '../../../shared/components/custom-icon';
+import { getSizeFonts } from '../../../shared/functions/styles';
+import * as settingsFonts from '../../../../constants/styles';
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,8 +36,8 @@ class InnerComponent extends Component {
     this.state = {
       currentTab: 0,
       styles: styles(props.fontSize),
-      groupNames : [],
-      currentGroupIndex : -1
+      groupNames: [],
+      currentGroupIndex: -1,
     };
   }
 
@@ -32,16 +46,16 @@ class InnerComponent extends Component {
     this.props.getFinancePayment(token);
     this.props.getFinanceScholarships(token);
 
-    const { role } = this.props
+    const { role } = this.props;
     role.forEach((localRole, index) => {
       if (localRole.type === 'STUDENT') {
-        let groupNames = []
+        let groupNames = [];
         role[index].details.forEach(detail => {
-          groupNames.push(detail.group.name)
+          groupNames.push(detail.group.name);
         });
-        this.setState({groupNames : groupNames, currentGroupIndex : 0});
+        this.setState({ groupNames: groupNames, currentGroupIndex: 0 });
       }
-    })
+    });
   }
 
   _upperCase(word, style = this.state.styles.tabTitleStyle) {
@@ -49,7 +63,8 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize &&
+      this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
@@ -66,7 +81,13 @@ class InnerComponent extends Component {
         <Tab
           heading={
             <TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
+              <View
+                style={[
+                  styles.tabHeadingStyle,
+                  styles.tabHeadingLeft,
+                  currentTab === 0 && styles.activeTabStyle,
+                ]}
+              >
                 {this._upperCase('Оплата')}
               </View>
             </TabHeading>
@@ -78,13 +99,31 @@ class InnerComponent extends Component {
             ) : (
               <List
                 // dataArray={finances[0] && finances[0].charges}
-                dataArray={[{amount: 600},{amount: 2750}]}
+                dataArray={[{ amount: 600 }, { amount: 2750 }]}
                 renderRow={(item, sectionId, index) => (
-                  <View style={[styles.listStyle, index === '0' ? {marginTop: 0} : {}]}>
+                  <View
+                    style={[
+                      styles.listStyle,
+                      index === '0' ? { marginTop: 0 } : {},
+                    ]}
+                  >
                     <View>
-                      <Text style={{ fontWeight: 'bold', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, this.props.fontSize) }}>Обучение, {this.getSemesterNumber('29-10-18')} семестр</Text>
+                      <Text
+                        style={{
+                          fontWeight: 'bold',
+                          fontSize: getSizeFonts(
+                            settingsFonts.FONT_SIZE_14,
+                            this.props.fontSize,
+                          ),
+                        }}
+                      >
+                        Обучение, {this.getSemesterNumber('29-10-18')} семестр
+                      </Text>
                       <Text style={styles.deadline}>
-                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
+                        Оплатить до{' '}
+                        <Text style={{ fontWeight: 'bold', fontSize: 12 }}>
+                          29.10.18
+                        </Text>
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
@@ -94,11 +133,19 @@ class InnerComponent extends Component {
                 )}
               />
             )}
-            {debt > 0 && currentTab === 0 ?
-            <View style={[styles.listStyle, {backgroundColor: '#e91b47', height : 50}]}>
-              <Text style={styles.debtText}>К оплате</Text>
-              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} ₽</Text>
-            </View> : null }
+            {debt > 0 && currentTab === 0 ? (
+              <View
+                style={[
+                  styles.listStyle,
+                  { backgroundColor: '#e91b47', height: 50 },
+                ]}
+              >
+                <Text style={styles.debtText}>К оплате</Text>
+                <Text style={[styles.paymentAmount, { color: 'white' }]}>
+                  {debt} ₽
+                </Text>
+              </View>
+            ) : null}
           </Content>
         </Tab>
       );
@@ -110,7 +157,13 @@ class InnerComponent extends Component {
         <Tab
           heading={
             <TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab === 1 && styles.activeTabStyle]}>
+              <View
+                style={[
+                  styles.tabHeadingStyle,
+                  styles.tabHeadingRight,
+                  currentTab === 1 && styles.activeTabStyle,
+                ]}
+              >
                 {this._upperCase('Стипендии')}
               </View>
             </TabHeading>
@@ -123,15 +176,20 @@ class InnerComponent extends Component {
                 <View style={styles.listStyle}>
                   <View>
                     <Text style={{ fontWeight: 'bold', fontSize: 14 }}>
-                      {this.getSemesterNumber(item.dateStart)} семестр, {item.type}
+                      {this.getSemesterNumber(item.dateStart)} семестр,{' '}
+                      {item.type}
                     </Text>
                     <Text style={styles.deadline}>
                       Начислена{' '}
-                      <Text style={{ fontWeight: 'bold', fontSize: 12 }}>{this.formatDate(item.dateStart)}</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 12 }}>
+                        {this.formatDate(item.dateStart)}
+                      </Text>
                     </Text>
                   </View>
                   <View>
-                    <Text style={styles.paymentAmount}>{Math.round(item.sum)} ₽</Text>
+                    <Text style={styles.paymentAmount}>
+                      {Math.round(item.sum)} ₽
+                    </Text>
                   </View>
                 </View>
               )}
@@ -143,25 +201,29 @@ class InnerComponent extends Component {
 
     return (
       <Container style={styles.container}>
-        {groupNames.length > 0 ?
-          groupNames.length > 1 ?
+        {groupNames.length > 0 ? (
+          groupNames.length > 1 ? (
             <View style={styles.groupSection}>
               <TouchableOpacity onPress={() => this.switchGroup('left')}>
-                <CustomIcon name='arrow_left' style={styles.iconLeft}/>
+                <CustomIcon name="arrow_left" style={styles.iconLeft} />
               </TouchableOpacity>
-              <Text style={{color: "#1784d3"}}>Группа {groupNames[this.state.currentGroupIndex]}</Text>
+              <Text style={{ color: '#1784d3' }}>
+                Группа {groupNames[this.state.currentGroupIndex]}
+              </Text>
               <TouchableOpacity onPress={() => this.switchGroup('right')}>
-                <CustomIcon name='arrow_right' style={styles.iconRight}/>
+                <CustomIcon name="arrow_right" style={styles.iconRight} />
               </TouchableOpacity>
-            </View> :
-            <View style={[styles.groupSection, {justifyContent : 'center'}]}>
-              <Text style={{color: "#1784d3"}}>Группа {groupNames[0]}</Text>
             </View>
-            : null }
+          ) : (
+            <View style={[styles.groupSection, { justifyContent: 'center' }]}>
+              <Text style={{ color: '#1784d3' }}>Группа {groupNames[0]}</Text>
+            </View>
+          )
+        ) : null}
 
         <Tabs
           page={this.state.currentTab}
-          tabContainerStyle={{elevation : 0}}
+          tabContainerStyle={{ elevation: 0 }}
           onChangeTab={({ i }) => this.setState({ currentTab: i })}
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
         >
@@ -169,44 +231,69 @@ class InnerComponent extends Component {
           {renderScholarships()}
         </Tabs>
 
-        {debt > 0 && currentTab === 0 ?
-        <View style={styles.paymentButton}>
-          <Button onPress={this.openSberbank}
-                  full rounded style={{backgroundColor: '#e91b47'}}>
-            {this._upperCase("оплата в сбербанк-онлайн",
-              {fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize), color: 'white'})}
-          </Button>
-        </View> : null }
+        {debt > 0 && currentTab === 0 ? (
+          <View style={styles.paymentButton}>
+            <Button
+              onPress={this.openSberbank}
+              full
+              rounded
+              style={{ backgroundColor: '#e91b47' }}
+            >
+              {this._upperCase('оплата в сбербанк-онлайн', {
+                fontSize: getSizeFonts(
+                  settingsFonts.FONT_SIZE_12,
+                  this.props.fontSize,
+                ),
+                color: 'white',
+              })}
+            </Button>
+          </View>
+        ) : null}
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
   }
 
   openSberbank = () => {
-    Linking.canOpenURL('sberbank://').then(supported => {
-      if (supported) Linking.openURL('sberbank://')
-      else Linking.openURL('https://online.sberbank.ru/')
-    }).catch(err => {
-      console.log("error linking open", err)
-    })
+    Linking.canOpenURL('sberbank://')
+      .then(supported => {
+        if (supported) Linking.openURL('sberbank://');
+        else Linking.openURL('https://online.sberbank.ru/');
+      })
+      .catch(err => {
+        console.log('error linking open', err);
+      });
+  };
+
+  getNextIndex = (directionName, currentIndex) => {
+    let direction = {
+      left: {
+        canMoveFrom: index => index !== 0,
+        getNext: index => index - 1,
+        getStartIndex: () => this.state.groupNames.length - 1,
+      },
+      right: {
+        canMoveFrom: index => index !== this.getLastGroupIndex(),
+        getNext: index => index + 1,
+        getStartIndex: () => 0,
+      },
+    }[directionName];
+
+    return direction.canMoveFrom(currentIndex)
+      ? direction.getNext(currentIndex)
+      : direction.getStartIndex();
   };
 
   switchGroup(direction) {
-    let length = this.state.groupNames.length;
-    let groupIndex = this.state.currentGroupIndex;
-    if (length > 1) {
-      switch (direction) {
-        case 'left' : {
-          this.setState(prevState => ({currentGroupIndex: groupIndex !== 0 ? prevState.currentGroupIndex - 1 : length - 1}));
-          break;
-        }
-        case 'right' : {
-          this.setState(prevState => ({currentGroupIndex : groupIndex !== length - 1 ? prevState.currentGroupIndex + 1 : 0}));
-          break;
-        }
-      }
+    if (this.state.groupNames.length > 1) {
+      this.setState({
+        currentGroupIndex: this.getNextIndex(
+          direction,
+          this.state.currentGroupIndex,
+        ),
+      });
     }
-  };
+  }
 
   formatDate(dateString) {
     return moment.utc(dateString, 'YYYY-MM-DD').format('DD.MM.YYYY');
