@@ -90,16 +90,23 @@ export function getSlider() {
 }
 
 export function timeTableGetApi(searchedText, token) {
-  return axios.post(endpoints.timetable.search, searchedText, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'text/plain',
-    },
-  });
+  return axios.post(
+    endpoints.timetable.search,
+    searchedText,
+    token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      : {},
+  );
 }
 
 export function departmentsGetApi(searchedText) {
-  return axios.get(`${endpoints.departments.searchByName}?search=${searchedText}`);
+  return axios.get(
+    `${endpoints.departments.searchByName}?search=${searchedText}`,
+  );
 }
 
 export function resetPassword(email) {
