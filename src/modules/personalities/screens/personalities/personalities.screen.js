@@ -8,45 +8,6 @@ import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {findPersonalityByName} from "../../../../actions/personalityAction";
 
-const itemList = [
-  {
-    fullName: 'Иванов Иван Иванович',
-    position: 'Проректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-];
-
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Персоналии',
@@ -56,8 +17,7 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: styles(props.fontSize),
-      searchedPersonalities:[]
+      styles: styles(props.fontSize)
     };
   }
 
@@ -70,7 +30,7 @@ class InnerComponent extends Component {
   }
   render() {
     const { userStatus, navigation, token, personalities, personalitiesIsLoading } = this.props;
-    const { styles, searchedPersonalities } = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
@@ -89,14 +49,16 @@ class InnerComponent extends Component {
           {!personalitiesIsLoading ?
           <List
             style={styles.listStyle}
-            dataArray={searchedPersonalities.length > 0 ? searchedPersonalities : personalities}
+            dataArray={personalities}
             renderRow={item => (
               <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
-                <Image source={item.image} style={styles.iconStyle} />
+                <Image source={img_teacher} style={styles.iconStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.name}</Text>
                   <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
-                  <Text style={styles.textStyle}>{item.department}</Text>
+                  <Text style={styles.textStyle}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={2}>{item.department}</Text>
                 </View>
               </ListItem>
             )}
@@ -107,8 +69,8 @@ class InnerComponent extends Component {
     );
   }
 
-  onHandleSubmit = name => {
-    this.props.findPersonalityByName(name)
+  onHandleSubmit = () => {
+    this.props.findPersonalityByName(this.state.searchedText)
     this.setState({searchedPersonalities : []})
   }
 }
