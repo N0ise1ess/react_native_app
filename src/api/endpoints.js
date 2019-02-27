@@ -67,6 +67,6 @@ export const endpoints = {
   /** Персоналии */
   personality: {
     /** Поиск по сотрудникам */
-    findByName: ' http://opencode.su/campus/integration/api/employee',
+    personalityUrl: ' http://opencode.su/campus/integration/api/employee',
   },
 };

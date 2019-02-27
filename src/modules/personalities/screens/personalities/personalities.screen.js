@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { img_teacher } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
-import {findPersonalityByName} from "../../../../actions/personalityAction";
+import {findPersonalityByName } from "../../../../actions/personalityAction";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,7 +22,8 @@ class InnerComponent extends Component {
   }
 
   componentWillMount() {
-    this.props.findPersonalityByName('')
+    //Getting first 50 contacts
+    this.props.findPersonalityByName('', 50, null)
   }
 
   componentDidUpdate(props) {
@@ -83,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  findPersonalityByName: (name) => dispatch(findPersonalityByName(name)),
+  findPersonalityByName: (name, size, page) => dispatch(findPersonalityByName(name, size, page)),
 });
 
 export const PersonalitiesScreen = connect(
