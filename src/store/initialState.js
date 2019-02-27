@@ -9,7 +9,11 @@ export default {
     userStatus: 'guest',
   },
   libraryReducer: {},
-  newsReducer: {},
+  newsReducer: {
+    newsPage: 1,
+    updatePage: 1,
+    eventPage: 1,
+  },
   financeReducer: {
     payments: [],
     scholarships: [],

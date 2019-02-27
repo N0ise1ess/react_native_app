@@ -101,6 +101,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#fff',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontWeight: '300',
     textAlign: 'center',
   },
   tabSectionStyle: {

@@ -34,7 +34,7 @@ export const News = props => {
   const titleWithoutEmptyLines = cleanTitle.replace(/\r?\n|\r/, '');
   const style = styles(props.fontSize);
   return (
-    <TouchableOpacity style={style.cardItem} disabled={!props.onPress} onPress={props.onPress}>
+    <TouchableOpacity activeOpacity={1} style={style.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
         {props.image && <Image style={style.imageStyle} source={{ uri: `data:image/png;base64,${props.image}` }} />}
         {props.time && (

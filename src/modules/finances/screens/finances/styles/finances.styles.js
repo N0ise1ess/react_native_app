@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const { width, height } = Dimensions.get('window');
 import * as settingsFonts from '../../../../../constants/styles';
 import {getSizeFonts} from '../../../../shared/functions/styles';
 
@@ -15,11 +16,11 @@ export const styles = (fontSize) => StyleSheet.create({
   listStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 15,
+    marginTop: 10,
     backgroundColor: '#fff',
     width: '100%',
     marginLeft: 0,
@@ -43,6 +44,8 @@ export const styles = (fontSize) => StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     backgroundColor: '#163D7D',
+    justifyContent:'center',
+    alignItems:'center'
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
@@ -58,6 +61,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#fff',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontWeight: '300',
     textAlign: 'center',
   },
   tabSectionStyle: {
@@ -90,6 +94,42 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   paymentAmount: {
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
   },
+  paymentButton: {
+    width: '60%',
+    alignSelf: 'center',
+    marginBottom: 15
+  },
+  groupSection: {
+    alignSelf: 'center',
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  iconLeft: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginLeft: 5
+  },
+  iconRight: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginRight: 5
+  },
+  debtText: {
+    fontWeight: 'bold',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    color: 'white'
+  },
+  debtSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
 });

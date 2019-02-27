@@ -82,7 +82,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   largeTitle: {
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
   },
   buttonClear_box: {
     marginTop: 20,

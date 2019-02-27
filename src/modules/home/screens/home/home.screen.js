@@ -192,13 +192,16 @@ class InnerComponent extends Component {
                 <Text />
               ) : (
                 cardList.map((image, index) => (
-                  <Icon
-                    style={[{ color: '#163D7D' }, position === index && styles.buttonSelected]}
-                    key={index}
-                    onPress={() => move(index)}
-                    type="Octicons"
-                    name="primitive-dot"
-                  />
+                  <View onPress={() => move(index)} key={index} style={[
+                    {backgroundColor: '#163D7D',
+                      bottom: 10,
+                      width: 10, 
+                      height: 10, 
+                      borderRadius: 20, 
+                      marginLeft: 5, 
+                      marginRight: 5,}, 
+                      position === index && styles.buttonSelected]
+                  }/>
                 ))
               )}
             </View>

@@ -13,7 +13,7 @@ export const styles = (fontSize) => StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     resizeMode: 'contain',
-    tintColor: '#163D7D',
+    tintColor: '#2386e1',
   },
   listItemStyle: {
     paddingTop: 15,
@@ -36,12 +36,13 @@ export const styles = (fontSize) => StyleSheet.create({
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     alignSelf: 'flex-start',
+    color: '#1e1e1e'
   },
   textStyle: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
-    color: '#000',
+    color: '#1e1e1e',
     alignSelf: 'flex-start',
   },
   //Search tabSectionStyle

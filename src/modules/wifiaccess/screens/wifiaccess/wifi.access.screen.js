@@ -101,8 +101,8 @@ class InnerComponent extends Component {
                 <View style={styles.dummy}/>
                 <View style={styles.card}>
                   <View style={styles.cardPassText}>
-                    <Text style={{color: 'grey', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Ваш пароль:</Text>
-                    <Text style={{color: 'grey', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>{this.state.wifiPass}</Text>
+                    <Text style={{color: 'grey', marginTop: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, this.props.fontSize)}}>Ваш пароль:</Text>
+                    <Text style={{color: 'grey', marginBottom: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_26, this.props.fontSize)}}>{this.state.wifiPass}</Text>
                   </View>
                   <Button onPress={this.copyPass} full rounded style={styles.copyPassBtn}>
                     <Text style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Скопировать пароль</Text>
