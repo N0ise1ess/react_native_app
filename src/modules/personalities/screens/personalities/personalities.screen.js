@@ -56,9 +56,7 @@ class InnerComponent extends Component {
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.name}</Text>
                   <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
-                  <Text style={styles.textStyle}
-                        adjustsFontSizeToFit={true}
-                        numberOfLines={2}>{item.department}</Text>
+                  <Text style={styles.textStyle}>{item.department}</Text>
                 </View>
               </ListItem>
             )}
