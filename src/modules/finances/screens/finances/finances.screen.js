@@ -22,7 +22,8 @@ class InnerComponent extends Component {
     this.state = {
       currentTab: 0,
       styles: styles(props.fontSize),
-      groupName : ''
+      groupNames : [],
+      currentGroupIndex : -1
     };
   }
 
@@ -34,7 +35,11 @@ class InnerComponent extends Component {
     const { role } = this.props
     role.forEach((localRole, index) => {
       if (localRole.type === 'STUDENT') {
-        this.setState({groupName : role[index].details[0].group.name})
+        let groupNames = []
+        role[index].details.forEach(detail => {
+          groupNames.push(detail.group.name)
+        });
+        this.setState({groupNames : groupNames, currentGroupIndex : 0});
       }
     })
   }
@@ -49,10 +54,9 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus, navigation, finances } = this.props;
-    const { currentTab, styles } = this.state;
+    const { currentTab, styles, groupNames } = this.state;
     // TODO fix 3350 to 0 after testing
     const debt = finances && finances[0] ? finances[0].debt : 3350;
-    const { groupName } = this.state;
 
     // TODO check what field holds amount of finances[0].charges ?
     const renderPayment = () => {
@@ -84,8 +88,7 @@ class InnerComponent extends Component {
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
-                      <Text style={styles.paymentAmount}>{item.amount}</Text>
-                      <CustomIcon name={'money'} style={{marginTop: 5, color:'black', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_20, this.props.fontSize)}}/>
+                      <Text style={styles.paymentAmount}>{item.amount} ₽</Text>
                     </View>
                   </View>
                 )}
@@ -94,10 +97,7 @@ class InnerComponent extends Component {
             {debt > 0 && currentTab === 0 ?
             <View style={[styles.listStyle, {backgroundColor: '#e91b47', height : 50}]}>
               <Text style={styles.debtText}>К оплате</Text>
-              <View style={this.state.styles.debtSection}>
-                <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt}</Text>
-                <CustomIcon name={'money'} style={{marginTop: 5, color:'white', fontSize: getSizeFonts(settingsFonts.FONT_SIZE_20, this.props.fontSize)}}/>
-              </View>
+              <Text style={[styles.paymentAmount, {color: 'white'}]}>{debt} ₽</Text>
             </View> : null }
           </Content>
         </Tab>
@@ -143,16 +143,21 @@ class InnerComponent extends Component {
 
     return (
       <Container style={styles.container}>
-        {groupName.length > 0 ?
-        <View style={styles.groupSection}>
-          <TouchableOpacity onPress={() => this.switchTab('left')}>
-            <CustomIcon name='arrow_left' style={styles.iconLeft}/>
-          </TouchableOpacity>
-          <Text style={{color: "#1784d3"}}>Группа {groupName}</Text>
-          <TouchableOpacity onPress={() => this.switchTab('right')}>
-            <CustomIcon name='arrow_right' style={styles.iconRight}/>
-          </TouchableOpacity>
-        </View> : null }
+        {groupNames.length > 0 ?
+          groupNames.length > 1 ?
+            <View style={styles.groupSection}>
+              <TouchableOpacity onPress={() => this.switchGroup('left')}>
+                <CustomIcon name='arrow_left' style={styles.iconLeft}/>
+              </TouchableOpacity>
+              <Text style={{color: "#1784d3"}}>Группа {groupNames[this.state.currentGroupIndex]}</Text>
+              <TouchableOpacity onPress={() => this.switchGroup('right')}>
+                <CustomIcon name='arrow_right' style={styles.iconRight}/>
+              </TouchableOpacity>
+            </View> :
+            <View style={[styles.groupSection, {justifyContent : 'center'}]}>
+              <Text style={{color: "#1784d3"}}>Группа {groupNames[0]}</Text>
+            </View>
+            : null }
 
         <Tabs
           page={this.state.currentTab}
@@ -178,16 +183,32 @@ class InnerComponent extends Component {
   }
 
   openSberbank = () => {
-    Linking.openURL('https://online.sberbank.ru/')
+    Linking.canOpenURL('sberbank://').then(supported => {
+      if (supported) Linking.openURL('sberbank://')
+      else Linking.openURL('https://online.sberbank.ru/')
+    }).catch(err => {
+      console.log("error linking open", err)
+    })
   };
 
-  switchTab(direction) {
-    const localCurrentTab = this.state.currentTab;
-    if (direction === 'left') {
-      this.setState({currentTab : localCurrentTab === 1 ? 0 : 1})
-    }
-    if (direction === 'right') {
-      this.setState({currentTab : localCurrentTab === 0 ? 1 : 0})
+  switchGroup(direction) {
+    let length = this.state.groupNames.length;
+    let groupIndex = this.state.currentGroupIndex;
+    if (length > 1) {
+      if (direction === 'left') {
+        if (groupIndex !== 0) {
+          this.setState(prevState => ({currentGroupIndex : prevState.currentGroupIndex - 1}))
+        } else {
+          this.setState({currentGroupIndex : length - 1})
+        }
+      }
+      if (direction === 'right') {
+        if (groupIndex !== length - 1) {
+          this.setState(prevState => ({currentGroupIndex : prevState.currentGroupIndex + 1}))
+        } else {
+          this.setState({currentGroupIndex: 0})
+        }
+      }
     }
   };
 
