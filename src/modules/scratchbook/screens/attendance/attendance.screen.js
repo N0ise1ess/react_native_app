@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Content, List, Text } from 'native-base';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { Hours } from '../../components/hours';
 import { CustomIcon } from '../../../shared/components';
 
@@ -22,7 +22,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      cards: []
+      activeSections: []
     };
   }
 
@@ -32,23 +32,24 @@ class InnerComponent extends Component {
 
   _updateSections = (activeSections) => {
     this.setState({
-      cards: activeSections
+      activeSections
     });
   }
 
   _renderHeader = (section, index, isActive) => {
-    const { styles, cards } = this.state;
+    const { styles } = this.state;
+    const areHoursEmpty = !section.hoursMissed && !section.hours;
     return <View style={styles.listStyle}>
-    <View style={[styles.header_section]}>
-      <Text style={{fontWeight: 'bold', fontSize: 14}}>{section.name}</Text>
-    </View>
-    <View style={{flexDirection: 'row', width: 90, marginRight: 20}}>
-      <View style={{marginRight: 15}}>
-       <Hours skipped={section.hoursMissed} held={section.hours} />
+      <View style={[styles.header_section]}>
+        <Text style={{fontWeight: 'bold', fontSize: 14}}>{section.name}</Text>
       </View>
-      <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
-        style={styles.iconStyle} />
-    </View>
+      <View style={{flexDirection: 'row', width: areHoursEmpty ? 80 : 90, marginRight: 20, marginLeft: 20}}>
+        <View style={{marginRight: 15}}>
+        <Hours skipped={section.hoursMissed} held={section.hours} />
+        </View>
+        <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
+          style={styles.iconStyle} />
+      </View>
   </View>;
   }
 
@@ -62,7 +63,7 @@ class InnerComponent extends Component {
             <Text style={styles.title}>{item.name}</Text>
             <Text style={styles.detailsText}>{item.teacherName}</Text>
           </View>
-          <View style={{width: 80, marginRight: 20}}>
+          <View style={{width: 100}}>
             <Hours skipped={item.hoursMissed} held={item.hours} />
           </View>
         </View>
@@ -70,7 +71,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { styles, cards } = this.state;
+    const { styles, activeSections } = this.state;
     return (
       <Content style={styles.content}>
         <View style={styles.list_header}>
@@ -79,7 +80,7 @@ class InnerComponent extends Component {
         </View>
         <Accordion
           underlayColor="transparent"
-          activeSections={cards}
+          activeSections={activeSections}
           sections={this.props.data}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}

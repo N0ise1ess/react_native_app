@@ -19,7 +19,7 @@ const dataList = [
         "name":"Весенний семестр",
         "disciplines": [
           {
-            "name":"Информатика",
+            "name": "Конструирование летательных аппаратов и двигателей",
             "type":"Зачет",
             "teacherName":"Мазуренко Екатерина Владимировна",
             "hours":36,
@@ -45,7 +45,7 @@ const dataList = [
     "yearCurrent": 2018,
     "semesters": [
       { "nameId":2,
-        "name": "Симний семестр",
+        "name": "Зимний семестр",
         "disciplines": [
           {
             "name":"Информатика",

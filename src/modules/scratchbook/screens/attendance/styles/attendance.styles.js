@@ -26,8 +26,8 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   title: {
-    width: '80%',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    flexWrap: 'wrap',
     fontWeight: 'bold',
   },
   iconStyle: {
@@ -49,6 +49,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#949394'
   },
   header_section: {
+    width: '60%',
     flexWrap: 'wrap',
     flexGrow: 1,
     flexDirection: 'column',
