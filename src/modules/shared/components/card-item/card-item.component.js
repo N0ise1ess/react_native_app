@@ -12,7 +12,7 @@ export function CardItem(props) {
           <View style={styles.borderStyle}>
             <Image source={props.image} style={styles.imageStyle} />
             <View style={styles.textSectionStyle}>
-              <Text style={styles.textStyle}>{props.title}</Text>
+              <Text allowFontScaling={false} style={styles.textStyle}>{props.title}</Text>
             </View>
           </View>
         </Card>

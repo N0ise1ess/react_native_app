@@ -87,7 +87,7 @@ class InnerComponent extends Component {
               <Button onPress={this.generatePassword}
                       disabled={wifiPassIsPresent}
                       full rounded style={!wifiPassIsPresent ? styles.activeButtonStyle : styles.inactiveButtonStyle}>
-                <Text style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Сгенерировать пароль</Text>
+                <Text allowFontScaling={false} style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Сгенерировать пароль</Text>
               </Button>
             </View>
             <View style={styles.dataSection}>

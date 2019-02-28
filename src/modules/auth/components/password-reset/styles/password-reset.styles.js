@@ -42,7 +42,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   errorStyle: {
     color: 'red',
-    height: 50,
+    height: 80,
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     marginTop: 10,

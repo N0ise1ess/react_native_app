@@ -182,7 +182,7 @@ class InnerComponent extends Component {
   };
 
   _upperCase(word) {
-    return <NB.Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
+    return <NB.Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
   }
 
   componentDidUpdate(props) {
