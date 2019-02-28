@@ -1,11 +1,11 @@
 import { Button, Container, Text } from 'native-base';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { img_email, img_make_call, img_start_chat, img_teacher } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
+import {CustomIcon} from "../../../shared/components/custom-icon";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -36,11 +36,11 @@ class InnerComponent extends Component {
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            <View style={styles.imgTeacher} />
+            <View style={[styles.imgTeacher, {width: 40, height: 40}]} />
             <Image source={{ uri: 'https://i.imgur.com/Fy3Xj9j.png' }} style={styles.photoStyle} />
           </View>
           <View style={styles.sectionStyle}>
-            <Image source={img_teacher} style={styles.imgTeacher} />
+            <CustomIcon name={'teacher'} style={styles.imgTeacher} />
             <View style={{ flex: 1 }}>
               <Text style={styles.nameStyle}>Иванов Иван Иванович</Text>
               <View style={styles.info}>
@@ -55,7 +55,7 @@ class InnerComponent extends Component {
                   <Text style={styles.dataStyle}>example@example.com</Text>
                 </View>
                 <Button style={styles.btnImageStyle} info>
-                  <Image source={img_email} style={styles.imageStyle} />
+                  <CustomIcon name={'message'} style={styles.imageStyle} />
                 </Button>
               </View>
               <View style={[styles.dataSection, styles.info]}>
@@ -64,7 +64,7 @@ class InnerComponent extends Component {
                   <Text style={styles.dataStyle}>+7 (979) 234-56-78</Text>
                 </View>
                 <Button style={styles.btnImageStyle} info>
-                  <Image source={img_make_call} style={styles.imageStyle} />
+                  <CustomIcon name={'call'} style={styles.imageStyle} />
                 </Button>
               </View>
               <View style={[styles.dataSection, styles.info]}>
@@ -72,7 +72,7 @@ class InnerComponent extends Component {
                   <Text style={styles.dataStyle}>Написать в чат</Text>
                 </View>
                 <Button style={styles.btnImageStyle}>
-                  <Image source={img_start_chat} style={styles.imageStyle} />
+                  <CustomIcon name={'chat_1'} style={styles.imageStyle} />
                 </Button>
               </View>
             </View>
