@@ -1,7 +1,7 @@
 import moment from 'moment';
 import {Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text} from 'native-base';
 import React, { Component } from 'react';
-import { View, Linking, TouchableOpacity } from 'react-native';
+import { View, Linking, TouchableOpacity, NativeModules } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getFinancePayment, getFinanceScholarships } from '../../../../actions/financeAction';
@@ -171,7 +171,7 @@ class InnerComponent extends Component {
 
         {debt > 0 && currentTab === 0 ?
         <View style={styles.paymentButton}>
-          <Button onPress={this.openSberbank}
+          <Button onPress={this.handleOpenSberbank}
                   full rounded style={{backgroundColor: '#e91b47'}}>
             {this._upperCase("оплата в сбербанк-онлайн",
               {fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize), color: 'white'})}
@@ -182,13 +182,10 @@ class InnerComponent extends Component {
     );
   }
 
-  openSberbank = () => {
-    Linking.canOpenURL('sberbank://').then(supported => {
-      if (supported) Linking.openURL('sberbank://')
-      else Linking.openURL('https://online.sberbank.ru/')
-    }).catch(err => {
-      console.log("error linking open", err)
-    })
+  handleOpenSberbank = () => {
+      NativeModules.CampusModule.openSberbank(() => {
+        Linking.openURL('https://online.sberbank.ru/')
+      })
   };
 
   switchGroup(direction) {
