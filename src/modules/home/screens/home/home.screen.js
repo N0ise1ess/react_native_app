@@ -28,6 +28,7 @@ const cardList = [
     list: [
       {
         title: 'Зачетная\nкнижка',
+        route: 'ScratchBook',
         image: img_rb,
       },
       {
