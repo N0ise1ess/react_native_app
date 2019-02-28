@@ -69,7 +69,7 @@ class InnerComponent extends React.Component {
               <Image source={img_logo} resizeMode="contain" style={styles.imageStyle} />
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
-                <Text allowFontScaling={false} style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
                 <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
                   Восстановить пароль
                 </Text>

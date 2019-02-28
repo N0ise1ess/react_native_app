@@ -30,4 +30,8 @@ export default {
     isLoaded: false,
     text: 'Загрузка...',
   },
+  personalityReducer: {
+    searching: false,
+    personalities: []
+  }
 };

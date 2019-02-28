@@ -1,4 +1,4 @@
-import { Button, Container, Content, Icon, Input, Item, List, ListItem, Text } from 'native-base';
+import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -6,45 +6,7 @@ import { connect } from 'react-redux';
 import { img_teacher } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
-
-const itemList = [
-  {
-    fullName: 'Иванов Иван Иванович',
-    position: 'Проректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    fullName: 'Иванов Георгий Петрович',
-    position: 'Ректор',
-    workPlace: 'Администрация',
-    image: img_teacher,
-  },
-];
+import {findPersonalityByName } from "../../../../actions/personalityAction";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -55,60 +17,74 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: styles(props.fontSize),
+      styles: styles(props.fontSize)
     };
   }
+
+  componentWillMount() {
+    //Getting first 50 contacts
+    this.props.findPersonalityByName('', 50, null)
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
   render() {
-    const { userStatus, navigation, token } = this.props;
-    const {styles} = this.state;
+    const { userStatus, navigation, token, personalities, personalitiesIsLoading } = this.props;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
           <Icon name="ios-search" style={styles.searchIcon} />
           <Input
             style={styles.searchInput}
-            placeholder="Поиск по ФИО или должности"
+            placeholder="Поиск по ФИО"
             value={this.state.searchedText}
             onChangeText={text => this.setState({ searchedText: text })}
           />
-          {/*<Button transparent onPress={this.onHandleSubmit}>*/}
-            {/*<Text>Найти</Text>*/}
-          {/*</Button>*/}
+          <Button transparent onPress={this.onHandleSubmit}>
+            <Text>Найти</Text>
+          </Button>
         </Item>
         <Content>
+          {!personalitiesIsLoading ?
           <List
             style={styles.listStyle}
-            dataArray={itemList}
+            dataArray={personalities}
             renderRow={item => (
               <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
-                <Image source={item.image} style={styles.iconStyle} />
+                <Image source={img_teacher} style={styles.iconStyle} />
                 <View style={styles.columnStyle}>
-                  <Text style={styles.titleStyle}>{item.fullName}</Text>
-                  <Text style={[styles.textStyle, {color: '#979797'}]}>{item.position}</Text>
-                  <Text style={styles.textStyle}>{item.workPlace}</Text>
+                  <Text style={styles.titleStyle}>{item.name}</Text>
+                  <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
+                  <Text style={styles.textStyle}>{item.department}</Text>
                 </View>
               </ListItem>
             )}
-          />
+          /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
+  }
+
+  onHandleSubmit = () => {
+    this.props.findPersonalityByName(this.state.searchedText)
+    this.setState({searchedPersonalities : []})
   }
 }
 
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
+    ...state.personalityReducer,
     ...state.settings,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
+  findPersonalityByName: (name, size, page) => dispatch(findPersonalityByName(name, size, page)),
 });
 
 export const PersonalitiesScreen = connect(

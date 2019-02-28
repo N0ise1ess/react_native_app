@@ -28,8 +28,10 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   listStyle: {},
   columnStyle: {
+    flex:1,
     flexDirection: 'column',
     alignItems: 'flex-start',
+    flexWrap: 'wrap'
   },
   titleStyle: {
     fontWeight: 'bold',
