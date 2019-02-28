@@ -16,11 +16,11 @@ export const styles = (fontSize) => StyleSheet.create({
     tintColor: '#2386e1',
   },
   listItemStyle: {
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
     marginBottom: 5,
     backgroundColor: '#fff',
-    width: '100%',
+    flex:1,
     marginLeft: 0,
     paddingLeft: 0,
     paddingRight: 0,
@@ -28,7 +28,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   listStyle: {},
   columnStyle: {
-    flex:1,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
     flexWrap: 'wrap'

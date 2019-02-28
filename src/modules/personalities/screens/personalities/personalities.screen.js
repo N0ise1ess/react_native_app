@@ -7,6 +7,49 @@ import { img_teacher } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {findPersonalityByName } from "../../../../actions/personalityAction";
+import {News} from "../../../news/components/news";
+
+
+const itemList = [
+  {
+    name: 'Иванов Иван Иванович',
+    post: 'Проректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+  {
+    name: 'Иванов Георгий Петрович',
+    post: 'Ректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+  {
+    name: 'Иванов Георгий Петрович',
+    post: 'Ректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+  {
+    name: 'Иванов Георгий Петрович',
+    post: 'Ректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+  {
+    name: 'Иванов Георгий Петрович',
+    post: 'Ректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+  {
+    name: 'Иванов Георгий Петрович',
+    post: 'Ректор',
+    department: 'Администрация',
+    image: img_teacher,
+  },
+];
+
+const alphabets = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'.split('');
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -46,23 +89,41 @@ class InnerComponent extends Component {
             <Text>Найти</Text>
           </Button>
         </Item>
-        <Content>
-          {!personalitiesIsLoading ?
-          <List
-            style={styles.listStyle}
-            dataArray={personalities}
-            renderRow={item => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
-                <Image source={img_teacher} style={styles.iconStyle} />
-                <View style={styles.columnStyle}>
-                  <Text style={styles.titleStyle}>{item.name}</Text>
-                  <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
-                  <Text style={styles.textStyle}>{item.department}</Text>
-                </View>
-              </ListItem>
-            )}
-          /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
-        </Content>
+        <View style={{flex:9, flexDirection: 'row'}}>
+          <View style={{flex: 0.1,
+            borderWidth: 1,
+            borderColor: 'lime',
+            paddingBottom: 15,
+            borderBottomRightRadius: 15,
+            borderTopRightRadius: 15,
+            backgroundColor: '#163D7D',
+            alignContent:'center',
+            marginBottom: 5}}>
+            {alphabets.map((item, index) => <Text
+              adjustsFontSizeToFit={true}
+              style={{color:'white',
+                fontSize: 8.4,
+                alignSelf: 'center'}}
+              key={index}>{item.toUpperCase()}</Text>)}
+          </View>
+          <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
+            {!false ?
+                <List
+                  style={styles.listStyle}
+                  dataArray={itemList}
+                  renderRow={item => (
+                    <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
+                      <Image source={img_teacher} style={styles.iconStyle} />
+                      <View style={styles.columnStyle}>
+                        <Text style={styles.titleStyle}>{item.name}</Text>
+                        <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
+                        <Text style={styles.textStyle}>{item.department}</Text>
+                      </View>
+                    </ListItem>
+
+                  )}/>: <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
+          </Content>
+        </View>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
