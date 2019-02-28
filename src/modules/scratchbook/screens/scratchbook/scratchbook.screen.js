@@ -179,9 +179,10 @@ class InnerComponent extends Component {
             <CustomIcon name="arrow_right" style={styles.iconStyle}/>
           </TouchableOpacity>
         </View>
-        <Tabs style={styles.tabs}
+        <Tabs
+          tabContainerStyle={{elevation : 0}}
           onChangeTab={({ i }) => this.setState({ currentTab: i })}
-          tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
+          tabBarUnderlineStyle={{ backgroundColor: 'transparent', border: 0 }}>
           {this._renderResult()}
           {this._renderAttendance()}
         </Tabs>
@@ -193,7 +194,8 @@ class InnerComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    ...state.authReducer
+    ...state.authReducer,
+    ...state.settings,
   };
 };
 

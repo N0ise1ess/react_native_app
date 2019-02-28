@@ -37,7 +37,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
     textAlign: 'center',
   },
   tabSectionStyle: {

@@ -42,8 +42,8 @@ class InnerComponent extends Component {
     <View style={[styles.header_section]}>
       <Text style={{fontWeight: 'bold', fontSize: 14}}>{section.name}</Text>
     </View>
-    <View style={{flexDirection: 'row', width: 110, marginRight: 20}}>
-      <View style={{width: 80, marginRight: 15}}>
+    <View style={{flexDirection: 'row', width: 90, marginRight: 20}}>
+      <View style={{marginRight: 15}}>
        <Hours skipped={section.hoursMissed} held={section.hours} />
       </View>
       <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
@@ -78,6 +78,7 @@ class InnerComponent extends Component {
           <Text style={styles.list_header_text}>ПРОВЕДЕНО</Text>
         </View>
         <Accordion
+          underlayColor="transparent"
           activeSections={cards}
           sections={this.props.data}
           renderHeader={this._renderHeader}
@@ -90,7 +91,7 @@ class InnerComponent extends Component {
               {general.title}
             </Text>
           </View>
-          <View style={{width: 110}}>
+          <View style={{width: 120}}>
             <Hours isSummary={true} skipped={general.attendance.skipped} held={general.attendance.held} />
           </View>
         </View>
@@ -98,4 +99,10 @@ class InnerComponent extends Component {
     }
 }
 
-export const Attendance = connect()(InnerComponent);
+const mapStateToProps = state => {
+  return {
+    ...state.settings,
+  };
+};
+
+export const Attendance = connect(mapStateToProps)(InnerComponent);

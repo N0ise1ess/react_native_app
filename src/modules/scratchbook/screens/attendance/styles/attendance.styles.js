@@ -51,6 +51,8 @@ export const styles = (fontSize) => StyleSheet.create({
   header_section: {
     flexWrap: 'wrap',
     flexGrow: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   content: {
     backgroundColor: '#CED8DA',
