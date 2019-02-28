@@ -64,4 +64,9 @@ export const endpoints = {
     /** ??? */
     books: 'http://opencode.su/campus/library/book/me',
   },
+  /** Персоналии */
+  personality: {
+    /** Поиск по сотрудникам */
+    personalityUrl: ' http://opencode.su/campus/integration/api/employee',
+  },
 };

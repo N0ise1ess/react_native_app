@@ -133,3 +133,11 @@ export function editPhoneNumber(phoneNumber, token) {
     },
   });
 }
+
+export function getPersonalityByName(name = '', size = 1, page) {
+  let endpoint = `${endpoints.personality.personalityUrl}?search=${name}&size=${size}`
+  if (page) {
+    endpoint = endpoint + `&page=${page}`
+  }
+  return axios.get(endpoint);
+}
