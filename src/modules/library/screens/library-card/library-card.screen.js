@@ -37,7 +37,7 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return <Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   renderLibraryCard = () => {

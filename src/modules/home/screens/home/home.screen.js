@@ -179,7 +179,7 @@ class InnerComponent extends Component {
                   <CardItem
                     key={index}
                     image={item.image}
-                    title={<Text style={styles.text}>{item.title}</Text>}
+                    title={<Text allowFontScaling={false} style={styles.text}>{item.title}</Text>}
                     navigate={() => this.props.navigation.navigate(item.route ? item.route : '')}
                   />
                 ))}
