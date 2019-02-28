@@ -5,16 +5,16 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CampusPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.asList(
-                new SharedModule(reactContext)
-        );
+        List<NativeModule> modules = new ArrayList<>();
+        modules.add(new SharedModule(reactContext));
+        return modules;
     }
 
     @Override
