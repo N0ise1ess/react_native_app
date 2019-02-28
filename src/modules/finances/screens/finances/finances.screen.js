@@ -12,7 +12,7 @@ import {
   Right,
 } from 'native-base';
 import React, { Component } from 'react';
-import { View, Linking, TouchableOpacity } from 'react-native';
+import { View, Linking, TouchableOpacity, NativeModules } from 'react-native';
 import { connect } from 'react-redux';
 
 import {
@@ -234,7 +234,7 @@ class InnerComponent extends Component {
         {debt > 0 && currentTab === 0 ? (
           <View style={styles.paymentButton}>
             <Button
-              onPress={this.openSberbank}
+              onPress={this.handleOpenSberbank}
               full
               rounded
               style={{ backgroundColor: '#e91b47' }}
@@ -254,15 +254,10 @@ class InnerComponent extends Component {
     );
   }
 
-  openSberbank = () => {
-    Linking.canOpenURL('sberbank://')
-      .then(supported => {
-        if (supported) Linking.openURL('sberbank://');
-        else Linking.openURL('https://online.sberbank.ru/');
-      })
-      .catch(err => {
-        console.log('error linking open', err);
-      });
+  handleOpenSberbank = () => {
+    NativeModules.CampusModule.openSberbank(() => {
+      Linking.openURL('https://online.sberbank.ru/');
+    })
   };
 
   getNextIndex = (directionName, currentIndex) => {
