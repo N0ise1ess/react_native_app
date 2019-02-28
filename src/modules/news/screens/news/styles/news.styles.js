@@ -48,13 +48,13 @@ export const styles = (fontSize) => StyleSheet.create({
     bottom: 3,
   },
   tabStyle: {
-    width: width / 3,
+    width: width / 3 - 10,
     backgroundColor: '#163D7D',
     marginTop: 10,
     marginBottom: 5,
     paddingLeft: 0,
     paddingRight: 0,
-    paddingTop: 0,
+    paddingTop: -10,
     paddingBottom: 0,
     borderWidth: 1,
     borderColor: '#fff',
@@ -80,7 +80,7 @@ export const styles = (fontSize) => StyleSheet.create({
     textAlign: 'center',
   },
   tabSectionStyle: {
-    paddingTop: 10,
+    paddingTop: 0,
     backgroundColor: '#CED8DA',
   },
   sliderContainer: {
