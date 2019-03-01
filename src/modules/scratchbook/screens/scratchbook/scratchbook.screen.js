@@ -7,6 +7,7 @@ import { Container, Content, Tab, TabHeading, Tabs, Text } from 'native-base';
 import { styles } from './styles';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { Attendance } from '../attendance';
+import { Result } from '../result';
 
 const dataList = [
   {
@@ -135,9 +136,10 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
-          {/* TODO */}
-        </Content>
+        <Result
+          // TODO pass semester rersult as prop when data will be ready
+          //data={dataList[currentYearId].semesters[currentSemesterId]}
+          fontSize={this.props.fontSize} />
       </Tab>
     );
   };
