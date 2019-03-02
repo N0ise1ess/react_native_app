@@ -141,3 +141,8 @@ export function getPersonalityByName(name = '', size = 1, page) {
   }
   return axios.get(endpoint);
 }
+
+export function getPersonalityById(personId) {
+  const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
+  return axios.get(endpoint);
+}
