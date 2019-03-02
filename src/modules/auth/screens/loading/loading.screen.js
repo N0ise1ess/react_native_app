@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { initLoad } from '../../../../actions/loadingAction';
 import { img_logo_white } from '../../../../assets/images';
 import { styles } from './styles';
-import {setFontSize} from '../../../../actions/settingsAction';
+import { setFontSize } from '../../../../actions/settingsAction';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -17,7 +17,9 @@ class InnerComponent extends React.Component {
 
   componentWillReceiveProps(props) {
     if (props.isLoaded) {
-      this.props.navigation.navigate(this.props.token !== null ? 'App' : 'Auth');
+      this.props.navigation.navigate(
+        this.props.token !== null ? 'App' : 'Auth',
+      );
     }
   }
 
@@ -29,7 +31,7 @@ class InnerComponent extends React.Component {
     try {
       const fontSize = await AsyncStorage.getItem('fontSize');
       fontSize && this.props.setFontSize(fontSize);
-      console.log('fontSize', fontSize)
+      console.log('fontSize', fontSize);
     } catch (error) {
       // Error retrieving data
       console.log(error);
@@ -37,14 +39,19 @@ class InnerComponent extends React.Component {
   };
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize &&
+      this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <View style={styles.container}>
-        <Image source={img_logo_white} resizeMode="contain" style={styles.image} />
+        <Image
+          source={img_logo_white}
+          resizeMode="center"
+          style={styles.image}
+        />
         <Text style={styles.text}>{this.props.text}</Text>
         <View style={styles.progressBar}>
           <Bar
@@ -71,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   initLoad: () => dispatch(initLoad()),
-  setFontSize: (fontSize) => dispatch(setFontSize(fontSize))
+  setFontSize: fontSize => dispatch(setFontSize(fontSize)),
 });
 
 export const LoadingScreen = connect(
