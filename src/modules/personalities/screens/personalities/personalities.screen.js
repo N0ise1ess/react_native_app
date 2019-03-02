@@ -92,19 +92,24 @@ class InnerComponent extends Component {
         <View style={{flex:9, flexDirection: 'row'}}>
           <View style={{flex: 0.1,
             borderWidth: 1,
-            borderColor: 'lime',
-            paddingBottom: 15,
+            borderColor: 'transparent',
             borderBottomRightRadius: 15,
             borderTopRightRadius: 15,
             backgroundColor: '#163D7D',
-            alignContent:'center',
             marginBottom: 2}}>
-            {alphabets.map((item, index) => <Text
-              adjustsFontSizeToFit={true}
-              style={{color:'white',
-                fontSize: 8.4,
-                alignSelf: 'center'}}
-              key={index}>{item.toUpperCase()}</Text>)}
+            <View style={{flex: alphabets.length}}>
+              {alphabets.map((item, index) =>
+                <View style={{
+                  borderBottomWidth: index !== alphabets.length - 1 ? 1 : 0,
+                  justifyContent: 'center',
+                  alignItems:'center',
+                  borderBottomColor:'white',
+                  flex: 1/ alphabets.length}} key={index}>
+                  <Text style={{color:'white', alignSelf:'center', fontSize: 11}}
+                        numberOfLines={1}
+                        uppercase={true}>{item}</Text>
+                </View>)}
+            </View>
           </View>
           <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
             {!false ?
