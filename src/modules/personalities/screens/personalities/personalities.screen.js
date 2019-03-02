@@ -118,7 +118,7 @@ class InnerComponent extends Component {
                   )}/>: <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
           </Content>
         </View>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus} navigate={navigation.navigate} maxHeight={40} />
       </Container>
     );
   }
