@@ -76,6 +76,13 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
     paddingRight: 10,
   },
+  headerHours: {
+    marginRight: 10
+  },
+  emptyHours: {
+    marginRight: 0,
+    marginLeft: 25
+  },
   summaryHours: {
     flex: 2,
     paddingLeft: 10,

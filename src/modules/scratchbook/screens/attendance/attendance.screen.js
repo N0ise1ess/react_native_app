@@ -44,7 +44,7 @@ class InnerComponent extends Component {
         <Text style={styles.title}>{section.name}</Text>
       </View>
       <View style={[styles.endSection]}>
-        <View style={{marginRight: areHoursEmpty ? 0 : 10, marginLeft: areHoursEmpty ? 25 : 0}}>
+        <View style={[styles.headerHours, areHoursEmpty && styles.emptyHours]}>
           <Hours skipped={section.hoursMissed} held={section.hours} />
         </View>
         <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
