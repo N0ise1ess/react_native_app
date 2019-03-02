@@ -2,6 +2,8 @@ import { StyleSheet, Dimensions } from 'react-native';
 import * as settingsFonts from '../../../../../constants/styles';
 import {getSizeFonts} from '../../../../shared/functions/styles';
 
+const { height } = Dimensions.get("window")
+
 export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
@@ -51,8 +53,9 @@ export const styles = (fontSize) => StyleSheet.create({
   searchBar: {
     paddingLeft: 10,
     paddingRight: 10,
-    marginBottom: 10,
+    marginBottom: 3,
     backgroundColor: '#fff',
+    height: height * 0.07
   },
   searchInput: {
     fontFamily: 'MyriadPro-Regular',
@@ -61,4 +64,22 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270',
   },
+  alphabetContainer: {
+    flex: 0.1,
+    borderWidth: 1,
+    borderColor: 'transparent',
+    borderBottomRightRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: '#163D7D',
+    marginBottom: 2
+  },
+  wordContainer(alphabetLength, index) {
+    return {
+      borderBottomWidth: index !== alphabetLength - 1 ? 1 : 0,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomColor: 'white',
+      flex: 1 / alphabetLength
+    }
+  }
 });
