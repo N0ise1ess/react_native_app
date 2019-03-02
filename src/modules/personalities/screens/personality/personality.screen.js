@@ -1,6 +1,6 @@
 import {Button, Container, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Linking } from 'react-native';
 import { connect } from 'react-redux';
 
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -39,14 +39,13 @@ class InnerComponent extends Component {
     const { userStatus, navigation, lastName, firstName, secondName, personalities, personalitiesIsLoading } = this.props;
     const { editableMode, text, styles } = this.state;
     const person = personalities;
-    // TODO replace <Image source={{ uri: 'https://i.imgur.com/Fy3Xj9j.png' }} на person.photo
     return (
       <Container style={styles.container}>
         {!personalitiesIsLoading ?
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
             <View style={[styles.imgTeacher, {width: 40, height: 40}]} />
-            <Image source={{ uri: 'https://i.imgur.com/Fy3Xj9j.png' }} style={styles.photoStyle} />
+            <Image source={{ uri: `data:image/png;base64,${person.photo}` }} style={styles.photoStyle} />
           </View>
           <View style={styles.sectionStyle}>
             <CustomIcon name={'teacher'} style={styles.imgTeacher} />
@@ -64,7 +63,8 @@ class InnerComponent extends Component {
                   <Text style={styles.dataStyle}>{person.email}</Text>
                 </View>
                 <Button style={styles.btnImageStyle} info>
-                  <CustomIcon name={'message'} style={styles.imageStyle} />
+                  <CustomIcon name={'message'} style={styles.imageStyle}
+                              onPress={() => this.sendEmail(person.email)} />
                 </Button>
               </View>
               <View style={[styles.dataSection, styles.info]}>
@@ -73,7 +73,8 @@ class InnerComponent extends Component {
                   <Text style={styles.dataStyle}>{person.phoneNumber}</Text>
                 </View>
                 <Button style={styles.btnImageStyle} info>
-                  <CustomIcon name={'call'} style={styles.imageStyle} />
+                  <CustomIcon name={'call'} style={styles.imageStyle}
+                              onPress={() => this.makeACall(person.phoneNumber)} />
                 </Button>
               </View>
               <View style={[styles.dataSection, styles.info]}>
@@ -90,6 +91,18 @@ class InnerComponent extends Component {
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
+  }
+
+  makeACall(phoneNumber) {
+    if (phoneNumber.length > 0) {
+      Linking.openURL(`tel://${phoneNumber}`)
+    }
+  }
+
+  sendEmail(email) {
+    if (email.length > 0) {
+      Linking.openURL(`mailto:${email}`)
+    }
   }
 }
 
