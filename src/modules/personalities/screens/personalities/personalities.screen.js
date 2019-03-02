@@ -98,7 +98,7 @@ class InnerComponent extends Component {
             borderTopRightRadius: 15,
             backgroundColor: '#163D7D',
             alignContent:'center',
-            marginBottom: 5}}>
+            marginBottom: 2}}>
             {alphabets.map((item, index) => <Text
               adjustsFontSizeToFit={true}
               style={{color:'white',
