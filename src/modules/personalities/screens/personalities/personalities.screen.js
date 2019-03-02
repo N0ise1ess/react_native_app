@@ -52,7 +52,7 @@ class InnerComponent extends Component {
             style={styles.listStyle}
             dataArray={personalities}
             renderRow={item => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
+              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality', {personId : item.personId})}>
                 <Image source={img_teacher} style={styles.iconStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.name}</Text>
