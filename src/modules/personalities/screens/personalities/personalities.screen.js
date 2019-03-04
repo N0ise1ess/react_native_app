@@ -1,6 +1,6 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Animated, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { img_teacher } from '../../../../assets/images';
@@ -60,7 +60,8 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: styles(props.fontSize)
+      styles: styles(props.fontSize),
+      shown : new Animated.Value(1),
     };
   }
 
@@ -75,6 +76,7 @@ class InnerComponent extends Component {
   render() {
     const { userStatus, navigation, token, personalities, personalitiesIsLoading } = this.props;
     const { styles } = this.state;
+    let { _value } = this.state.shown;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
@@ -89,35 +91,35 @@ class InnerComponent extends Component {
             <Text>Найти</Text>
           </Button>
         </Item>
-        <View style={{flex:9, flexDirection: 'row'}}>
-          <View style={styles.alphabetContainer}>
-            <View style={{flex: alphabets.length}}>
-              {alphabets.map((item, index) =>
-                <View style={styles.wordContainer(alphabets.length, index)} key={index}>
-                  <Text style={{color:'white', alignSelf:'center', fontSize: 11}}
-                        numberOfLines={1}
-                        uppercase={true}>{item}</Text>
-                </View>)}
+          <View style={{flex:9, flexDirection: 'row'}}>
+            <View style={[styles.alphabetContainer]}>
+              <View style={{flex: alphabets.length}}>
+                {alphabets.map((item, index) =>
+                  <View style={styles.wordContainer(alphabets.length, index)} key={index}>
+                    <Text style={{color:'white', alignSelf:'center', fontSize: 11}}
+                          numberOfLines={1}
+                          uppercase={true}>{item}</Text>
+                  </View>)}
+              </View>
             </View>
-          </View>
-          <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
-            {!false ?
-                <List
-                  style={styles.listStyle}
-                  dataArray={itemList}
-                  renderRow={item => (
-                    <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
-                      <Image source={img_teacher} style={styles.iconStyle} />
-                      <View style={styles.columnStyle}>
-                        <Text style={styles.titleStyle}>{item.name}</Text>
-                        <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
-                        <Text style={styles.textStyle}>{item.department}</Text>
-                      </View>
-                    </ListItem>
+            <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
+              {!false ?
+                  <List
+                    style={styles.listStyle}
+                    dataArray={itemList}
+                    renderRow={item => (
+                      <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
+                        <Image source={img_teacher} style={styles.iconStyle} />
+                        <View style={styles.columnStyle}>
+                          <Text style={styles.titleStyle}>{item.name}</Text>
+                          <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
+                          <Text style={styles.textStyle}>{item.department}</Text>
+                        </View>
+                      </ListItem>
 
-                  )}/>: <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
-          </Content>
-        </View>
+                    )}/>: <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
+            </Content>
+          </View>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} maxHeight={40} />
       </Container>
     );
@@ -127,6 +129,22 @@ class InnerComponent extends Component {
     this.props.findPersonalityByName(this.state.searchedText)
     this.setState({searchedPersonalities : []})
   }
+
+  fadeIn = () => {
+    Animated.timing(this.state.shown, {
+      toValue: 1,
+      duration: 300,
+    }).start();
+    // this.setState({opa: new Animated.Value(1)})
+  };
+
+  fadeOut = () => {
+    Animated.timing(this.state.shown, {
+      toValue: 0,
+      duration: 300,
+    }).start()
+    // this.setState({shown: new Animated.Value(0)})
+  };
 }
 
 const mapStateToProps = state => {
