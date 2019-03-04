@@ -34,6 +34,9 @@ export const styles = (fontSize) => StyleSheet.create({
   imageStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: 'white',
+    alignContent: 'center',
+    alignSelf: 'center',
+    textAlignVertical: 'center'
   },
   imgTeacher: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_45, fontSize),
