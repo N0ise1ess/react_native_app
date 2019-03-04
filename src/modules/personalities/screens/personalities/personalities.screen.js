@@ -17,7 +17,8 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: styles(props.fontSize)
+      styles: styles(props.fontSize),
+      isLoading: false
     };
   }
 
@@ -26,12 +27,23 @@ class InnerComponent extends Component {
     this.props.findPersonalityByName('', 50, null)
   }
 
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      this.props.findPersonalityByName('', 50, null)
+      this.setState({isLoading: false})
+    });
+
+    this.props.navigation.addListener("didBlur", () => {
+      this.setState({isLoading: true})
+    });
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
   render() {
     const { userStatus, navigation, token, personalities, personalitiesIsLoading } = this.props;
-    const { styles } = this.state;
+    const { styles, isLoading } = this.state;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
@@ -47,7 +59,7 @@ class InnerComponent extends Component {
           </Button>
         </Item>
         <Content>
-          {!personalitiesIsLoading ?
+          {!personalitiesIsLoading && !isLoading ?
           <List
             style={styles.listStyle}
             dataArray={personalities}
