@@ -17,7 +17,7 @@ export const styles = (fontSize) => StyleSheet.create({
     width: '100%',
     borderWidth: 1,
     borderColor: '#fff',
-    backgroundColor: '#163D7D',
+    backgroundColor: '#0E63EE',
   },
   tabHeadingRight: {
     borderTopRightRadius: 25,
@@ -51,7 +51,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingRight: 20,
   },
   activeTabStyle: {
-    backgroundColor: '#0E63EE',
+    backgroundColor: '#163D7D',
   },
   year: {
     marginTop: 20,

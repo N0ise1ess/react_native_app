@@ -145,10 +145,10 @@ class InnerComponent extends Component {
   };
 
   _renderAttendance = () => {
-    const { currentYearId, currentSemesterId, styles } = this.state;
+    const { currentYearId, currentSemesterId, styles, currentTab } = this.state;
     return <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
       <View
-        style={[styles.tabHeadingStyle, styles.tabHeadingRight, this.state.currentTab % 3 === 0 && styles.activeTabStyle]}>
+        style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 0 && styles.activeTabStyle]}>
         {this._upperCase('Посещаемость')}
       </View>
       </TabHeading>}>
