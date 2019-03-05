@@ -1,13 +1,14 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
-import React, { Component } from 'react';
-import { Image, View, Animated, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Image, View, Animated, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-import { img_teacher } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
-import { styles } from './styles';
-import {findPersonalityByName } from "../../../../actions/personalityAction";
+import {img_teacher} from '../../../../assets/images';
+import {ButtonBack, FooterSection} from '../../../shared/components';
+import {styles} from './styles';
+import {findPersonalityByName} from "../../../../actions/personalityAction";
 import {News} from "../../../news/components/news";
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
 const itemList = [
@@ -52,16 +53,16 @@ const itemList = [
 const alphabets = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'.split('');
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({navigation}) => ({
     title: 'Персоналии',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
   });
 
   constructor(props) {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      shown : new Animated.Value(1),
+      shown: new Animated.Value(1),
     };
   }
 
@@ -73,61 +74,80 @@ class InnerComponent extends Component {
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
+
+  renderLeftActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+    const { styles } = this.state
+    let alphabetsLocal = alphabets;
+    return (
+      <Animated.View style={[{transform: [{translateX: trans}]}]}>
+        <View style={[styles.alphabetContainer]}>
+          <View style={{flex: alphabetsLocal.length}}>
+            {alphabetsLocal.map((item, index) =>
+              <View style={styles.wordContainer(alphabetsLocal.length, index)} key={index}>
+                <Text style={{color: 'white', alignSelf: 'center', fontSize: 11}}
+                      numberOfLines={1}
+                      uppercase={true}>{item}</Text>
+              </View>)}
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
   render() {
-    const { userStatus, navigation, token, personalities, personalitiesIsLoading } = this.props;
-    const { styles } = this.state;
-    let { _value } = this.state.shown;
+    const {userStatus, navigation, token, personalities, personalitiesIsLoading} = this.props;
+    const {styles} = this.state;
+    let {_value} = this.state.shown;
     return (
       <Container style={styles.container}>
         <Item style={styles.searchBar}>
-          <Icon name="ios-search" style={styles.searchIcon} />
+          <Icon name="ios-search" style={styles.searchIcon}/>
           <Input
             style={styles.searchInput}
             placeholder="Поиск по ФИО"
             value={this.state.searchedText}
-            onChangeText={text => this.setState({ searchedText: text })}
+            onChangeText={text => this.setState({searchedText: text})}
           />
           <Button transparent onPress={this.onHandleSubmit}>
             <Text>Найти</Text>
           </Button>
         </Item>
-          <View style={{flex:9, flexDirection: 'row'}}>
-            <View style={[styles.alphabetContainer]}>
-              <View style={{flex: alphabets.length}}>
-                {alphabets.map((item, index) =>
-                  <View style={styles.wordContainer(alphabets.length, index)} key={index}>
-                    <Text style={{color:'white', alignSelf:'center', fontSize: 11}}
-                          numberOfLines={1}
-                          uppercase={true}>{item}</Text>
-                  </View>)}
-              </View>
-            </View>
-            <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
-              {!false ?
-                  <List
-                    style={styles.listStyle}
-                    dataArray={itemList}
-                    renderRow={item => (
-                      <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
-                        <Image source={img_teacher} style={styles.iconStyle} />
-                        <View style={styles.columnStyle}>
-                          <Text style={styles.titleStyle}>{item.name}</Text>
-                          <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
-                          <Text style={styles.textStyle}>{item.department}</Text>
-                        </View>
-                      </ListItem>
+        <View style={{flex: 9, flexDirection: 'row'}}>
+          <Swipeable
+            childrenContainerStyle={styles.shadow}
+            renderRightActions={this.renderLeftActions}>
 
-                    )}/>: <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/> }
-            </Content>
-          </View>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} maxHeight={40} />
+          </Swipeable>
+          <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
+            {!false ?
+              <List
+                style={styles.listStyle}
+                dataArray={itemList}
+                renderRow={item => (
+                  <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
+                    <Image source={img_teacher} style={styles.iconStyle}/>
+                    <View style={styles.columnStyle}>
+                      <Text style={styles.titleStyle}>{item.name}</Text>
+                      <Text style={[styles.textStyle, {color: '#979797'}]}>{item.post}</Text>
+                      <Text style={styles.textStyle}>{item.department}</Text>
+                    </View>
+                  </ListItem>
+
+                )}/> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>}
+          </Content>
+        </View>
+        <FooterSection userStatus={userStatus} navigate={navigation.navigate} maxHeight={40}/>
       </Container>
     );
   }
 
   onHandleSubmit = () => {
     this.props.findPersonalityByName(this.state.searchedText)
-    this.setState({searchedPersonalities : []})
+    this.setState({searchedPersonalities: []})
   }
 
   fadeIn = () => {

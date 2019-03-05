@@ -81,5 +81,20 @@ export const styles = (fontSize) => StyleSheet.create({
       borderBottomColor: 'white',
       flex: 1 / alphabetLength
     }
+  },
+  shadow: {
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 15, //IOS
+    elevation: 2, // Android
+    borderWidth: 1,
+    borderColor: 'transparent',
+    borderBottomRightRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: 'grey',
+    marginBottom: 2,
+    flex:1,
+    width: 15
   }
 });
