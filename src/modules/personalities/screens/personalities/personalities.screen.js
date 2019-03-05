@@ -23,8 +23,8 @@ class InnerComponent extends Component {
   }
 
   componentWillMount() {
-    //Getting first 50 contacts
-    this.props.findPersonalityByName('', 50, null)
+    //Getting first 20 contacts
+    this.props.findPersonalityByName('', 20, null)
   }
 
   componentDidMount() {

@@ -46,6 +46,7 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: '300',
     color: '#1e1e1e',
     alignSelf: 'flex-start',
+    marginRight: 5
   },
   //Search tabSectionStyle
   searchBar: {
