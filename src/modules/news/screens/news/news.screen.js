@@ -49,7 +49,9 @@ class InnerComponent extends Component {
           fontSize={this.props.fontSize}
           key={`${index}_news`}
           title={item.title}
-          time={item.time}
+          time={m(item.time)
+            .format('LL')
+            .replace('г.', '')}
           image={item.image}
           description={item.text}
           isTruncate={true}
@@ -81,7 +83,9 @@ class InnerComponent extends Component {
         newsType="advertisement"
         key={`${index}_updates`}
         title={item.title}
-        time={item.time}
+        time={m(item.time)
+          .format('LL')
+          .replace('г.', '')}
         description={item.text}
         isTruncate={true}
         onPress={() =>
@@ -98,16 +102,22 @@ class InnerComponent extends Component {
 
   renderEvents = events => <React.Fragment>
       <RN.FlatList
-         ref={'events'}
-          data={events}
-          renderItem={({item, index}) => <News
-          fontSize={this.props.fontSize}
-          newsType="advertisementr"
-          key={`${index}_events`}
-          title={item.title}
-          time={item.time}
-          description={item.text}
-        />}
+        ref={'events'}
+        data={events}
+        renderItem={({item, index}) => <RN.View key={`${index}_events`}>
+            <RN.Text 
+              style={this.state.styles.textEvent}
+            >
+              {m(item.time).format('LL').replace('г.', '')}
+            </RN.Text>
+            <News
+              fontSize={this.props.fontSize}
+              newsType="events"
+              time={m(item.time).format('HH:mm')}
+              title={item.title}
+              description={item.text}
+            />
+        </RN.View>}
       />
     </React.Fragment>
 
@@ -183,7 +193,7 @@ class InnerComponent extends Component {
     const tabY = RN.Animated.add(this.scroll, this.headerY);
     const tabs = ['news', 'updates', 'events'];
     const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
-    console.log(height)
+    console.log(event)
     return (
       <NB.Container>
         <RN.Animated.View
