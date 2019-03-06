@@ -40,10 +40,7 @@ export const News = props => {
         {props.time && (
           <CardItem style={style.sectionTime}>
             <Text style={style.timeStyle}>
-              {props.time &&
-                m(props.time)
-                  .format('LL')
-                  .replace('г.', '')}
+              {props.time}
             </Text>
           </CardItem>
         )}
