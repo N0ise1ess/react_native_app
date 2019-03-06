@@ -180,20 +180,13 @@ class InnerComponent extends Component {
   componentDidUpdate(props, state) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
-
-  // componentWillUpdate(props, state) {
-  //   const tabs = ['news', 'updates', 'events']
-  //   state.height !== this.refs[tabs[state.currentTab]]._listRef._scrollMetrics.contentLengthr
-  //     && this.setState({height: this.refs[tabs[state.currentTab]]._listRef._scrollMetrics.contentLength});
-  // }
-
+  
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
     const tabs = ['news', 'updates', 'events'];
-    const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
-    console.log(event)
+    // const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
     return (
       <NB.Container>
         <RN.Animated.View
@@ -220,7 +213,6 @@ class InnerComponent extends Component {
             zIndex: 0, 
             backgroundColor: '#CED8DA',
           }}
-          // maxHeight={400}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
           })}
@@ -266,7 +258,6 @@ class InnerComponent extends Component {
             >
               <NB.Container style={[
                   styles.tabSectionStyle, 
-                  {height: height}
                 ]}>
                 {news ? this.renderNews(news) : <NB.Spinner color="blue" />}
               </NB.Container>
