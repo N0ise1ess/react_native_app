@@ -186,7 +186,7 @@ class InnerComponent extends Component {
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
     const tabs = ['news', 'updates', 'events'];
-    // const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
+    const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
     return (
       <NB.Container>
         <RN.Animated.View
@@ -258,6 +258,7 @@ class InnerComponent extends Component {
             >
               <NB.Container style={[
                   styles.tabSectionStyle, 
+                  {height: height}
                 ]}>
                 {news ? this.renderNews(news) : <NB.Spinner color="blue" />}
               </NB.Container>
