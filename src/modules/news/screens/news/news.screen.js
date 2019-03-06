@@ -66,7 +66,7 @@ class InnerComponent extends Component {
           }
         />}
       />
-      <RN.View style={{flexDirection: "row", justifyContent: "center"}}>
+      <RN.View style={{flexDirection: "row", justifyContent: "center", marginTop: 10,}}>
         { this.props.isLoadingNews ? <NB.Spinner color="blue" /> :
           <NB.Button style={this.state.styles.buttonsPagination} onPress={() => this.props.getNews(this.props.newsPage + 1)}>
             <RN.Text style={this.state.styles.textEventWhite}>Показать еще</RN.Text>
@@ -180,12 +180,17 @@ class InnerComponent extends Component {
   componentDidUpdate(props, state) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
-  
+  isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+    const paddingToBottom = 20;
+    return layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom;
+  };
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
     const tabs = ['news', 'updates', 'events'];
+    let test = true;
     const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
     return (
       <NB.Container>
@@ -204,8 +209,9 @@ class InnerComponent extends Component {
           {isSliderShown && (slider ? this.renderSlider(slider, styles) : this.renderSlider(imagesOnLoading, styles))}
         </RN.Animated.View>
         <RN.Animated.ScrollView
+          // scrollToEnd={() => currentTab === 0 && this.props.getNews(this.props.newsPage + 1)}
+          scrollEventThrottle={400}
           contentContainerStyle={{ paddingTop: NAVBAR_HEIGHT / 5 }}
-          scrollEventThrottle={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
           style={{
@@ -215,6 +221,12 @@ class InnerComponent extends Component {
           }}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
+            listener: event => {
+              if (currentTab === 0 && test && this.isCloseToBottom(event.nativeEvent)) {
+                this.props.getNews(this.props.newsPage + 1);
+                test = false;
+              }
+            },
           })}
           ref={ref => (this._scrollView = ref)}
         >
