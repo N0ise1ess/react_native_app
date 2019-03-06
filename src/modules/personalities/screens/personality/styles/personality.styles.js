@@ -34,6 +34,9 @@ export const styles = (fontSize) => StyleSheet.create({
   imageStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: 'white',
+    alignContent: 'center',
+    alignSelf: 'center',
+    textAlignVertical: 'center'
   },
   imgTeacher: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_45, fontSize),
@@ -46,6 +49,8 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     color: '#1e1e1e',
+    paddingRight: 5,
+    marginRight: 5
   },
   label: {
     fontFamily: 'MyriadPro-Regular',
@@ -120,5 +125,6 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     color: '#1e1e1e',
     marginTop: 0,
+    paddingRight: 5,
   },
 });

@@ -1,4 +1,4 @@
-import {Button, Container, Spinner, Text} from 'native-base';
+import {Button, Container, Content, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
 import { Image, View, Linking } from 'react-native';
 import { connect } from 'react-redux';
@@ -41,53 +41,55 @@ class InnerComponent extends Component {
     const person = personalities;
     return (
       <Container style={styles.container}>
+        <Content>
         {!personalitiesIsLoading ?
-        <View style={styles.content}>
-          <View style={styles.sectionStyle}>
-            <View style={[styles.imgTeacher, {width: 40, height: 40}]} />
-            <Image source={{ uri: `data:image/png;base64,${person.photo}` }} style={styles.photoStyle} />
-          </View>
-          <View style={styles.sectionStyle}>
-            <CustomIcon name={'teacher'} style={styles.imgTeacher} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.nameStyle}>{person.name}</Text>
-              <View style={styles.info}>
-                <View>
-                  <Text style={styles.textStyle}>{person.post}</Text>
-                  <Text style={styles.departmentLabel}>{person.department}</Text>
+          <View style={styles.content}>
+            <View style={styles.sectionStyle}>
+              <View style={[styles.imgTeacher, {width: 40, height: 40}]} />
+              <Image source={{ uri: `data:image/png;base64,${person.photo}` }} style={styles.photoStyle} />
+            </View>
+            <View style={styles.sectionStyle}>
+              <CustomIcon name={'teacher'} style={styles.imgTeacher} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.nameStyle}>{person.name}</Text>
+                <View style={styles.info}>
+                  <View>
+                    <Text style={styles.textStyle}>{person.post}</Text>
+                    <Text style={styles.departmentLabel}>{person.department}</Text>
+                  </View>
                 </View>
-              </View>
-              <View style={[styles.dataSection, styles.info]}>
-                <View style={{ flexDirection: 'column' }}>
-                  {this.renderLabel('E-mail')}
-                  <Text style={styles.dataStyle}>{person.email}</Text>
+                <View style={[styles.dataSection, styles.info]}>
+                  <View style={{ flexDirection: 'column' }}>
+                    {this.renderLabel('E-mail')}
+                    <Text style={styles.dataStyle}>{person.email}</Text>
+                  </View>
+                  <Button style={styles.btnImageStyle} info>
+                    <CustomIcon name={'message'} style={styles.imageStyle}
+                                onPress={() => this.sendEmail(person.email)} />
+                  </Button>
                 </View>
-                <Button style={styles.btnImageStyle} info>
-                  <CustomIcon name={'message'} style={styles.imageStyle}
-                              onPress={() => this.sendEmail(person.email)} />
-                </Button>
-              </View>
-              <View style={[styles.dataSection, styles.info]}>
-                <View style={{ flexDirection: 'column' }}>
-                  {this.renderLabel('Телефон')}
-                  <Text style={styles.dataStyle}>{person.phoneNumber}</Text>
+                <View style={[styles.dataSection, styles.info]}>
+                  <View style={{ flexDirection: 'column' }}>
+                    {this.renderLabel('Телефон')}
+                    <Text style={styles.dataStyle}>{person.phoneNumber}</Text>
+                  </View>
+                  <Button style={styles.btnImageStyle} info>
+                    <CustomIcon name={'call'} style={styles.imageStyle}
+                                onPress={() => this.makeACall(person.phoneNumber)} />
+                  </Button>
                 </View>
-                <Button style={styles.btnImageStyle} info>
-                  <CustomIcon name={'call'} style={styles.imageStyle}
-                              onPress={() => this.makeACall(person.phoneNumber)} />
-                </Button>
-              </View>
-              <View style={[styles.dataSection, styles.info]}>
-                <View style={{ flexDirection: 'column' }}>
-                  <Text style={styles.dataStyle}>Написать в чат</Text>
+                <View style={[styles.dataSection, styles.info]}>
+                  <View style={{ flexDirection: 'column' }}>
+                    <Text style={styles.dataStyle}>Написать в чат</Text>
+                  </View>
+                  <Button style={styles.btnImageStyle}>
+                    <CustomIcon name={'chat_1'} style={styles.imageStyle} />
+                  </Button>
                 </View>
-                <Button style={styles.btnImageStyle}>
-                  <CustomIcon name={'chat_1'} style={styles.imageStyle} />
-                </Button>
               </View>
             </View>
-          </View>
-        </View> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center', flex: 1}}/>}
+          </View> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center', flex: 1}}/>}
+        </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
