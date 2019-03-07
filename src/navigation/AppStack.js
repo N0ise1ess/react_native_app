@@ -29,7 +29,8 @@ import {
   SettingsScreen,
   TimeTableScreen,
   WifiAccessScreen,
-  ScratchBookScreen
+  ScratchBookScreen,
+  ReportsScreen
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -58,6 +59,7 @@ const AppStack = createStackNavigator(
     Parents: ParentsListScreen,
     Parent: ParentScreen,
     WifiAccess: WifiAccessScreen,
+    Reports: ReportsScreen,
   },
   {
     initialRouteName: 'Home',

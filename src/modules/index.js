@@ -14,3 +14,4 @@ export { AccountScreen, MainConfigScreen, SettingsScreen } from './settings';
 export { TimeTableScreen } from './timetable';
 export { WifiAccessScreen } from './wifiaccess';
 export { ScratchBookScreen } from './scratchbook';
+export { ReportsScreen } from './reports';
