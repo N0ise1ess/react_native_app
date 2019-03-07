@@ -34,6 +34,34 @@ const statementsList = [
   },
 ];
 
+const reportsList = [
+  {
+    title: '2018 год',
+    type: 'Годовой отчет',
+    passed: true,
+  },
+  {
+    title: '2017 год',
+    type: 'Годовой отчет',
+    passed: true,
+  },
+  {
+    title: '2016 год',
+    type: 'Годовой отчет',
+    passed: true,
+  },
+  {
+    title: '2015 год',
+    type: 'Годовой отчет',
+    passed: true,
+  },
+  {
+    title: '2014 год',
+    type: 'Годовой отчет',
+    passed: false,
+  },
+];
+
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Ведомости и отчеты',
@@ -56,6 +84,35 @@ class InnerComponent extends Component {
     return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
+  _renderList = (list) => {
+    const { styles } = this.state;
+
+    return <Content style={styles.container}>
+      <List
+        dataArray={list}
+        renderRow={item => (
+          <View style={styles.listItemStyle}>
+            <View style={styles.beginningItems}>
+              <View style={styles.upperSection}>
+                {item.passed ? (
+                  <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
+                ) : (
+                  <View style={[styles.markIcon, styles.redCircle]}></View>
+                )}
+                <Text style={styles.title}>{item.title}</Text>
+              </View>
+              <Text style={styles.textStyle}>{item.type}</Text>
+            </View>
+            <View>
+              <CustomIcon name={item.passed ? 'success' : 'error'} style={styles.iconStyle} />
+              <Text style={styles.rateTextStyle}>{item.passed ? 'ЗАПОЛНЕНО' : 'НЕ ЗАПОЛНЕНО'}</Text>
+            </View>
+          </View>
+        )}
+      />
+    </Content>
+  };
+
   _renderStatements = () => {
     const { currentTab, styles } = this.state;
 
@@ -70,30 +127,7 @@ class InnerComponent extends Component {
             </View>
           </TabHeading>
         }>
-        <Content style={styles.container}>
-          <List
-              dataArray={statementsList}
-              renderRow={item => (
-                <View style={styles.listItemStyle}>
-                  <View style={styles.beginningItems}>
-                    <View style={styles.upperSection}>
-                      {item.passed ? (
-                        <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
-                      ) : (
-                        <View style={[styles.markIcon, styles.redCircle]}></View>
-                      )}
-                      <Text style={styles.title}>{item.title}</Text>
-                    </View>
-                    <Text style={styles.textStyle}>{item.type}</Text>
-                  </View>
-                  <View>
-                    <CustomIcon name={item.passed ? 'success' : 'error'} style={styles.iconStyle} />
-                    <Text style={styles.rateTextStyle}>{item.passed ? 'ЗАПОЛНЕНО' : 'НЕ ЗАПОЛНЕНО'}</Text>
-                  </View>
-                </View>
-              )}
-            />
-        </Content>
+        {this._renderList(statementsList)}
       </Tab>
     );
   };
@@ -111,11 +145,8 @@ class InnerComponent extends Component {
               {this._upperCase('Отчеты')}
             </View>
           </TabHeading>
-        }
-      >
-        <Content>
-          {/* TODO */}
-        </Content>
+        }>
+        {this._renderList(reportsList)}
       </Tab>
     );
   };
