@@ -15,6 +15,7 @@ export const img_parent = require('./parent.png');
 export const img_question = require('./question.png');
 export const img_student = require('./student.png');
 export const img_students = require('./students.png');
+export const img_reports = require('./report.png');
 
 //ЭБС
 
