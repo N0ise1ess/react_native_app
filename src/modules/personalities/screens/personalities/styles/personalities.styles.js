@@ -65,13 +65,14 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#4D6270',
   },
   alphabetContainer: {
-    flex: 0.1,
+    flex: 1,
     borderWidth: 1,
     borderColor: 'transparent',
     borderBottomRightRadius: 15,
     borderTopRightRadius: 15,
     backgroundColor: '#163D7D',
-    marginBottom: 2
+    marginBottom: 2,
+    width:40,
   },
   wordContainer(alphabetLength, index) {
     return {
@@ -82,19 +83,17 @@ export const styles = (fontSize) => StyleSheet.create({
       flex: 1 / alphabetLength
     }
   },
-  shadow: {
-    shadowColor: 'rgba(0,0,0, .4)', // IOS
-    shadowOffset: { height: 1, width: 1 }, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 15, //IOS
-    elevation: 2, // Android
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderBottomRightRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: 'grey',
-    marginBottom: 2,
-    flex:1,
-    width: 15
+  swipeable(width = 15) {
+    return {
+      elevation: 1,
+      marginBottom: 5,
+      shadowOpacity: 0.5,
+      shadowRadius: 15,
+      width: width,
+      borderWidth: 1,
+      borderBottomRightRadius: 15,
+      borderTopRightRadius: 15,
+      borderColor: 'transparent'
+    }
   }
 });

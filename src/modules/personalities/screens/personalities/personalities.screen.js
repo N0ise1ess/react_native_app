@@ -83,7 +83,7 @@ class InnerComponent extends Component {
     const { styles } = this.state
     let alphabetsLocal = alphabets;
     return (
-      <Animated.View style={[{transform: [{translateX: trans}]}]}>
+      <Animated.View>
         <View style={[styles.alphabetContainer]}>
           <View style={{flex: alphabetsLocal.length}}>
             {alphabetsLocal.map((item, index) =>
@@ -118,10 +118,9 @@ class InnerComponent extends Component {
         </Item>
         <View style={{flex: 9, flexDirection: 'row'}}>
           <Swipeable
-            childrenContainerStyle={styles.shadow}
-            renderRightActions={this.renderLeftActions}>
-
-          </Swipeable>
+            // onSwipeableLeftOpen={styles.swipeable(40)}
+            containerStyle={styles.swipeable()}
+            renderLeftActions={this.renderLeftActions}/>
           <Content contentContainerStyle={{flex: 8.9, marginLeft: 5}}>
             {!false ?
               <List
