@@ -71,19 +71,19 @@ class InnerComponent extends Component {
                   style={styles.listItemStyle}
                 >
                   <View style={{flexDirection: 'row'}}>
-                  <CustomIcon
-                    style={{
-                      width: 32,
-                      height: 32,
-                      marginLeft: 15,
-                      marginRight: 15,
-                      fontSize: 30,
-                      color: '#2386e1',
-                    }}
-                    name={'university'}
-                  />
-                  <Text style={styles.titleStyle}>{item.name}</Text>
-                  <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                    <CustomIcon
+                      style={{
+                        width: 32,
+                        height: 32,
+                        marginLeft: 15,
+                        marginRight: 15,
+                        fontSize: 30,
+                        color: '#2386e1',
+                      }}
+                      name={'university'}
+                    />
+                    <Text style={styles.titleStyle}>{item.name}</Text>
+                    <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
                   </View>
                   <CollapsibleDivisionInfo item={item} ref={component => this[item.name] = component}/>
                 </ListItem>

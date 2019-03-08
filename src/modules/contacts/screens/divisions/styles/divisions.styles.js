@@ -1,6 +1,8 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import * as settingsFonts from '../../../../../constants/styles';
 import {getSizeFonts} from '../../../../shared/functions/styles';
+
+const {width, height} = Dimensions.get("window");
 
 export const styles = (fontSize) => StyleSheet.create({
   container: {
@@ -12,7 +14,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 15,
     marginBottom: 5,
     backgroundColor: '#fff',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     marginLeft: 0,
     paddingLeft: 0,
     paddingRight: 20,
@@ -51,5 +53,38 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270'
   },
+  label: {
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    color: '#979797',
+  },
+  content: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    width: 400
+  },
+  dataSection: {
+    paddingTop: 7,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  btnImageStyle: {
+    borderRadius: width * 0.1,
+    marginRight: 10,
+    height: width * 0.1,
+    width: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0C68FF',
+  },
+  imageStyle: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
+    color: 'white',
+    alignContent: 'center',
+    alignSelf: 'center',
+    textAlignVertical: 'center'
+  },
+
 
 })
