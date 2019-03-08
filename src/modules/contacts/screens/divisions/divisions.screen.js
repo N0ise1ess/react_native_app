@@ -1,10 +1,12 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {View} from 'react-native';
 
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
+import CollapsibleDivisionInfo from "./collapsible.division.info";
 
 
 class InnerComponent extends Component {
@@ -27,7 +29,8 @@ class InnerComponent extends Component {
       steps: {
         counter: 0,
         prevTitle : undefined
-      }
+      },
+      toggled : undefined
     };
   }
 
@@ -67,6 +70,7 @@ class InnerComponent extends Component {
                   onPress={() => this.getIntoNextDepartments(item.departments, item.name)}
                   style={styles.listItemStyle}
                 >
+                  <View style={{flexDirection: 'row'}}>
                   <CustomIcon
                     style={{
                       width: 32,
@@ -80,6 +84,8 @@ class InnerComponent extends Component {
                   />
                   <Text style={styles.titleStyle}>{item.name}</Text>
                   <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                  </View>
+                  <CollapsibleDivisionInfo item={item} ref={component => this[item.name] = component}/>
                 </ListItem>
               )}
             /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
@@ -88,20 +94,29 @@ class InnerComponent extends Component {
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
       </Container>
     )
-
   }
 
-  getIntoNextDepartments(nextDepartments, prevDepartmentName) {
+  getIntoNextDepartments(nextDepartments, name) {
     let steps = {...this.state.steps}
     if (nextDepartments !== null && nextDepartments.length > 0) {
+      const {toggled} = this.state;
+      if (toggled) {
+        this[toggled].toggle()
+        this.setState({toggled: undefined})
+      }
       steps.counter++;
       steps[`step${steps.counter}`] = nextDepartments;
-      steps[`prevTitle${steps.counter}`] = prevDepartmentName
+      steps[`prevTitle${steps.counter}`] = name
       this.setState({steps})
       this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
-      this.props.navigation.setParams({currentTitle: prevDepartmentName});
+      this.props.navigation.setParams({currentTitle: name});
     } else {
-      alert('Screen for detailed contacts info is being developed...')
+      const {toggled} = this.state;
+      if (toggled && toggled !== name) {
+        this[toggled].toggle()
+      }
+      this[name].toggle();
+      this.setState({toggled: name})
     }
   };
 

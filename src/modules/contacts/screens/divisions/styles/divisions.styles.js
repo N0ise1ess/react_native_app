@@ -17,7 +17,7 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 20,
     marginRight: 0,
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   listStyle: {},
   columnStyle: {
