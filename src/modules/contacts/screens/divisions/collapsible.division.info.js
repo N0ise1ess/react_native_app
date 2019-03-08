@@ -16,48 +16,58 @@ export default class CollapsibleDivisionInfo extends React.Component {
 
   render() {
     const {item} = this.props
-    return <Collapsible collapsed={!this.state.expanded}>
+    return(
+      <Collapsible collapsed={!this.state.expanded}>
       <View style={styles.content}>
         <View style={{flex:1,justifyContent: 'space-between', borderBottomWidth: 1, borderBottomColor:'grey', marginBottom: 5}}>
-          {this.renderLabel("Адрес")}
-          <Text>Адрес адрес</Text>
+          <View style={{alignSelf:'flex-start'}}>
+            {this.renderLabel("Адрес")}
+            <Text>Адрес адрес</Text>
+          </View>
         </View>
         <View style={{flex:1,justifyContent: 'space-between', borderBottomWidth: 1, borderBottomColor:'grey', marginBottom: 5}}>
-          <View style={{marginTop: 10}}>
+          <View style={{marginTop: 10, alignSelf:'flex-start'}}>
             {this.renderLabel("Директор академии")}
             <Text>Имя имя имя</Text>
           </View>
-          <View style={{marginTop: 10}}>
-          {this.renderLabel("Телефон")}
-            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-              <Text>+7 921 981 28 78</Text>
-              <Button style={styles.btnImageStyle} info>
-                <CustomIcon name={'call'} style={styles.imageStyle}
-                            onPress={() => this.sendEmail('email')} />
-              </Button>
+          <View style={[styles.dataSection]}>
+            <View style={{ flexDirection: 'column' }}>
+              {this.renderLabel('Телефон')}
+              <Text style={styles.dataStyle}>+79999999</Text>
             </View>
+            <Button style={styles.btnImageStyle} info>
+              <CustomIcon name={'call'} style={styles.imageStyle}
+                          onPress={() => this.makeACall('')} />
+            </Button>
           </View>
-          <View style={{marginTop: 10}}>
-            {this.renderLabel("Email")}
-            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-              <Text>test@gmail.com</Text>
-              <Button style={styles.btnImageStyle} info>
-                <CustomIcon name={'call'} style={styles.imageStyle}
-                            onPress={() => this.sendEmail('email')} />
-              </Button>
+          <View style={[styles.dataSection]}>
+            <View style={{ flexDirection: 'column' }}>
+              {this.renderLabel('Email')}
+              <Text style={styles.dataStyle}>test@yandex.ru</Text>
             </View>
+            <Button style={styles.btnImageStyle} info>
+              <CustomIcon name={'call'} style={styles.imageStyle}
+                          onPress={() => this.makeACall('')} />
+            </Button>
           </View>
         </View>
         <View style={{flex:1,justifyContent: 'space-between', borderBottomWidth: 1, borderBottomColor:'grey', marginBottom: 5}}>
-          {this.renderLabel("Зам директора академии")}
-          <Text>Имя имя имя</Text>
-          {this.renderLabel("Телефон")}
-          <Text>+7 921 981 28 78</Text>
-          {this.renderLabel("Email")}
-          <Text>test@gmail.com</Text>
+          <View style={{alignSelf:'flex-start'}}>
+            {this.renderLabel("Зам директора академии")}
+            <Text>Имя имя имя</Text>
+          </View>
+          <View style={{alignSelf:'flex-start'}}>
+            {this.renderLabel("Телефон")}
+            <Text>+7 921 981 28 78</Text>
+          </View>
+          <View style={{alignSelf:'flex-start'}}>
+            {this.renderLabel("Email")}
+            <Text>test@gmail.com</Text>
+          </View>
         </View>
       </View>
     </Collapsible>
+    )
   }
 
   renderLabel = text => <Text style={styles.label}>{text.toUpperCase()}</Text>;

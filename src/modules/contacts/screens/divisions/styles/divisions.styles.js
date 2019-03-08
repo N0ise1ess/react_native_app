@@ -19,7 +19,8 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 20,
     marginRight: 0,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: width
   },
   listStyle: {},
   columnStyle: {
@@ -61,7 +62,9 @@ export const styles = (fontSize) => StyleSheet.create({
   content: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    width: 400
+    alignSelf:'flex-start',
+    width: width,
+    flex:1
   },
   dataSection: {
     paddingTop: 7,
@@ -85,6 +88,15 @@ export const styles = (fontSize) => StyleSheet.create({
     alignSelf: 'center',
     textAlignVertical: 'center'
   },
-
-
+  info: {
+    borderColor: '#979797',
+    borderBottomWidth: 1,
+    paddingBottom: 10,
+  },
+  dataStyle: {
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontWeight: 'bold',
+    color: '#4099F4',
+  },
 })
