@@ -23,6 +23,7 @@ export const img_star = require('./star.png');
 export const img_link = require('./link.png');
 export const img_membership = require('./membership.png');
 export const img_notification = require('./notification.png');
+export const img_notification_blue = require('./notification-blue.png');
 export const img_services = require('./services.png');
 export const img_collection = require('./collection.png');
 export const img_list = require('./list.png');
