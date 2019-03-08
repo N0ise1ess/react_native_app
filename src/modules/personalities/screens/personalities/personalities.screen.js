@@ -12,45 +12,6 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const { height, width } = Dimensions.get("window")
 
-const itemList = [
-  {
-    name: 'Иванов Иван Иванович',
-    post: 'Проректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    name: 'Иванов Георгий Петрович',
-    post: 'Ректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    name: 'Иванов Георгий Петрович',
-    post: 'Ректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    name: 'Иванов Георгий Петрович',
-    post: 'Ректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    name: 'Иванов Георгий Петрович',
-    post: 'Ректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-  {
-    name: 'Иванов Георгий Петрович',
-    post: 'Ректор',
-    department: 'Администрация',
-    image: img_teacher,
-  },
-];
-
 const alphabets = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'.split('');
 
 class InnerComponent extends Component {
@@ -71,7 +32,7 @@ class InnerComponent extends Component {
   }
 
   componentWillMount() {
-    //Getting first 50 contacts
+    //Getting first 20 contacts
     this.props.findPersonalityByName('', 20, null)
   }
 
@@ -130,10 +91,10 @@ class InnerComponent extends Component {
           </Animated.View>
           <Animated.View style={[{width: personalitiesWidth}, {marginLeft: 5}]}>
             <Content onLayout={this.onLayout}>
-              {!false ?
+              {!personalitiesIsLoading ?
                 <List
                   style={styles.listStyle}
-                  dataArray={itemList}
+                  dataArray={personalities}
                   renderRow={item => (
                     <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
                       <Image source={img_teacher} style={styles.iconStyle}/>
