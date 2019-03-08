@@ -104,7 +104,7 @@ class InnerComponent extends Component {
               <Text style={styles.textStyle}>{item.type}</Text>
             </View>
             <View>
-              <CustomIcon name={item.passed ? 'success' : 'error'} style={styles.iconStyle} />
+              <CustomIcon name={item.passed ? 'success' : 'error'} style={[styles.iconStyle, !item.passed && styles.errorIcon]} />
               <Text style={styles.rateTextStyle}>{item.passed ? 'ЗАПОЛНЕНО' : 'НЕ ЗАПОЛНЕНО'}</Text>
             </View>
           </View>
