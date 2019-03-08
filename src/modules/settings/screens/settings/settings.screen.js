@@ -9,7 +9,7 @@ import {
   img_account,
   img_login,
   img_logout,
-  img_notification_white,
+  img_notification_blue,
   img_settings,
 } from '../../../../assets/images';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -18,7 +18,7 @@ import { styles } from './styles';
 const itemList = [
   {
     title: 'Уведомления',
-    image: img_notification_white,
+    image: img_notification_blue,
   },
   {
     title: 'Учетная запись',
@@ -46,7 +46,7 @@ const itemList = [
 const itemGuestList = [
   {
     title: 'Уведомления',
-    image: img_notification_white,
+    image: img_notification_blue,
   },
   {
     title: 'Основные',
