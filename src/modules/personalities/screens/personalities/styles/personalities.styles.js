@@ -71,8 +71,8 @@ export const styles = (fontSize) => StyleSheet.create({
     borderBottomRightRadius: 15,
     borderTopRightRadius: 15,
     backgroundColor: '#163D7D',
-    marginBottom: 2,
-    width:40,
+    marginBottom: 0,
+    width: 45
   },
   wordContainer(alphabetLength, index) {
     return {
@@ -83,17 +83,15 @@ export const styles = (fontSize) => StyleSheet.create({
       flex: 1 / alphabetLength
     }
   },
-  swipeable(width = 15) {
+  swipeable() {
     return {
       elevation: 1,
-      marginBottom: 5,
-      shadowOpacity: 0.5,
-      shadowRadius: 15,
-      width: width,
+      marginBottom: 0,
       borderWidth: 1,
       borderBottomRightRadius: 15,
       borderTopRightRadius: 15,
-      borderColor: 'transparent'
+      borderColor: 'transparent',
+      flex: 1
     }
   }
 });
