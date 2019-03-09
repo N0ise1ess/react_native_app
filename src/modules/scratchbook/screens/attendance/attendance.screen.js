@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Content, List, Text } from 'native-base';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { Hours } from '../../components/hours';
 import { CustomIcon } from '../../../shared/components';
 
@@ -22,7 +22,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      cards: []
+      activeSections: []
     };
   }
 
@@ -32,23 +32,24 @@ class InnerComponent extends Component {
 
   _updateSections = (activeSections) => {
     this.setState({
-      cards: activeSections
+      activeSections
     });
   }
 
   _renderHeader = (section, index, isActive) => {
-    const { styles, cards } = this.state;
+    const { styles } = this.state;
+    const areHoursEmpty = !section.hoursMissed && !section.hours;
     return <View style={styles.listStyle}>
-    <View style={[styles.header_section]}>
-      <Text style={{fontWeight: 'bold', fontSize: 14}}>{section.name}</Text>
-    </View>
-    <View style={{flexDirection: 'row', width: 90, marginRight: 20}}>
-      <View style={{marginRight: 15}}>
-       <Hours skipped={section.hoursMissed} held={section.hours} />
+      <View style={[styles.headerSection]}>
+        <Text style={styles.title}>{section.name}</Text>
       </View>
-      <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
-        style={styles.iconStyle} />
-    </View>
+      <View style={[styles.endSection]}>
+        <View style={[styles.headerHours, areHoursEmpty && styles.emptyHours]}>
+          <Hours skipped={section.hoursMissed} held={section.hours} />
+        </View>
+        <CustomIcon name={isActive ? 'arrow_up' : 'arrow_down'}
+          style={styles.iconStyle} />
+      </View>
   </View>;
   }
 
@@ -58,40 +59,40 @@ class InnerComponent extends Component {
       dataArray={section.info}
       renderRow={item => (
         <View style={[styles.listStyle, styles.detailsListItem]}>
-          <View style={[styles.header_section]}>
+          <View style={[styles.headerSection]}>
             <Text style={styles.title}>{item.name}</Text>
             <Text style={styles.detailsText}>{item.teacherName}</Text>
           </View>
-          <View style={{width: 80, marginRight: 20}}>
-            <Hours skipped={item.hoursMissed} held={item.hours} />
+          <View style={[styles.endSection, styles.hoursSection]}>
+           <Hours skipped={item.hoursMissed} held={item.hours} />
           </View>
         </View>
       )} />;
   };
 
   render() {
-    const { styles, cards } = this.state;
+    const { styles, activeSections } = this.state;
     return (
       <Content style={styles.content}>
-        <View style={styles.list_header}>
-          <Text style={styles.list_header_text}>ПРОПУЩЕНО</Text>
-          <Text style={styles.list_header_text}>ПРОВЕДЕНО</Text>
+        <View style={styles.listHeader}>
+          <Text style={styles.listHeaderText}>ПРОПУЩЕНО</Text>
+          <Text style={styles.listHeaderText}>ПРОВЕДЕНО</Text>
         </View>
         <Accordion
           underlayColor="transparent"
-          activeSections={cards}
+          activeSections={activeSections}
           sections={this.props.data}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
           onChange={this._updateSections}
         />
-        <View style={[styles.listStyle, styles.sum_item]}>
-          <View style={styles.header_section}>
-            <Text style={[ styles.sum_item_text ]}>
+        <View style={[styles.listStyle, styles.sumItem]}>
+          <View style={styles.headerSection}>
+            <Text style={[ styles.sumItemText ]}>
               {general.title}
             </Text>
           </View>
-          <View style={{width: 120}}>
+          <View style={styles.summaryHours}>
             <Hours isSummary={true} skipped={general.attendance.skipped} held={general.attendance.held} />
           </View>
         </View>

@@ -31,6 +31,7 @@ class InnerComponent extends Component {
       isSliderShown: true,
       currentTab: 0,
       styles: styles(props.fontSize),
+      height: 0,
     };
     this.scroll = new RN.Animated.Value(0);
     this.headerY = RN.Animated.multiply(RN.Animated.diffClamp(this.scroll, 0, NAVBAR_HEIGHT / 5), -1);
@@ -42,12 +43,15 @@ class InnerComponent extends Component {
 
   renderNews = data => <React.Fragment>
       <RN.FlatList
+        ref={'news'}
         data={data}
         renderItem={({item, index}) => <News
           fontSize={this.props.fontSize}
           key={`${index}_news`}
           title={item.title}
-          time={item.time}
+          time={m(item.time)
+            .format('LL')
+            .replace('г.', '')}
           image={item.image}
           description={item.text}
           isTruncate={true}
@@ -72,13 +76,16 @@ class InnerComponent extends Component {
 
   renderUpdates = updates => <React.Fragment>
     <RN.FlatList
+      ref={'updates'}
       data={updates}
       renderItem={({item, index}) => <News
         fontSize={this.props.fontSize}
         newsType="advertisement"
         key={`${index}_updates`}
         title={item.title}
-        time={item.time}
+        time={m(item.time)
+          .format('LL')
+          .replace('г.', '')}
         description={item.text}
         isTruncate={true}
         onPress={() =>
@@ -91,35 +98,28 @@ class InnerComponent extends Component {
         }
       />}
     />
-    <RN.View style={{flexDirection: "row", justifyContent: "center"}}>
-      { this.props.isLoadingUpdates ? <NB.Spinner color="blue" /> :
-        <NB.Button style={this.state.styles.buttonsPagination} onPress={() => this.props.getUpdate(this.props.updatePage + 1)}>
-          <RN.Text style={this.state.styles.textEventWhite}>Показать еще</RN.Text>
-        </NB.Button>}
-    </RN.View>
   </React.Fragment>
 
-  renderEvents = events => {
-    return <React.Fragment>
+  renderEvents = events => <React.Fragment>
       <RN.FlatList
-        ref={ref => (this._flatListEvents = ref)}
+        ref={'events'}
         data={events}
-        renderItem={({item, index}) => <News
-        fontSize={this.props.fontSize}
-        newsType="advertisementr"
-        key={`${index}_events`}
-        title={item.title}
-        time={item.time}
-        description={item.text}
-      />}
+        renderItem={({item, index}) => <RN.View key={`${index}_events`}>
+            <RN.Text 
+              style={this.state.styles.textEvent}
+            >
+              {m(item.time).format('LL').replace('г.', '')}
+            </RN.Text>
+            <News
+              fontSize={this.props.fontSize}
+              newsType="events"
+              time={m(item.time).format('HH:mm')}
+              title={item.title}
+              description={item.text}
+            />
+        </RN.View>}
       />
-      <RN.View style={{flexDirection: "row", justifyContent: "center"}}>
-        { this.props.isLoadingEvents ? <NB.Spinner color="blue" /> :
-          <NB.Button style={this.state.styles.buttonsPagination} onPress={() => this.props.getEvents(this.props.eventPage + 1)}>
-            <RN.Text style={this.state.styles.textEventWhite}>Показать еще</RN.Text>
-          </NB.Button>}
-      </RN.View>
-    </React.Fragment>}
+    </React.Fragment>
 
   renderSlider = (slider, styles) => {
     return (
@@ -173,27 +173,20 @@ class InnerComponent extends Component {
     );
   };
 
-  onScroll = event => {
-    if (event.nativeEvent.contentOffset.y > 20) {
-      this.setState({ isSliderShown: false });
-    } else if (event.nativeEvent.contentOffset.y < 20) {
-      this.setState({ isSliderShown: true });
-    }
-  };
-
   _upperCase(word) {
     return <NB.Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
   }
 
-  componentDidUpdate(props) {
+  componentDidUpdate(props, state) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
-
+  
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
-    const { isSliderShown, currentTab, styles, positionY } = this.state;
+    const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
-
+    const tabs = ['news', 'updates', 'events'];
+    const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
     return (
       <NB.Container>
         <RN.Animated.View
@@ -215,7 +208,11 @@ class InnerComponent extends Component {
           scrollEventThrottle={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{fontSize:getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize), zIndex: 0, backgroundColor: '#CED8DA' }}
+          style={{
+            fontSize:getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
+            zIndex: 0, 
+            backgroundColor: '#CED8DA',
+          }}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
           })}
@@ -257,10 +254,14 @@ class InnerComponent extends Component {
                   {this._upperCase('Новости')}
                 </NB.TabHeading>
               }
+              // style={{height: height}}
             >
-              <NB.Content onScroll={this.onScroll} style={styles.tabSectionStyle}>
+              <NB.Container style={[
+                  styles.tabSectionStyle, 
+                  {height: height}
+                ]}>
                 {news ? this.renderNews(news) : <NB.Spinner color="blue" />}
-              </NB.Content>
+              </NB.Container>
             </NB.Tab>
             <NB.Tab
               heading={
@@ -269,9 +270,11 @@ class InnerComponent extends Component {
                 </NB.TabHeading>
               }
             >
-              <NB.Content onScroll={this.onScroll} style={styles.tabSectionStyle}>
+              <NB.Container style={[
+                  styles.tabSectionStyle,
+                ]}>
                 {advertisement ? this.renderUpdates(advertisement) : <NB.Spinner color="blue" />}
-              </NB.Content>
+              </NB.Container>
             </NB.Tab>
             <NB.Tab
               heading={
@@ -280,11 +283,14 @@ class InnerComponent extends Component {
                 </NB.TabHeading>
               }
             >
-              <NB.Content onScroll={this.onScroll} style={styles.tabSectionStyle}>
+              <NB.Container style={[
+                  styles.tabSectionStyle,
+                ]}>
                 {event ? this.renderEvents(event) : <NB.Spinner color="blue" />}
-              </NB.Content>
+              </NB.Container>
             </NB.Tab>
           </NB.Tabs>
+          
         </RN.Animated.ScrollView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </NB.Container>

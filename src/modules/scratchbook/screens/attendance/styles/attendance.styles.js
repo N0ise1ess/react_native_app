@@ -11,23 +11,19 @@ export const styles = (fontSize) => StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     backgroundColor: '#fff',
-    flex: 1,
     fontWeight: '200',
     marginTop: 10,
     marginLeft: 0,
     marginRight: 0
   },
   detailsListItem: {
-    paddingRight: 10,
-    paddingLeft: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
     marginTop: 1,
     backgroundColor: '#f0f0f0',
   },
   title: {
-    width: '80%',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    flexWrap: 'wrap',
     fontWeight: 'bold',
   },
   iconStyle: {
@@ -48,16 +44,26 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: '200',
     color: '#949394'
   },
-  header_section: {
+  endSection: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginRight: 30,
+    marginLeft: 20
+  },
+  hoursSection: {
+    marginLeft: 0,
+    marginRight: 30
+  },
+  headerSection: {
+    flex: 4,
     flexWrap: 'wrap',
-    flexGrow: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
   },
   content: {
     backgroundColor: '#CED8DA',
   },
-  list_header: {
+  listHeader: {
     backgroundColor: '#CED8DA',
     marginTop: 10,
     marginBottom: 5,
@@ -65,17 +71,28 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
-  list_header_text: {
+  listHeaderText: {
     color: '#363a3a',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
     paddingRight: 10,
   },
-  sum_item: {
+  headerHours: {
+    marginRight: 10
+  },
+  emptyHours: {
+    marginRight: 0,
+    marginLeft: 25
+  },
+  summaryHours: {
+    flex: 2,
+    paddingLeft: 10,
+  },
+  sumItem: {
     fontFamily: 'MyriadPro-Light',
     backgroundColor: '#ED3944',
     color: '#fff'
   },
-  sum_item_text: {
+  sumItemText: {
     fontFamily: 'MyriadPro-Light',
     fontWeight: 'bold',
     color: '#fff',

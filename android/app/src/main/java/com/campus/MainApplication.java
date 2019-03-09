@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNTextInputMaskPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new CampusPackage()
       );
     }
 

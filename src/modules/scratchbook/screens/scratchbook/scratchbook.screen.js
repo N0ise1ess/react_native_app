@@ -7,6 +7,7 @@ import { Container, Content, Tab, TabHeading, Tabs, Text } from 'native-base';
 import { styles } from './styles';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { Attendance } from '../attendance';
+import { Result } from '../result';
 
 const dataList = [
   {
@@ -19,7 +20,7 @@ const dataList = [
         "name":"Весенний семестр",
         "disciplines": [
           {
-            "name":"Информатика",
+            "name": "Конструирование летательных аппаратов и двигателей",
             "type":"Зачет",
             "teacherName":"Мазуренко Екатерина Владимировна",
             "hours":36,
@@ -45,7 +46,7 @@ const dataList = [
     "yearCurrent": 2018,
     "semesters": [
       { "nameId":2,
-        "name": "Симний семестр",
+        "name": "Зимний семестр",
         "disciplines": [
           {
             "name":"Информатика",
@@ -135,18 +136,19 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
-          {/* TODO */}
-        </Content>
+        <Result
+          // TODO pass semester rersult as prop when data will be ready
+          //data={dataList[currentYearId].semesters[currentSemesterId]}
+          fontSize={this.props.fontSize} />
       </Tab>
     );
   };
 
   _renderAttendance = () => {
-    const { currentYearId, currentSemesterId, styles } = this.state;
+    const { currentYearId, currentSemesterId, styles, currentTab } = this.state;
     return <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
       <View
-        style={[styles.tabHeadingStyle, styles.tabHeadingRight, this.state.currentTab % 3 === 0 && styles.activeTabStyle]}>
+        style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 0 && styles.activeTabStyle]}>
         {this._upperCase('Посещаемость')}
       </View>
       </TabHeading>}>

@@ -32,16 +32,15 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#0C68FF',
   },
   imageStyle: {
-    width: width * 0.05,
-    height: width * 0.05,
-    resizeMode: 'contain',
-    tintColor: 'white',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
+    color: 'white',
+    alignContent: 'center',
+    alignSelf: 'center',
+    textAlignVertical: 'center'
   },
   imgTeacher: {
-    width: 40,
-    height: 40,
-    resizeMode: 'contain',
-    tintColor: '#4099F4',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_45, fontSize),
+    color: '#4099F4',
     marginLeft: 10,
     marginRight: 10,
     marginTop: 5,
@@ -50,6 +49,8 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     color: '#1e1e1e',
+    paddingRight: 5,
+    marginRight: 5
   },
   label: {
     fontFamily: 'MyriadPro-Regular',
@@ -124,5 +125,6 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: 'bold',
     color: '#1e1e1e',
     marginTop: 0,
+    paddingRight: 5,
   },
 });

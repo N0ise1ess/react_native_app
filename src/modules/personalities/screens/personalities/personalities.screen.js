@@ -15,15 +15,16 @@ const { height, width } = Dimensions.get("window")
 const alphabets = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'.split('');
 
 class InnerComponent extends Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     title: 'Персоналии',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
   constructor(props) {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      isLoading: false
       sideBarInitWidth: 15,
       sideBarFinishWidth: 45,
       sidebarWidth: new Animated.Value(15),
@@ -34,6 +35,17 @@ class InnerComponent extends Component {
   componentWillMount() {
     //Getting first 20 contacts
     this.props.findPersonalityByName('', 20, null)
+  }
+
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      this.props.findPersonalityByName('', 50, null)
+      this.setState({isLoading: false})
+    });
+
+    this.props.navigation.addListener("didBlur", () => {
+      this.setState({isLoading: true})
+    });
   }
 
   componentDidUpdate(props) {
@@ -65,7 +77,7 @@ class InnerComponent extends Component {
 
   render() {
     const {userStatus, navigation, token, personalities, personalitiesIsLoading} = this.props;
-    const {styles, personalitiesWidth, sidebarWidth} = this.state;
+    const {styles, personalitiesWidth, sidebarWidth, isLoading} = this.state;
 
     return (
       <Container style={styles.container}>
@@ -91,12 +103,12 @@ class InnerComponent extends Component {
           </Animated.View>
           <Animated.View style={[{width: personalitiesWidth}, {marginLeft: 5}]}>
             <Content onLayout={this.onLayout}>
-              {!personalitiesIsLoading ?
+              {!personalitiesIsLoading && !isLoading ?
                 <List
                   style={styles.listStyle}
                   dataArray={personalities}
                   renderRow={item => (
-                    <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality')}>
+                    <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality', {personId : item.personId})}>
                       <Image source={img_teacher} style={styles.iconStyle}/>
                       <View style={styles.columnStyle}>
                         <Text style={styles.titleStyle}>{item.name}</Text>

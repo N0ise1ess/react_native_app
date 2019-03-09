@@ -15,6 +15,7 @@ export const img_parent = require('./parent.png');
 export const img_question = require('./question.png');
 export const img_student = require('./student.png');
 export const img_students = require('./students.png');
+export const img_reports = require('./report.png');
 
 //ЭБС
 
@@ -22,6 +23,7 @@ export const img_star = require('./star.png');
 export const img_link = require('./link.png');
 export const img_membership = require('./membership.png');
 export const img_notification = require('./notification.png');
+export const img_notification_blue = require('./notification-blue.png');
 export const img_services = require('./services.png');
 export const img_collection = require('./collection.png');
 export const img_list = require('./list.png');

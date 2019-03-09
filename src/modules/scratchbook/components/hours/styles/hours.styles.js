@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   hours_section: {
     flexDirection: 'row',
-    marginRight: 10,
+    marginRight: 15,
     width: 50,
   },
   hours: {

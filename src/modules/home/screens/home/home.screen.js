@@ -19,6 +19,7 @@ import {
   img_student,
   img_timetable,
   img_wifi,
+  img_reports,
 } from '../../../../assets/images';
 import { CardItem, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
@@ -92,6 +93,15 @@ const cardList = [
       },
     ],
   },
+  {
+    list: [
+      {
+        title: 'Ведомости\nи отчеты',
+        route: 'Reports',
+        image: img_reports,
+      },
+    ]
+  }
 ];
 
 const cardGuestList = [
