@@ -10,10 +10,7 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     textAlign: 'center',
-    padding: 10,
-    paddingBottom: 20,
-    paddingTop: 20,
-    paddingRight: 20,
+    padding: 20,
     backgroundColor: '#fff',
     flex: 1,
     fontWeight: '200',
@@ -23,6 +20,7 @@ export const styles = (fontSize) => StyleSheet.create({
   title: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     flexWrap: 'wrap',
+    color: '#1E1E1E',
     fontWeight: 'bold',
   },
   text: {
@@ -45,6 +43,9 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
     alignSelf: 'center'
   },
+  errorIcon: {
+    paddingLeft: 15
+  },
   upperSection: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -54,7 +55,7 @@ export const styles = (fontSize) => StyleSheet.create({
     fontFamily: 'MyriadPro-Light',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
-    color: '#163D7D',
+    color: '#979797',
     paddingLeft: 20,
     marginTop: 3,
   },
@@ -98,15 +99,18 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 0
   },
+  markIcon: {
+    marginRight: 5,
+    marginTop: 5,
+    height: 15,
+    width: 15,
+  },
   redCircle: {
-    backgroundColor: 'red',
+    backgroundColor: '#e62249',
     width: 10,
     height: 10,
+    marginRight: 10,
     borderRadius: 5,
-  },
-  markIcon: {
-    marginRight: 7,
-    marginTop: 5,
   },
   okIcon: {
     color: '#163D7D',
