@@ -24,7 +24,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      isLoading: false
+      isLoading: false,
       sideBarInitWidth: 15,
       sideBarFinishWidth: 45,
       sidebarWidth: new Animated.Value(15),
@@ -39,7 +39,7 @@ class InnerComponent extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener("didFocus", () => {
-      this.props.findPersonalityByName('', 50, null)
+      this.props.findPersonalityByName('', 20, null)
       this.setState({isLoading: false})
     });
 
