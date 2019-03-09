@@ -20,7 +20,7 @@
     "react-native": "0.57.7",
     "react-native-collapsible": "^1.4.0",
     "react-native-device-info": "^0.26.3",
-    "react-native-gesture-handler": "^1.0.10",
+    "react-native-gesture-handler": "^1.1.0",
     "react-native-image-slider": "^2.0.3",
     "react-native-progress": "^3.5.0",
     "react-native-render-html": "^3.10.0",
