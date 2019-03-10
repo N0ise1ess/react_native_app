@@ -17,7 +17,7 @@ export const styles = (fontSize) => StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 0,
     paddingLeft: 0,
-    paddingRight: 20,
+    paddingRight: 0,
     marginRight: 0,
     flexDirection: 'column',
     width: width

@@ -71,7 +71,7 @@ class InnerComponent extends Component {
                   style={styles.listItemStyle}
                 >
                   <View style={{flex:1 , width : '100%'}}>
-                    <View style={{flexDirection: 'row'}}>
+                    <View style={{flexDirection: 'row', paddingRight: 20}}>
                       <CustomIcon
                         style={{
                           width: 32,
