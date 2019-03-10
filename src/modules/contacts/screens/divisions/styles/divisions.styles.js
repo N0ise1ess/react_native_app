@@ -53,50 +53,5 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   searchIcon: {
     color: '#4D6270'
-  },
-  label: {
-    fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    color: '#979797',
-  },
-  content: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignSelf:'flex-start',
-    width: width,
-    flex:1
-  },
-  dataSection: {
-    paddingTop: 7,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  btnImageStyle: {
-    borderRadius: width * 0.1,
-    marginRight: 10,
-    height: width * 0.1,
-    width: width * 0.1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#0C68FF',
-  },
-  imageStyle: {
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
-    color: 'white',
-    alignContent: 'center',
-    alignSelf: 'center',
-    textAlignVertical: 'center'
-  },
-  info: {
-    borderColor: '#979797',
-    borderBottomWidth: 1,
-    paddingBottom: 10,
-  },
-  dataStyle: {
-    fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
-    fontWeight: 'bold',
-    color: '#4099F4',
-  },
+  }
 })

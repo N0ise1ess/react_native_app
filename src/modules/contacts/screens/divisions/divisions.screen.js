@@ -6,7 +6,7 @@ import {Linking, View} from 'react-native';
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
-import CollapsibleDivisionInfo from "./collapsible.division.info";
+import CollapsibleDivisionInfo from "./division.info/collapsible.division.info";
 
 
 class InnerComponent extends Component {
@@ -67,25 +67,29 @@ class InnerComponent extends Component {
               renderRow={item => (
                 <ListItem
                   button
-                  onPress={() => this.getIntoNextDepartments(item.departments, item.name)}
+                  onPress={() => this.getIntoNextDepartments(item.departments, item.name, item.id)}
                   style={styles.listItemStyle}
                 >
-                  <View style={{flexDirection: 'row'}}>
-                    <CustomIcon
-                      style={{
-                        width: 32,
-                        height: 32,
-                        marginLeft: 15,
-                        marginRight: 15,
-                        fontSize: 30,
-                        color: '#2386e1',
-                      }}
-                      name={'university'}
-                    />
-                    <Text style={styles.titleStyle}>{item.name}</Text>
-                    <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                  <View style={{flex:1 , width : '100%'}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <CustomIcon
+                        style={{
+                          width: 32,
+                          height: 32,
+                          marginLeft: 15,
+                          marginRight: 15,
+                          fontSize: 30,
+                          color: '#2386e1',
+                        }}
+                        name={'university'}
+                      />
+                      <Text style={styles.titleStyle}>{item.name}</Text>
+                      <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                    </View>
+                    <CollapsibleDivisionInfo item={item}
+                                             fontSize={this.props.fontSize}
+                                             ref={component => this[item.id] = component}/>
                   </View>
-                  <CollapsibleDivisionInfo item={item} ref={component => this[item.name] = component}/>
                 </ListItem>
               )}
             /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
@@ -96,7 +100,7 @@ class InnerComponent extends Component {
     )
   }
 
-  getIntoNextDepartments(nextDepartments, name) {
+  getIntoNextDepartments(nextDepartments, name, id) {
     let steps = {...this.state.steps}
     if (nextDepartments !== null && nextDepartments.length > 0) {
       const {toggled} = this.state;
@@ -112,11 +116,11 @@ class InnerComponent extends Component {
       this.props.navigation.setParams({currentTitle: name});
     } else {
       const {toggled} = this.state;
-      if (toggled && toggled !== name) {
+      if (toggled && toggled !== id) {
         this[toggled].toggle()
       }
-      this[name].toggle();
-      this.setState({toggled: name})
+      this[id].toggle();
+      this.setState({toggled: id})
     }
   };
 
