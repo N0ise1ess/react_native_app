@@ -116,11 +116,22 @@ class InnerComponent extends Component {
       this.props.navigation.setParams({currentTitle: name});
     } else {
       const {toggled} = this.state;
+      //Самое первое нажатие
+      if (!toggled) {
+        this[id].toggle();
+        this.setState({toggled: id})
+      }
+      //Нажали на другой, тогда уже нажатый закрываем и открываем новый
       if (toggled && toggled !== id) {
         this[toggled].toggle()
+        this[id].toggle();
+        this.setState({toggled: id})
       }
-      this[id].toggle();
-      this.setState({toggled: id})
+      //Уже был нажат, тогда закрываем уже открытый
+      if (toggled && toggled === id) {
+        this[id].toggle();
+        this.setState({toggled: undefined})
+      }
     }
   };
 
