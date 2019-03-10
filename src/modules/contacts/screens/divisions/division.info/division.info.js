@@ -5,7 +5,7 @@ import Collapsible from "react-native-collapsible";
 import {CustomIcon} from "../../../../shared/components/custom-icon/index";
 import {Button} from "native-base";
 
-export default class CollapsibleDivisionInfo extends Component {
+export default class DivisionInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {

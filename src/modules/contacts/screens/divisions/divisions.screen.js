@@ -6,7 +6,7 @@ import {Linking, View} from 'react-native';
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
-import CollapsibleDivisionInfo from "./division.info/collapsible.division.info";
+import DivisionInfo from "./division.info/division.info";
 
 
 class InnerComponent extends Component {
@@ -86,9 +86,9 @@ class InnerComponent extends Component {
                       <Text style={styles.titleStyle}>{item.name}</Text>
                       <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
                     </View>
-                    <CollapsibleDivisionInfo item={item}
-                                             fontSize={this.props.fontSize}
-                                             ref={component => this[item.id] = component}/>
+                    <DivisionInfo item={item}
+                                  fontSize={this.props.fontSize}
+                                  ref={component => this[item.id] = component}/>
                   </View>
                 </ListItem>
               )}
