@@ -1,6 +1,7 @@
 package com.campus;
 
 import android.content.Intent;
+import android.net.Uri;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -23,6 +24,19 @@ public class SharedModule extends ReactContextBaseJavaModule {
             errorCallback.invoke();
         }
 
+    }
+
+    @ReactMethod
+    public void sendEmail(String email, Callback errorCallback) {
+        try {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            emailIntent.setData(Uri.parse("mailto:"));
+            emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[] {email});
+            getReactApplicationContext()
+                    .startActivity(emailIntent);
+        } catch (Exception e) {
+            errorCallback.invoke();
+        }
     }
 
     @Override

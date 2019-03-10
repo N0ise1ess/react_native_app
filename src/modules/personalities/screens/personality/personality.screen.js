@@ -1,6 +1,6 @@
 import {Button, Container, Content, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
-import { Image, View, Linking } from 'react-native';
+import {Image, View, Linking, NativeModules} from 'react-native';
 import { connect } from 'react-redux';
 
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -65,7 +65,7 @@ class InnerComponent extends Component {
                   </View>
                   <Button style={styles.btnImageStyle} info>
                     <CustomIcon name={'message'} style={styles.imageStyle}
-                                onPress={() => this.sendEmail(person.email)} />
+                                onPress={() => this.handleSendEmail(person.email)} />
                   </Button>
                 </View>
                 <View style={[styles.dataSection, styles.info]}>
@@ -101,9 +101,17 @@ class InnerComponent extends Component {
     }
   }
 
-  sendEmail(email) {
+  handleSendEmail(email) {
     if (email.length > 0) {
-      Linking.openURL(`mailto:${email}`)
+      NativeModules.CampusModule.sendEmail(email, () => {
+        Linking.canOpenURL(`mailto:${email}`).then((supported) => {
+          if (supported) {
+            Linking.openURL(`mailto:${email}`)
+          } else {
+            alert('Cannot send email');
+          }
+        })
+      })
     }
   }
 }

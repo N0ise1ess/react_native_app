@@ -3,10 +3,10 @@ import { Footer, FooterTab, Button } from 'native-base';
 import { styles } from './styles';
 import { CustomIcon } from '..';
 
-export const FooterSection = ({ userStatus, navigate }) => {
+export const FooterSection = ({ userStatus, navigate, maxHeight }) => {
   console.log('userStatus', userStatus);
   return (
-    <Footer style={{ backgroundColor: '#163D7D' }}>
+    <Footer style={[{ backgroundColor: '#163D7D' }, maxHeight ? {maxHeight : maxHeight} : {}]}>
       <FooterTab style={{ backgroundColor: '#163D7D' }}>
         <Button vertical onPress={() => navigate('Finance')}>
           {userStatus !== 'guest' && <CustomIcon name={'finance'} style={styles.image} />}
