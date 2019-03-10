@@ -100,4 +100,10 @@ export default class CollapsibleDivisionInfo extends Component {
       expanded: !this.state.expanded
     });
   }
+
+  collapse() {
+    this.setState({
+      expanded: false
+    });
+  }
 }

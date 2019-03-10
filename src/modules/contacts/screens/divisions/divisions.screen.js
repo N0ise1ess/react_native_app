@@ -102,10 +102,10 @@ class InnerComponent extends Component {
 
   getIntoNextDepartments(nextDepartments, name, id) {
     let steps = {...this.state.steps}
+    const {toggled} = this.state;
     if (nextDepartments !== null && nextDepartments.length > 0) {
-      const {toggled} = this.state;
       if (toggled) {
-        this[toggled].toggle()
+        this[toggled].collapse()
         this.setState({toggled: undefined})
       }
       steps.counter++;
@@ -115,7 +115,6 @@ class InnerComponent extends Component {
       this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
       this.props.navigation.setParams({currentTitle: name});
     } else {
-      const {toggled} = this.state;
       //Самое первое нажатие
       if (!toggled) {
         this[id].toggle();
@@ -137,6 +136,11 @@ class InnerComponent extends Component {
 
   handleBackArrow = () => {
     let steps = {...this.state.steps}
+    const {toggled} = this.state;
+    if (toggled) {
+      this[toggled].collapse()
+      this.setState({toggled: undefined})
+    }
     this.props.navigation.setParams({currentTitle: steps[`prevTitle${steps.counter - 1}`]});
     if (steps.counter - 1 === 0) {
       this.setState({ searchedDepartments : this.props.departments});
