@@ -2,10 +2,10 @@ import {styles} from "./styles";
 import {Animated, Linking, NativeModules, Text, View} from "react-native";
 import React, {Component} from "react";
 import Collapsible from "react-native-collapsible";
-import {CustomIcon} from "../../../../shared/components/custom-icon/index";
+import {CustomIcon} from "../../../../shared/components";
 import {Button} from "native-base";
 
-export default class DivisionInfo extends Component {
+export class DivisionInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,11 +21,11 @@ export default class DivisionInfo extends Component {
     if (item.departments === null) {
       return (
         <Collapsible collapsed={!this.state.expanded} style={{flex: 1}}>
-          <View style={styles.content}>
-            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+          <View style={styles.container}>
+            <View style={styles.content}>
               <View style={styles.dummy}/>
               <View style={[styles.section, styles.borderLine]}>
-                <View style={{alignSelf: 'flex-start', marginBottom: 5}}>
+                <View style={styles.universityInfo}>
                   {this.renderLabel("Адрес")}
                   <Text style={styles.nameStyle}>{item.building || ''}</Text>
                 </View>
@@ -42,10 +42,10 @@ export default class DivisionInfo extends Component {
 
   renderDirectorSection(directorInfo, index, arrayLength) {
     const { styles } = this.state;
-    return <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} key={index}>
+    return <View style={styles.content} key={index}>
       <View style={styles.dummy}/>
       <View style={[styles.section, index !== arrayLength - 1 ? styles.borderLine : {}]}>
-        <View style={{marginTop: 10, alignSelf: 'flex-start'}}>
+        <View style={styles.directorSection}>
           {this.renderLabel(directorInfo.post)}
           <Text style={styles.nameStyle}>{directorInfo.name}</Text>
         </View>
@@ -55,7 +55,7 @@ export default class DivisionInfo extends Component {
             <Text style={styles.dataStyle}>{directorInfo.phoneNumber}</Text>
           </View>
           <Button style={styles.btnImageStyle} info>
-            <CustomIcon name={'call'} style={styles.imageStyle}
+            <CustomIcon name="call" style={styles.imageStyle}
                         onPress={() => this.makeACall(directorInfo.phoneNumber)}/>
           </Button>
         </View>
@@ -65,7 +65,7 @@ export default class DivisionInfo extends Component {
             <Text style={styles.dataStyle}>{directorInfo.email}</Text>
           </View>
           <Button style={styles.btnImageStyle} info>
-            <CustomIcon name={'message'} style={styles.imageStyle}
+            <CustomIcon name="message" style={styles.imageStyle}
                         onPress={() => this.handleSendEmail(directorInfo.email)}/>
           </Button>
         </View>

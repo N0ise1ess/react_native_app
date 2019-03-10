@@ -6,7 +6,7 @@ import {Linking, View} from 'react-native';
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
-import DivisionInfo from "./division.info/division.info";
+import {DivisionInfo} from "./division.info/division.info";
 
 
 class InnerComponent extends Component {
@@ -28,9 +28,9 @@ class InnerComponent extends Component {
       searchedDepartments: [],
       steps: {
         counter: 0,
-        prevTitle : undefined
+        prevTitle : null
       },
-      toggled : undefined
+      toggledId : null
     };
   }
 
@@ -81,7 +81,7 @@ class InnerComponent extends Component {
                           fontSize: 30,
                           color: '#2386e1',
                         }}
-                        name={'university'}
+                        name="university"
                       />
                       <Text style={styles.titleStyle}>{item.name}</Text>
                       <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
@@ -101,12 +101,12 @@ class InnerComponent extends Component {
   }
 
   getIntoNextDepartments(nextDepartments, name, id) {
-    let steps = {...this.state.steps}
-    const {toggled} = this.state;
+    let steps = Object.assign({}, this.state.steps)
+    const { toggledId } = this.state;
     if (nextDepartments !== null && nextDepartments.length > 0) {
-      if (toggled) {
-        this[toggled].collapse()
-        this.setState({toggled: undefined})
+      if (toggledId) {
+        this[toggledId].collapse()
+        this.setState({toggledId: null})
       }
       steps.counter++;
       steps[`step${steps.counter}`] = nextDepartments;
@@ -116,30 +116,30 @@ class InnerComponent extends Component {
       this.props.navigation.setParams({currentTitle: name});
     } else {
       //Самое первое нажатие
-      if (!toggled) {
+      if (!toggledId) {
         this[id].toggle();
-        this.setState({toggled: id})
+        this.setState({toggledId: id})
       }
       //Нажали на другой, тогда уже нажатый закрываем и открываем новый
-      if (toggled && toggled !== id) {
-        this[toggled].toggle()
+      if (toggledId && toggledId !== id) {
+        this[toggledId].toggle()
         this[id].toggle();
-        this.setState({toggled: id})
+        this.setState({toggledId: id})
       }
       //Уже был нажат, тогда закрываем уже открытый
-      if (toggled && toggled === id) {
+      if (toggledId && toggledId === id) {
         this[id].toggle();
-        this.setState({toggled: undefined})
+        this.setState({toggledId: null})
       }
     }
   };
 
   handleBackArrow = () => {
-    let steps = {...this.state.steps}
-    const {toggled} = this.state;
-    if (toggled) {
-      this[toggled].collapse()
-      this.setState({toggled: undefined})
+    let steps = Object.assign({}, this.state.steps)
+    const { toggledId } = this.state;
+    if (toggledId) {
+      this[toggledId].collapse()
+      this.setState({toggledId: undefined})
     }
     this.props.navigation.setParams({currentTitle: steps[`prevTitle${steps.counter - 1}`]});
     if (steps.counter - 1 === 0) {

@@ -5,6 +5,11 @@ import {getSizeFonts} from '../../../../../shared/functions/styles';
 const {width, height} = Dimensions.get("window");
 
 export const styles = (fontSize) => StyleSheet.create({
+  content: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
   section: {
     flex: 1,
     justifyContent: 'space-between'
@@ -19,7 +24,7 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_10, fontSize),
     color: '#979797',
   },
-  content: {
+  container: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignSelf: 'flex-start',
@@ -73,5 +78,13 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#1e1e1e',
     paddingRight: 5,
     marginRight: 5
+  },
+  directorSection: {
+    marginTop: 10,
+    alignSelf: 'flex-start'
+  },
+  universityInfo : {
+    alignSelf: 'flex-start',
+    marginBottom: 5
   }
 })
