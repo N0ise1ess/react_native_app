@@ -56,7 +56,7 @@ export default class CollapsibleDivisionInfo extends Component {
           </View>
           <Button style={styles.btnImageStyle} info>
             <CustomIcon name={'call'} style={styles.imageStyle}
-                        onPress={() => this.makeACall('')}/>
+                        onPress={() => this.makeACall(directorInfo.phoneNumber)}/>
           </Button>
         </View>
         <View style={[styles.dataSection]}>
@@ -66,7 +66,7 @@ export default class CollapsibleDivisionInfo extends Component {
           </View>
           <Button style={styles.btnImageStyle} info>
             <CustomIcon name={'message'} style={styles.imageStyle}
-                        onPress={() => this.handleSendEmail('')}/>
+                        onPress={() => this.handleSendEmail(directorInfo.email)}/>
           </Button>
         </View>
       </View>
