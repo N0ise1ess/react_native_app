@@ -13,7 +13,7 @@ import { styles } from './styles';
 import * as settingsFonts from '../../../../constants/styles';
 import {getSizeFonts} from '../../../shared/functions/styles';
 
-const { height: NAVBAR_HEIGHT, width: WIDTH } = RN.Dimensions.get('window');
+const { height: NAVBAR_HEIGHT, } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
 class InnerComponent extends Component {
@@ -31,7 +31,6 @@ class InnerComponent extends Component {
       isSliderShown: true,
       currentTab: 0,
       styles: styles(props.fontSize),
-      height: 0,
     };
     this.scroll = new RN.Animated.Value(0);
     this.headerY = RN.Animated.multiply(RN.Animated.diffClamp(this.scroll, 0, NAVBAR_HEIGHT / 5), -1);
@@ -44,6 +43,7 @@ class InnerComponent extends Component {
   renderNews = data => <React.Fragment>
       <RN.FlatList
         ref={'news'}
+        keyExtractor={(item, index) => `${index}_news`}
         data={data}
         renderItem={({item, index}) => <News
           fontSize={this.props.fontSize}
@@ -78,9 +78,10 @@ class InnerComponent extends Component {
     <RN.FlatList
       ref={'updates'}
       data={updates}
+      keyExtractor={(item, index) => `${index}_updates`}
       renderItem={({item, index}) => <News
         fontSize={this.props.fontSize}
-        newsType="advertisement"
+        newsType='advertisement'
         key={`${index}_updates`}
         title={item.title}
         time={m(item.time)
@@ -104,6 +105,7 @@ class InnerComponent extends Component {
       <RN.FlatList
         ref={'events'}
         data={events}
+        keyExtractor={(item, index) => `${index}_events`}
         renderItem={({item, index}) => <RN.View key={`${index}_events`}>
             <RN.Text 
               style={this.state.styles.textEvent}
@@ -112,8 +114,9 @@ class InnerComponent extends Component {
             </RN.Text>
             <News
               fontSize={this.props.fontSize}
-              newsType="events"
-              time={m(item.time).format('HH:mm')}
+              newsType='events'
+              time={m(item.time).format('HH:mm') !== '00:00' 
+              ? m(item.time).format('HH:mm') : 'Весь день'}
               title={item.title}
               description={item.text}
             />
@@ -141,7 +144,7 @@ class InnerComponent extends Component {
             ]}
           >
             {item.isLoading ? (
-              <NB.Spinner color="blue" />
+              <NB.Spinner color='blue' />
             ) : (
               <RN.Image source={{ uri: `data:image/png;base64,${item.image}` }} style={styles.sliderImage} />
             )}
@@ -180,18 +183,27 @@ class InnerComponent extends Component {
   componentDidUpdate(props, state) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
+
   isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 20;
     return layoutMeasurement.height + contentOffset.y >=
       contentSize.height - paddingToBottom;
   };
+
+  handlePressTab = (i) => {
+    this._scrollView.getNode().scrollTo({
+      y: 0,
+      animated: false,
+    });
+    this.setState({currentTab: i });
+  }
+
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
-    const tabs = ['news', 'updates', 'events'];
-    let test = true;
-    const height = this.refs[tabs[currentTab]] && this.refs[tabs[currentTab]]._listRef._scrollMetrics.contentLength;
+    let isDownloading = true;
+    
     return (
       <NB.Container>
         <RN.Animated.View
@@ -209,100 +221,60 @@ class InnerComponent extends Component {
           {isSliderShown && (slider ? this.renderSlider(slider, styles) : this.renderSlider(imagesOnLoading, styles))}
         </RN.Animated.View>
         <RN.Animated.ScrollView
-          // scrollToEnd={() => currentTab === 0 && this.props.getNews(this.props.newsPage + 1)}
           scrollEventThrottle={400}
           contentContainerStyle={{ paddingTop: NAVBAR_HEIGHT / 5 }}
           bounces={false}
           showsVerticalScrollIndicator={false}
           style={{
             fontSize:getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
-            zIndex: 0, 
             backgroundColor: '#CED8DA',
           }}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
             listener: event => {
-              if (currentTab === 0 && test && this.isCloseToBottom(event.nativeEvent)) {
+              if (currentTab === 0 && isDownloading && this.isCloseToBottom(event.nativeEvent)) {
                 this.props.getNews(this.props.newsPage + 1);
-                test = false;
+                test = isDownloading;
               }
             },
           })}
           ref={ref => (this._scrollView = ref)}
         >
-          <NB.Tabs
-            renderTabBar={props => (
-              <RN.Animated.View
-                style={[
-                  {
-                    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
-                    transform: [{ translateY: tabY }],
-                    zIndex: 1,
-                    backgroundColor: '#CED8DA',
-                    justifyContent: 'center',
-                  },
-                  RN.Platform.OS === 'ios' ? { paddingTop: 20 } : null,
-                ]}
-              >
-                <NB.ScrollableTab
-                  {...props}
-                  style={{ backgroundColor: '#CED8DA', width: WIDTH - 30, marginRight: 15, marginLeft: 15, }}
-                  underlineStyle={{ backgroundColor: 'transparent' }}
-                  tabsContainerStyle={{width: WIDTH - 30, backgroundColor: 'transparent',}}
-                />
-              </RN.Animated.View>
-            )}
-            onChangeTab={({ i }) => {
-              this._scrollView.getNode().scrollTo({
-                y: 0,
-                animated: false,
-              });
-              this.setState({currentTab: i });
-            }}
+          <RN.Animated.View
+            style={[
+              {
+                fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
+                transform: [{ translateY: tabY }],
+                backgroundColor: '#CED8DA',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                zIndex: 2,
+              },
+              RN.Platform.OS === 'ios' ? { paddingTop: 20 } : null,
+            ]}
           >
-            <NB.Tab
-              heading={
-                <NB.TabHeading style={[styles.tabStyle, styles.tabLeft, currentTab === 0 && styles.activeTabStyle]}>
-                  {this._upperCase('Новости')}
-                </NB.TabHeading>
-              }
-              // style={{height: height}}
+            <RN.TouchableOpacity 
+              onPress={() => this.handlePressTab(0)}
+              style={[styles.tabStyle, styles.tabLeft, currentTab === 0 && styles.activeTabStyle]}
             >
-              <NB.Container style={[
-                  styles.tabSectionStyle, 
-                  {height: height}
-                ]}>
-                {news ? this.renderNews(news) : <NB.Spinner color="blue" />}
-              </NB.Container>
-            </NB.Tab>
-            <NB.Tab
-              heading={
-                <NB.TabHeading style={[styles.tabStyle, currentTab === 1 && styles.activeTabStyle]}>
-                  {this._upperCase('Объявления')}
-                </NB.TabHeading>
-              }
+              {this._upperCase('Новости')}
+            </RN.TouchableOpacity>
+            <RN.TouchableOpacity 
+              onPress={() => this.handlePressTab(1)}
+              style={[styles.tabStyle, currentTab === 1 && styles.activeTabStyle]}
             >
-              <NB.Container style={[
-                  styles.tabSectionStyle,
-                ]}>
-                {advertisement ? this.renderUpdates(advertisement) : <NB.Spinner color="blue" />}
-              </NB.Container>
-            </NB.Tab>
-            <NB.Tab
-              heading={
-                <NB.TabHeading style={[styles.tabStyle, styles.tabRight, currentTab === 2 && styles.activeTabStyle]}>
-                  {this._upperCase('Мероприятия')}
-                </NB.TabHeading>
-              }
+              {this._upperCase('Объявления')}
+            </RN.TouchableOpacity>
+            <RN.TouchableOpacity 
+              onPress={() => this.handlePressTab(2)}
+              style={[styles.tabStyle, styles.tabRight, currentTab === 2 && styles.activeTabStyle]}
             >
-              <NB.Container style={[
-                  styles.tabSectionStyle,
-                ]}>
-                {event ? this.renderEvents(event) : <NB.Spinner color="blue" />}
-              </NB.Container>
-            </NB.Tab>
-          </NB.Tabs>
-          
+              {this._upperCase('Мероприятия')}
+            </RN.TouchableOpacity>
+          </RN.Animated.View>
+          {currentTab === 0 && news && this.renderNews(news)}
+          {currentTab === 1 && advertisement && this.renderUpdates(advertisement)}
+          {currentTab === 2 && event && this.renderEvents(event)}
         </RN.Animated.ScrollView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </NB.Container>

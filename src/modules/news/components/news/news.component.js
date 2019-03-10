@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, Dimensions, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Card, CardItem, Text, Body } from 'native-base';
-import m from 'moment/min/moment-with-locales';
 import HTML from 'react-native-render-html';
 
 import { styles } from './styles/news.styles'
@@ -27,7 +26,6 @@ const htmlProps = {
 };
 
 export const News = props => {
-  m.locale('ru');
   const cleanText = props.description && props.description.replace(/<\/?[^>]+(>|$)/g, '');
   const textWithoutEmptyLines = cleanText.replace(/\r?\n|\r/, '');
   const cleanTitle = props.title && props.title.replace(/<\/?[^>]+(>|$)/g, '');
