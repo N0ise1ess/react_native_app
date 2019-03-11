@@ -70,19 +70,9 @@ class InnerComponent extends Component {
                   onPress={() => this.getIntoNextDepartments(item.departments, item.name, item.id)}
                   style={styles.listItemStyle}
                 >
-                  <View style={{flex:1 , width : '100%'}}>
-                    <View style={{flexDirection: 'row', paddingRight: 20}}>
-                      <CustomIcon
-                        style={{
-                          width: 32,
-                          height: 32,
-                          marginLeft: 15,
-                          marginRight: 15,
-                          fontSize: 30,
-                          color: '#2386e1',
-                        }}
-                        name="university"
-                      />
+                  <View style={styles.listItemContainer}>
+                    <View style={styles.listItem}>
+                      <CustomIcon style={styles.iconUniversity} name="university"/>
                       <Text style={styles.titleStyle}>{item.name}</Text>
                       <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
                     </View>
@@ -101,7 +91,7 @@ class InnerComponent extends Component {
   }
 
   getIntoNextDepartments(nextDepartments, name, id) {
-    let steps = Object.assign({}, this.state.steps)
+    let steps = {...this.state.steps};
     const { toggledId } = this.state;
     if (nextDepartments !== null && nextDepartments.length > 0) {
       if (toggledId) {
@@ -135,7 +125,7 @@ class InnerComponent extends Component {
   };
 
   handleBackArrow = () => {
-    let steps = Object.assign({}, this.state.steps)
+    let steps = {...this.state.steps}
     const { toggledId } = this.state;
     if (toggledId) {
       this[toggledId].collapse()

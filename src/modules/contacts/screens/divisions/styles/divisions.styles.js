@@ -53,5 +53,21 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   searchIcon: {
     color: '#4D6270'
+  },
+  iconUniversity: {
+    width: 32,
+    height: 32,
+    marginLeft: 15,
+    marginRight: 15,
+    fontSize: 30,
+    color: '#2386e1',
+  },
+  listItemContainer: {
+    flex:1,
+    width : '100%'
+  },
+  listItem: {
+    flexDirection: 'row',
+    paddingRight: 20
   }
 })
