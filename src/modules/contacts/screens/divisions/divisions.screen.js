@@ -1,10 +1,12 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Linking, View} from 'react-native';
 
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {getDepartments} from "../../../../actions/contactsAction";
+import {DivisionInfo} from "./division.info/division.info";
 
 
 class InnerComponent extends Component {
@@ -26,8 +28,9 @@ class InnerComponent extends Component {
       searchedDepartments: [],
       steps: {
         counter: 0,
-        prevTitle : undefined
-      }
+        prevTitle : null
+      },
+      toggledId : null
     };
   }
 
@@ -64,22 +67,19 @@ class InnerComponent extends Component {
               renderRow={item => (
                 <ListItem
                   button
-                  onPress={() => this.getIntoNextDepartments(item.departments, item.name)}
+                  onPress={() => this.getIntoNextDepartments(item.departments, item.name, item.id)}
                   style={styles.listItemStyle}
                 >
-                  <CustomIcon
-                    style={{
-                      width: 32,
-                      height: 32,
-                      marginLeft: 15,
-                      marginRight: 15,
-                      fontSize: 30,
-                      color: '#2386e1',
-                    }}
-                    name={'university'}
-                  />
-                  <Text style={styles.titleStyle}>{item.name}</Text>
-                  <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                  <View style={styles.listItemContainer}>
+                    <View style={styles.listItem}>
+                      <CustomIcon style={styles.iconUniversity} name="university"/>
+                      <Text style={styles.titleStyle}>{item.name}</Text>
+                      <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
+                    </View>
+                    <DivisionInfo item={item}
+                                  fontSize={this.props.fontSize}
+                                  ref={component => this[item.id] = component}/>
+                  </View>
                 </ListItem>
               )}
             /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
@@ -88,25 +88,49 @@ class InnerComponent extends Component {
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
       </Container>
     )
-
   }
 
-  getIntoNextDepartments(nextDepartments, prevDepartmentName) {
-    let steps = {...this.state.steps}
+  getIntoNextDepartments(nextDepartments, name, id) {
+    let steps = {...this.state.steps};
+    const { toggledId } = this.state;
     if (nextDepartments !== null && nextDepartments.length > 0) {
+      if (toggledId) {
+        this[toggledId].collapse()
+        this.setState({toggledId: null})
+      }
       steps.counter++;
       steps[`step${steps.counter}`] = nextDepartments;
-      steps[`prevTitle${steps.counter}`] = prevDepartmentName
+      steps[`prevTitle${steps.counter}`] = name
       this.setState({steps})
       this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
-      this.props.navigation.setParams({currentTitle: prevDepartmentName});
+      this.props.navigation.setParams({currentTitle: name});
     } else {
-      alert('Screen for detailed contacts info is being developed...')
+      //Самое первое нажатие
+      if (!toggledId) {
+        this[id].toggle();
+        this.setState({toggledId: id})
+      }
+      //Нажали на другой, тогда уже нажатый закрываем и открываем новый
+      if (toggledId && toggledId !== id) {
+        this[toggledId].toggle()
+        this[id].toggle();
+        this.setState({toggledId: id})
+      }
+      //Уже был нажат, тогда закрываем уже открытый
+      if (toggledId && toggledId === id) {
+        this[id].toggle();
+        this.setState({toggledId: null})
+      }
     }
   };
 
   handleBackArrow = () => {
     let steps = {...this.state.steps}
+    const { toggledId } = this.state;
+    if (toggledId) {
+      this[toggledId].collapse()
+      this.setState({toggledId: undefined})
+    }
     this.props.navigation.setParams({currentTitle: steps[`prevTitle${steps.counter - 1}`]});
     if (steps.counter - 1 === 0) {
       this.setState({ searchedDepartments : this.props.departments});

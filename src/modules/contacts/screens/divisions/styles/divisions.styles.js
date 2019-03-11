@@ -1,6 +1,8 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import * as settingsFonts from '../../../../../constants/styles';
 import {getSizeFonts} from '../../../../shared/functions/styles';
+
+const {width, height} = Dimensions.get("window");
 
 export const styles = (fontSize) => StyleSheet.create({
   container: {
@@ -12,12 +14,13 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 15,
     marginBottom: 5,
     backgroundColor: '#fff',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     marginLeft: 0,
     paddingLeft: 0,
-    paddingRight: 20,
+    paddingRight: 0,
     marginRight: 0,
-    flexDirection: 'row'
+    flexDirection: 'column',
+    width: width
   },
   listStyle: {},
   columnStyle: {
@@ -51,5 +54,20 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270'
   },
-
+  iconUniversity: {
+    width: 32,
+    height: 32,
+    marginLeft: 15,
+    marginRight: 15,
+    fontSize: 30,
+    color: '#2386e1',
+  },
+  listItemContainer: {
+    flex:1,
+    width : '100%'
+  },
+  listItem: {
+    flexDirection: 'row',
+    paddingRight: 20
+  }
 })
