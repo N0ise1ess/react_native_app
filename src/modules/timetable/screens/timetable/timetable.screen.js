@@ -160,7 +160,8 @@ class InnerComponent extends Component {
       timeTableLoading,
       errorCode,
       error,
-      errorDescription
+      errorDescription,
+      timetables
     } = this.props;
     const { styles } = this.state;
     return (

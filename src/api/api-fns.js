@@ -97,6 +97,7 @@ export function timeTableGetApi(searchedText, token) {
       ? {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
         }
       : {},
