@@ -11,7 +11,7 @@ export default timetableReducer = (state = initialState.timetableReducer, action
       return {
         ...state,
         timeTableLoading: false,
-        ...action.payload,
+        timetables: action.payload,
       }
     case SEARCH_PENDING:
       return {
