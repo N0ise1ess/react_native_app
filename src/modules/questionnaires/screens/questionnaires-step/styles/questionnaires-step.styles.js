@@ -7,6 +7,9 @@ export const styles = (fontSize) => StyleSheet.create({
 		backgroundColor: '#CED8DA',
 		flex: 1,
 	},
+	full_container: {
+		flex: 1,
+	},
 	text_margin: {
 		paddingLeft: '10%',
 		paddingRight: 10,
