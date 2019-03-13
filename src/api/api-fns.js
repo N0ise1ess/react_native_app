@@ -89,10 +89,25 @@ export function getSlider() {
   return axios.get(endpoints.news.getSliders);
 }
 
-export function timeTableGetApi(searchedText, token) {
+export function timeTableSearchApi(searchedText, token) {
   return axios.post(
     endpoints.timetable.search,
     searchedText,
+    token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      : {},
+  );
+}
+
+export function timeTableGetApi(search, token) {
+  return axios.post(
+    endpoints.timetable.get,
+    {id : search.id, type : search.type},
     token
       ? {
           headers: {

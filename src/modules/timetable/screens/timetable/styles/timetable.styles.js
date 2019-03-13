@@ -19,11 +19,6 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270',
   },
-  listItemStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
   listStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -122,4 +117,17 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 15,
   },
+  listItemStyle: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginBottom: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    marginLeft: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginRight: 0,
+    flexDirection: 'column',
+    flex: 1
+  }
 });

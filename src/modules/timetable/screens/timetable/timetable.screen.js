@@ -5,20 +5,21 @@ import {
   Icon,
   Input,
   Item,
-  List,
+  List, ListItem,
   Spinner,
   Tab,
   TabHeading,
   Tabs,
   Text
 } from 'native-base';
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {View} from 'react-native';
+import {connect} from 'react-redux';
+import moment from 'moment';
 
-import { getSearchedTimetable } from '../../../../actions/timetableAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
-import { styles } from './styles';
+import {getSearchedTimetable, getTimetable} from '../../../../actions/timetableAction';
+import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
+import {styles} from './styles';
 
 const timeTableList = [
   {
@@ -43,10 +44,20 @@ const timeTableList = [
   }
 ];
 
+const days = {
+  0: 'sunday',
+  1: 'monday',
+  2: 'tuesday',
+  3: 'wednesday',
+  4: 'thursday',
+  5: 'friday',
+  6: 'saturday'
+}
+
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({navigation}) => ({
     headerTitle: 'Расписание',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>
   });
 
   constructor(props) {
@@ -57,9 +68,11 @@ class InnerComponent extends Component {
       styles: styles(props.fontSize)
     };
   }
+
   componentWillMount() {
     this.props.getSearchedTimetable('', this.props.token);
   }
+
   _upperCase(word) {
     return (
       <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>
@@ -67,8 +80,10 @@ class InnerComponent extends Component {
   }
 
   renderOdd = () => {
-    const { currentTab, styles } = this.state;
+    const {currentTab, styles} = this.state;
+    const {timetables} = this.props;
 
+    const timetable = timetables[0].dayTimetables[days[moment.day()]]
     return (
       <Tab
         heading={
@@ -85,17 +100,17 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
+        <Content style={{backgroundColor: '#CED8DA'}}>
           <List
-            dataArray={timeTableList}
+            dataArray={timetable}
             renderRow={item => (
               <View style={styles.listStyle}>
-                <View style={styles.section}>
-                  <Text style={styles.time}>{item.time}</Text>
+                <View style={[styles.section]}>
+                  <Text style={styles.time}>{item.timeName}</Text>
                 </View>
-                <View style={[styles.section, { flex: 1 }]}>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.text}>{item.text}</Text>
+                <View style={[styles.section, {flex: 1}]}>
+                  <Text style={styles.title}>{item.discriplineName}</Text>
+                  <Text style={styles.text}>{item.planTimeTypeName}</Text>
                 </View>
               </View>
             )}
@@ -107,11 +122,14 @@ class InnerComponent extends Component {
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize &&
-      this.setState({ styles: styles(this.props.fontSize) });
+    this.setState({styles: styles(this.props.fontSize)});
   }
 
   renderEven = () => {
-    const { currentTab, styles } = this.state;
+    const {currentTab, styles} = this.state;
+    const {timetables} = this.props;
+
+    const timetable = timetables[1].dayTimetables[days[moment.day()]]
     return (
       <Tab
         heading={
@@ -128,17 +146,17 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
+        <Content style={{backgroundColor: '#CED8DA'}}>
           <List
-            dataArray={timeTableList}
+            dataArray={timetable}
             renderRow={item => (
               <View style={styles.listStyle}>
                 <View style={[styles.section]}>
-                  <Text style={styles.time}>{item.time}</Text>
+                  <Text style={styles.time}>{item.timeName}</Text>
                 </View>
-                <View style={[styles.section, { flex: 1 }]}>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.text}>{item.text}</Text>
+                <View style={[styles.section, {flex: 1}]}>
+                  <Text style={styles.title}>{item.discriplineName}</Text>
+                  <Text style={styles.text}>{item.planTimeTypeName}</Text>
                 </View>
               </View>
             )}
@@ -149,9 +167,27 @@ class InnerComponent extends Component {
   };
 
   onHandleSubmit = () => {
-    const { searchedText } = this.state;
+    const {searchedText} = this.state;
     this.props.getSearchedTimetable(searchedText, this.props.token);
   };
+
+  _renderSearchBar = () => {
+    const {styles} = this.state;
+    return (
+      <Item style={styles.searchBar}>
+        <Icon name="ios-search" style={styles.searchIcon}/>
+        <Input
+          style={styles.searchInput}
+          placeholder="Поиск по расписанию"
+          value={this.state.searchedText}
+          onChangeText={text => this.setState({searchedText: text})}
+        />
+        <Button transparent onPress={this.onHandleSubmit}>
+          <Text>Найти</Text>
+        </Button>
+      </Item>
+    )
+  }
 
   render() {
     const {
@@ -161,44 +197,66 @@ class InnerComponent extends Component {
       errorCode,
       error,
       errorDescription,
-      timetables
+      suggestions,
+      timetables,
+      token
     } = this.props;
-    const { styles } = this.state;
-    return (
-      <Container style={styles.container}>
-        <Item style={styles.searchBar}>
-          <Icon name="ios-search" style={styles.searchIcon} />
-          <Input
-            style={styles.searchInput}
-            placeholder="Поиск по расписанию"
-            value={this.state.searchedText}
-            onChangeText={text => this.setState({ searchedText: text })}
-          />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
-          </Button>
-        </Item>
-        {!errorCode ? (
-          <Tabs
-            onChangeTab={({ i }) => this.setState({ currentTab: i })}
-            tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          >
-            {this.renderOdd()}
-            {this.renderEven()}
-          </Tabs>
-        ) : (
+    const {styles} = this.state;
+    if (timetables.length > 0) {
+      return (
+        <Container style={styles.container}>
+          {this._renderSearchBar()}
+          {!errorCode ? (
+            <Tabs
+              onChangeTab={({i}) => this.setState({currentTab: i})}
+              tabBarUnderlineStyle={{backgroundColor: 'transparent'}}
+            >
+              {this.renderOdd()}
+              {this.renderEven()}
+            </Tabs>
+          ) : (
+            <Content>
+              {timeTableLoading && <Spinner/>}
+              {errorCode && (
+                <Text style={styles.errorText}>
+                  ErrorCode: {`${errorCode}\n`}
+                </Text>
+              )}
+            </Content>
+          )}
+          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        </Container>
+      );
+    } else {
+      return (
+        <Container style={styles.container}>
+          {this._renderSearchBar()}
           <Content>
-            {timeTableLoading && <Spinner />}
-            {errorCode && (
-              <Text style={styles.errorText}>
-                ErrorCode: {`${errorCode}\n`}
-              </Text>
-            )}
+            {!timeTableLoading ?
+              <List
+                style={{}}
+                dataArray={suggestions}
+                renderRow={item => (
+                  <ListItem
+                    button
+                    onPress={() => this.props.getTimetable(item, token)}
+                    style={styles.listItemStyle}
+                  >
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                      <Text>{item.title}</Text>
+                    </View>
+                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                      <Text>{item.description}</Text>
+                    </View>
+                  </ListItem>
+                )}
+              /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
+            }
           </Content>
-        )}
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
-      </Container>
-    );
+          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        </Container>
+      )
+    }
   }
 }
 
@@ -211,8 +269,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getSearchedTimetable: (searchedText, token) =>
-    dispatch(getSearchedTimetable(searchedText, token)),
+  getSearchedTimetable: (searchedText, token) => dispatch(getSearchedTimetable(searchedText, token)),
+  getTimetable: (search, token) => dispatch(getTimetable(search, token)),
   dispatch
 });
 
