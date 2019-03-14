@@ -154,3 +154,31 @@ export function getAllQuestionnaires(token) {
     },
   });
 }
+
+export function getQuestionnaire(id, token) {
+  let data = new FormData();
+
+  data.append('id', id);
+
+  return axios.post(endpoints.questionnaires.getQuestionnaire, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+}
+
+export function saveAnswers(params, token) {
+  let data = new FormData();
+
+  data.append('isFull', params.isFull);
+  data.append('questionnaireId', params.questionnaireId);
+  data.append('answerLinks', params.answerLinks);
+
+  return axios.post(endpoints.questionnaires.saveAnswers, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+}

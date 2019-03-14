@@ -9,9 +9,29 @@ export const getAllQuestionnaires = token => async dispatch => {
 				payload: data,
 			});
 	} catch (e) {
-		// dispatch({
-		// 	type: constants.PHONE_EDIT_FAILURE,
-		// 	payload: 'Произошла ошибка при сохранении данных',
-		// });
+	}
+}
+
+export const getQuestionnaires = (id, token) => async dispatch => {
+	try {		
+		let { data } = await api.getQuestionnaire(id, token);
+		data && dispatch({
+				type: constants.GET_QUESTIONNAIRES_SUCCESS,
+				payload: data,
+			});
+	} catch (e) {
+		console.log(e)
+	}
+}
+
+export const saveAnswers = (parametrs, token) => async dispatch => {
+	try {		
+		let { data } = await api.saveAnswers(parametrs, token);
+		data && dispatch({
+				type: constants.SAVE_QUESTIONNAIRES_SUCCESS,
+				payload: data,
+			});
+	} catch (e) {
+		console.log(e)
 	}
 }

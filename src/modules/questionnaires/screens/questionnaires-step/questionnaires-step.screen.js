@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { View, TouchableOpacity, ScrollView } from 'react-native';
-import { Container, Text, Button, Card } from 'native-base';
+import { Container, Text, Button, Card, Spinner } from 'native-base';
+import * as actions from '../../../../actions/questionnairesAction';
+
 class InnerComponent extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -16,8 +18,9 @@ class InnerComponent extends React.Component {
     this.state = {
       styles: styles(props.fontSize),
       isFinished: false,
-    };
-    alert(props.navigation.getParam('itemId'))
+      step: 1,
+    };    
+    props.getQuestionnaires(props.navigation.getParam('itemId'), props.token)
   }
 
   componentDidUpdate(props) {
@@ -27,7 +30,9 @@ class InnerComponent extends React.Component {
   renderAnswerQuestions = (styles) => (
     <React.Fragment>
       <View style={styles.text_margin}>
-        <Text style={[styles.text, styles.text__normal, styles.text__blue, styles.padding_top_20]}>Вопрос 1 из 1</Text>
+        <Text style={[styles.text, styles.text__normal, styles.text__blue, styles.padding_top_20]}>
+          Вопрос {this.state.step} из {this.props.questionnaires.answers.length}
+        </Text>
         <Text style={[styles.text, styles.text__normal, styles.text__bold, styles.padding_top_10]}>Lorem bla bla bla bla bla bla bla bla bla bla bla bla</Text>
         <Text style={[styles.text, styles.text__small, styles.text__gray, styles.padding_top_10]}>{'Варианты ответов'.toUpperCase()}</Text>
       </View>
@@ -50,18 +55,34 @@ class InnerComponent extends React.Component {
     </React.Fragment>
   )
 
+  handlePressButton = () => {
+    if(this.state.step === this.props.questionnaires.answers.length) {
+      this.props.saveAnswers({
+        isFull: true,
+        questionnaireId: this.props.navigation.getParam('itemId'),
+        answerLinks: this.props.answersId,
+      })
+    } else {
+      this.setState({step: this.state.step + 1})
+    };
+  }
+
   render() {
 
     const { styles, isFinished } = this.state;
-    const { userStatus, navigation } = this.props;
+    const { userStatus, navigation, questionnaires } = this.props;
+
     return (
       <Container style={styles.container}>
+      {Object.keys(questionnaires).length > 0 ? <React.Fragment>
         {isFinished ? this.renderThankyouPage(styles) : this.renderAnswerQuestions(styles)}
-        <View style={[styles.button_container, styles.button_container__right, styles.padding_10, styles.margin_left__12]}>
-          <Button rounded style={[styles.button]}>
-            <Text>Готово</Text>
-          </Button>
-        </View>
+          <View style={[styles.button_container, styles.button_container__right, styles.padding_10, styles.margin_left__12]}>
+            <Button rounded style={[styles.button]}>
+              <Text>Готово</Text>
+            </Button>
+          </View>
+        </React.Fragment> 
+        : <View style={styles.full_container}><Spinner/></View>}
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     )
@@ -72,7 +93,8 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.settings,
+    ...state.questionnaires,
   };
 };
 
-export const QuestionnairesStep = connect(mapStateToProps, {})(InnerComponent);
+export const QuestionnairesStep = connect(mapStateToProps, {...actions})(InnerComponent);

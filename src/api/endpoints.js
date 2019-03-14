@@ -71,5 +71,7 @@ export const endpoints = {
   },
   questionnaires: {
     getAllQuestionnaires: 'http://opencode.su/campus/questionnaire/api/questionnaire/getAllQuestionnaireIdByRespondent',
+    getQuestionnaire: 'http://opencode.su/campus/questionnaire/api/questionnaire/getViewById',
+    saveAnswers: 'http://opencode.su/campus/questionnaire/api/answerVersion/createFull',
   }
 };
