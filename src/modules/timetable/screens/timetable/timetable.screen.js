@@ -73,6 +73,11 @@ class InnerComponent extends Component {
     this.props.getSearchedTimetable('', this.props.token);
   }
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize &&
+    this.setState({styles: styles(this.props.fontSize)});
+  }
+
   _upperCase(word) {
     return (
       <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>
@@ -83,7 +88,7 @@ class InnerComponent extends Component {
     const {currentTab, styles} = this.state;
     const {timetables} = this.props;
 
-    const timetable = timetables[0].dayTimetables[days[moment.day()]]
+    const timetable = timetables[1].dayTimetables;
     return (
       <Tab
         heading={
@@ -101,35 +106,37 @@ class InnerComponent extends Component {
         }
       >
         <Content style={{backgroundColor: '#CED8DA'}}>
-          <List
-            dataArray={timetable}
-            renderRow={item => (
-              <View style={styles.listStyle}>
-                <View style={[styles.section]}>
-                  <Text style={styles.time}>{item.timeName}</Text>
+          {Object.keys(timetable).map((key, index) =>
+            timetable[key] && timetable[key][0] ?
+              <View key={index} style={styles.timetable}>
+                <View style={styles.weekHeader}>
+                  <Text>Неделя {timetables[1].weekNumber}</Text>
+                  <Text>{timetable[key][0].weekDayName || ''}</Text>
                 </View>
-                <View style={[styles.section, {flex: 1}]}>
-                  <Text style={styles.title}>{item.discriplineName}</Text>
-                  <Text style={styles.text}>{item.planTimeTypeName} Ауд.{item.auditoriumNumber} {item.buildingName}</Text>
-                </View>
-              </View>
-            )}
-          />
+                <List
+                  dataArray={timetable[key]}
+                  renderRow={item => (
+                    <View style={styles.listStyle}>
+                      <View style={[styles.section]}>
+                        <Text style={styles.time}>{item.timeName}</Text>
+                      </View>
+                      <View style={[styles.section, {flex: 1}]}>
+                        <Text style={styles.title}>{item.discriplineName}</Text>
+                        <Text style={styles.text}>{item.planTimeTypeName}. Ауд.{item.auditoriumNumber} {item.buildingName}</Text>
+                      </View>
+                    </View>
+                  )}
+                />
+              </View> : null)}
         </Content>
       </Tab>
     );
   };
 
-  componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-    this.setState({styles: styles(this.props.fontSize)});
-  }
-
   renderEven = () => {
     const {currentTab, styles} = this.state;
     const {timetables} = this.props;
-
-    const timetable = timetables[1].dayTimetables[days[moment.day()]]
+    const timetable = timetables[0].dayTimetables;
     return (
       <Tab
         heading={
@@ -146,22 +153,30 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{backgroundColor: '#CED8DA'}}>
-          <List
-            dataArray={timetable}
-            renderRow={item => (
-              <View style={styles.listStyle}>
-                <View style={[styles.section]}>
-                  <Text style={styles.time}>{item.timeName}</Text>
-                </View>
-                <View style={[styles.section, {flex: 1}]}>
-                  <Text style={styles.title}>{item.discriplineName}</Text>
-                  <Text style={styles.text}>{item.planTimeTypeName} Ауд.{item.auditoriumNumber} {item.buildingName}</Text>
-                </View>
+          <Content style={{backgroundColor: '#CED8DA'}}>
+            {Object.keys(timetable).map((key, index) =>
+            timetable[key] && timetable[key][0] ?
+            <View key={index} style={styles.timetable}>
+              <View style={styles.weekHeader}>
+                <Text>Неделя {timetables[0].weekNumber}</Text>
+                <Text>{timetable[key][0].weekDayName || ''}</Text>
               </View>
-            )}
-          />
-        </Content>
+              <List
+                dataArray={timetable[key]}
+                renderRow={item => (
+                  <View style={styles.listStyle}>
+                    <View style={[styles.section]}>
+                      <Text style={styles.time}>{item.timeName}</Text>
+                    </View>
+                    <View style={[styles.section, {flex: 1}]}>
+                      <Text style={styles.title}>{item.discriplineName}</Text>
+                      <Text style={styles.text}>{item.planTimeTypeName}. Ауд.{item.auditoriumNumber} {item.buildingName}</Text>
+                    </View>
+                  </View>
+                )}
+              />
+            </View> : null)}
+          </Content>
       </Tab>
     );
   };
@@ -245,7 +260,7 @@ class InnerComponent extends Component {
                     <View style={{justifyContent: 'center', alignItems: 'center'}}>
                       <Text>{item.title}</Text>
                     </View>
-                    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <View>
                       <Text>{item.description}</Text>
                     </View>
                   </ListItem>

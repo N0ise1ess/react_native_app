@@ -107,7 +107,7 @@ export function timeTableSearchApi(searchedText, token) {
 export function timeTableGetApi(search, token) {
   return axios.post(
     endpoints.timetable.get,
-    {id : search.id, type : search.type},
+    {id: search.id, type: search.type},
     token
       ? {
           headers: {

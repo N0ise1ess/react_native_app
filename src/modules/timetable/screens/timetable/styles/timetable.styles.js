@@ -31,7 +31,7 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
     marginLeft: 0,
     marginRight: 0,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   tabHeaderStyle: {
     backgroundColor: '#CED8DA',
@@ -118,8 +118,8 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingLeft: 15,
   },
   listItemStyle: {
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 5,
     marginBottom: 5,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
@@ -129,5 +129,15 @@ export const styles = (fontSize) => StyleSheet.create({
     marginRight: 0,
     flexDirection: 'column',
     flex: 1
+  },
+  weekHeader: {
+    flex:1,
+    alignSelf: 'center',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  timetable: {
+    flex: 1,
+    marginTop: 10
   }
 });
