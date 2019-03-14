@@ -1,9 +1,10 @@
-import { Container, Content, Icon, List, Text } from 'native-base';
+import { Container, Content, Icon, List, Text, Spinner } from 'native-base';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import * as actions from '../../../../actions/questionnairesAction';
 
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [
@@ -45,34 +46,44 @@ class InnerComponent extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getAllQuestionnaires(this.props.token);
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
+  handleClickQuestionnaire = (id) => {
+    this.props.navigation.navigate('QuestionnairesStep', {
+      itemId: id,
+    });
+  }
+
   render() {
-    const { userStatus, navigation, token } = this.props;
+    const { userStatus, navigation, listQuestionnaires } = this.props;
     const {styles} = this.state;
     return (
       <Container style={styles.container}>
         <Content>
-          <List
-            dataArray={itemList}
+          {listQuestionnaires ? <List
+            dataArray={listQuestionnaires}
             renderRow={item => (
-              <View style={[styles.listStyle, item.passed && styles.opacityStyle]}>
+              <TouchableOpacity
+                key={item.id}
+                onPress={() => this.handleClickQuestionnaire(item.id)}
+                style={[styles.listStyle, item.passed && styles.opacityStyle]}>
                 <View style={styles.listItemStyle}>
-                  {item.passed ? (
-                    <Icon type="Octicons" name="check" style={{ color: '#163D7D', fontSize: 15, paddingRight: 7 }} />
-                  ) : (
-                    <Icon type="Octicons" name="primitive-dot" style={{ color: 'red', fontSize: 22 }} />
-                  )}
-                  <Text style={styles.bookTitle}>{item.title}</Text>
+                 {item.passed ? <CustomIcon style={styles.icon} name="ok"/> : <View style={styles.octions}/>}
+                  <Text style={styles.bookTitle}>{item.value}</Text>
                 </View>
                 <Text style={styles.bookAuthor}>
-                  {item.desc} {item.passed && 'Пройден 20.09.2018'}
+                  ~{item.minutes}
                 </Text>
-              </View>
+              </TouchableOpacity>
             )}
-          />
+          /> : <Spinner/>}
+          
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
@@ -82,17 +93,18 @@ class InnerComponent extends Component {
 
 const mapStateToProps = state => {
   return {
+    ...state.questionnaires,
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  getQuestionnaire: () => dispatch(getQuestionnaire()),
-  dispatch,
-});
+// const mapDispatchToProps = dispatch => ({
+//   getQuestionnaire: () => dispatch(getQuestionnaire()),
+//   dispatch,
+// });
 
 export const QuestionnairesScreen = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {...actions},
 )(InnerComponent);

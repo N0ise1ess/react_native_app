@@ -69,4 +69,7 @@ export const endpoints = {
     /** Поиск по сотрудникам */
     personalityUrl: 'http://opencode.su/campus/integration/api/employee',
   },
+  questionnaires: {
+    getAllQuestionnaires: 'http://opencode.su/campus/questionnaire/api/questionnaire/getAllQuestionnaireIdByRespondent',
+  }
 };

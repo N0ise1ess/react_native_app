@@ -146,3 +146,11 @@ export function getPersonalityById(personId) {
   const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
   return axios.get(endpoint);
 }
+
+export function getAllQuestionnaires(token) {
+  return axios.get(endpoints.questionnaires.getAllQuestionnaires, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

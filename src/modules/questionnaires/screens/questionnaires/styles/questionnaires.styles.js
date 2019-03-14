@@ -141,4 +141,20 @@ export const styles = (fontSize) => StyleSheet.create({
     height: 200,
     resizeMode: 'contain',
   },
+  octions: {
+    height: 10,
+    width: 10,
+    backgroundColor: 'red',
+    borderRadius: 10,
+    marginTop: 5,
+    marginRight: 10,
+  },
+  icon: {
+    marginTop: 5,
+    marginRight: 10,
+    width: 12,
+    height: 12,
+    fontSize: 10,
+    color: '#163D7D',
+  }
 });

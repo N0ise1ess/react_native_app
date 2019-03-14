@@ -46,13 +46,17 @@ export const styles = (fontSize) => StyleSheet.create({
 		marginTop: 10,
 		marginBottom: 10,
 	},
+	padding_5: {
+		marginTop: 5,
+		marginBottom: 5,
+	},
 	item_answer: {
 		backgroundColor: '#fff',
 		paddingTop: 8,
 		paddingBottom: 8,
 	},
 	item_answer__active: {
-		backgroundColor: '#fff',
+		backgroundColor: '#0060f7',
 	},
 	button: {
 		backgroundColor: '#ff003c',
