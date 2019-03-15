@@ -1,0 +1,71 @@
+import React from 'react';
+import * as NB from 'native-base';
+import { View, Linking } from 'react-native';
+import { connect } from 'react-redux';
+import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { styles } from './styles';
+
+class InnerComponent extends React.Component {
+
+	static navigationOptions = ({ navigation }) => ({
+		title: 'Корпуса и общежития',
+		headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
+	});
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			styles: styles(props.fontSize),
+		};
+	}
+
+	render() {
+		const { styles } = this.state;
+		const item = this.props.navigation.getParam('item');
+
+		return (<NB.Container style={styles.container}>
+			<NB.Grid>
+				<NB.Col size={20}>
+					<CustomIcon
+						style={styles.icon}
+						name={'hostel'}
+					/>
+				</NB.Col>
+				<NB.Col size={80}>
+					<NB.Text style={styles.titleStyle}>{item.name}</NB.Text>
+					<NB.Text style={styles.textStyle}>{'Учебный'}</NB.Text>
+					<NB.Grid style={styles.containerBorder}>
+						<NB.Col size={75}>
+							<NB.Text style={styles.textStyle}>{'Телефон'}</NB.Text>
+							<NB.Text style={[styles.titleStyle, styles.titleStyleBlue]}>
+								{'+7(999)243-12-44'}
+							</NB.Text>
+						</NB.Col>
+						<NB.Col size={25}>
+							<NB.Button style={styles.btnImageStyle} info onPress={() => Linking.openURL(`tel://+7(999)243-12-44`)}>
+								<CustomIcon name="call" style={styles.imageStyle} />
+							</NB.Button>
+						</NB.Col>
+					</NB.Grid>
+					<View style={styles.containerBorder}>
+						<NB.Text style={styles.textStyle}>{'Адрес:'}</NB.Text>
+						<NB.Text style={styles.titleStyle}>
+							{item.address}
+						</NB.Text>
+					</View>
+				</NB.Col>
+			</NB.Grid>
+		</NB.Container>)
+	}
+}
+
+const mapStateToProps = state => {
+	return {
+		...state.authReducer,
+		...state.settings,
+		...state.departmentReducer,
+	};
+};
+
+
+export const BuildingDormsCardScreen = connect(mapStateToProps, {})(InnerComponent);

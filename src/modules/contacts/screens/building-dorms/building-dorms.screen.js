@@ -1,10 +1,8 @@
-import { Container, Content, Icon, List, ListItem, Text, Item, Input, Button, Spinner } from 'native-base';
+import * as NB from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import {CustomIcon} from '../../../shared/components/custom-icon';
-import { img_campus_dorm } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 import * as actions from "../../../../actions/contactsAction";
 
@@ -30,28 +28,30 @@ class InnerComponent extends Component {
   render() {
     const { userStatus, navigation, token, buildingsDorms } = this.props;
     const {styles, searchedText} = this.state;
-    const data = buildingsDorms.filter(item => item.name.search(searchedText) > -1);
+    const data = buildingsDorms && buildingsDorms.filter(item => item.name.search(searchedText) > -1);
     return (
-      <Container style={styles.container}>
-        <Item style={styles.searchBar}>
-          <Icon name="ios-search" style={styles.searchIcon}/>
-          <Input
+      <NB.Container style={styles.container}>
+        <NB.Item style={styles.searchBar}>
+          <NB.Icon name="ios-search" style={styles.searchIcon}/>
+          <NB.Input
             style={styles.searchInput}
             placeholder="Поиск по подразделениям"
             value={this.state.searchedText}
             onChangeText={text => this.setState({searchedText: text})}
           />
-        </Item>
-        <Content>
-          {!buildingsDorms && <Spinner color="blue"/>}
-          {buildingsDorms && data.length > 0 ? <List
+        </NB.Item>
+        <NB.Content>
+          {!buildingsDorms && <NB.Spinner color="blue"/>}
+          {buildingsDorms && data.length > 0 ? <NB.List
             style={styles.listStyle}
             dataArray={data}
             renderRow={item => (
-              <ListItem
+              <NB.ListItem
                 key={item.id}
                 button
-                onPress={() => navigation.navigate(item.route ? item.route : '')}
+                onPress={() => navigation.navigate('BuildingDormsCard', {
+                  item,
+                })}
                 style={styles.listItemStyle}
               >
                 <View style={styles.viewStyle}>
@@ -62,24 +62,24 @@ class InnerComponent extends Component {
                       marginLeft: 15,
                       marginRight: 15,
                       fontSize: 30,
-                      color: '#3587fa',
+                      color: '#0C68FF',
                     }}
                     name={'hostel'}
                   />
                   <View style={styles.columnStyle}>
-                    <Text style={styles.titleStyle}>{item.name}</Text>
-                    <Text style={styles.textStyle}>{'Учебный'}</Text>
+                    <NB.Text style={styles.titleStyle}>{item.name}</NB.Text>
+                    <NB.Text style={styles.textStyle}>{'Учебный'}</NB.Text>
                   </View>
                 </View>
-                <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
-              </ListItem>
+                <NB.Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
+              </NB.ListItem>
             )}
           /> : <View style={[styles.columnStyle, styles.columnStyleRow]}>
-            <Text style={styles.textStyle}>{'Ничего не найдено'}</Text>
+            <NB.Text style={styles.textStyle}>{'Ничего не найдено'}</NB.Text>
           </View>}
-        </Content>
+        </NB.Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
-      </Container>
+      </NB.Container>
     );
   }
 }

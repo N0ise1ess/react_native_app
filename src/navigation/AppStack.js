@@ -31,7 +31,8 @@ import {
   TimeTableScreen,
   WifiAccessScreen,
   ScratchBookScreen,
-  ReportsScreen
+  ReportsScreen,
+  BuildingDormsCardScreen,
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -54,6 +55,7 @@ const AppStack = createStackNavigator(
     Contacts: ContactsScreen,
     Divisions: DivisionsScreen,
     BuildingDorms: BuildingDormsScreen,
+    BuildingDormsCard: BuildingDormsCardScreen,
     MainConfig: MainConfigScreen,
     Personalities: PersonalitiesScreen,
     Personality: PersonalityScreen,

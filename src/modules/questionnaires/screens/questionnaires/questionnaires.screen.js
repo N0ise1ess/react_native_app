@@ -7,32 +7,6 @@ import * as actions from '../../../../actions/questionnairesAction';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
-const itemList = [
-  {
-    title: 'Оценка качества оказания образовательных услуг',
-    desc: '1 вопрос',
-    passed: false,
-  },
-  {
-    title: 'День здоровья',
-    desc: '40 вопросов - 4 минуты',
-    score: 0,
-    passed: false,
-  },
-  {
-    title: 'ЭКБ',
-    desc: '20 вопросов - 2 минуты',
-    score: 62,
-    passed: true,
-  },
-  {
-    title: 'Профориентация',
-    desc: '20 вопросов - 2 минуты',
-    score: 0,
-    passed: true,
-  },
-];
-
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Анкетные опросы',
