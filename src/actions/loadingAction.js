@@ -23,7 +23,7 @@ export const initLoad = () => async dispatch => {
       let value = await item.invoke();
       dispatch({
         type: types.NEWS_SUCCESS,
-        payload: { [item.key]: value.data },
+        payload: { [item.key]: value },
       });
       getNext();
     }, 1);
