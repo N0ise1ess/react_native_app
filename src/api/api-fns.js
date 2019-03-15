@@ -169,3 +169,29 @@ export function getPersonalityById(personId) {
   const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
   return axios.get(endpoint);
 }
+
+export function getAllQuestionnaires(token) {
+  return axios.get(endpoints.questionnaires.getAllQuestionnaires, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function getQuestionnaire(id, token) {
+  return axios.post(endpoints.questionnaires.getQuestionnaire, id.toString(), {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function saveAnswers(params, token) {
+  return axios.post(endpoints.questionnaires.saveAnswers, params, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+}
