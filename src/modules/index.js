@@ -1,6 +1,6 @@
 export { AboutScreen } from './about';
 export { ChatScreen } from './chats';
-export { BuildingDormsScreen, ContactsScreen, DivisionsScreen } from './contacts';
+export { BuildingDormsScreen, ContactsScreen, DivisionsScreen, BuildingDormsCardScreen } from './contacts';
 export { FinanceScreen } from './finances';
 export { HomeScreen } from './home';
 export { LibraryScreen, LibraryCardScreen } from './library';
