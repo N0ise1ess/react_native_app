@@ -9,7 +9,7 @@ import * as actions from '../../../../actions/questionnairesAction';
 class InnerComponent extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Анкетные опросы',
+    headerTitle: navigation.getParam('itemTitle'),
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
@@ -19,7 +19,8 @@ class InnerComponent extends React.Component {
       styles: styles(props.fontSize),
       isFinished: false,
       step: 1,
-    };    
+      selectedAnswers: [],
+    };
     props.getQuestionnaires(props.navigation.getParam('itemId'), props.token)
   }
 
@@ -27,62 +28,95 @@ class InnerComponent extends React.Component {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
-  renderAnswerQuestions = (styles) => (
+  renderAnswerQuestions = (styles) => {
+    const selectedAnswer = this.state.selectedAnswers[this.state.step - 1]
+    return (
     <React.Fragment>
       <View style={styles.text_margin}>
         <Text style={[styles.text, styles.text__normal, styles.text__blue, styles.padding_top_20]}>
-          Вопрос {this.state.step} из {this.props.questionnaires.answers.length}
+          Вопрос {this.state.step} 
+          из {this.props.questionnaires.questions && this.props.questionnaires.questions.length}
         </Text>
-        <Text style={[styles.text, styles.text__normal, styles.text__bold, styles.padding_top_10]}>Lorem bla bla bla bla bla bla bla bla bla bla bla bla</Text>
-        <Text style={[styles.text, styles.text__small, styles.text__gray, styles.padding_top_10]}>{'Варианты ответов'.toUpperCase()}</Text>
+        <Text style={[styles.text, styles.text__normal, styles.text__bold, styles.padding_top_10]}>
+          {this.props.questionnaires.questions[this.state.step - 1].value}
+        </Text>
+        <Text style={[styles.text, styles.text__small, styles.text__gray, styles.padding_top_10]}>
+          {'Варианты ответов'.toUpperCase()}
+        </Text>
       </View>
       <ScrollView style={styles.padding_top_10}>
-        {new Array(1, 2, 3, 4, 5,).map((item, index) => <TouchableOpacity key={index}>
-          <Card style={[styles.item_answer, styles.text_margin]}>
-            <Text style={[styles.text, styles.text__normal, styles.text__bold]}>{item}</Text>
-          </Card>
-        </TouchableOpacity>)}
+        {this.props.questionnaires.questions[this.state.step - 1].answers.map(
+          (item, index) => <TouchableOpacity key={index} onPress={() => {
+            const selectedAnswers = this.state.selectedAnswers;
+            selectedAnswers[this.state.step - 1] = item.id;
+            this.setState({selectedAnswers})}
+          }>
+            <Card style={[styles.item_answer, 
+              item.id === selectedAnswer && styles.item_answer__active,
+              styles.text_margin]}
+            >
+              <Text style={[styles.text, 
+                item.id === selectedAnswer && styles.text__white, 
+                styles.text__normal, styles.text__bold]}>
+                {item.value}
+              </Text>
+            </Card>
+          </TouchableOpacity>)}
       </ScrollView>
     </React.Fragment>
-  );
+  )};
 
   renderThankyouPage = (styles) => (
     <React.Fragment>
       <View style={[styles.text_margin, styles.full_container]}>
         <Text style={[styles.text, styles.text__normal, styles.text__blue, styles.padding_top_20]}>Опрос пройден</Text>
-        <Text style={[styles.text, styles.text__normal, styles.text__bold, styles.padding_top_10]}>Спасибо за участие!{"\n"}Ваши ответы учтены.</Text>
+        <Text style={[styles.text, styles.text__normal, styles.text__bold, styles.padding_top_10]}>
+          Спасибо за участие!{"\n"}Ваши ответы учтены.
+        </Text>
       </View>
     </React.Fragment>
   )
 
-  handlePressButton = () => {
-    if(this.state.step === this.props.questionnaires.answers.length) {
+  handlePressButton = () => {  
+    this.state.isFinished && this.props.navigation.navigate('Questionnaires');
+    if (this.props.questionnaires && this.state.step === this.props.questionnaires.questions.length) {
       this.props.saveAnswers({
         isFull: true,
         questionnaireId: this.props.navigation.getParam('itemId'),
-        answerLinks: this.props.answersId,
-      })
+        answerLinks: this.state.selectedAnswers.map((id) => ({"answerId": id})),
+      }, this.props.token)
+      this.setState({ isFinished: true })
     } else {
-      this.setState({step: this.state.step + 1})
+      this.setState({ step: this.state.step + 1, })
     };
   }
 
   render() {
 
-    const { styles, isFinished } = this.state;
+    const { styles, isFinished, selectedAnswers, step } = this.state;
     const { userStatus, navigation, questionnaires } = this.props;
+    const isDisabledButton = !selectedAnswers[step - 1];
 
     return (
       <Container style={styles.container}>
-      {Object.keys(questionnaires).length > 0 ? <React.Fragment>
-        {isFinished ? this.renderThankyouPage(styles) : this.renderAnswerQuestions(styles)}
-          <View style={[styles.button_container, styles.button_container__right, styles.padding_10, styles.margin_left__12]}>
-            <Button rounded style={[styles.button]}>
+        {questionnaires && Object.keys(questionnaires).length > 0 ? <React.Fragment>
+          {isFinished ? this.renderThankyouPage(styles) : this.renderAnswerQuestions(styles)}
+          <View style={[styles.button_container, 
+            styles.button_container__right, styles.padding_10, 
+            styles.margin_left__12]}
+          >
+            <Button rounded 
+              style={[styles.button, 
+                isDisabledButton && styles.button__disabled,
+              ]} 
+              onPress={this.handlePressButton}
+              disabled={isDisabledButton}
+            >
               <Text>Готово</Text>
             </Button>
           </View>
-        </React.Fragment> 
-        : <View style={styles.full_container}><Spinner/></View>}
+        </React.Fragment>
+          : <View style={styles.full_container}><Spinner /></View>}
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     )
@@ -97,4 +131,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const QuestionnairesStep = connect(mapStateToProps, {...actions})(InnerComponent);
+export const QuestionnairesStep = connect(mapStateToProps, { ...actions })(InnerComponent);

@@ -31,6 +31,7 @@ export const saveAnswers = (parametrs, token) => async dispatch => {
 				type: constants.SAVE_QUESTIONNAIRES_SUCCESS,
 				payload: data,
 			});
+		getAllQuestionnaires(token)(dispatch);
 	} catch (e) {
 		console.log(e)
 	}

@@ -27,6 +27,9 @@ export const styles = (fontSize) => StyleSheet.create({
 	text__blue: {
 		color: '#496d9e',
 	},
+	text__white: {
+		color: '#fff',
+	},
 	text__bold: {
 		fontFamily: 'MyriadPro-Bold',
 	},
@@ -62,6 +65,9 @@ export const styles = (fontSize) => StyleSheet.create({
 		backgroundColor: '#ff003c',
 		width: 150,
 		justifyContent: 'center',
+	},
+	button__disabled: {
+		backgroundColor: '#ec6e8e',
 	},
 	button_container: {
 		// flex: 1,

@@ -44,9 +44,6 @@ class InnerComponent extends Component {
     this.state = {
       styles: styles(props.fontSize),
     };
-  }
-
-  componentDidMount() {
     this.props.getAllQuestionnaires(this.props.token);
   }
 
@@ -54,15 +51,17 @@ class InnerComponent extends Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
-  handleClickQuestionnaire = (id) => {
+  handleClickQuestionnaire = (id, title) => {
     this.props.navigation.navigate('QuestionnairesStep', {
       itemId: id,
+      itemTitle: title, 
     });
   }
 
   render() {
     const { userStatus, navigation, listQuestionnaires } = this.props;
     const {styles} = this.state;
+    
     return (
       <Container style={styles.container}>
         <Content>
@@ -71,14 +70,14 @@ class InnerComponent extends Component {
             renderRow={item => (
               <TouchableOpacity
                 key={item.id}
-                onPress={() => this.handleClickQuestionnaire(item.id)}
+                onPress={() => this.handleClickQuestionnaire(item.id, item.value)}
                 style={[styles.listStyle, item.passed && styles.opacityStyle]}>
                 <View style={styles.listItemStyle}>
                  {item.passed ? <CustomIcon style={styles.icon} name="ok"/> : <View style={styles.octions}/>}
                   <Text style={styles.bookTitle}>{item.value}</Text>
                 </View>
                 <Text style={styles.bookAuthor}>
-                  ~{item.minutes}
+                  ~{item.minutes} минут
                 </Text>
               </TouchableOpacity>
             )}

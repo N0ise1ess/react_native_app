@@ -109,7 +109,7 @@ const cardGuestList = [
     list: [
       {
         title: 'Новости',
-        route: 'QuestionnairesStep',
+        route: 'News',
         image: img_news,
       },
       {
