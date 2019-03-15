@@ -116,7 +116,7 @@ class InnerComponent extends React.Component {
             </Button>
           </View>
         </React.Fragment>
-          : <View style={styles.full_container}><Spinner /></View>}
+          : <View style={styles.full_container}><Spinner color="blue"/></View>}
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     )

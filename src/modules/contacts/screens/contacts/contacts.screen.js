@@ -65,7 +65,7 @@ class InnerComponent extends Component {
                     marginLeft: 15,
                     marginRight: 15,
                     fontSize: 30,
-                    color: '#163D7D',
+                    color: '#3587fa',
                   }}
                   name={item.image}
                 />

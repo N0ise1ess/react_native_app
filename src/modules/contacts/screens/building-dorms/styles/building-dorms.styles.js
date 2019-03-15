@@ -27,12 +27,29 @@ export const styles = (fontSize) => StyleSheet.create({
     marginRight: 0,
   },
   listStyle: {},
+  searchIcon: {
+    color: '#4D6270'
+  },
+  searchBar: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 10,
+    backgroundColor: '#fff'
+  },
+  searchInput: {
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+  },
   viewStyle: {
     flexDirection: 'row',
   },
   columnStyle: {
     flexDirection: 'column',
     justifyContent: 'center',
+    flex: 1,
+  },
+  columnStyleRow: {
+    flexDirection: 'row',
   },
   iconStyle: {
     fontSize: 32,
@@ -41,13 +58,15 @@ export const styles = (fontSize) => StyleSheet.create({
   titleStyle: {
     fontWeight: '500',
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     alignSelf: 'flex-start',
+    color: '#242424',
   },
   textStyle: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     alignSelf: 'flex-start',
+    color: '#4D6270',
   },
 });

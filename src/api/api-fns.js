@@ -132,6 +132,10 @@ export function departmentsGetApi(searchedText) {
   );
 }
 
+export function getBuildingDorms() {
+  return axios.get(endpoints.buildings.get);
+}
+
 export function resetPassword(email) {
   let data = new FormData();
 
