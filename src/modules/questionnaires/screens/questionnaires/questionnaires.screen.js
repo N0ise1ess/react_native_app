@@ -81,7 +81,7 @@ class InnerComponent extends Component {
                 </Text>
               </TouchableOpacity>
             )}
-          /> : <Spinner/>}
+          /> : <Spinner color="blue"/>}
           
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
