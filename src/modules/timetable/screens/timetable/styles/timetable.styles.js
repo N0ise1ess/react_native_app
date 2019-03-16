@@ -26,12 +26,12 @@ export const styles = (fontSize) => StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 10,
+    marginTop: 3,
     backgroundColor: '#fff',
     flex: 1,
     marginLeft: 0,
     marginRight: 0,
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   tabHeaderStyle: {
     backgroundColor: '#CED8DA',
@@ -91,6 +91,7 @@ export const styles = (fontSize) => StyleSheet.create({
   time: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    marginTop: 5
   },
   title: {
     fontFamily: 'MyriadPro-Regular',
@@ -134,10 +135,55 @@ export const styles = (fontSize) => StyleSheet.create({
     flex:1,
     alignSelf: 'center',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    marginBottom: 10
   },
   timetable: {
     flex: 1,
     marginTop: 10
-  }
+  },
+  groupSection: {
+    alignSelf: 'center',
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  iconLeft: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginLeft: 5
+  },
+  iconRight: {
+    width: 25,
+    height: 25,
+    fontSize: 23,
+    color: '#1784d3',
+    marginRight: 5
+  },
+  columnStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent:'center',
+    flexWrap: 'wrap'
+  },
+  titleStyle: {
+    fontWeight: 'bold',
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    alignSelf: 'center',
+    color: '#1e1e1e'
+  },
+  textStyle: {
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontWeight: '300',
+    color: '#1e1e1e',
+    alignSelf: 'center',
+    marginRight: 5,
+    marginLeft:10
+  },
 });
