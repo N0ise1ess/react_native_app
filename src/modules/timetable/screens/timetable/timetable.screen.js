@@ -116,7 +116,7 @@ class InnerComponent extends Component {
                       </View>
                       <View style={[styles.section, {flex: 1}]}>
                         <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
-                        <Text style={styles.text}>{item.teacherFIO}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
+                        <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
                       </View>
                     </View>
                   )}
@@ -126,6 +126,15 @@ class InnerComponent extends Component {
       </Tab>
     );
   };
+
+  //Return format Иванов Иван Иванов => Иванов И.И.
+  getFio(teacherName) {
+    if (teacherName && teacherName.length > 0) {
+      let teacherSplit = teacherName.split(' ');
+      return teacherSplit[0] + ' ' + teacherSplit[1].substr(0, 1) + '. ' + teacherSplit[2].substr(0, 1) + '.';
+    }
+    return ''
+  }
 
   renderEven = () => {
     const {currentTab, styles} = this.state;
@@ -166,7 +175,7 @@ class InnerComponent extends Component {
                     </View>
                     <View style={[styles.section, {flex: 1}]}>
                       <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
-                      <Text style={styles.text}>{item.teacherFIO}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
+                      <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
                     </View>
                   </View>
                 )}
