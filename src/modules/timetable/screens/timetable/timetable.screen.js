@@ -5,48 +5,36 @@ import {
   Icon,
   Input,
   Item,
-  List,
+  List, ListItem,
   Spinner,
   Tab,
   TabHeading,
   Tabs,
   Text
 } from 'native-base';
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {View, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+import moment from 'moment';
 
-import { getSearchedTimetable } from '../../../../actions/timetableAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
-import { styles } from './styles';
+import {getSearchedTimetable, getTimetable} from '../../../../actions/timetableAction';
+import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
+import {styles} from './styles';
 
-const timeTableList = [
-  {
-    title: 'Разработка программного обеспечения обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00'
-  },
-  {
-    title: 'ИНО, практика',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '18:00-19.30'
-  },
-  {
-    title: 'Иностранный язык',
-    text: 'Сергеев, Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00'
-  },
-  {
-    title: 'Разработка программного обеспечения',
-    text: 'Иванова Н.М. 524 ауд., корпус 8',
-    time: '16:30-18:00'
-  }
-];
+const days = {
+  0: 'sunday',
+  1: 'monday',
+  2: 'tuesday',
+  3: 'wednesday',
+  4: 'thursday',
+  5: 'friday',
+  6: 'saturday'
+}
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({navigation}) => ({
     headerTitle: 'Расписание',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />
+    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>
   });
 
   constructor(props) {
@@ -54,12 +42,34 @@ class InnerComponent extends Component {
     this.state = {
       currentTab: 0,
       searchedText: '',
-      styles: styles(props.fontSize)
+      styles: styles(props.fontSize),
+      groupNames: [],
+      currentGroupIndex: -1
     };
   }
+
   componentWillMount() {
     this.props.getSearchedTimetable('', this.props.token);
+
+    const { role } = this.props;
+    if (role && role.length > 0) {
+      role.forEach((localRole, index) => {
+        if (localRole.type === 'STUDENT') {
+          let groupNames = [];
+          role[index].details.forEach(detail => {
+            groupNames.push(detail.group.name);
+          });
+          this.setState({groupNames: groupNames, currentGroupIndex: 0});
+        }
+      });
+    }
   }
+
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize &&
+    this.setState({styles: styles(this.props.fontSize)});
+  }
+
   _upperCase(word) {
     return (
       <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>
@@ -67,8 +77,10 @@ class InnerComponent extends Component {
   }
 
   renderOdd = () => {
-    const { currentTab, styles } = this.state;
+    const {currentTab, styles} = this.state;
+    const {timetables} = this.props;
 
+    const timetable = timetables[1].dayTimetables;
     return (
       <Tab
         heading={
@@ -85,33 +97,49 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
-          <List
-            dataArray={timeTableList}
-            renderRow={item => (
-              <View style={styles.listStyle}>
-                <View style={styles.section}>
-                  <Text style={styles.time}>{item.time}</Text>
+        <Content style={{backgroundColor: '#CED8DA'}}>
+          <View style={{alignSelf: 'center'}}>
+            <Text>Неделя {timetables[1].weekNumber}</Text>
+          </View>
+          {Object.keys(timetable).map((key, index) =>
+            timetable[key] && timetable[key][0] ?
+              <View key={index} style={styles.timetable}>
+                <View style={styles.weekHeader}>
+                  <Text style={{color: '#1784d3'}}>{timetable[key][0].weekDayName || ''}</Text>
                 </View>
-                <View style={[styles.section, { flex: 1 }]}>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.text}>{item.text}</Text>
-                </View>
-              </View>
-            )}
-          />
+                <List
+                  dataArray={timetable[key]}
+                  renderRow={item => (
+                    <View style={styles.listStyle}>
+                      <View style={[styles.section]}>
+                        <Text style={styles.time}>{item.timeName}</Text>
+                      </View>
+                      <View style={[styles.section, {flex: 1}]}>
+                        <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
+                        <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
+                      </View>
+                    </View>
+                  )}
+                />
+              </View> : null)}
         </Content>
       </Tab>
     );
   };
 
-  componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-      this.setState({ styles: styles(this.props.fontSize) });
+  //Return format Иванов Иван Иванов => Иванов И.И.
+  getFio(teacherName) {
+    if (teacherName && teacherName.length > 0) {
+      let teacherSplit = teacherName.split(' ');
+      return teacherSplit[0] + ' ' + teacherSplit[1].substr(0, 1) + '. ' + teacherSplit[2].substr(0, 1) + '.';
+    }
+    return ''
   }
 
   renderEven = () => {
-    const { currentTab, styles } = this.state;
+    const {currentTab, styles} = this.state;
+    const {timetables} = this.props;
+    const timetable = timetables[0].dayTimetables;
     return (
       <Tab
         heading={
@@ -128,30 +156,58 @@ class InnerComponent extends Component {
           </TabHeading>
         }
       >
-        <Content style={{ backgroundColor: '#CED8DA' }}>
-          <List
-            dataArray={timeTableList}
-            renderRow={item => (
-              <View style={styles.listStyle}>
-                <View style={[styles.section]}>
-                  <Text style={styles.time}>{item.time}</Text>
-                </View>
-                <View style={[styles.section, { flex: 1 }]}>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.text}>{item.text}</Text>
-                </View>
+          <Content style={{backgroundColor: '#CED8DA'}}>
+            <View style={{alignSelf: 'center'}}>
+              <Text>Неделя {timetables[0].weekNumber}</Text>
+            </View>
+            {Object.keys(timetable).map((key, index) =>
+            timetable[key] && timetable[key][0] ?
+            <View key={index} style={styles.timetable}>
+              <View style={styles.weekHeader}>
+                <Text style={{color: '#1784d3'}}>{timetable[key][0].weekDayName || ''}</Text>
               </View>
-            )}
-          />
-        </Content>
+              <List
+                dataArray={timetable[key]}
+                renderRow={item => (
+                  <View style={styles.listStyle}>
+                    <View style={[styles.section]}>
+                      <Text style={styles.time}>{item.timeName}</Text>
+                    </View>
+                    <View style={[styles.section, {flex: 1}]}>
+                      <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
+                      <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
+                    </View>
+                  </View>
+                )}
+              />
+            </View> : null)}
+          </Content>
       </Tab>
     );
   };
 
   onHandleSubmit = () => {
-    const { searchedText } = this.state;
+    const {searchedText} = this.state;
     this.props.getSearchedTimetable(searchedText, this.props.token);
   };
+
+  _renderSearchBar = () => {
+    const {styles} = this.state;
+    return (
+      <Item style={styles.searchBar}>
+        <Icon name="ios-search" style={styles.searchIcon}/>
+        <Input
+          style={styles.searchInput}
+          placeholder="Поиск по расписанию"
+          value={this.state.searchedText}
+          onChangeText={text => this.setState({searchedText: text})}
+        />
+        <Button transparent onPress={this.onHandleSubmit}>
+          <Text>Найти</Text>
+        </Button>
+      </Item>
+    )
+  }
 
   render() {
     const {
@@ -160,45 +216,121 @@ class InnerComponent extends Component {
       timeTableLoading,
       errorCode,
       error,
-      errorDescription
+      errorDescription,
+      suggestions,
+      timetables,
+      token
     } = this.props;
-    const { styles } = this.state;
-    return (
-      <Container style={styles.container}>
-        <Item style={styles.searchBar}>
-          <Icon name="ios-search" style={styles.searchIcon} />
-          <Input
-            style={styles.searchInput}
-            placeholder="Поиск по расписанию"
-            value={this.state.searchedText}
-            onChangeText={text => this.setState({ searchedText: text })}
-          />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
-          </Button>
-        </Item>
-        {!errorCode ? (
-          <Tabs
-            onChangeTab={({ i }) => this.setState({ currentTab: i })}
-            tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          >
-            {this.renderOdd()}
-            {this.renderEven()}
-          </Tabs>
-        ) : (
+    const { styles, groupNames } = this.state;
+    if (timetables.length > 0) {
+      return (
+        <Container style={styles.container}>
+          {this._renderSearchBar()}
+          {groupNames.length > 0 && !timeTableLoading ? (
+            groupNames.length > 1 ? (
+              <View style={styles.groupSection}>
+                <TouchableOpacity onPress={() => this.switchGroup('left')}>
+                  <CustomIcon name="arrow_left" style={styles.iconLeft} />
+                </TouchableOpacity>
+                <Text style={{ color: '#1784d3' }}>
+                  Группа {groupNames[this.state.currentGroupIndex]}
+                </Text>
+                <TouchableOpacity onPress={() => this.switchGroup('right')}>
+                  <CustomIcon name="arrow_right" style={styles.iconRight} />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={[styles.groupSection, { justifyContent: 'center' }]}>
+                <Text style={{ color: '#1784d3' }}>Группа {groupNames[0]}</Text>
+              </View>
+            )
+          ) : null}
+          {!errorCode ? (
+            <Tabs
+              tabContainerStyle={{ elevation: 0 }}
+              onChangeTab={({i}) => this.setState({currentTab: i})}
+              tabBarUnderlineStyle={{backgroundColor: 'transparent'}}
+            >
+              {this.renderOdd()}
+              {this.renderEven()}
+            </Tabs>
+          ) : (
+            <Content>
+              {timeTableLoading && <Spinner/>}
+              {errorCode && (
+                <Text style={styles.errorText}>
+                  ErrorCode: {`${errorCode}\n`}
+                </Text>
+              )}
+            </Content>
+          )}
+          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        </Container>
+      );
+    } else {
+      return (
+        <Container style={styles.container}>
+          {this._renderSearchBar()}
           <Content>
-            {timeTableLoading && <Spinner />}
-            {errorCode && (
-              <Text style={styles.errorText}>
-                ErrorCode: {`${errorCode}\n`}
-              </Text>
-            )}
+            {!timeTableLoading ?
+              <List
+                style={{}}
+                dataArray={suggestions}
+                renderRow={item => (
+                  <ListItem
+                    button
+                    onPress={() => this.props.getTimetable(item, token)}
+                    style={styles.listItemStyle}
+                  >
+                    <View style={styles.columnStyle}>
+                      <Text style={styles.titleStyle}>{item.title}</Text>
+                      <Text style={[styles.textStyle, {color: '#979797'}]}>{item.description}</Text>
+                    </View>
+                  </ListItem>
+                )}
+              /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
+            }
           </Content>
-        )}
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
-      </Container>
-    );
+          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        </Container>
+      )
+    }
   }
+
+  getNextIndex = (directionName, currentIndex) => {
+    let direction = {
+      left: {
+        canMoveFrom: index => index !== 0,
+        getNext: index => index - 1,
+        getStartIndex: () => this.state.groupNames.length - 1,
+      },
+      right: {
+        canMoveFrom: index => index !== this.getLastGroupIndex(),
+        getNext: index => index + 1,
+        getStartIndex: () => 0,
+      },
+    }[directionName];
+
+    return direction.canMoveFrom(currentIndex)
+      ? direction.getNext(currentIndex)
+      : direction.getStartIndex();
+  };
+
+  switchGroup(direction) {
+    if (this.state.groupNames.length > 1) {
+      this.setState({
+        currentGroupIndex: this.getNextIndex(
+          direction,
+          this.state.currentGroupIndex,
+        ),
+      });
+    }
+  }
+
+  getLastGroupIndex() {
+    return this.state.groupNames.length - 1
+  }
+
 }
 
 const mapStateToProps = state => {
@@ -210,8 +342,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getSearchedTimetable: (searchedText, token) =>
-    dispatch(getSearchedTimetable(searchedText, token)),
+  getSearchedTimetable: (searchedText, token) => dispatch(getSearchedTimetable(searchedText, token)),
+  getTimetable: (search, token) => dispatch(getTimetable(search, token)),
   dispatch
 });
 

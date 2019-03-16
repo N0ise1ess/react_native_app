@@ -21,6 +21,8 @@ export default {
   timetableReducer: {
     timeTableLoading: false,
     errorCode: null,
+    timetables: [],
+    suggestions: [],
   },
   departmentReducer: {
     departments: [],

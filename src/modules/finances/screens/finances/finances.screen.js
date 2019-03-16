@@ -279,6 +279,10 @@ class InnerComponent extends Component {
       : direction.getStartIndex();
   };
 
+  getLastGroupIndex() {
+    return this.state.groupNames.length - 1
+  }
+
   switchGroup(direction) {
     if (this.state.groupNames.length > 1) {
       this.setState({
