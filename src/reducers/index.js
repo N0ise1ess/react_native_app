@@ -9,6 +9,8 @@ import departmentReducer from './departmentReducer';
 import loadingReducer from './loadingReducer';
 import settings from './settingsReducer';
 import personalityReducer from "./personalityReducer";
+import questionnaires from './questionnairesReducer';
+
 export default combineReducers({
   authReducer,
   libraryReducer,
@@ -19,5 +21,6 @@ export default combineReducers({
   departmentReducer,
   loadingScreen: loadingReducer,
   personalityReducer,
+  questionnaires,
   settings,
 });

@@ -35,5 +35,10 @@ export default {
   personalityReducer: {
     searching: false,
     personalities: []
+  },
+  questionnaires: {
+    listQuestionnaires: [],
+    questionnaires: {},
+    answersId: [],
   }
 };

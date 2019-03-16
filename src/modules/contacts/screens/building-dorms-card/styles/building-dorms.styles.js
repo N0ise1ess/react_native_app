@@ -4,16 +4,16 @@ import {getSizeFonts} from '../../../../shared/functions/styles';
 
 export const styles = (fontSize) => StyleSheet.create({
   container: {
-    backgroundColor: '#CED8DA',
+    backgroundColor: '#fff',
     flex: 1,
+    paddingTop: 20,
   },
   imageStyle: {
-    width: 36,
-    height: 36,
-    marginLeft: 20,
-    marginRight: 20,
-    resizeMode: 'contain',
-    tintColor: '#163D7D',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_17, fontSize),
+    color: 'white',
+    alignContent: 'center',
+    alignSelf: 'center',
+    textAlignVertical: 'center'
   },
   listItemStyle: {
     paddingTop: 15,
@@ -68,5 +68,31 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: '300',
     alignSelf: 'flex-start',
     color: '#4D6270',
+  },
+  icon: {
+    width: 42,
+    height: 42,
+    marginLeft: 20,
+    fontSize: 40,
+    color: '#3587fa',
+  },
+  containerBorder: {
+    flex: 1,
+    maxHeight: 50,
+    borderTopWidth: 1,
+    borderColor: '#666',
+    marginTop: 10,
+    paddingTop: 10,
+  },
+  btnImageStyle: {
+    borderRadius: 50,
+    height: 40,
+    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0C68FF',
+  },
+  titleStyleBlue: {
+    color: '#0C68FF',
   },
 });

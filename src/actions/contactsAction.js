@@ -1,11 +1,13 @@
 import {
-  departmentsGetApi
+  departmentsGetApi,
+  getBuildingDorms
 } from '../api';
 
 import {
   DEPARTMENTS_SUCCESS,
   DEPARTMENTS_PENDING,
   DEPARTMENTS_FAILURE,
+  GET_BUILDING_DORMS_SUCCESS,
 } from '../constants';
 
 export const getDepartments = (searchedText) => async dispatch => {
@@ -15,7 +17,6 @@ export const getDepartments = (searchedText) => async dispatch => {
   try {
     const response = await departmentsGetApi(searchedText);
     if (response && response.data) {
-      console.log(response);
       if(response.status == '200'){
         dispatch({
           type: DEPARTMENTS_SUCCESS,
@@ -38,3 +39,15 @@ export const getDepartments = (searchedText) => async dispatch => {
     });
   }
 };
+
+export const getBuildings = () => async dispatch => {
+  try {    
+    const {data} = await getBuildingDorms();
+    data && dispatch({
+      type: GET_BUILDING_DORMS_SUCCESS,
+      payload: data,
+    })
+  } catch(e) {
+    console.log(e)
+  }
+}

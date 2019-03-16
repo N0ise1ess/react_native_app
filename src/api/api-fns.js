@@ -60,33 +60,56 @@ export function newsApi() {
   return axios.get(endpoints.news.getAll);
 }
 
-export function getNews(page = 1, size = 10) {
-  return axios.get(endpoints.news.getNews, {
-    params: {
-      page,
-      size,
-    },
-  });
+export async function getNews(page = 1, size = 10) {
+  let t0 = new Date();
+  let response = await fetch(
+    `${endpoints.news.getNews}?page=${page}&size=${size}`,
+  );
+  let t1 = new Date();
+  let json = await response.json();
+  let t2 = new Date();
+  console.log(`getNews: Response: ${t1 - t0} ms`);
+  console.log(`getNews: Parse JSON: ${t2 - t1} ms`);
+  console.log(`getNews: Total: ${t2 - t0} ms`);
+  return json;
 }
 
-export function getEvents(page = 1, size = 10) {
-  return axios.get(endpoints.news.getEvents, {
-    params: {
-      page,
-      size,
-    },
-  });
+export async function getEvents(page = 1, size = 10) {
+  let t0 = new Date();
+  let response = await fetch(
+    `${endpoints.news.getEvents}?page=${page}&size=${size}`,
+  );
+  let t1 = new Date();
+  let json = await response.json();
+  let t2 = new Date();
+  console.log(`getEvents: Response: ${t1 - t0} ms`);
+  console.log(`getEvents: Parse JSON: ${t2 - t1} ms`);
+  console.log(`getEvents: Total: ${t2 - t0} ms`);
+  return json;
 }
-export function getAdvertisement(page = 1, size = 10) {
-  return axios.get(endpoints.news.getAdvertisements, {
-    params: {
-      page,
-      size,
-    },
-  });
+export async function getAdvertisement(page = 1, size = 10) {
+  let t0 = new Date();
+  let response = await fetch(
+    `${endpoints.news.getAdvertisements}?page=${page}&size=${size}`,
+  );
+  let t1 = new Date();
+  let json = await response.json();
+  let t2 = new Date();
+  console.log(`getAdvertisement: Response: ${t1 - t0} ms`);
+  console.log(`getAdvertisement: Parse JSON: ${t2 - t1} ms`);
+  console.log(`getAdvertisement: Total: ${t2 - t0} ms`);
+  return json;
 }
-export function getSlider() {
-  return axios.get(endpoints.news.getSliders);
+export async function getSlider() {
+  let t0 = new Date();
+  let response = await fetch(endpoints.news.getSliders);
+  let t1 = new Date();
+  let json = await response.json();
+  let t2 = new Date();
+  console.log(`getSlider: Response: ${t1 - t0} ms`);
+  console.log(`getSlider: Parse JSON: ${t2 - t1} ms`);
+  console.log(`getSlider: Total: ${t2 - t0} ms`);
+  return json;
 }
 
 export function timeTableSearchApi(searchedText, token) {
@@ -125,6 +148,10 @@ export function departmentsGetApi(searchedText) {
   );
 }
 
+export function getBuildingDorms() {
+  return axios.get(endpoints.buildings.get);
+}
+
 export function resetPassword(email) {
   let data = new FormData();
 
@@ -161,4 +188,30 @@ export function getPersonalityByName(name = '', size = 1, page) {
 export function getPersonalityById(personId) {
   const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
   return axios.get(endpoint);
+}
+
+export function getAllQuestionnaires(token) {
+  return axios.get(endpoints.questionnaires.getAllQuestionnaires, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function getQuestionnaire(id, token) {
+  return axios.post(endpoints.questionnaires.getQuestionnaire, id.toString(), {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function saveAnswers(params, token) {
+  return axios.post(endpoints.questionnaires.saveAnswers, params, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
 }

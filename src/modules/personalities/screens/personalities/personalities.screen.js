@@ -1,18 +1,17 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, {Component} from 'react';
-import {Image, View, Animated, TouchableOpacity, Dimensions} from 'react-native';
+import {Image, View, Animated, TouchableOpacity, Dimensions, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 
 import {img_teacher} from '../../../../assets/images';
 import {ButtonBack, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
 import {findPersonalityByName} from "../../../../actions/personalityAction";
-import {News} from "../../../news/components/news";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const { height, width } = Dimensions.get("window")
 
-const alphabets = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'.split('');
+const alphabets = 'абвгдежзиклмнопрстуфхцчшщэюя'.split('');
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -35,6 +34,15 @@ class InnerComponent extends Component {
   componentWillMount() {
     //Getting first 20 contacts
     this.props.findPersonalityByName('', 20, null)
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this['sidebar'].close()
   }
 
   componentDidMount() {
@@ -96,6 +104,7 @@ class InnerComponent extends Component {
         <View style={{flex: 4, flexDirection: 'row'}}>
           <Animated.View style={[{width: sidebarWidth}]}>
           <Swipeable
+            ref={component => this['sidebar'] = component}
             onSwipeableWillOpen={this.onSwipeableWillOpen}
             onSwipeableClose={this.onSwipeableWillClose}
             containerStyle={styles.swipeable()}

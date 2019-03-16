@@ -1,39 +1,10 @@
-import { Container, Content, Icon, List, ListItem, Text } from 'native-base';
+import * as NB from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import {CustomIcon} from '../../../shared/components/custom-icon';
-import { img_campus_dorm } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
-
-const itemList = [
-  {
-    title: 'Корпус 1',
-    text: 'Учебный',
-    image: 'hostel',
-  },
-  {
-    title: 'Корпус 2',
-    text: 'Учебный',
-    image: 'hostel',
-  },
-  {
-    title: 'Корпус 3',
-    text: 'Учебный',
-    image: 'hostel',
-  },
-  {
-    title: 'Корпус 4',
-    text: 'Административный',
-    image: 'hostel',
-  },
-  {
-    title: 'Корпус 5',
-    text: 'Учебный',
-    image: 'hostel',
-  },
-];
+import * as actions from "../../../../actions/contactsAction";
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -45,7 +16,9 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      searchedText: '',
     };
+    props.getBuildings();
   }
 
   componentDidUpdate(props) {
@@ -53,22 +26,35 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, token } = this.props;
-    const {styles} = this.state;
+    const { userStatus, navigation, token, buildingsDorms } = this.props;
+    const {styles, searchedText} = this.state;
+    const data = buildingsDorms && buildingsDorms.filter(item => item.name.search(searchedText) > -1);
     return (
-      <Container style={styles.container}>
-        <Content>
-          <List
+      <NB.Container style={styles.container}>
+        <NB.Item style={styles.searchBar}>
+          <NB.Icon name="ios-search" style={styles.searchIcon}/>
+          <NB.Input
+            style={styles.searchInput}
+            placeholder="Поиск по подразделениям"
+            value={this.state.searchedText}
+            onChangeText={text => this.setState({searchedText: text})}
+          />
+        </NB.Item>
+        <NB.Content>
+          {!buildingsDorms && <NB.Spinner color="blue"/>}
+          {buildingsDorms && data.length > 0 ? <NB.List
             style={styles.listStyle}
-            dataArray={itemList}
+            dataArray={data}
             renderRow={item => (
-              <ListItem
+              <NB.ListItem
+                key={item.id}
                 button
-                onPress={() => navigation.navigate(item.route ? item.route : '')}
+                onPress={() => navigation.navigate('BuildingDormsCard', {
+                  item,
+                })}
                 style={styles.listItemStyle}
               >
                 <View style={styles.viewStyle}>
-                  {/* <Image source={item.image} style={styles.imageStyle} /> */}
                   <CustomIcon
                     style={{
                       width: 32,
@@ -76,22 +62,24 @@ class InnerComponent extends Component {
                       marginLeft: 15,
                       marginRight: 15,
                       fontSize: 30,
-                      color: '#163D7D',
+                      color: '#0C68FF',
                     }}
-                    name={item.image}
+                    name={'hostel'}
                   />
                   <View style={styles.columnStyle}>
-                    <Text style={styles.titleStyle}>{item.title}</Text>
-                    <Text style={styles.textStyle}>{item.text}</Text>
+                    <NB.Text style={styles.titleStyle}>{item.name}</NB.Text>
+                    <NB.Text style={styles.textStyle}>{'Учебный'}</NB.Text>
                   </View>
                 </View>
-                <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
-              </ListItem>
+                <NB.Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
+              </NB.ListItem>
             )}
-          />
-        </Content>
+          /> : <View style={[styles.columnStyle, styles.columnStyleRow]}>
+            <NB.Text style={styles.textStyle}>{'Ничего не найдено'}</NB.Text>
+          </View>}
+        </NB.Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
-      </Container>
+      </NB.Container>
     );
   }
 }
@@ -100,14 +88,11 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.settings,
+    ...state.departmentReducer,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  dispatch,
-});
-
 export const BuildingDormsScreen = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {...actions},
 )(InnerComponent);

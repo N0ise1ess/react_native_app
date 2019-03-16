@@ -26,11 +26,13 @@ import {
   PersonalityScreen,
   PersonalRatingScreen,
   QuestionnairesScreen,
+  QuestionnairesStep,
   SettingsScreen,
   TimeTableScreen,
   WifiAccessScreen,
   ScratchBookScreen,
-  ReportsScreen
+  ReportsScreen,
+  BuildingDormsCardScreen,
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -49,9 +51,11 @@ const AppStack = createStackNavigator(
     Notifications: NotificationsScreen,
     PersonalRating: PersonalRatingScreen,
     Questionnaires: QuestionnairesScreen,
+    QuestionnairesStep: QuestionnairesStep,
     Contacts: ContactsScreen,
     Divisions: DivisionsScreen,
     BuildingDorms: BuildingDormsScreen,
+    BuildingDormsCard: BuildingDormsCardScreen,
     MainConfig: MainConfigScreen,
     Personalities: PersonalitiesScreen,
     Personality: PersonalityScreen,
