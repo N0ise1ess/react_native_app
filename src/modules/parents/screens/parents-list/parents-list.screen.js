@@ -17,7 +17,7 @@ const itemList = [
     position: 'Мать',
   },
   {
-    fullName: 'Видова Фидора Васильевна',
+    fullName: 'Видова Федора Васильевна',
     position: 'Бабушка',
   },
 ];
@@ -35,10 +35,11 @@ class InnerComponent extends Component {
     };
   }
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize &&
+      this.setState({ styles: styles(this.props.fontSize) });
   }
   render() {
-    const {styles} = this.state;
+    const { styles } = this.state;
     const { userStatus, navigation, token } = this.props;
     return (
       <Container style={styles.container}>
@@ -46,8 +47,12 @@ class InnerComponent extends Component {
           <List
             style={styles.listStyle}
             dataArray={itemList}
-            renderRow={item => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Parent')}>
+            renderRow={(item) => (
+              <ListItem
+                button
+                style={styles.listItemStyle}
+                onPress={() => navigation.navigate('Parent')}
+              >
                 <Image source={img_parent} style={styles.imageStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
@@ -63,14 +68,14 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatch,
 });
 
