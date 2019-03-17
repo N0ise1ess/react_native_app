@@ -119,7 +119,7 @@ class InnerComponent extends Component {
 
   copyPass = () => {
     Toast.show({
-      text: "Скопированно в буфер обмена",
+      text: "Скопировано в буфер обмена",
       buttonText: 'Ок',
       duration: 2000,
       type: 'warning',
