@@ -142,10 +142,12 @@ export function timeTableGetApi(search, token) {
   );
 }
 
-export function departmentsGetApi(searchedText) {
-  return axios.get(
-    `${endpoints.departments.searchByName}?search=${searchedText}`,
-  );
+export async function departmentsGetApi(searchedText) {
+  let url = `${endpoints.departments.searchByName}?search=${searchedText}`;
+  let response = await fetch(url);
+  let status = response.status;
+  let data = await response.json();
+  return { data, status };
 }
 
 export function getBuildingDorms() {
