@@ -130,7 +130,7 @@ export function timeTableSearchApi(searchedText, token) {
 export function timeTableGetApi(search, token) {
   return axios.post(
     endpoints.timetable.get,
-    { id: search.id, type: search.type },
+    {id: search.id, type: search.type},
     token
       ? {
           headers: {
@@ -180,19 +180,15 @@ export function editPhoneNumber(phoneNumber, token) {
 }
 
 export function getPersonalityByName(name = '', size = 1, page) {
-  let endpoint = `${
-    endpoints.personality.personalityUrl
-  }?search=${name}&size=${size}`;
+  let endpoint = `${endpoints.personality.personalityUrl}?search=${name}&size=${size}`
   if (page) {
-    endpoint = endpoint + `&page=${page}`;
+    endpoint = endpoint + `&page=${page}`
   }
   return axios.get(endpoint);
 }
 
 export function getPersonalityById(personId) {
-  const endpoint = `${
-    endpoints.personality.personalityUrl
-  }/getByPersonId?personId=${personId}`;
+  const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
   return axios.get(endpoint);
 }
 
