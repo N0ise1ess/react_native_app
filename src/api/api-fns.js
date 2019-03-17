@@ -179,16 +179,21 @@ export function editPhoneNumber(phoneNumber, token) {
   });
 }
 
-export function getPersonalityByName(name = '', size = 1, page) {
-  let endpoint = `${endpoints.personality.personalityUrl}?search=${name}&size=${size}`
+export async function getPersonalityByName(name = '', size = 1, page) {
+  let endpoint = `${
+    endpoints.personality.personalityUrl
+  }?search=${name}&size=${size}`;
   if (page) {
-    endpoint = endpoint + `&page=${page}`
+    endpoint = endpoint + `&page=${page}`;
   }
-  return axios.get(endpoint);
+  let response = await fetch(endpoint);
+  let status = response.status;
+  let data = await response.json();
+  return { data, status };
 }
 
 export function getPersonalityById(personId) {
-  const endpoint = `${endpoints.personality.personalityUrl}/getByPersonId?personId=${personId}`
+  const endpoint = `${endpoints.personality.personalityUrl}/${personId}`;
   return axios.get(endpoint);
 }
 
