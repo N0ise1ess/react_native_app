@@ -10,34 +10,29 @@ export class DivisionInfo extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      expanded: false
     };
   }
 
   render() {
-    const {item} = this.props
+    const {item, openedIdItem} = this.props
     const { directors } = item;
-    const {styles} = this.state;
-    if (item.departments === null) {
-      return (
-        <Collapsible collapsed={!this.state.expanded} style={{flex: 1}}>
-          <View style={styles.container}>
-            <View style={styles.content}>
-              <View style={styles.dummy}/>
-              <View style={[styles.section, styles.borderLine]}>
-                <View style={styles.universityInfo}>
-                  {this.renderLabel("Адрес")}
-                  <Text style={styles.nameStyle}>{item.building || ''}</Text>
-                </View>
+    const {styles} = this.state;  
+    return (
+      <Collapsible collapsed={!(openedIdItem === item.id)} style={{flex: 1}}>
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.dummy}/>
+            <View style={[styles.section, styles.borderLine]}>
+              <View style={styles.universityInfo}>
+                {this.renderLabel("Адрес")}
+                <Text style={styles.nameStyle}>{item.building || ''}</Text>
               </View>
             </View>
-            {directors ? directors.map((item, index) => this.renderDirectorSection(item, index, directors.length)) : null}
           </View>
-        </Collapsible>
-      )
-    } else {
-      return null;
-    }
+          {directors ? directors.map((item, index) => this.renderDirectorSection(item, index, directors.length)) : null}
+        </View>
+      </Collapsible>
+    )
   }
 
   renderDirectorSection(directorInfo, index, arrayLength) {

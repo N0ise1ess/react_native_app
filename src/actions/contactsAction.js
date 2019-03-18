@@ -8,7 +8,14 @@ import {
   DEPARTMENTS_PENDING,
   DEPARTMENTS_FAILURE,
   GET_BUILDING_DORMS_SUCCESS,
+  SET_OPENED_ID,
 } from '../constants';
+
+
+export const setOpenedIdItemDivisions = (payload) => ({
+  type: SET_OPENED_ID,
+  payload,
+})
 
 export const getDepartments = (searchedText) => async dispatch => {
   dispatch({

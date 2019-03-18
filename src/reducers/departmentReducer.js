@@ -4,10 +4,16 @@ import {
   DEPARTMENTS_PENDING,
   DEPARTMENTS_FAILURE,
   GET_BUILDING_DORMS_SUCCESS,
+  SET_OPENED_ID,
 } from '../constants';
 
 export default departmentReducer = (state = initialState.departmentReducer, action) => {
   switch (action.type) {
+    case SET_OPENED_ID: 
+      return {
+        ...state,
+        openedIdItem: action.payload,
+      }
     case DEPARTMENTS_SUCCESS:
       return {
         ...state,
