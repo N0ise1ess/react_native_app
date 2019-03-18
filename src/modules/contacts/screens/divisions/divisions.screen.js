@@ -27,6 +27,7 @@ class InnerComponent extends Component {
     this.state = {
       styles: styles(props.fontSize),
       stepStack: [],
+      searchedText: '',
     };
   }
 
@@ -57,35 +58,38 @@ class InnerComponent extends Component {
           </Button>
         </Item>
         <Content ref={node => this.content = node}>
-          {departmentsLoading && !departments
+          {departmentsLoading
             ? <Spinner color='#163D7D' style={{ justifyContent: 'center', alignItems: 'center' }} />
-            : this.getDataList(departments).map((item, index) => (
-              <ListItem
-                key={item.id}
-                button
-                onPress={() => item.directors
-                  && this.props.setOpenedIdItemDivisions(this.props.openedIdItem === item.id ? '' : item.id)}
-                style={styles.listItemStyle}
-              >
-                {console.log(departments)}
-                <View style={styles.listItemContainer}>
-                  <View style={styles.listItem}>
-                    <CustomIcon style={styles.iconUniversity} name="university" />
-                    <Text style={styles.titleStyle}>{item.name}</Text>
-                    {item.departments
-                      && item.departments.length > 0
-                      && <TouchableOpacity
-                          style={{width: 40, height: 40}}
-                          onPress={() => this.handlePressNextStep(item, index)}>
-                        <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
-                      </TouchableOpacity>}
+            : <FlatList
+              data={this.getDataList(departments)}
+              extraData={{openedIdItem: this.props.openedIdItem}}
+              keyExtractor={(item, index) => item.id.toString()}
+              renderItem={(({item, index}) => (
+                <ListItem
+                  button
+                  onPress={() => item.directors
+                    && this.props.setOpenedIdItemDivisions(openedIdItem === item.id ? '' : item.id)}
+                  style={styles.listItemStyle}
+                >
+                  <View style={styles.listItemContainer}>
+                    <View style={styles.listItem}>
+                      <CustomIcon style={styles.iconUniversity} name="university" />
+                      <Text style={styles.titleStyle}>{item.name}</Text>
+                      {item.departments
+                        && item.departments.length > 0
+                        && <TouchableOpacity
+                            style={{width: 40, height: 40}}
+                            onPress={() => this.handlePressNextStep(item, index)}>
+                          <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
+                        </TouchableOpacity>}
+                    </View>
+                    {openedIdItem===item.id && <DivisionInfo item={item}
+                      isOpened={openedIdItem===item.id}
+                      fontSize={this.props.fontSize} />}
                   </View>
-                  <DivisionInfo item={item}
-                    openedIdItem={openedIdItem}
-                    fontSize={this.props.fontSize} />
-                </View>
-              </ListItem>
-            ))
+                </ListItem>
+              ))}
+            />            
           }
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
@@ -94,10 +98,9 @@ class InnerComponent extends Component {
   }
 
   getDataList = (data) => {
-    const { stepStack } = this.state;
-    stepStack.forEach((item) => {
+    if(data) this.state.stepStack.forEach((item) => {
       data = data[item.index].departments;
-    })
+    });    
     return data;
   }
 
@@ -134,11 +137,9 @@ class InnerComponent extends Component {
   onHandleSubmit = () => {
     Keyboard.dismiss();
     const { searchedText } = this.state;
-    if(searchedText) {
-      this.props.getDepartments(searchedText.trim());
-      this.props.setOpenedIdItemDivisions('');
-      this.setState({ stepStack: [] });
-    }
+    this.props.getDepartments(searchedText.trim());
+    this.props.setOpenedIdItemDivisions('');
+    this.setState({ stepStack: [] });
   };
 }
 
