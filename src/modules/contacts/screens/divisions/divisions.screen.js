@@ -30,6 +30,7 @@ class InnerComponent extends Component {
         counter: 0,
         prevTitle : null
       },
+      stepStack: [],
       toggledId : null
     };
   }
@@ -63,11 +64,11 @@ class InnerComponent extends Component {
           {!departmentsLoading ?
             <List
               style={styles.listStyle}
-              dataArray={searchedDepartments.length > 0 ? searchedDepartments : departments}
-              renderRow={item => (
+              dataArray={this.getDataList(departments)}
+              renderRow={(item, _, index) => (
                 <ListItem
                   button
-                  onPress={() => this.getIntoNextDepartments(item.departments, item.name, item.id)}
+                  onPress={() => this.handlePressNextStep(item, index)}
                   style={styles.listItemStyle}
                 >
                   <View style={styles.listItemContainer}>
@@ -76,9 +77,9 @@ class InnerComponent extends Component {
                       <Text style={styles.titleStyle}>{item.name}</Text>
                       <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle}/>
                     </View>
-                    <DivisionInfo item={item}
+                    {/* <DivisionInfo item={item}
                                   fontSize={this.props.fontSize}
-                                  ref={component => this[item.id] = component}/>
+                                  ref={component => this[item.id] = component}/> */}
                   </View>
                 </ListItem>
               )}
@@ -90,61 +91,40 @@ class InnerComponent extends Component {
     )
   }
 
-  getIntoNextDepartments(nextDepartments, name, id) {
-    let steps = {...this.state.steps};
-    const { toggledId } = this.state;
-    if (nextDepartments !== null && nextDepartments.length > 0) {
-      if (toggledId && this[toggledId]) {
-        this[toggledId].collapse()
-        this.setState({toggledId: null})
-      }
-      steps.counter++;
-      steps[`step${steps.counter}`] = nextDepartments;
-      steps[`prevTitle${steps.counter}`] = name
-      this.setState({steps})
-      this.setState({ searchedDepartments : steps[`step${steps.counter}`]})
-      this.props.navigation.setParams({currentTitle: name});
+  getDataList = (data) => {
+    const {stepStack} = this.state;
+    
+    stepStack.forEach((item) => {
+      data = data[item.index].departments; 
+    })
+    return data;
+  }
+
+  handlePressNextStep(item, index) {
+    if(item && item.departments && item.departments.length > 0) {
+      const {stepStack} = this.state;
+      stepStack.push({
+        index,
+        title: item.name,
+      });
+      this.props.navigation.setParams({currentTitle: item.name});
+      this.setState({stepStack});
     } else {
-      //Самое первое нажатие
-      if (!toggledId) {
-        this[id].toggle();
-        this.setState({toggledId: id})
-      }
-      //Нажали на другой, тогда уже нажатый закрываем и открываем новый
-      if (toggledId && toggledId !== id) {
-        this[toggledId].toggle()
-        this[id].toggle();
-        this.setState({toggledId: id})
-      }
-      //Уже был нажат, тогда закрываем уже открытый
-      if (toggledId && toggledId === id) {
-        this[id].toggle();
-        this.setState({toggledId: null})
-      }
+
     }
   };
 
   handleBackArrow = () => {
-    let steps = {...this.state.steps}
-    const { toggledId } = this.state;
-    if (toggledId && this[toggledId]) {
-      this[toggledId].collapse()
-      this.setState({toggledId: undefined})
-    }
-    this.props.navigation.setParams({currentTitle: steps[`prevTitle${steps.counter - 1}`]});
-    if (steps.counter - 1 === 0) {
-      this.setState({ searchedDepartments : this.props.departments});
-      steps.counter--;
-      this.setState({steps})
-      return
-    }
-    if (steps[`step${steps.counter - 1}`]) {
-      this.setState({ searchedDepartments : steps[`step${steps.counter - 1}`]});
-      steps.counter--;
-      this.setState({steps})
-    } else {
-      this.props.navigation.goBack();
-    }
+    const {stepStack} = this.state;
+    if(stepStack && stepStack.length > 0) {
+      stepStack.pop();
+      this.setState(stepStack);
+      console.log(stepStack);
+      
+      this.props.navigation.setParams({currentTitle: stepStack[stepStack.length - 1]
+        ? stepStack[stepStack.length - 1].title
+        : '' });
+    } else this.props.navigation.goBack();
   };
 
   onHandleSubmit = () => {
