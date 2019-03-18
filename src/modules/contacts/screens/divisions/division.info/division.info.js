@@ -1,74 +1,69 @@
-import {styles} from "./styles";
-import {Animated, Linking, NativeModules, Text, View} from "react-native";
-import React, {Component} from "react";
+import { styles } from "./styles";
+import { Animated, Linking, NativeModules, Text, View } from "react-native";
+import React, { Component } from "react";
 import Collapsible from "react-native-collapsible";
-import {CustomIcon} from "../../../../shared/components";
-import {Button} from "native-base";
+import { CustomIcon } from "../../../../shared/components";
+import { Button } from "native-base";
 
 export class DivisionInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      expanded: false
     };
   }
 
   render() {
-    const {item} = this.props
-    const { directors } = item;
-    const {styles} = this.state;
-    if (item.departments === null) {
-      return (
-        <Collapsible collapsed={!this.state.expanded} style={{flex: 1}}>
-          <View style={styles.container}>
-            <View style={styles.content}>
-              <View style={styles.dummy}/>
-              <View style={[styles.section, styles.borderLine]}>
-                <View style={styles.universityInfo}>
-                  {this.renderLabel("Адрес")}
-                  <Text style={styles.nameStyle}>{item.building || ''}</Text>
-                </View>
+    const { item, isOpened } = this.props
+    const { directors, building } = item;
+    const { styles } = this.state;
+    return (
+      <Collapsible collapsed={!isOpened} style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.dummy} />
+            <View style={[styles.section, styles.borderLine]}>
+              <View style={styles.universityInfo}>
+                {this.renderLabel("Адрес")}
+                <Text style={styles.nameStyle}>{building || ''}</Text>
               </View>
             </View>
-            {directors ? directors.map((item, index) => this.renderDirectorSection(item, index, directors.length)) : null}
           </View>
-        </Collapsible>
-      )
-    } else {
-      return null;
-    }
+          {directors && directors.map((item, index) => this.renderDirectorSection(item, index, directors.length))}
+        </View>
+      </Collapsible>
+    )
   }
 
   renderDirectorSection(directorInfo, index, arrayLength) {
-    const { styles } = this.state;
+    const { styles } = this.state;    
     return <View style={styles.content} key={index}>
-      <View style={styles.dummy}/>
+      <View style={styles.dummy} />
       <View style={[styles.section, index !== arrayLength - 1 ? styles.borderLine : {}]}>
-        <View style={styles.directorSection}>
+      {directorInfo && directorInfo.name !== null && <View style={styles.directorSection}>
           {this.renderLabel(directorInfo.post)}
           <Text style={styles.nameStyle}>{directorInfo.name}</Text>
-        </View>
-        <View style={[styles.dataSection]}>
-          <View style={{flexDirection: 'column'}}>
+        </View>}
+        {directorInfo && directorInfo.phoneNumber !== null &&<View style={[styles.dataSection]}>
+          <View style={{ flexDirection: 'column' }}>
             {this.renderLabel('Телефон')}
             <Text style={styles.dataStyle}>{directorInfo.phoneNumber}</Text>
           </View>
           <Button style={styles.btnImageStyle} info>
             <CustomIcon name="call" style={styles.imageStyle}
-                        onPress={() => this.makeACall(directorInfo.phoneNumber)}/>
+              onPress={() => this.makeACall(directorInfo.phoneNumber)} />
           </Button>
-        </View>
-        <View style={[styles.dataSection]}>
-          <View style={{flexDirection: 'column'}}>
+        </View>}
+        {directorInfo && directorInfo.email !== null && <View style={[styles.dataSection]}>
+          <View style={{ flexDirection: 'column' }}>
             {this.renderLabel('E-Mail')}
             <Text style={styles.dataStyle}>{directorInfo.email}</Text>
           </View>
           <Button style={styles.btnImageStyle} info>
             <CustomIcon name="message" style={styles.imageStyle}
-                        onPress={() => this.handleSendEmail(directorInfo.email)}/>
+              onPress={() => this.handleSendEmail(directorInfo.email)} />
           </Button>
-        </View>
+        </View>}
       </View>
     </View>
   }
@@ -88,7 +83,7 @@ export class DivisionInfo extends Component {
           if (supported) {
             Linking.openURL(`mailto:${email}`)
           } else {
-            alert('Cannot send email');
+            alert('Невозможно отправить сообщение');
           }
         })
       })

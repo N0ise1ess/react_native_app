@@ -68,6 +68,5 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    paddingRight: 20
   }
 })
