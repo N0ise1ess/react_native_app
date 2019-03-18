@@ -26,23 +26,17 @@ export const getNewsPagination = (page) => async dispatch => {
   });
   try {
     const response = await getNews(page);
-    if (response && response.data) {
-      if(response.status == '200'){
-        dispatch({
-          type: NEWS_PAGINATION_SUCCESS,
-          payload: {
-            newsPage: page,
-            news: response.data,
-          },
-        });
-      }
-      else{
-        dispatch({
-          type: NEWS_PAGINATION_FAILURE,
-          payload: response
-        })
-      }
-    }
+    if(response) dispatch({
+      type: NEWS_PAGINATION_SUCCESS,
+      payload: {
+        newsPage: page,
+        news: response,
+      },
+    });
+    else dispatch({
+      type: NEWS_PAGINATION_FAILURE,
+      payload: response
+    })
   } catch (err) {
     console.log(err);
     dispatch({

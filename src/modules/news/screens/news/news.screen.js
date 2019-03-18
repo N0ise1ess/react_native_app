@@ -199,10 +199,10 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { slider, news, advertisement, event, userStatus, navigation } = this.props;
+    const { slider, news, advertisement, event, userStatus, navigation, isLoadingNews } = this.props;
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
-    let isDownloading = true;
+    // let isDownloading = true;
     
     return (
       <NB.Container>
@@ -232,9 +232,8 @@ class InnerComponent extends Component {
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
             listener: event => {
-              if (currentTab === 0 && isDownloading && this.isCloseToBottom(event.nativeEvent)) {
+              if (currentTab === 0 && !isLoadingNews && this.isCloseToBottom(event.nativeEvent)) {
                 this.props.getNews(this.props.newsPage + 1);
-                test = isDownloading;
               }
             },
           })}

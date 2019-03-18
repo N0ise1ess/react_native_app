@@ -70,8 +70,8 @@ class InnerComponent extends Component {
                     <NB.Text style={styles.titleStyle}>{item.name}</NB.Text>
                     <NB.Text style={styles.textStyle}>{'Учебный'}</NB.Text>
                   </View>
+                  <NB.Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
                 </View>
-                <NB.Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
               </NB.ListItem>
             )}
           /> : <View style={[styles.columnStyle, styles.columnStyleRow]}>
