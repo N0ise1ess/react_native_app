@@ -1,7 +1,7 @@
 import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Linking, View} from 'react-native';
+import {Linking, View, Keyboard} from 'react-native';
 
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
@@ -94,7 +94,7 @@ class InnerComponent extends Component {
     let steps = {...this.state.steps};
     const { toggledId } = this.state;
     if (nextDepartments !== null && nextDepartments.length > 0) {
-      if (toggledId) {
+      if (toggledId && this[toggledId]) {
         this[toggledId].collapse()
         this.setState({toggledId: null})
       }
@@ -127,7 +127,7 @@ class InnerComponent extends Component {
   handleBackArrow = () => {
     let steps = {...this.state.steps}
     const { toggledId } = this.state;
-    if (toggledId) {
+    if (toggledId && this[toggledId]) {
       this[toggledId].collapse()
       this.setState({toggledId: undefined})
     }
@@ -148,6 +148,7 @@ class InnerComponent extends Component {
   };
 
   onHandleSubmit = () => {
+    Keyboard.dismiss();
     const {searchedText} = this.state;
     this.props.getDepartments(searchedText.trim());
     this.setState({ searchedDepartments : []})
