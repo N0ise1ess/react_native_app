@@ -20,33 +20,6 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize), 
     color: '#fff', 
   },
-  customSlide: {
-    width,
-    flex: 0,
-    padding: 0,
-  },
-  sliderImage: {
-    resizeMode: 'cover',
-    width,
-    height: height / 5,
-  },
-  buttonSelected: {
-    backgroundColor: 'red',
-  },
-  buttonsPagination: {
-    borderRadius: 30,
-    paddingRight: 15,
-    paddingLeft: 15,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  buttons: {
-    position: 'absolute',
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    bottom: 3,
-  },
   tabStyle: {
     width: width / 3 - 10,
     backgroundColor: '#163D7D',
@@ -90,5 +63,12 @@ export const styles = (fontSize) => StyleSheet.create({
     elevation: 0,
     flex: 1,
     zIndex: 1,
+  },
+  tabbarBox: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    backgroundColor: '#CED8DA',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    zIndex: 2,
   },
 });
