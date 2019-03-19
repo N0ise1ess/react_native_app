@@ -68,7 +68,7 @@ class InnerComponent extends React.Component {
               onPress={() => {
                 if (route.key != this.state.currentTab && canJumpToTab) {
                   animation.onTabPress(route);
-                  this.setState({currentTab: route.key, index: i})
+                  this.setState({ currentTab: route.key, index: i })
                 }
               }}
               style={[this.state.styles.tabStyle
@@ -85,9 +85,12 @@ class InnerComponent extends React.Component {
   );
 
   _renderScene = SceneMap({
-    news: Tab,
-    advertisement: Tab,
-    event: Tab,
+    news: connect(mapStateToProps,
+      mapDispatchToProps)(Tab),
+    advertisement: connect(mapStateToProps,
+      mapDispatchToProps)(Tab),
+    event: connect(mapStateToProps,
+      mapDispatchToProps)(Tab),
   });
 
   _renderSuggestion(animation) {
@@ -107,7 +110,6 @@ class InnerComponent extends React.Component {
 
   render() {
     const { slider, news, advertisement, event, userStatus, navigation } = this.props;
-    console.log(this.state);
 
     return (
       <React.Fragment>
@@ -125,8 +127,6 @@ class InnerComponent extends React.Component {
                 canJumpToTab={() => canJumpToTab}
                 useNativeDriver
               />
-
-              {this._renderSuggestion(animation)}
             </View>
           }
         </SearchBarProvider>
