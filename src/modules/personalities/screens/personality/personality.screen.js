@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
-import {CustomIcon} from "../../../shared/components/custom-icon";
+import {
+  CustomIcon,
+  CustomSnackbar
+} from "../../../shared/components";
 import {findPersonalityById} from "../../../../actions/personalityAction";
 
 class InnerComponent extends Component {
@@ -108,7 +111,9 @@ class InnerComponent extends Component {
           if (supported) {
             Linking.openURL(`mailto:${email}`)
           } else {
-            alert('Почтовая программа неодступна');
+            CustomSnackbar.show({
+              title: "Невозможно отправить email"
+            });
           }
         })
       })
