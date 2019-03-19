@@ -1,13 +1,12 @@
 import { Animated } from 'react-native'; 
 
-export class SearchBarAnimation {
+export class HeaderAnimation {
 
   statusBarHeight = 0;
-  wrapperHeight = 115;
   paddingStatusBar = 0;
   arrowHeight = 72;
-  topPartHeight = this.arrowHeight + 43;
-  fullHeight = 115;
+  topPartHeight = this.arrowHeight + 46;
+  fullHeight = 118;
   distanceRange = this.fullHeight - this.topPartHeight;
   maxClamp = this.fullHeight - (this.paddingStatusBar + this.statusBarHeight);
   minClamp = this.topPartHeight;
@@ -41,7 +40,7 @@ export class SearchBarAnimation {
      this._clampedScrollValue = value;
     } else {
       const diff = value - this._scrollValue;
-      this._scrollValue = Math.max(value, this.topPartHeight); // Fix normal state
+      this._scrollValue = Math.max(value, this.topPartHeight);
       this._clampedScrollValue = Math.min(
         Math.max(this._clampedScrollValue + diff, this.minClamp), 
         this.maxClamp
@@ -52,11 +51,11 @@ export class SearchBarAnimation {
 
   _createClampedScroll() {
     this.clampedScroll = Animated.diffClamp(
-      this.scrollY.interpolate({ // Only positive
+      this.scrollY.interpolate({ 
         inputRange: [0, 1],
         outputRange: [0, 1],
         extrapolateLeft: 'clamp',
-      }).interpolate({ // Fix normal state
+      }).interpolate({ 
         inputRange: [0, this.topPartHeight],
         outputRange: [this.topPartHeight, this.topPartHeight],
         extrapolate: 'identity',
@@ -95,9 +94,9 @@ export class SearchBarAnimation {
 
   _handleIntermediateState = (scrollToOffset) => {
     let scrollY = this.scrollY._value;
-    if(scrollY < this.topPartHeight) { // Full
+    if(scrollY < this.topPartHeight) { 
       scrollToOffset(scrollY > (this.topPartHeight / 2) ? this.topPartHeight : 0);
-    } else { // Clamped
+    } else { 
       if(
         this._clampedScrollValue < this.maxClamp && 
         this._clampedScrollValue > this.minClamp
@@ -132,9 +131,9 @@ export class SearchBarAnimation {
   }
 
   minimizeBar = () => {
-    if(Math.round(this.scrollY._value) == 0) { // Full
+    if(Math.round(this.scrollY._value) == 0) {
       this.scrollToOffset(this.topPartHeight);
-    } else { // Clamped
+    } else { 
       this._setStateBar('normal');
     }
   };
@@ -144,9 +143,9 @@ export class SearchBarAnimation {
       return;
     }
 
-    if(Math.round(this.scrollY._value) == this.topPartHeight) { // Full
+    if(Math.round(this.scrollY._value) == this.topPartHeight) {
       this.scrollToOffset(0);
-    } else { // Clamped
+    } else { 
       this._setStateBar('full');
     }
   };
@@ -183,10 +182,10 @@ export class SearchBarAnimation {
   getTransformWrapper() {
     let byScroll = Animated.add(
       Animated.multiply(this.clampedScroll, -1),
-      this.scrollY.interpolate({ // To negative
+      this.scrollY.interpolate({ 
         inputRange: [0, 1],
         outputRange: [0, -1],
-      }).interpolate({ // Add bottom height part 
+      }).interpolate({ 
         inputRange: [-this.topPartHeight, 0],
         outputRange: [0, this.minClamp],
         extrapolate: 'clamp',
@@ -218,30 +217,13 @@ export class SearchBarAnimation {
     };
   }
 
-  getOpacitySearchBar() {
+  getOpacityHead() {
     return {
       opacity: this.clampedScroll.interpolate({
         inputRange: [this.topPartHeight, this.maxClamp],
         outputRange: [1, 0],
         extrapolate: 'clamp',
       })
-    };
-  }
-
-  getOpacityLocationInput() {
-    return {
-      opacity: Animated.add(
-        this.actionAnimated.interpolate({
-          inputRange: [0, this.maxActionAnimated],
-          outputRange: [0, 1],
-          extrapolate: 'clamp',
-        }), 
-        this.scrollY.interpolate({
-          inputRange: [0, this.topPartHeight],
-          outputRange: [1, 0],
-          extrapolate: 'clamp',
-        })
-      )
     };
   }
 
@@ -273,42 +255,6 @@ export class SearchBarAnimation {
           extrapolate: 'clamp',
         })
       )
-    };
-  }
-
-  getStyleSuggestion() {
-    let scroll = this.scrollY.interpolate({ // To negative
-      inputRange: [0, 1],
-      outputRange: [0, -1],
-    });
-
-    return {
-      opacity: Animated.add(
-        this.actionAnimated.interpolate({
-          inputRange: [0, this.maxActionAnimated],
-          outputRange: [0, 1],
-          extrapolate: 'clamp',
-        }),
-        scroll.interpolate({
-          inputRange: [-this.topPartHeight, 0],
-          outputRange: [0, 1],
-          extrapolate: 'clamp'
-        })
-      ),
-      transform: [{
-        translateY: Animated.add(
-          this.actionAnimated.interpolate({
-            inputRange: [0, this.maxActionAnimated],
-            outputRange: [0, this.topPartHeight],
-            extrapolate: 'clamp',
-          }),
-          scroll.interpolate({
-            inputRange: [-this.topPartHeight, 0],
-            outputRange: [this.topPartHeight, this.wrapperHeight],
-            extrapolate: 'clamp'
-          })
-        )
-      }]
     };
   }
 }

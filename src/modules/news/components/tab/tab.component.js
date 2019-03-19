@@ -17,9 +17,7 @@ export class Tab extends React.PureComponent {
   renderNews = item => <News
     fontSize={this.props.fontSize}
     title={item.title}
-    time={m(item.time)
-      .format('LL')
-      .replace('г.', '')}
+    time={item.time}
     image={item.image}
     description={item.text}
     isTruncate={true}
@@ -38,9 +36,7 @@ export class Tab extends React.PureComponent {
     fontSize={this.props.fontSize}
     newsType='advertisement'
     title={item.title}
-    time={m(item.time)
-      .format('LL')
-      .replace('г.', '')}
+    time={item.time}
     description={item.text}
     isTruncate={true}
     onPress={() =>
@@ -55,27 +51,30 @@ export class Tab extends React.PureComponent {
 
   renderEvents = item => <View>
     <Text
+      style={{textAlign: 'center', color: '#053c81'}}
     >
-      {m(item.time).format('LL').replace('г.', '')}
+      {m(item.time).format('LL')}
     </Text>
     <News
       fontSize={this.props.fontSize}
       newsType='events'
-      time={m(item.time).format('HH:mm') !== '00:00'
-        ? m(item.time).format('HH:mm') : 'Весь день'}
+      time={item.time}
+      typeTime={'hour'}
       title={item.title}
       description={item.text}
     />
   </View>
 
   render() {
+    console.log(this.props);
+    
     return (<React.Fragment>
       <FlatList
         style={styles.wrapper}
         data={this.props[this.props.route.key]}
         keyExtractor={(item, index) => index.toString()}
         onEndReachedThreshold={1}
-        onEndReached={() => this.props.route.key === 'news' 
+        onEndReached={() => this.props.route.key === 'news'
           && !this.props.isLoadingNews
           && this.props.getNews(this.props.newsPage + 1)}
         tabRoute={this.props.route.key}
@@ -86,27 +85,18 @@ export class Tab extends React.PureComponent {
         </React.Fragment>)}
       />
       {
-        this.props.route.key === 'news' 
+        this.props.route.key === 'news'
         && this.props.isLoadingNews
-        && <Spinner/>
+        && <Spinner color="blue" />
       }
-      </React.Fragment>
+    </React.Fragment>
     );
   }
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 15
+    paddingTop: 160,
+    paddingLeft: 10,
   },
-  item: {
-    height: 150,
-    backgroundColor: '#fff',
-    marginBottom: 20,
-    shadowColor: 'rgb(75, 89, 101)',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1
-  }
 })

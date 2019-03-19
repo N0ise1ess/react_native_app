@@ -3,16 +3,17 @@ import { StyleSheet, Dimensions, Animated, View, TouchableOpacity, Text, } from 
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { connect } from 'react-redux';
 
+import { createAppContainer } from 'react-navigation';
+
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
-import { SearchBarProvider, Tab, Head } from '../../components';
-import SearchBarSuggestion from './components/SearchBarSuggestion';
+import { HeaderProvider, Tab, Head } from '../../components';
 
 import { styles as myStyles } from './styles';
 
 const initialLayout = {
   width: Dimensions.get('window').width,
-  height: Dimensions.get('window').height - 130,
+  height: Dimensions.get('window').height - 135,
 };
 
 class InnerComponent extends React.Component {
@@ -83,27 +84,16 @@ class InnerComponent extends React.Component {
       }
     />
   );
+  
+  renderTab = connect(mapStateToProps,
+    mapDispatchToProps)((props) => <Tab {...props} navigation={this.props.navigation}/>)
 
   _renderScene = SceneMap({
-    news: connect(mapStateToProps,
-      mapDispatchToProps)(Tab),
-    advertisement: connect(mapStateToProps,
-      mapDispatchToProps)(Tab),
-    event: connect(mapStateToProps,
-      mapDispatchToProps)(Tab),
+    news: this.renderTab,
+    advertisement: this.renderTab,
+    event: this.renderTab,
   });
 
-  _renderSuggestion(animation) {
-    let focus = this.state.suggestionFocus;
-    if (focus) {
-      let styleAnimation = animation.getStyleSuggestion();
-      return (
-        <Animated.View style={[initialLayout, styles.suggestionWrap, styleAnimation]}>
-          <SearchBarSuggestion />
-        </Animated.View>
-      );
-    }
-  }
   componentDidUpdate(props, state) {
     this.props.fontSize !== props.fontSize && this.setState({ styles: myStyles(this.props.fontSize) });
   }
@@ -113,7 +103,7 @@ class InnerComponent extends React.Component {
 
     return (
       <React.Fragment>
-        <SearchBarProvider currentTab={this.state.currentTab}>
+        <HeaderProvider currentTab={this.state.currentTab}>
           {(animation, { canJumpToTab }) =>
             <View style={initialLayout}>
               <TabView
@@ -122,14 +112,17 @@ class InnerComponent extends React.Component {
                 renderScene={this._renderScene}
                 renderTabBar={this._renderHeader(animation, canJumpToTab)}
                 onIndexChange={this._handleIndexChange}
-                initialLayout={initialLayout}
+                initialLayout={{
+                  height: initialLayout.height - 100,
+                  width: initialLayout.width,
+                }}
                 swipeEnabled={true}
                 canJumpToTab={() => canJumpToTab}
                 useNativeDriver
               />
             </View>
           }
-        </SearchBarProvider>
+        </HeaderProvider>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </React.Fragment>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { isAndroid } from '../../../utils';
 import { FlatList as FlatListRn, Animated } from 'react-native'; 
-import { SearchBarContext } from '../'
+import { HeaderContext } from '../'
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatListRn);
 
@@ -54,15 +54,15 @@ class FlatListHelper extends React.PureComponent {
   }
 }
 
-const withSearchBarContext = Comp => props => (
-  <SearchBarContext.Consumer>
+const withHeaderContext= Comp => props => (
+  <HeaderContext.Consumer>
     {(context) => 
       <Comp
         {...context}
         {...props} 
       />
     }
-  </SearchBarContext.Consumer>
+  </HeaderContext.Consumer>
 );
 
-export const FlatList = withSearchBarContext(FlatListHelper);
+export const FlatList = withHeaderContext(FlatListHelper);

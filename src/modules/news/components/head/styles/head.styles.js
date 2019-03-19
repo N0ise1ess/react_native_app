@@ -8,10 +8,11 @@ export const styles = StyleSheet.create({
 		top: 0,
 		left: 0,
 		right: 0,
+		flex: 1,
 		zIndex: 1,
 		backgroundColor: '#fff',
 	},
-	searchContainer: {
+	headContainer: {
 		zIndex: 99,
 		backgroundColor: '#CED8DA',
 		width: '100%',
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
 	sliderImage: {
 		resizeMode: 'cover',
 		width,
-		height: height / 5,
+		height: 118,
 	},
 	buttonSelected: {
 		backgroundColor: 'red',
@@ -37,11 +38,11 @@ export const styles = StyleSheet.create({
 		marginTop: 10,
 		marginBottom: 10,
 	},
-  buttons: {
-    position: 'absolute',
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    bottom: 3,
-  },
+	buttons: {
+		position: 'absolute',
+		flexDirection: 'row',
+		width: '100%',
+		justifyContent: 'center',
+		bottom: 3,
+	},
 });

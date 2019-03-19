@@ -73,20 +73,15 @@ export class Head extends Component {
         const { animation, renderTabBar, slider } = this.props;
 
         const transformWrapper = animation.getTransformWrapper();
-        const opacitySearchBar = animation.getOpacitySearchBar();
-        const opacityLocationInput = animation.getOpacityLocationInput();
+        const opacitySearchBar = animation.getOpacityHead();
 
         return (
             <Animated.View style={[styles.wrapper, transformWrapper]}>
                 <Animated.View style={opacitySearchBar}>
-                    <View style={styles.searchContainer}>
-                        <Animated.View style={[
-                            opacityLocationInput
-                        ]}>
-                            {(slider
-                                ? this.renderSlider(slider)
-                                : this.renderSlider(imagesOnLoading))}
-                        </Animated.View>
+                    <View style={styles.headContainer}>
+                        {(slider
+                            ? this.renderSlider(slider)
+                            : this.renderSlider(imagesOnLoading))}
                     </View>
                 </Animated.View>
                 {renderTabBar()}

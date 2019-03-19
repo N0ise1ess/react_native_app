@@ -108,7 +108,7 @@ class InnerComponent extends Component {
           if (supported) {
             Linking.openURL(`mailto:${email}`)
           } else {
-            alert('Cannot send email');
+            alert('Почтовая программа неодступна');
           }
         })
       })

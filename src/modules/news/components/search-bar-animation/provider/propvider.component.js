@@ -1,11 +1,11 @@
 import React from 'react';
-import { SearchBarContext, SearchBarAnimation } from '../';
+import { HeaderContext, HeaderAnimation } from '../';
 
-export class SearchBarProvider extends React.Component {
+export class HeaderProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.searchBarAnimation = new SearchBarAnimation({
+    this.headerAnimation = new HeaderAnimation({
       scrollToOffset: (configScroll) => {
         let tab = configScroll.tab ? configScroll.tab : this.props.currentTab;
 
@@ -18,7 +18,7 @@ export class SearchBarProvider extends React.Component {
       currentTab: null,
       canJumpToTab: true,
       contextProvider: {
-        animation: this.searchBarAnimation.animationProps, 
+        animation: this.headerAnimation.animationProps, 
         addHandlerScroll: this._addHandlerScroll,
         _canJumpToTab: this._canJumpToTab
       }
@@ -26,7 +26,7 @@ export class SearchBarProvider extends React.Component {
   }
 
   componentWillUnmount() {
-    this.searchBarAnimation.destroy();
+    this.headerAnimation.destroy();
   }
 
   _handlersScroll = {};
@@ -38,11 +38,11 @@ export class SearchBarProvider extends React.Component {
 
   render() {
     return (
-      <SearchBarContext.Provider value={this.state.contextProvider}>
-        {this.props.children(this.searchBarAnimation, {
+      <HeaderContext.Provider value={this.state.contextProvider}>
+        {this.props.children(this.headerAnimation, {
           canJumpToTab: this.state.canJumpToTab
         })}
-      </SearchBarContext.Provider>
+      </HeaderContext.Provider>
     );
   }
 }

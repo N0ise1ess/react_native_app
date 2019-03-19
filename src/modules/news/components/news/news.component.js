@@ -2,6 +2,9 @@ import React from 'react';
 import { Image, Dimensions, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Card, CardItem, Text, Body } from 'native-base';
 import HTML from 'react-native-render-html';
+import m from 'moment/min/moment-with-locales';
+
+// m.locale('ru');
 
 import { styles } from './styles/news.styles'
 
@@ -11,8 +14,8 @@ const htmlProps = {
   onLinkPress: (evt, href) => {
     console.log(href);
     Alert.alert(
-      'Хотите открыть ссылку в браузере?',
-      'чтобы открыть ссылку ...',
+      'Переход по внешней ссылке. Открыть ссылку в браузере?',
+      '',
       [
         {
           text: 'Открыть в браузере',
@@ -24,6 +27,12 @@ const htmlProps = {
     );
   },
 };
+
+renderTime = (time) => {
+  const formatTime = m(time).format('LL').replace('г.', '');
+  if (formatTime === m().format('LL').replace('г.', '')) return 'Сегодня';
+  return formatTime;
+}
 
 export const News = props => {
   const cleanText = props.description && props.description.replace(/<\/?[^>]+(>|$)/g, '');
@@ -38,7 +47,8 @@ export const News = props => {
         {props.time && (
           <CardItem style={style.sectionTime}>
             <Text style={style.timeStyle}>
-              {props.time}
+              {props.typeTime === 'hour' && (m(props.time).format('HH:mm') !== '00:00'
+                ? m(props.time).format('HH:mm') : 'Весь день') || renderTime(props.time)}
             </Text>
           </CardItem>
         )}
@@ -46,8 +56,8 @@ export const News = props => {
           {props.newsType === 'advertisement' ? (
             <Text style={style.titleStyle}>{titleWithoutEmptyLines}</Text>
           ) : (
-            <Text style={style.titleStyle}>{props.title && props.title}</Text>
-          )}
+              <Text style={style.titleStyle}>{props.title && props.title}</Text>
+            )}
         </CardItem>
         <CardItem style={style.sectionText}>
           <Body>
@@ -57,8 +67,19 @@ export const News = props => {
                   {textWithoutEmptyLines}
                 </Text>
               ) : (
-                <HTML baseFontStyle={style.textStyle} allowFontScaling {...htmlProps} html={props.description} imagesMaxWidth={width} />
-              ))}
+                  <HTML
+                    tagsStyles={{
+                      p: {
+                        color: '#979797',
+                      }
+                    }}
+                    baseFontStyle={style.textStyle}
+                    allowFontScaling
+                    {...htmlProps}
+                    html={props.description}
+                    imagesMaxWidth={width}
+                  />
+                ))}
           </Body>
         </CardItem>
       </Card>

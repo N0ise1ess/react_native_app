@@ -28,7 +28,7 @@ export const styles = (fontSize) => StyleSheet.create({
     alignSelf: 'center',
   },
   timeStyle: {
-    color: '#2F528B',
+    color: '#053c81',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontWeight: '400',
