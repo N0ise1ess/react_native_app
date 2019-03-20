@@ -27,20 +27,6 @@ class Settings extends Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem();
-      console.log(value);
-      if (value !== null) {
-        // We have data!!
-        console.log(value);
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log(error);
-    }
-  };
-
   render() {
     const {styles} = this.state;
     return (

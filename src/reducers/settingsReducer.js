@@ -8,7 +8,7 @@ const initialState = ({
 export default (state = initialState, action) => {
     switch (action.type) {
         case SET_FONT_SIZE: {
-            AsyncStorage.setItem('fontSize', action.payload) 
+            AsyncStorage.setItem('fontSize', action.payload.toString()) 
             return {
                 ...state,
                 fontSize: action.payload,
