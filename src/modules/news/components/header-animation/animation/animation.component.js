@@ -150,7 +150,7 @@ export class HeaderAnimation {
     }
   };
 
-  onTabPress = (route) => {
+  onTabPress = (route) => {    
     let type = this.stateBarTypes;
     let offset = (this.stateBar == type.NORMAL) ? this.topPartHeight : 
                  (this.stateBar == type.CLAMPED) ? this.maxClamp : 0;

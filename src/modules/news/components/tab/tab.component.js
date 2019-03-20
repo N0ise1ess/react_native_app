@@ -78,7 +78,8 @@ export class Tab extends React.PureComponent {
           && !this.props.isLoadingNews
           && this.props.getNews(this.props.newsPage + 1)}
         tabRoute={this.props.route.key}
-        renderItem={({ item }) => (<React.Fragment>
+        renderItem={({ item, index }) => (<React.Fragment>
+          {index === 0 && <View style={{height: 170}}></View>}
           {this.props.route.key === 'news' && this.renderNews(item)}
           {this.props.route.key === 'advertisement' && this.renderUpdates(item)}
           {this.props.route.key === 'event' && this.renderEvents(item)}
@@ -96,7 +97,6 @@ export class Tab extends React.PureComponent {
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingTop: 160,
     paddingLeft: 10,
   },
 })

@@ -36,7 +36,7 @@ renderTime = (time) => {
 
 export const News = props => {
   const cleanText = props.description && props.description.replace(/<\/?[^>]+(>|$)/g, '');
-  const textWithoutEmptyLines = cleanText.replace(/\r?\n|\r/, '');
+  const textWithoutEmptyLines = cleanText;
   const cleanTitle = props.title && props.title.replace(/<\/?[^>]+(>|$)/g, '');
   const titleWithoutEmptyLines = cleanTitle.replace(/\r?\n|\r/, '');
   const style = styles(props.fontSize);
