@@ -2,8 +2,11 @@ import { styles } from "./styles";
 import { Animated, Linking, NativeModules, Text, View } from "react-native";
 import React, { Component } from "react";
 import Collapsible from "react-native-collapsible";
-import { CustomIcon } from "../../../../shared/components";
-import { Button } from "native-base";
+import {
+  CustomIcon,
+  CustomSnackbar
+} from "../../../../shared/components";
+import {Button} from "native-base";
 
 export class DivisionInfo extends Component {
   constructor(props) {
@@ -83,7 +86,9 @@ export class DivisionInfo extends Component {
           if (supported) {
             Linking.openURL(`mailto:${email}`)
           } else {
-            alert('Невозможно отправить сообщение');
+            CustomSnackbar.show({
+              title: "Почтовая программа недоступна"
+            });
           }
         })
       })

@@ -1,4 +1,4 @@
-import { Text, Toast } from 'native-base';
+import { Text } from 'native-base';
 import React from 'react';
 import { Image, KeyboardAvoidingView, ScrollView, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -8,7 +8,10 @@ import { login } from '../../../../actions/authorizationAction';
 import { img_logo } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
-import { FooterSection } from '../../../shared/components';
+import { 
+  FooterSection,
+  CustomSnackbar
+ } from '../../../shared/components';
 import { styles } from './styles';
 import {setFontSize} from '../../../../actions/settingsAction';
 
@@ -49,11 +52,8 @@ class InnerComponent extends React.Component {
   };
 
   showToast(message) {
-    return Toast.show({
-      text: message,
-      buttonText: 'Ок',
-      duration: 2000,
-      type: 'danger',
+    CustomSnackbar.show({
+      title: message
     });
   }
 

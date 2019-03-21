@@ -2,12 +2,15 @@ import {Button, Container, Content, Icon, Picker, List, ListItem, Toast, Text, C
 import React, {Component} from 'react';
 import {Dimensions, View} from 'react-native';
 import {connect} from 'react-redux';
-import {ButtonBack} from "../../../shared/components/button-back";
 import {styles} from "./styles";
-import {FooterSection} from "../../../shared/components/footer";
-import {CustomIcon} from "../../../shared/components/custom-icon";
 import * as settingsFonts from '../../../../constants/styles';
 import {getSizeFonts} from '../../../shared/functions/styles';
+import {
+  ButtonBack,
+  FooterSection,
+  CustomIcon,
+  CustomSnackbar
+} from '../../../shared/components';
 
 
 class InnerComponent extends Component {
@@ -116,11 +119,8 @@ class InnerComponent extends Component {
   }
 
   copyPass = () => {
-    Toast.show({
-      text: "Скопировано в буфер обмена",
-      buttonText: 'Ок',
-      duration: 2000,
-      type: 'warning',
+    CustomSnackbar.show({
+        title: "Скопировано в буфер обмена",
     });
   }
 
