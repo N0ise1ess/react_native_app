@@ -30,7 +30,7 @@ class InnerComponent extends React.Component {
   _retrieveData = async () => {
     try {
       const fontSize = await AsyncStorage.getItem('fontSize');
-      fontSize && this.props.setFontSize(fontSize);
+      fontSize && this.props.setFontSize(parseInt(fontSize));
       console.log('fontSize', fontSize);
     } catch (error) {
       // Error retrieving data
@@ -49,7 +49,7 @@ class InnerComponent extends React.Component {
       <View style={styles.container}>
         <Image
           source={img_logo_white}
-          resizeMode="center"
+          resizeMode="contain"
           style={styles.image}
         />
         <Text style={styles.text}>{this.props.text}</Text>

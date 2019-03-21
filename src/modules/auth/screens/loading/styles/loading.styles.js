@@ -1,6 +1,13 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Platform, Dimensions, StyleSheet } from 'react-native';
 import * as settingsFonts from '../../../../../constants/styles';
 import { getSizeFonts } from '../../../../shared/functions/styles';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const isIphoneX = Platform.OS === 'ios' &&
+!Platform.isPad &&
+!Platform.isTVOS &&
+(height >= 812 || width === 812);
 
 export const styles = fontSize =>
   StyleSheet.create({
@@ -12,7 +19,7 @@ export const styles = fontSize =>
     image: {
       position: 'absolute',
       width: '65%',
-      top: '-15%',
+      top: isIphoneX ? 0 : '-15%',
     },
     text: {
       color: 'white',

@@ -8,10 +8,11 @@ import { ButtonBack, FooterSection } from '../../../shared/components';
 import { HeaderProvider, Tab, Head } from '../../components';
 
 import { styles as myStyles } from './styles';
+import { ifIphoneX, ifAndroid } from '../../utils';
 
 const initialLayout = {
   width: Dimensions.get('window').width,
-  height: Dimensions.get('window').height - 135,
+  height: Dimensions.get('window').height - 115 - ifIphoneX(42, 0) - ifAndroid(20, 0),
 };
 
 class InnerComponent extends React.Component {
@@ -101,7 +102,7 @@ class InnerComponent extends React.Component {
       <React.Fragment>
         <HeaderProvider currentTab={this.state.currentTab}>
           {(animation, { canJumpToTab }) =>
-            <View style={initialLayout}>
+            <View style={{flex: 1}}>
               <TabView
                 style={styles.container}
                 navigationState={this.state}

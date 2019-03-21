@@ -7,12 +7,12 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#C8D1D3',
   },
   iconStyle: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     marginLeft: 20,
     marginRight: 20,
-    resizeMode: 'contain',
-    tintColor: '#163D7D',
+    fontSize: 18,
+    color: '#163D7D',
   },
   listItemStyle: {
     paddingTop: 20,

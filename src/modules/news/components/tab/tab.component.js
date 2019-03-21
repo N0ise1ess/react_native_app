@@ -66,11 +66,8 @@ export class Tab extends React.PureComponent {
   </View>
 
   render() {
-    console.log(this.props);
-    
     return (<React.Fragment>
       <FlatList
-        style={styles.wrapper}
         data={this.props[this.props.route.key]}
         keyExtractor={(item, index) => index.toString()}
         onEndReachedThreshold={1}
@@ -94,9 +91,3 @@ export class Tab extends React.PureComponent {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    paddingLeft: 10,
-  },
-})

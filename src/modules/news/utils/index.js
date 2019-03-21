@@ -8,7 +8,7 @@ export function isIphoneX() {
     Platform.OS === 'ios' &&
     !Platform.isPad &&
     !Platform.isTVOS &&
-    (height === 812 || width === 812)
+    (height >= 812 || width === 812)
   );
 }
 
@@ -29,10 +29,3 @@ export function ifAndroid(androidStyle, regularStyle) {
   }
   return regularStyle;
 }
-
-const isFunction = input => typeof input === 'function';
-export function renderIf(predicate) {
-  return function(elemOrThunk) {
-    return predicate ? (isFunction(elemOrThunk) ? elemOrThunk() : elemOrThunk) : null;
-  }
-} 

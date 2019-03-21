@@ -70,18 +70,15 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'row',
   },
   pickerIcon: {
-    flex: 0.1,
     marginLeft: 10,
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
+    width: 20,
+    height: 20,
+    fontSize: settingsFonts.FONT_SIZE_18,
   },
   pickerShadow:{
-    flex : 0.9,
     backgroundColor:'white',
-    shadowColor: 'rgba(0,0,0, .4)',
-    shadowOffset: { height: 1, width: 1 },
-    shadowOpacity: 1,
-    shadowRadius: 1,
-    elevation: 0
+    elevation: 0,
+    width: width * 0.7 - 20,
   },
   card : {
     width: width * 0.7,

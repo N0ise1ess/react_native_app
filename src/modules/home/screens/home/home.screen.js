@@ -153,9 +153,9 @@ class InnerComponent extends Component {
       headerLeft: (
         <Left>
           {props.navigation.state.params && props.navigation.state.params.userStatus === 'student' ? (
-            <Image style={{resizeMode: 'contain',height: 30,}} source={img_student} />
+            <Image style={{resizeMode: 'contain', height: 30,}} source={img_student} />
           ) : (
-            <Image style={{resizeMode: 'contain',height: 30, marginLeft: 10 }} source={img_account} />
+            <Image style={{resizeMode: 'contain', height: 30, marginLeft: 10 }} source={img_account} />
           )}
         </Left>
       ),

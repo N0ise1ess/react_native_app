@@ -1,6 +1,6 @@
 import { Container, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import {
@@ -66,29 +66,31 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
     const { userStatus, navigation } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
-        <List
-          scrollEnabled={false}
-          style={styles.listStyle}
-          dataArray={itemList}
-          renderRow={item => (
-            <ListItem
-              button
-              onPress={() => this.props.navigation.navigate(item.route ? item.route : '')}
-              style={styles.listItemStyle}
-            >
-              <Image source={item.image} style={styles.iconStyle} />
-              <Text style={styles.textStyle}>{item.title}</Text>
-            </ListItem>
-          )}
-        />
+        <ScrollView>
+          <List
+            scrollEnabled={false}
+            style={styles.listStyle}
+            dataArray={itemList}
+            renderRow={item => (
+              <ListItem
+                button
+                onPress={() => this.props.navigation.navigate(item.route ? item.route : '')}
+                style={styles.listItemStyle}
+              >
+                <Image source={item.image} style={styles.iconStyle} />
+                <Text style={styles.textStyle}>{item.title}</Text>
+              </ListItem>
+            )}
+          />
+        </ScrollView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );

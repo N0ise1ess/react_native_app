@@ -111,6 +111,7 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     fontWeight: '300',
     textAlign: 'center',
+    minHeight: 12,
   },
   tabSectionStyle: {
     backgroundColor: '#CED8DA',
