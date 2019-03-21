@@ -25,7 +25,7 @@ class InnerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'SSTU-main',
+      selected: 'key0',
       wifiPass: "",
       styles: styles(props.fontSize),
     };
@@ -41,8 +41,6 @@ class InnerComponent extends Component {
         <CustomIcon name={'wifi'} style={this.state.styles.pickerIcon}/>
         <Picker
           mode="dropdown"
-          iosHeader="Wi-fi"
-          iosIcon={<Icon name="arrow-dropdown-circle" style={{color: "#007aff", fontSize: 25}}/>}
           style={this.state.styles.pickerShadow}
           selectedValue={this.state.selected}
           onValueChange={this.onValueChange}
@@ -54,8 +52,8 @@ class InnerComponent extends Component {
     )
   }
 
-  onValueChange = text => {
-    console.log(text)
+  onValueChange = key => {
+    this.setState({selected: key})
   }
 
   render() {

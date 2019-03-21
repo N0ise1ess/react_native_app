@@ -67,7 +67,7 @@ export const styles = (fontSize) => StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 5,
     width: '100%',
     borderWidth: 1,
     borderColor: '#fff',
@@ -85,8 +85,11 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   tabTitleStyle: {
     color: '#fff',
+    fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontWeight: '300',
     textAlign: 'center',
+    minHeight: 12,
   },
   tabSectionStyle: {
     backgroundColor: '#CED8DA',

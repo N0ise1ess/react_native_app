@@ -1,68 +1,59 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import { logout } from '../../../../actions/authorizationAction';
-import {
-  img_about,
-  img_account,
-  img_login,
-  img_logout,
-  img_notification_blue,
-  img_settings,
-} from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [
   {
     title: 'Уведомления',
-    image: img_notification_blue,
+    image: 'notification_2',
   },
   {
     title: 'Учетная запись',
     route: 'Account',
-    image: img_account,
+    image: 'account_2',
   },
   {
     title: 'Основные',
     route: 'MainConfig',
-    image: img_settings,
+    image: 'settings',
   },
   {
     title: 'О приложении',
     route: 'About',
-    image: img_about,
+    image: 'info_3',
   },
   {
     title: 'Выход из учетной записи',
     route: 'Login',
-    image: img_logout,
-    image2: img_login,
+    image: 'exit',
+    image2: 'entry',
   },
 ];
 
 const itemGuestList = [
   {
     title: 'Уведомления',
-    image: img_notification_blue,
+    image: 'notification_2',
   },
   {
     title: 'Основные',
     route: 'MainConfig',
-    image: img_settings,
+    image: 'settings',
   },
   {
     title: 'О приложении',
     route: 'About',
-    image: img_about,
+    image: 'info_3',
   },
   {
     title: 'Выход из учетной записи',
     route: 'Login',
-    image: img_logout,
-    image2: img_login,
+    image: 'exit',
+    image2: 'entry',
   },
 ];
 
@@ -111,9 +102,9 @@ class InnerComponent extends Component {
                 }
                 style={styles.listItemStyle}
               >
-                <Image
-                  source={item.route === 'Login' ? (token ? item.image : item.image2) : item.image}
+                <CustomIcon 
                   style={styles.iconStyle}
+                  name={item.route === 'Login' ? (token ? item.image : item.image2) : item.image}
                 />
                 <Text style={styles.textStyle}>
                   {item.route === 'Login' ? (token ? item.title : 'Войти в учетную запись') : item.title}

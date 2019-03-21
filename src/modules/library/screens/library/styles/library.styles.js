@@ -15,7 +15,7 @@ export const styles = (fontSize) => StyleSheet.create({
     resizeMode: 'contain',
   },
   listItemStyle: {
-    maxHeight: height / 12,
+    maxHeight: 55,
     paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 5,

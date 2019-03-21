@@ -59,7 +59,7 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word, style = this.state.styles.tabTitleStyle) {
-    return <Text style={style}>{word.toUpperCase()}</Text>;
+    return <Text style={style} allowFontScaling={false}>{word.toUpperCase()}</Text>;
   }
 
   componentDidUpdate(props) {
@@ -240,10 +240,7 @@ class InnerComponent extends Component {
               style={{ backgroundColor: '#e91b47' }}
             >
               {this._upperCase('оплата в сбербанк-онлайн', {
-                fontSize: getSizeFonts(
-                  settingsFonts.FONT_SIZE_12,
-                  this.props.fontSize,
-                ),
+                fontSize: settingsFonts.FONT_SIZE_12,
                 color: 'white',
               })}
             </Button>
