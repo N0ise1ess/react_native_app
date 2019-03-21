@@ -112,7 +112,7 @@ class InnerComponent extends Component {
             Linking.openURL(`mailto:${email}`)
           } else {
             CustomSnackbar.show({
-              title: "Невозможно отправить email"
+              title: "Почтовая программа недоступна"
             });
           }
         })
