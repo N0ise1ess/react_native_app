@@ -60,7 +60,7 @@ export const endpoints = {
     /** ??? */
     card: 'http://opencode.su/campus/integration/api/library/card',
     /** QR */
-    qr: 'http://opencode.su/campus/integration/api/library/card/qr',
+    qr: 'http://opencode.su/campus/library/card/qr',
     /** ??? */
     books: 'http://opencode.su/campus/library/book/me',
   },
