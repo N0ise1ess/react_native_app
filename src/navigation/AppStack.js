@@ -16,6 +16,7 @@ import {
   HomeScreen,
   LibraryCardScreen,
   LibraryScreen,
+  ServicesScreen,
   MainConfigScreen,
   NewsDetailsScreen,
   NewsScreen,
@@ -33,6 +34,7 @@ import {
   ScratchBookScreen,
   ReportsScreen,
   BuildingDormsCardScreen,
+  RequestsInfoScreen,
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -41,6 +43,8 @@ const AppStack = createStackNavigator(
     Home: HomeScreen,
     Library: LibraryScreen,
     LibraryCard: LibraryCardScreen,
+    Services: ServicesScreen,
+    RequestsInfo: RequestsInfoScreen,
     News: NewsScreen,
     NewsDetails: NewsDetailsScreen,
     TimeTable: TimeTableScreen,

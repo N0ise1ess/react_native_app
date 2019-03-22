@@ -35,6 +35,7 @@ const itemList = [
   },
   {
     title: 'Услуги',
+    route: 'Services',
     image: img_services,
   },
   {
