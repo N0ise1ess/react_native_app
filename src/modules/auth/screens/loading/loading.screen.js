@@ -6,6 +6,7 @@ import { initLoad } from '../../../../actions/loadingAction';
 import { img_logo_white } from '../../../../assets/images';
 import { styles } from './styles';
 import { setFontSize } from '../../../../actions/settingsAction';
+import SplashScreen from 'react-native-splash-screen';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -25,6 +26,9 @@ class InnerComponent extends React.Component {
 
   componentWillMount() {
     this.props.initLoad();
+  }
+  componentDidMount() {
+    SplashScreen.hide()
   }
 
   _retrieveData = async () => {
