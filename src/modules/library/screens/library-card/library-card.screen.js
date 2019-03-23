@@ -96,7 +96,7 @@ class InnerComponent extends Component {
             {qrcodeData && (
               <Image
                 onLoad={() => <Spinner color="blue" />}
-                source={{ uri: `data:image/png;base64,${qrcodeData}` }}
+                source={{ uri: qrcodeData }}
                 style={styles.qrcodeImage}
               />
             )}
