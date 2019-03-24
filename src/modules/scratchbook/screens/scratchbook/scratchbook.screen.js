@@ -2,74 +2,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import { Container, Content, Tab, TabHeading, Tabs, Text } from 'native-base';
+import { Container, Content, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
 
 import { styles } from './styles';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { Attendance } from '../attendance';
 import { Result } from '../result';
-
-const dataList = [
-  {
-    "year": 2017,
-    "studYear": "2017/2018",
-    "semesterCurrent": 4,
-    "yearCurrent": 2018,
-    "semesters": [
-      { "nameId":2,
-        "name":"Весенний семестр",
-        "disciplines": [
-          {
-            "name": "Конструирование летательных аппаратов и двигателей",
-            "type":"Зачет",
-            "teacherName":"Мазуренко Екатерина Владимировна",
-            "hours":36,
-            "hoursMissed":2,
-            "isInfoOpen":false,
-            "info":
-              [
-                {
-                  "name":"Лекции",
-                  "hours":36,
-                  "hoursMissed":null,
-                  "teacherName":"Мазуренко Екатерина Владимировна",
-                }
-              ]
-          }
-        ]
-      }
-    ]
-  }, {
-    "year": 2017,
-    "studYear": "2018/2019",
-    "semesterCurrent": 4,
-    "yearCurrent": 2018,
-    "semesters": [
-      { "nameId":2,
-        "name": "Зимний семестр",
-        "disciplines": [
-          {
-            "name":"Информатика",
-            "type":"Зачет",
-            "teacherName":"Мазуренко Екатерина Владимировна",
-            "hours":null,
-            "hoursMissed":null,
-            "isInfoOpen":false,
-            "info":
-              [
-                {
-                  "name":"Лекции",
-                  "hours":null,
-                  "hoursMissed":null,
-                  "teacherName":"Мазуренко Екатерина Владимировна",
-                }
-              ]
-          }
-        ]
-      }
-    ]
-  }
-];
+import * as actions from '../../../../actions/scratchBookAction';
 
 class InnerComponent extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -87,6 +26,10 @@ class InnerComponent extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getDisciplineListProgress(this.props.token);
+  }
+
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
@@ -94,10 +37,10 @@ class InnerComponent extends Component {
   previous = (field) => {
     if (field === 'year') {
       this.setState({
-        currentYearId : !!this.state.currentYearId ? this.state.currentYearId - 1 : dataList.length - 1
+        currentYearId : !!this.state.currentYearId ? this.state.currentYearId - 1 : this.props.dataScratchBook.length - 1
       });
     } else {
-      const semesters = dataList[this.state.currentYearId].semesters;
+      const semesters = this.props.dataScratchBook[this.state.currentYearId].semesters;
       this.setState({
         currentSemesterId : !!this.state.currentSemesterId ? this.state.currentSemesterId - 1 : semesters.length - 1
       });
@@ -107,10 +50,10 @@ class InnerComponent extends Component {
   next = (field) => {
     if (field === 'year') {
       this.setState({
-        currentYearId : !!(dataList.length - 1 - this.state.currentYearId) ? this.state.currentYearId + 1 : 0
+        currentYearId : !!(this.props.dataScratchBook.length - 1 - this.state.currentYearId) ? this.state.currentYearId + 1 : 0
       });
     } else {
-      const semesters = dataList[this.state.currentYearId].semesters;
+      const semesters = this.props.dataScratchBook[this.state.currentYearId].semesters;
       this.setState({
         currentSemesterId : !!(semesters.length - 1 - this.state.currentSemesterId) ? this.state.currentSemesterId + 1 : 0
       });
@@ -123,6 +66,7 @@ class InnerComponent extends Component {
 
   _renderResult = () => {
     const { currentTab, styles } = this.state;
+    const {dataScratchBook} = this.props;
 
     return (
       <Tab
@@ -138,7 +82,7 @@ class InnerComponent extends Component {
       >
         <Result
           // TODO pass semester rersult as prop when data will be ready
-          //data={dataList[currentYearId].semesters[currentSemesterId]}
+          data={dataScratchBook[this.state.currentYearId].semesters[this.state.currentSemesterId].disciplines}
           fontSize={this.props.fontSize} />
       </Tab>
     );
@@ -153,7 +97,7 @@ class InnerComponent extends Component {
       </View>
       </TabHeading>}>
       <Attendance 
-        data={dataList[currentYearId].semesters[currentSemesterId].disciplines}
+        data={this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].disciplines}
         fontSize={this.props.fontSize} />
     </Tab>
   };
@@ -163,11 +107,12 @@ class InnerComponent extends Component {
     const { currentYearId, currentSemesterId, styles } = this.state;
     return (
     <Container style={styles.container}>
+    {this.props.isLoading ? <View style={styles.view}><Spinner/></View> : <React.Fragment>
         <View style={styles.year}>
           <TouchableOpacity onPress={() => this.previous('year')}>
             <CustomIcon name="arrow_left" style={styles.iconStyle}/>
           </TouchableOpacity>
-          <Text style={{color:'#486694'}}>Группа {dataList[currentYearId].studYear}</Text>
+          <Text style={{color:'#486694'}}>Группа {this.props.dataScratchBook[currentYearId].studYear}</Text>
           <TouchableOpacity onPress={() => this.next('year')}>
             <CustomIcon name="arrow_right" style={styles.iconStyle}/>
           </TouchableOpacity>
@@ -176,7 +121,7 @@ class InnerComponent extends Component {
           <TouchableOpacity onPress={() => this.previous('semester')}>
             <CustomIcon name="arrow_left" style={styles.iconStyle}/>
           </TouchableOpacity>
-          <Text style={{color:'#486694'}}>{dataList[currentYearId].semesters[currentSemesterId].name}</Text>
+          <Text style={{color:'#486694'}}>{this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].name}</Text>
           <TouchableOpacity onPress={() => this.next('semester')}>
             <CustomIcon name="arrow_right" style={styles.iconStyle}/>
           </TouchableOpacity>
@@ -188,6 +133,7 @@ class InnerComponent extends Component {
           {this._renderResult()}
           {this._renderAttendance()}
         </Tabs>
+        </React.Fragment> }
         <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
@@ -198,9 +144,10 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.settings,
+    ...state.scratchBook,
   };
 };
 
 export const ScratchBookScreen = connect(
-  mapStateToProps,
+  mapStateToProps, {...actions}
 )(InnerComponent);

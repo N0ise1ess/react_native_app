@@ -65,7 +65,7 @@ class InnerComponent extends Component {
     const { styles } = this.state;
     return (<Content style={styles.container}>
       <List
-        dataArray={dataList}
+        dataArray={this.props.data}
         renderRow={this._renderItem} />
     </Content>);
     }

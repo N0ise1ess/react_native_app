@@ -6,6 +6,9 @@ export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#CED8DA',
   },
+  view: {
+    flex: 1,
+  },
   tabHeaderStyle: {
     backgroundColor: '#CED8DA',
     justifyContent: 'center',

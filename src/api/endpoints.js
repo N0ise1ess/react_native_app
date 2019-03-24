@@ -73,5 +73,8 @@ export const endpoints = {
     getAllQuestionnaires: 'http://opencode.su/campus/questionnaire/api/questionnaire/getAllQuestionnaireIdByRespondent',
     getQuestionnaire: 'http://opencode.su/campus/questionnaire/api/questionnaire/getViewById',
     saveAnswers: 'http://opencode.su/campus/questionnaire/api/answerVersion/createFull',
-  }
+  },
+  scratchBook: {
+    getDisciplineListProgress: 'http://opencode.su/campus/integration/api/student/getDisciplineListProgress',
+  },
 };
