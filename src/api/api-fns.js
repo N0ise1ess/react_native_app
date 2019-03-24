@@ -179,7 +179,7 @@ export function editPhoneNumber(phoneNumber, token) {
   });
 }
 
-export async function getPersonalityByName(name = '', size = 1, page) {
+export async function getPersonalityByName(name = '', size = 20, page= 1) {
   let endpoint = `${
     endpoints.personality.personalityUrl
   }?search=${name}&size=${size}`;
