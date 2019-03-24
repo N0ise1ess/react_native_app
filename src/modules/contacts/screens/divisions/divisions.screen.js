@@ -1,7 +1,7 @@
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, View, Keyboard, Animated } from 'react-native';
+import { FlatList, View, Keyboard } from 'react-native';
 
 import { ButtonBack, CustomIcon, FooterSection } from '../../../shared/components';
 import { styles } from './styles';

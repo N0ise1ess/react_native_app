@@ -40,5 +40,9 @@ export default {
     listQuestionnaires: [],
     questionnaires: {},
     answersId: [],
+  },
+  scratchBook: {
+    dataScratchBook: {},
+    isLoading: true,
   }
 };

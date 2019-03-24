@@ -10,6 +10,7 @@ import loadingReducer from './loadingReducer';
 import settings from './settingsReducer';
 import personalityReducer from "./personalityReducer";
 import questionnaires from './questionnairesReducer';
+import scratchBook from './scratchBookReducer';
 
 export default combineReducers({
   authReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
   personalityReducer,
   questionnaires,
   settings,
+  scratchBook,
 });

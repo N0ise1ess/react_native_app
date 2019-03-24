@@ -6,27 +6,6 @@ import { CustomIcon } from '../../../shared/components';
 
 import { styles } from './styles';
 
-const dataList = [
-  {
-    name: 'Иностранный язык',
-    type: 'Экзамен',
-    teacherName: 'Чидова И.И.',
-    rate: 'good'
-  },
-  {
-    name: 'Конструирование летательных аппаратов и двигателей',
-    type: 'Экзамен',
-    teacherName: 'Чидова И.И.',
-    rate: 'failed'
-  },
-  {
-    name: 'Разработка программного обеспечения',
-    type: 'Зачет',
-    teacherName: 'Любин Ф.И.',
-    rate: 'good'
-  }
-]
-
 class InnerComponent extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +44,7 @@ class InnerComponent extends Component {
     const { styles } = this.state;
     return (<Content style={styles.container}>
       <List
-        dataArray={dataList}
+        dataArray={this.props.data}
         renderRow={this._renderItem} />
     </Content>);
     }

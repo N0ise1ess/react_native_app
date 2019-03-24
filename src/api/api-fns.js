@@ -222,3 +222,11 @@ export function saveAnswers(params, token) {
     },
   });
 }
+
+export function getDisciplineListProgress(token) {
+  return axios.get(endpoints.scratchBook.getDisciplineListProgress, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
