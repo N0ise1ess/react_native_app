@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import { Container, Content, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
+import { Container, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
 
 import { styles } from './styles';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
@@ -81,7 +81,6 @@ class InnerComponent extends Component {
         }
       >
         <Result
-          // TODO pass semester rersult as prop when data will be ready
           data={dataScratchBook[this.state.currentYearId].semesters[this.state.currentSemesterId].disciplines}
           fontSize={this.props.fontSize} />
       </Tab>
