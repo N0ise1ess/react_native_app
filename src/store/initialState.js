@@ -34,7 +34,8 @@ export default {
   },
   personalityReducer: {
     searching: false,
-    personalities: []
+    personalities: [],
+    personalitiesIsRefreshing: false,
   },
   questionnaires: {
     listQuestionnaires: [],

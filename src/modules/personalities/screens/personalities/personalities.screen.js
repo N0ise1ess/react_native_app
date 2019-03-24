@@ -1,12 +1,12 @@
-import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text} from 'native-base';
+import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text,} from 'native-base';
 import React, {Component} from 'react';
-import {Image, View, Animated, TouchableOpacity, Dimensions, Keyboard} from 'react-native';
+import {Image, View, Animated, TouchableOpacity, Dimensions, Keyboard, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
 
 import {img_teacher} from '../../../../assets/images';
 import {ButtonBack, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
-import {findPersonalityByName} from "../../../../actions/personalityAction";
+import {findPersonalityByName, updatePersonalityByName} from "../../../../actions/personalityAction";
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const { height, width } = Dimensions.get("window")
@@ -33,7 +33,7 @@ class InnerComponent extends Component {
 
   componentWillMount() {
     //Getting first 20 contacts
-    this.props.findPersonalityByName('', 20, null)
+    this.props.personalities.length === 0 && this.props.findPersonalityByName('', 20, null)
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
   }
 
@@ -47,8 +47,10 @@ class InnerComponent extends Component {
 
   componentDidMount() {
     this.props.navigation.addListener("didFocus", () => {
-      this.props.findPersonalityByName('', 20, null)
-      this.setState({isLoading: false})
+      if(this.props.personalities.length === 0) { 
+        this.props.findPersonalityByName('', 20, null)
+        this.setState({isLoading: false})
+      }
     });
 
     this.props.navigation.addListener("didBlur", () => {
@@ -84,7 +86,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const {userStatus, navigation, token, personalities, personalitiesIsLoading} = this.props;
+    const {userStatus, navigation, token, personalities, personalitiesIsLoading, personalitiesIsRefreshing} = this.props;
     const {styles, personalitiesWidth, sidebarWidth, isLoading} = this.state;
 
     return (
@@ -111,8 +113,12 @@ class InnerComponent extends Component {
             renderLeftActions={this.renderLeftActions}/>
           </Animated.View>
           <Animated.View style={[{width: personalitiesWidth}, {marginLeft: 5}]}>
-            <Content onLayout={this.onLayout}>
-              {!personalitiesIsLoading && !isLoading ?
+            <Content onLayout={this.onLayout} refreshControl={
+                    <RefreshControl refreshing={personalitiesIsRefreshing}
+                      onRefresh={this.props.updatePersonalityByName}
+                    />
+                  }>
+              {!personalitiesIsLoading && (!isLoading || personalities) ?
                 <List
                   style={styles.listStyle}
                   dataArray={personalities}
@@ -186,6 +192,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   findPersonalityByName: (name, size, page) => dispatch(findPersonalityByName(name, size, page)),
+  updatePersonalityByName: () => dispatch(updatePersonalityByName()),
 });
 
 export const PersonalitiesScreen = connect(

@@ -3,15 +3,11 @@ import {
   getPersonalityById
 } from '../api';
 
-import {
-  PERSONALITY_SEARCHING_FAILURE,
-  PERSONALITY_SEARCHING_PENDING,
-  PERSONALITY_SEARCHING_SUCCESS,
-} from '../constants';
+import * as constants from '../constants';
 
 export const findPersonalityByName = (searchedName, size, page) => async dispatch => {
   dispatch({
-    type: PERSONALITY_SEARCHING_PENDING
+    type: constants.PERSONALITY_SEARCHING_PENDING
   });
   try {
     const response = await getPersonalityByName(searchedName, size, page);
@@ -19,13 +15,13 @@ export const findPersonalityByName = (searchedName, size, page) => async dispatc
       console.log(response);
       if(response.status == '200'){
         dispatch({
-          type: PERSONALITY_SEARCHING_SUCCESS,
+          type: constants.PERSONALITY_SEARCHING_SUCCESS,
           payload: response.data
         });
       }
       else{
         dispatch({
-          type: PERSONALITY_SEARCHING_FAILURE,
+          type: constants.PERSONALITY_SEARCHING_FAILURE,
           payload: response
         })
       }
@@ -33,7 +29,38 @@ export const findPersonalityByName = (searchedName, size, page) => async dispatc
   } catch (err) {
     console.log(err);
     dispatch({
-      type: PERSONALITY_SEARCHING_FAILURE,
+      type: constants.PERSONALITY_SEARCHING_FAILURE,
+      payload: err,
+      error: true
+    });
+  }
+};
+
+export const updatePersonalityByName = () => async dispatch => {
+  dispatch({
+    type: constants.PERSONALITY_UPDATE_PENDING
+  });
+  try {
+    const response = await getPersonalityByName();
+    if (response && response.data) {
+      console.log(response);
+      if(response.status == '200'){
+        dispatch({
+          type: constants.PERSONALITY_UPDATE_SUCCESS,
+          payload: response.data
+        });
+      }
+      else{
+        dispatch({
+          type: constants.PERSONALITY_UPDATE_FAILURE,
+          payload: response
+        })
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: constants.PERSONALITY_UPDATE_FAILURE,
       payload: err,
       error: true
     });
@@ -42,7 +69,7 @@ export const findPersonalityByName = (searchedName, size, page) => async dispatc
 
 export const findPersonalityById = (personId) => async dispatch => {
   dispatch({
-    type: PERSONALITY_SEARCHING_PENDING
+    type: constants.PERSONALITY_SEARCHING_BY_ID_PENDING
   });
   try {
     const response = await getPersonalityById(personId);
@@ -50,13 +77,13 @@ export const findPersonalityById = (personId) => async dispatch => {
       console.log(response);
       if(response.status == '200'){
         dispatch({
-          type: PERSONALITY_SEARCHING_SUCCESS,
+          type: constants.PERSONALITY_SEARCHING_BY_ID_SUCCESS,
           payload: response.data
         });
       }
       else{
         dispatch({
-          type: PERSONALITY_SEARCHING_FAILURE,
+          type: constants.PERSONALITY_SEARCHING_BY_ID_FAILURE,
           payload: response
         })
       }
@@ -64,7 +91,7 @@ export const findPersonalityById = (personId) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: PERSONALITY_SEARCHING_FAILURE,
+      type: constants.PPERSONALITY_SEARCHING_BY_ID_FAILURE,
       payload: err,
       error: true
     });

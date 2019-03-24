@@ -33,52 +33,55 @@ class InnerComponent extends Component {
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
+
   renderLabel = text => <Text style={this.state.styles.label}>{text.toUpperCase()}</Text>;
+
   onHandleEdit = () => {
     this.setState(prevState => ({ editableMode: !prevState.editableMode }));
     this.state.editableMode && console.log('saved in server');
   };
+
   render() {
-    const { userStatus, navigation, lastName, firstName, secondName, personalities, personalitiesIsLoading } = this.props;
-    const { editableMode, text, styles } = this.state;
-    const person = personalities;
+    const { userStatus, navigation, personality, personalityIsLoading } = this.props;
+    
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Content>
-        {!personalitiesIsLoading ?
+        {!personalityIsLoading && personality ?
           <View style={styles.content}>
             <View style={styles.sectionStyle}>
               <View style={[styles.imgTeacher, {width: 40, height: 40}]} />
-              <Image source={{ uri: `data:image/png;base64,${person.photo}` }} style={styles.photoStyle} />
+              <Image source={{ uri: `data:image/png;base64,${personality.photo}` }} style={styles.photoStyle} />
             </View>
             <View style={styles.sectionStyle}>
               <CustomIcon name={'teacher'} style={styles.imgTeacher} />
               <View style={{ flex: 1 }}>
-                <Text style={styles.nameStyle}>{person.name}</Text>
+                <Text style={styles.nameStyle}>{personality.name}</Text>
                 <View style={styles.info}>
                   <View>
-                    <Text style={styles.textStyle}>{person.post}</Text>
-                    <Text style={styles.departmentLabel}>{person.department}</Text>
+                    <Text style={styles.textStyle}>{personality.post}</Text>
+                    <Text style={styles.departmentLabel}>{personality.department}</Text>
                   </View>
                 </View>
                 <View style={[styles.dataSection, styles.info]}>
                   <View style={{ flexDirection: 'column' }}>
                     {this.renderLabel('E-mail')}
-                    <Text style={styles.dataStyle}>{person.email}</Text>
+                    <Text style={styles.dataStyle}>{personality.email}</Text>
                   </View>
                   <Button style={styles.btnImageStyle} info>
                     <CustomIcon name={'message'} style={styles.imageStyle}
-                                onPress={() => this.handleSendEmail(person.email)} />
+                                onPress={() => this.handleSendEmail(personality.email)} />
                   </Button>
                 </View>
                 <View style={[styles.dataSection, styles.info]}>
                   <View style={{ flexDirection: 'column' }}>
                     {this.renderLabel('Телефон')}
-                    <Text style={styles.dataStyle}>{person.phoneNumber}</Text>
+                    <Text style={styles.dataStyle}>{personality.phoneNumber}</Text>
                   </View>
                   <Button style={styles.btnImageStyle} info>
                     <CustomIcon name={'call'} style={styles.imageStyle}
-                                onPress={() => this.makeACall(person.phoneNumber)} />
+                                onPress={() => this.makeACall(personality.phoneNumber)} />
                   </Button>
                 </View>
                 <View style={[styles.dataSection, styles.info]}>
