@@ -13,7 +13,7 @@ const renderCheckbox = ({ input, label, type, meta: { touched, error, warning }}
       checked={!!input.value}
       color="#163D7D"
     />
-    <Text style={{paddingLeft: 10, fontSize: 14}}>{label}</Text>
+    <Text style={{paddingLeft: 10, fontSize: 12, color: '#979797'}}>{label}</Text>
   </ListItem>
 }
 
