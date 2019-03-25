@@ -1,38 +1,29 @@
 import {
   libCardApi,
   libBookApi,
-  libQRCodeApi
+  libQRCodeApi,
+  sendRequestLibraryApi,
 } from '../api';
 
-import {
-  LIBRARY_CARD_PENDING,
-  LIBRARY_CARD_SUCCESS,
-  LIBRARY_CARD_FAILURE,
-  LIBRARY_BOOK_PENDING,
-  LIBRARY_BOOK_SUCCESS,
-  LIBRARY_BOOK_FAILURE,
-  LIBRARY_QRCODE_PENDING,
-  LIBRARY_QRCODE_SUCCESS,
-  LIBRARY_QRCODE_FAILURE,
-} from '../constants';
+import * as constants from '../constants';
 
 export const getLibraryCard = (token) => async dispatch => {
   dispatch({
-    type: LIBRARY_CARD_PENDING
+    type: constants.LIBRARY_CARD_PENDING
   });
   try {
     const response = await libCardApi(token);
     if (response && response.data) {
       console.log(response);
-      if(response.status == '200'){
+      if (response.status == '200') {
         dispatch({
-          type: LIBRARY_CARD_SUCCESS,
+          type: constants.LIBRARY_CARD_SUCCESS,
           payload: response.data
         });
       }
-      else{
+      else {
         dispatch({
-          type: LIBRARY_CARD_FAILURE,
+          type: constants.LIBRARY_CARD_FAILURE,
           payload: response
         })
       }
@@ -40,7 +31,7 @@ export const getLibraryCard = (token) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: LIBRARY_CARD_FAILURE,
+      type: constants.LIBRARY_CARD_FAILURE,
       payload: err,
       error: true
     });
@@ -49,21 +40,21 @@ export const getLibraryCard = (token) => async dispatch => {
 
 export const getLibraryQRCode = (token) => async dispatch => {
   dispatch({
-    type: LIBRARY_QRCODE_PENDING
+    type: constants.LIBRARY_QRCODE_PENDING
   });
   try {
     const response = await libQRCodeApi(token);
     if (response && response.data) {
       console.log(response);
-      if(response.status == '200'){
+      if (response.status == '200') {
         dispatch({
-          type: LIBRARY_QRCODE_SUCCESS,
+          type: constants.LIBRARY_QRCODE_SUCCESS,
           payload: response.data
         });
       }
-      else{
+      else {
         dispatch({
-          type: LIBRARY_QRCODE_FAILURE,
+          type: constants.LIBRARY_QRCODE_FAILURE,
           payload: response
         })
       }
@@ -71,7 +62,7 @@ export const getLibraryQRCode = (token) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: LIBRARY_QRCODE_FAILURE,
+      type: constants.LIBRARY_QRCODE_FAILURE,
       payload: err,
       error: true
     });
@@ -80,21 +71,21 @@ export const getLibraryQRCode = (token) => async dispatch => {
 
 export const getLibraryBook = (token) => async dispatch => {
   dispatch({
-    type: LIBRARY_BOOK_PENDING
+    type: constants.LIBRARY_BOOK_PENDING
   });
   try {
     const response = await libBookApi(token);
     if (response && response.data) {
       console.log(response);
-      if(response.status == '200'){
+      if (response.status == '200') {
         dispatch({
-          type: LIBRARY_BOOK_SUCCESS,
+          type: constants.LIBRARY_BOOK_SUCCESS,
           payload: response.data
         });
       }
-      else{
+      else {
         dispatch({
-          type: LIBRARY_BOOK_FAILURE,
+          type: constants.LIBRARY_BOOK_FAILURE,
           payload: response
         })
       }
@@ -102,9 +93,42 @@ export const getLibraryBook = (token) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: LIBRARY_BOOK_FAILURE,
+      type: constants.LIBRARY_BOOK_FAILURE,
       payload: err,
       error: true
     });
   }
 };
+
+export const setRequestLibrary = (payload) => ({
+  type: constants.SET_REQUEST_LIBRARY,
+  payload,
+})
+
+export const sendRequestLibrary = (payload) => async (dispatch) => {
+  dispatch({type: constants.SET_REQUEST_LIBRARY_PENDING});
+  try {
+    const response = await sendRequestLibraryApi(payload);
+    if (response && response.data) {
+      console.log(response);
+      if (response.status == '200') {
+        dispatch({
+          type: constants.SET_REQUEST_LIBRARY_SUCCESS,
+          payload: response.data
+        });
+      }
+      else {
+        dispatch({
+          type: constants.SET_REQUEST_LIBRARY_FAILURE,
+          payload: response
+        })
+      }
+    }
+  } catch(err) {
+    dispatch({
+      type: constants.SET_REQUEST_LIBRARY_FAILURE,
+      payload: err,
+      error: true
+    });
+  }
+}
