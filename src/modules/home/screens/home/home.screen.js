@@ -71,11 +71,11 @@ const cardList = [
         route: 'PersonalRating',
         image: img_rating,
       },
-      {
-        title: 'Родители',
-        route: 'Parents',
-        image: img_parent,
-      },
+      // {
+      //   title: 'Родители',
+      //   route: 'Parents',
+      //   image: img_parent,
+      // },
       {
         title: 'Персоналии',
         route: 'Personalities',
@@ -88,20 +88,27 @@ const cardList = [
       },
       {
         title: 'Доступ к Wi-Fi',
-        route: "WifiAccess",
-        image: img_wifi
+        route: 'WifiAccess',
+        image: img_wifi,
       },
-    ],
-  },
-  {
-    list: [
+      //todo: убрать этот пункт, когда блок родителей вернется в меню (он выводится ниже)
       {
         title: 'Ведомости\nи отчеты',
         route: 'Reports',
         image: img_reports,
       },
-    ]
-  }
+    ],
+  },
+  // todo: раскоментировать, когда блок родителей вернется в меню
+  // {
+  //   list: [
+  //     {
+  //       title: 'Ведомости\nи отчеты',
+  //       route: 'Reports',
+  //       image: img_reports,
+  //     },
+  //   ],
+  // },
 ];
 
 const cardGuestList = [
@@ -144,18 +151,27 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-    }
+    };
   }
 
   static navigationOptions = (props) => {
     return {
-      title: props.navigation.state.params && props.navigation.state.params.userFullName,
+      title:
+        props.navigation.state.params &&
+        props.navigation.state.params.userFullName,
       headerLeft: (
         <Left>
-          {props.navigation.state.params && props.navigation.state.params.userStatus === 'student' ? (
-            <Image style={{resizeMode: 'contain', height: 30,}} source={img_student} />
+          {props.navigation.state.params &&
+          props.navigation.state.params.userStatus === 'student' ? (
+            <Image
+              style={{ resizeMode: 'contain', height: 30 }}
+              source={img_student}
+            />
           ) : (
-            <Image style={{resizeMode: 'contain', height: 30, marginLeft: 10 }} source={img_account} />
+            <Image
+              style={{ resizeMode: 'contain', height: 30, marginLeft: 10 }}
+              source={img_account}
+            />
           )}
         </Left>
       ),
@@ -165,18 +181,22 @@ class InnerComponent extends Component {
   componentWillMount() {
     const { firstName, secondName, lastName, userStatus } = this.props;
     this.props.navigation.setParams({
-      userFullName: lastName || firstName || secondName ? `${lastName} ${firstName} ${secondName}` : 'Гость',
+      userFullName:
+        lastName || firstName || secondName
+          ? `${lastName} ${firstName} ${secondName}`
+          : 'Гость',
       userStatus: userStatus,
     });
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize &&
+      this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
     const { navigation, userStatus } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <ImageSlider
@@ -189,8 +209,16 @@ class InnerComponent extends Component {
                   <CardItem
                     key={index}
                     image={item.image}
-                    title={<Text allowFontScaling={false} style={styles.text}>{item.title}</Text>}
-                    navigate={() => this.props.navigation.navigate(item.route ? item.route : '')}
+                    title={
+                      <Text allowFontScaling={false} style={styles.text}>
+                        {item.title}
+                      </Text>
+                    }
+                    navigate={() =>
+                      this.props.navigation.navigate(
+                        item.route ? item.route : '',
+                      )
+                    }
                   />
                 ))}
               </View>
@@ -202,16 +230,22 @@ class InnerComponent extends Component {
                 <Text />
               ) : (
                 cardList.map((image, index) => (
-                  <View onPress={() => move(index)} key={index} style={[
-                    {backgroundColor: '#163D7D',
-                      bottom: 10,
-                      width: 10, 
-                      height: 10, 
-                      borderRadius: 20, 
-                      marginLeft: 5, 
-                      marginRight: 5,}, 
-                      position === index && styles.buttonSelected]
-                  }/>
+                  <View
+                    onPress={() => move(index)}
+                    key={index}
+                    style={[
+                      {
+                        backgroundColor: '#163D7D',
+                        bottom: 10,
+                        width: 10,
+                        height: 10,
+                        borderRadius: 20,
+                        marginLeft: 5,
+                        marginRight: 5,
+                      },
+                      position === index && styles.buttonSelected,
+                    ]}
+                  />
                 ))
               )}
             </View>
@@ -223,7 +257,7 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
