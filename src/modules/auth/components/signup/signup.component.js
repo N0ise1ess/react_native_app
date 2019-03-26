@@ -66,7 +66,7 @@ class innerComponent extends React.Component {
     }
     return (
           <ListItem style={this.state.styles.listItem}>
-              <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
+              <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
               <View style={this.state.styles.personal}>
                   <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
                   <Text style={[this.state.styles.text, {color:'#0C68FF'}]}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
