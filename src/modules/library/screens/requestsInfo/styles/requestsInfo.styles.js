@@ -7,7 +7,7 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#CED8DA',
   },
   listItemStyle: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     textAlign: 'center',
     padding: 20,
@@ -34,11 +34,6 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#979797',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
-  beginningItems: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
   iconStyle: {
     color: '#58739d',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_22, fontSize),
@@ -46,8 +41,12 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   upperSection: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
+  },
+  requestIndexSection: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   },
   textStyle: {
     fontFamily: 'MyriadPro-Light',
@@ -55,13 +54,13 @@ export const styles = (fontSize) => StyleSheet.create({
     fontWeight: '300',
     color: '#979797',
     paddingLeft: 20,
-    marginTop: 3,
+    marginTop: 5,
   },
   statusStyle: {
     fontWeight: '400',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     color: '#1E1E1E',
-    marginTop: 3,
+    marginTop: 5,
   },
   tabHeaderStyle: {
     backgroundColor: '#CED8DA',
