@@ -1,6 +1,6 @@
 import { Container, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, Linking } from 'react-native';
 import { connect } from 'react-redux';
 
 import {
@@ -49,6 +49,7 @@ const itemList = [
   },
   {
     title: 'Переход на сайт ЭБС',
+    link: 'https://elib.samgtu.ru/',
     image: img_link,
   },
 ];
@@ -70,6 +71,15 @@ class InnerComponent extends Component {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
+  onListItemClick = (item) => {
+    if (item.route) {
+      this.props.navigation.navigate(item.route ? item.route : '');
+    }
+    if (item.link) {
+      Linking.openURL(item.link).catch(err => console.error('An error occurred', err));
+    }
+  }
+
   render() {
     const { userStatus, navigation } = this.props;
     const { styles } = this.state;
@@ -83,7 +93,7 @@ class InnerComponent extends Component {
             renderRow={item => (
               <ListItem
                 button
-                onPress={() => this.props.navigation.navigate(item.route ? item.route : '')}
+                onPress={() => this.onListItemClick(item)}
                 style={styles.listItemStyle}
               >
                 <Image source={item.image} style={styles.iconStyle} />
