@@ -50,26 +50,6 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     marginTop: height < 550 ? 0 : 10,
     backgroundColor: '#0C68FF',
   },
-  errorStyle: {
-    color: 'red',
-    height: 40,
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    fontFamily: 'MyriadPro-Regular',
-    marginTop: 10,
-    marginRight: 10,
-  },
-  resetButtonStyle: {
-    backgroundColor: '#ED3944',
-    position: 'absolute',
-    bottom: 50,
-    width: '100%',
-  },
-  resetButtonStyle_text: {
-    fontSize: width > 360 
-      ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize) 
-      : getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    fontFamily: 'MyriadPro-Regular',
-  },
   textStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontFamily: 'MyriadPro-Regular',
@@ -77,14 +57,30 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flex:1,
     flexWrap: 'wrap'
   },
-  textStyle__email: {
-    color: '#0067f6',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
-    fontFamily: 'MyriadPro-Regular',
-  },
   buttons: {
     flexDirection: 'row',
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  form: {
+    flex: 1,
+    minWidth: width * 0.7,
+    marginTop: 20
+  },
+  button(color) {
+    return {
+      backgroundColor: color || '#747A7B',
+      paddingLeft: 20,
+      paddingRight: 20
+    }
+  },
+  listItem: {
+    borderBottomWidth: 0,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    marginTop: height < 550 ? 0 : 10,
+    marginLeft: 0,
   }
 });

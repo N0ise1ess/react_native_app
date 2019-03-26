@@ -49,7 +49,7 @@ class innerComponent extends React.Component {
         <Input
           {...input}
           placeholder={placeholder}
-          placeholderTextColor="black"
+          placeholderTextColor="#747A7B"
           secureTextEntry={type == 'password'}
           style={this.state.styles.inputStyle}
         />
@@ -66,14 +66,7 @@ class innerComponent extends React.Component {
     }
     return (
           <ListItem
-              style={{
-                  borderBottomWidth: 0,
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  flexDirection: 'row',
-                  marginTop: height < 550 ? 0 : 10,
-                  marginLeft: 0,
-              }}
+              style={this.state.styles.listItem}
           >
               <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
               <View style={{flex:1, marginTop: -5}}>
@@ -90,7 +83,7 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-      <Form style={{flex: 1, minWidth: width * 0.7 }}>
+      <Form style={styles.form}>
         {this.upperCaseWord('Выбирете имя пользователя (логин):')}
         <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" component={this.renderInput} />
         {this.upperCaseWord('Введите пароль')}
@@ -101,10 +94,10 @@ class innerComponent extends React.Component {
         <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
 
           <View style={styles.buttons}>
-              <Button rounded style={{backgroundColor:'#2386e1', paddingLeft: 20, paddingRight: 20,}}>
+              <Button rounded style={styles.button('#227bd4')}>
                   <Text>Назад</Text>
               </Button>
-              <Button style={{backgroundColor:'#ff5064', paddingLeft: 20, paddingRight: 20,}} rounded>
+              <Button style={styles.button('#ec4a58')} rounded>
                   <Text>Готово</Text>
               </Button>
           </View>
