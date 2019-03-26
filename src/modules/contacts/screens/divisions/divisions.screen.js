@@ -59,7 +59,7 @@ class InnerComponent extends Component {
         </Item>
         <Content ref={node => this.content = node}>
           {departmentsLoading
-            ? <Spinner color='#163D7D' style={{ justifyContent: 'center', alignItems: 'center' }} />
+            ? <Spinner color='blue' style={{ justifyContent: 'center', alignItems: 'center' }} />
             : <FlatList
               data={this.getDataList(departments)}
               extraData={{openedIdItem: this.props.openedIdItem}}
