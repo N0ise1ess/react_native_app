@@ -52,7 +52,11 @@ class InnerComponent extends Component {
 			</Button>
 			<Button
 				rounded
-				style={[styles.button, styles.button__red, styles.margin_left__15]}
+				style={[styles.button, 
+					styles.button__red, 
+					styles.margin_left__15, 
+					!this.props.requestLibrary && styles.button__disabled,
+				]}
 				onPress={() => this._handlerGoNext()}
 				disabled={!this.props.requestLibrary}
 			>
@@ -61,7 +65,7 @@ class InnerComponent extends Component {
 		</View>
 	</React.Fragment>
 
-	_renderThankYouPage = (styles) => this.props.isLoadingRequestLibrary ? <Spinner /> : <React.Fragment>
+	_renderThankYouPage = (styles) => this.props.isLoadingRequestLibrary ? <Spinner  color='#blue'/> : <React.Fragment>
 		<View style={styles.content}>
 			<View style={styles.text_block}>
 				<Text style={[styles.text, styles.text__blue]}>{'Спасибо!'}</Text>

@@ -51,6 +51,9 @@ export const styles = (fontSize) => StyleSheet.create({
 	button__red: {
 		backgroundColor: '#ff003c',
 	},
+	button__disabled: {
+		backgroundColor: '#ec6e8e',
+	},
 	margin_left__15: {
 		marginLeft: 15,
 	}

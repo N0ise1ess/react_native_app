@@ -106,25 +106,23 @@ export const setRequestLibrary = (payload) => ({
 })
 
 export const sendRequestLibrary = (payload) => async (dispatch) => {
-  dispatch({type: constants.SET_REQUEST_LIBRARY_PENDING});
+  dispatch({ type: constants.SET_REQUEST_LIBRARY_PENDING });
   try {
     const response = await sendRequestLibraryApi(payload);
-    if (response && response.data) {
-      console.log(response);
-      if (response.status == '200') {
-        dispatch({
-          type: constants.SET_REQUEST_LIBRARY_SUCCESS,
-          payload: response.data
-        });
-      }
-      else {
-        dispatch({
-          type: constants.SET_REQUEST_LIBRARY_FAILURE,
-          payload: response
-        })
-      }
+    console.log(response);
+    if (response.status == '200') {
+      dispatch({
+        type: constants.SET_REQUEST_LIBRARY_SUCCESS,
+        payload: response.data
+      });
     }
-  } catch(err) {
+    else {
+      dispatch({
+        type: constants.SET_REQUEST_LIBRARY_FAILURE,
+        payload: response
+      })
+    }
+  } catch (err) {
     dispatch({
       type: constants.SET_REQUEST_LIBRARY_FAILURE,
       payload: err,
