@@ -113,33 +113,30 @@ export async function getSlider() {
 }
 
 export function timeTableSearchApi(searchedText, token) {
-  return axios.post(
-    endpoints.timetable.search,
-    searchedText,
-    token
-      ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      : {},
-  );
+  return fetch(endpoints.timetable.search, {
+    method: 'POST',
+    body: searchedText,
+    headers: token ? {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    } : {}})
+    .then(response => response.json())
 }
 
 export function timeTableGetApi(search, token) {
-  return axios.post(
-    endpoints.timetable.get,
-    {id: search.id, type: search.type},
-    token
-      ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      : {},
-  );
+  const params = {
+    id: search.id,
+    type: search.type
+  }
+
+  return fetch(endpoints.timetable.get, {
+    method: 'POST',
+    body: JSON.stringify(params),
+    headers: token ? {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    } : {}})
+    .then(response => response.json())
 }
 
 export async function departmentsGetApi(searchedText) {
