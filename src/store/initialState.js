@@ -8,7 +8,11 @@ export default {
     isFirstStepResetPassword: true,
     userStatus: 'guest',
   },
-  libraryReducer: {},
+  libraryReducer: {
+    requestLibrary: '',
+    isLoadingRequestLibrary: false,
+    requestNumber: '',
+  },
   newsReducer: {
     newsPage: 1,
     updatePage: 1,

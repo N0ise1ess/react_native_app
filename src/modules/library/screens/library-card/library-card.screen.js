@@ -153,7 +153,7 @@ class InnerComponent extends Component {
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
                   <Text style={styles.issueDate}>
-                    Выдано {item.dateTo ? item.dateTo : <Spinner />}
+                    Выдано {item.dateTo ? item.dateTo : <Spinner color='blue' />}
                   </Text>
                   {item.returned ? (
                     <View style={styles.listItemStyle}>
@@ -162,7 +162,7 @@ class InnerComponent extends Component {
                     </View>
                   ) : (
                     <Text style={[styles.returnStyle, item.isDelayes && { color: 'red' }, { paddingLeft: 22 }]}>
-                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner />}
+                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner color='blue'/>}
                     </Text>
                   )}
                 </View>

@@ -57,4 +57,11 @@ class About extends Component {
   }
 }
 
-export const AboutScreen = connect((state) => state.settings, actions)(About);
+const mapStateToProps = (state) => {
+  return {
+    ...state.authReducer,
+    ...state.settings,
+  };
+};
+
+export const AboutScreen = connect(mapStateToProps, actions)(About);

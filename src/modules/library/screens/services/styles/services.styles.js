@@ -12,7 +12,7 @@ export const styles = (fontSize) => StyleSheet.create({
     color: '#163D7D',
     marginLeft: 20,
     marginRight: 20,
-    resizeMode: 'contain',
+    // resizeMode: '',
   },
   listItemStyle: {
     maxHeight: height / 12,

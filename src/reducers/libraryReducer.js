@@ -1,30 +1,38 @@
 import initialState from '../store/initialState';
-import {
-  LIBRARY_CARD_PENDING,
-  LIBRARY_CARD_SUCCESS,
-  LIBRARY_CARD_FAILURE,
-  LIBRARY_BOOK_PENDING,
-  LIBRARY_BOOK_SUCCESS,
-  LIBRARY_BOOK_FAILURE,
-  LIBRARY_QRCODE_SUCCESS,
-} from '../constants';
+import * as constants from '../constants';
 
 export default libraryReducer = (state= initialState.libraryReducer, action) => {
   switch (action.type) {
-    case LIBRARY_CARD_SUCCESS:
+    case constants.LIBRARY_CARD_SUCCESS:
       return {
         ...state,
         cardInfo: action.payload,
       }
-    case LIBRARY_BOOK_SUCCESS:
+    case constants.LIBRARY_BOOK_SUCCESS:
       return {
         ...state,
         bookInfo: action.payload,
       }
-    case LIBRARY_QRCODE_SUCCESS:
+    case constants.LIBRARY_QRCODE_SUCCESS:
       return {
         ...state,
         qrcodeData: action.payload,
+      }
+    case constants.SET_REQUEST_LIBRARY:
+      return {
+        ...state,
+        requestLibrary: action.payload,
+      }
+    case constants.SET_REQUEST_LIBRARY_PENDING:
+      return {
+        ...state,
+        isLoadingRequestLibrary: true,
+      }
+    case constants.SET_REQUEST_LIBRARY_SUCCESS:
+      return {
+        ...state,
+        requestNumber: action.payload,
+        isLoadingRequestLibrary: false,
       }
     default:
       return state;

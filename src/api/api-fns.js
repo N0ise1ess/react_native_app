@@ -230,3 +230,12 @@ export function getDisciplineListProgress(token) {
     },
   });
 }
+
+export function sendRequestLibraryApi(payload) {
+  return axios.post(endpoints.library.requestLibrary, payload.text, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${payload.token}`,
+    },
+  })
+}

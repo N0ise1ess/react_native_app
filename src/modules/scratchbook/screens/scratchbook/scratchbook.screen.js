@@ -106,7 +106,7 @@ class InnerComponent extends Component {
     const { currentYearId, currentSemesterId, styles } = this.state;
     return (
     <Container style={styles.container}>
-    {this.props.isLoading ? <View style={styles.view}><Spinner/></View> : <React.Fragment>
+    {this.props.isLoading ? <View style={styles.view}><Spinner color='blue'/></View> : <React.Fragment>
         <View style={styles.year}>
           <TouchableOpacity onPress={() => this.previous('year')}>
             <CustomIcon name="arrow_left" style={styles.iconStyle}/>

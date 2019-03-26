@@ -13,6 +13,7 @@ const itemList = [
   },
   {
     title: 'Заявка на подбор литературы',
+    route: 'RequestsLibrary',
     image: 'file',
   },
   {

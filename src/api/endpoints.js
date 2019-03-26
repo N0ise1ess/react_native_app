@@ -63,6 +63,7 @@ export const endpoints = {
     qr: 'http://opencode.su/campus/library/card/qr',
     /** ??? */
     books: 'http://opencode.su/campus/library/book/me',
+    requestLibrary: 'http://opencode.su/campus/library/book/selection',
   },
   /** Персоналии */
   personality: {
