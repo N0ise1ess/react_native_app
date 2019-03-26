@@ -7,8 +7,8 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   text: { 
     paddingLeft: 10, 
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize), 
-    color: 'silver', 
-    fontFamily: 'MyriadPro-Regular',
+    color: '#747A7B',
+    fontFamily: 'MyriadPro-Regular'
   },
   label: {
     fontSize: 10,

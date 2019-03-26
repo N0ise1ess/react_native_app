@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {ButtonBack} from "../../../shared/components";
 import {connect} from 'react-redux';
 import {styles} from './styles';
-import {View, Button} from 'react-native';
+import {View, Button, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {Container, Content, Form, Spinner, Text} from "native-base";
 import {FooterSection} from "../../../shared/components/footer/index";
 import {SignUp} from "../../components";
@@ -39,9 +39,11 @@ class InnerComponent extends Component {
     const {styles} = this.state;
     return (
       <Container style={styles.container}>
-        <Content>
-          <SignUp/>
-        </Content>
+        <KeyboardAvoidingView>
+          <ScrollView contentContainerStyle={[styles.container, {marginTop: 20}]} keyboardShouldPersistTaps={'handled'}>
+            <SignUp/>
+          </ScrollView>
+        </KeyboardAvoidingView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
       </Container>
     )

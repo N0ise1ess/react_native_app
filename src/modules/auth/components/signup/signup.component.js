@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import { styles } from './styles';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const validate = values => {
   const error = {};
@@ -65,14 +65,24 @@ class innerComponent extends React.Component {
       input.onChange(!input.value);
     }
     return (
-        <ListItem style={{flex:1}}>
-            <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
-
-            <Body style={{flex:1, justifyContent:'center', alignItems:'center',alignSelf:'center'}}>
-            <Text style={{flexWrap:'wrap'}}>Даю свое согласение на своих обработку персональных данных согласно</Text>
-            </Body>
-        </ListItem>
-    );
+          <ListItem
+              style={{
+                  borderBottomWidth: 0,
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  flexDirection: 'row',
+                  marginTop: height < 550 ? 0 : 10,
+                  marginLeft: 0,
+              }}
+          >
+              <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
+              <View style={{flex:1, marginTop: -5}}>
+                  <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
+                  <Text style={[this.state.styles.text, {color:'#0C68FF'}]}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
+                      и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
+              </View>
+          </ListItem>
+      )
   };
 
   render() {
@@ -80,7 +90,7 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-      <Form style={{ justifyContent: 'space-around',flex:1 }}>
+      <Form style={{flex: 1, minWidth: width * 0.7 }}>
         {this.upperCaseWord('Выбирете имя пользователя (логин):')}
         <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" component={this.renderInput} />
         {this.upperCaseWord('Введите пароль')}
@@ -88,7 +98,7 @@ class innerComponent extends React.Component {
         {this.upperCaseWord('Подтвердите пароль')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
-        <Field name="checkbox" type="checkbox" component={this.renderCheckbox} />
+        <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
 
       </Form>
     )
