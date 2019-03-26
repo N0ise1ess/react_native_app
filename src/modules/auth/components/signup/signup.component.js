@@ -100,6 +100,15 @@ class innerComponent extends React.Component {
 
         <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
 
+          <View style={styles.buttons}>
+              <Button rounded style={{backgroundColor:'#2386e1', paddingLeft: 20, paddingRight: 20,}}>
+                  <Text>Назад</Text>
+              </Button>
+              <Button style={{backgroundColor:'#ff5064', paddingLeft: 20, paddingRight: 20,}} rounded>
+                  <Text>Готово</Text>
+              </Button>
+          </View>
+
       </Form>
     )
   }

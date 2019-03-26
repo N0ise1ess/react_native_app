@@ -82,4 +82,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
     fontFamily: 'MyriadPro-Regular',
   },
+  buttons: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between'
+  }
 });

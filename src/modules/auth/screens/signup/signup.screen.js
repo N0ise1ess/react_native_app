@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {ButtonBack} from "../../../shared/components";
 import {connect} from 'react-redux';
 import {styles} from './styles';
-import {View, Button, ScrollView, KeyboardAvoidingView} from 'react-native';
-import {Container, Content, Form, Spinner, Text} from "native-base";
+import {View, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {Container,Button, Content, Form, Spinner, Text} from "native-base";
 import {FooterSection} from "../../../shared/components/footer/index";
 import {SignUp} from "../../components";
 
@@ -40,7 +40,7 @@ class InnerComponent extends Component {
     return (
       <Container style={styles.container}>
         <KeyboardAvoidingView>
-          <ScrollView contentContainerStyle={[styles.container, {marginTop: 20}]} keyboardShouldPersistTaps={'handled'}>
+          <ScrollView contentContainerStyle={[styles.container, {marginTop: 20, }]} keyboardShouldPersistTaps={'handled'}>
             <SignUp/>
           </ScrollView>
         </KeyboardAvoidingView>
