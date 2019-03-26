@@ -43,7 +43,6 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     backgroundColor: '#fff',
   },
   item: {
-    marginTop: height < 550 ? 0 : 5,
     backgroundColor: '#fff',
   },
   buttonStyle: {
@@ -82,5 +81,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flexDirection: 'row',
     marginTop: height < 550 ? 0 : 10,
     marginLeft: 0,
+  },
+  personal: {
+    flex:1,
+    marginTop: -5
   }
 });

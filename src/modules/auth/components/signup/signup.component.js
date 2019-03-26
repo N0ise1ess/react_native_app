@@ -65,11 +65,9 @@ class innerComponent extends React.Component {
       input.onChange(!input.value);
     }
     return (
-          <ListItem
-              style={this.state.styles.listItem}
-          >
+          <ListItem style={this.state.styles.listItem}>
               <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!!input.value} color="#163D7D" />
-              <View style={{flex:1, marginTop: -5}}>
+              <View style={this.state.styles.personal}>
                   <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
                   <Text style={[this.state.styles.text, {color:'#0C68FF'}]}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
                       и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
@@ -86,9 +84,9 @@ class innerComponent extends React.Component {
       <Form style={styles.form}>
         {this.upperCaseWord('Выбирете имя пользователя (логин):')}
         <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" component={this.renderInput} />
-        {this.upperCaseWord('Введите пароль')}
+        {this.upperCaseWord('Введите пароль:')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Подтвердите пароль')}
+        {this.upperCaseWord('Подтвердите пароль:')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
         <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
