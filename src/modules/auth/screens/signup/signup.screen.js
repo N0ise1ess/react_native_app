@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {ButtonBack} from "../../../shared/components";
 import {connect} from 'react-redux';
-import { styles } from './styles';
-import {View} from 'react-native';
-import {Button, Container, Content, Text} from "native-base";
-import {getSizeFonts} from "../../../shared/functions/styles";
-import * as settingsFonts from "../../../../constants/styles";
+import {styles} from './styles';
+import {View, Button} from 'react-native';
+import {Container, Content, Form, Spinner, Text} from "native-base";
 import {FooterSection} from "../../../shared/components/footer/index";
+import {SignUp} from "../../components";
 
 class InnerComponent extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -41,30 +40,7 @@ class InnerComponent extends Component {
     return (
       <Container style={styles.container}>
         <Content>
-          <View style={styles.content}>
-            <View style={styles.dataSection}>
-              <View style={styles.dummy}/>
-              <Text style={styles.title}>Для подключения к сети Wi-Fi университета:</Text>
-            </View>
-            <View style={styles.dataSection}>
-              <Text style={styles.stepText}>1)</Text>
-              <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
-            </View>
-            <View style={[styles.dataSection, {paddingBottom: 0}]}>
-              <Text style={styles.stepText}>2)</Text>
-              <Text style={[styles.dataText, {marginTop: 0}]}>Сгенерируйте пароль для данной сети:</Text>
-            </View>
-            <View style={styles.dataSection}>
-              <View style={styles.dummy}/>
-
-            </View>
-            <View style={styles.dataSection}>
-              <Text style={styles.stepText}>3)</Text>
-              <Text style={styles.dataText}>Введите пароль в соответсвующее поле "Пароль"
-                при подключении к сети.
-              </Text>
-            </View>
-          </View>
+          <SignUp/>
         </Content>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
       </Container>

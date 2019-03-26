@@ -10,9 +10,10 @@ export const styles = (fontSize) => StyleSheet.create({
     alignItems: 'center'
   },
   content : {
+    flex:1,
     marginTop: height * 0.05,
-    width: width * 0.7,
-    marginRight: 55
+    justifyContent: 'space-around',
+    alignItems:'center'
   },
   dataSection : {
     paddingTop: 7,
