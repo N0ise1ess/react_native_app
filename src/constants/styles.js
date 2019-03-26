@@ -2,6 +2,7 @@ export const STEP_CHANGE_FONT_SIZE = 2;
 export const FONT_FAMILY_REGULAR = 'MyriadPro-Regular';
 export const FONT_FAMILY_LIGHT = 'MyriadPro-Light';
 export const FONT_FAMILY_BOLD = 'MyriadPro-Bold';
+export const FONT_SIZE_8 = 8;
 export const FONT_SIZE_10 = 10;
 export const FONT_SIZE_11 = 11;
 export const FONT_SIZE_12 = 12;
