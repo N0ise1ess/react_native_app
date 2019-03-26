@@ -61,7 +61,7 @@ class InnerComponent extends Component {
               </View>
               <View style={styles.dataSection}>
                 {this.renderLabel('Доступ:')}
-                <Parent />
+                <Parent styles={styles}/>
               </View>
             </View>
           </View>
