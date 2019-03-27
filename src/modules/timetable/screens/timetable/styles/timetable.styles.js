@@ -93,6 +93,12 @@ export const styles = (fontSize) => StyleSheet.create({
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     marginTop: 5
   },
+  timePlug: {
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    color: 'transparent',
+    textShadowColor: 'transparent'
+  },
   title: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),

@@ -113,6 +113,7 @@ class InnerComponent extends Component {
                     <View style={styles.listStyle}>
                       <View style={[styles.section]}>
                         <Text style={styles.time}>{item.timeName}</Text>
+                        <Text style={styles.timePlug}>00:00-00:00</Text>
                       </View>
                       <View style={[styles.section, {flex: 1}]}>
                         <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
