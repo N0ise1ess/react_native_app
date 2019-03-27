@@ -136,6 +136,10 @@ class InnerComponent extends Component {
     return ''
   }
 
+  currentSuggestionType() {
+    return this.props.suggestions.length ? this.props.suggestions[0].type : '';
+  }
+
   renderEven = () => {
     const {currentTab, styles} = this.state;
     const {timetables} = this.props;
@@ -232,16 +236,21 @@ class InnerComponent extends Component {
                 <TouchableOpacity onPress={() => this.switchGroup('left')}>
                   <CustomIcon name="arrow_left" style={styles.iconLeft} />
                 </TouchableOpacity>
-                <Text style={{ color: '#1784d3' }}>
-                  Группа {groupNames[this.state.currentGroupIndex]}
-                </Text>
+
+                {this.currentSuggestionType() !== 'TEACHER' ? (
+                  <Text style={{ color: '#1784d3' }}>
+                    Группа {groupNames[this.state.currentGroupIndex]}
+                  </Text>) : null}
+
                 <TouchableOpacity onPress={() => this.switchGroup('right')}>
                   <CustomIcon name="arrow_right" style={styles.iconRight} />
                 </TouchableOpacity>
               </View>
             ) : (
               <View style={[styles.groupSection, { justifyContent: 'center' }]}>
-                <Text style={{ color: '#1784d3' }}>Группа {groupNames[0]}</Text>
+                {this.currentSuggestionType() !== 'TEACHER' ? (
+                  <Text style={{ color: '#1784d3' }}>Группа {groupNames[0]}</Text>
+                ) : null}
               </View>
             )
           ) : null}
