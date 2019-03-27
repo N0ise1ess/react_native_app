@@ -10,8 +10,7 @@ import { styles } from './styles';
 const AuthStack = createStackNavigator(
   {
     Login: LoginScreen,
-    ResetPassword: PasswordResetScreen,
-    SignUp: SignUpScreen,
+    ResetPassword: PasswordResetScreen
   },
   {
     initialRouteName: 'Login',

@@ -61,56 +61,41 @@ class innerComponent extends React.Component {
 
   upperCaseWord = word => <Label style={this.state.styles.label}>{word.toUpperCase()}</Label>;
 
-  renderCheckbox = ({ input, label, type, meta: { touched, error, warning } }) => {
-    if (input.value === '') {
-      input.onChange(!input.value);
-    }
-    return (
-          <ListItem style={this.state.styles.listItem}>
-              <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
-              <View style={this.state.styles.personal}>
-                  <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
-                  <Text style={[this.state.styles.text, {color:'#0C68FF'}]}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
-                      и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
-              </View>
-          </ListItem>
-      )
-  };
-
   render() {
     const { handleSubmit, reset, isLoading, fontSize } = this.props;
     const {styles} = this.state;
 
     return (
       <Form style={styles.form}>
-        {this.upperCaseWord('Выбирете имя пользователя (логин):')}
-        <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
-        {this.upperCaseWord('Введите пароль:')}
-        <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Подтвердите пароль:')}
+        {this.upperCaseWord('Фамилия:')}
+        <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
+        {this.upperCaseWord('Имя:')}
+        <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
+        {this.upperCaseWord('Отчество (при наличии):')}
+        <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
+        {this.upperCaseWord('E-mail:')}
+        <Field name="password" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
+        {this.upperCaseWord('Номер телефона:')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
-        <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
-
-          <View style={styles.buttons}>
-              <Button rounded style={styles.button('#227bd4')} onPress={() => this.props.navigation.goBack()}>
-                  <Text>Назад</Text>
-              </Button>
-              <Button style={styles.button('#ec4a58')} rounded>
-                  <Text>Готово</Text>
-              </Button>
-          </View>
+      <View style={styles.buttons}>
+          <Button rounded style={styles.button('#227bd4')}>
+              <Text>Отмена</Text>
+          </Button>
+          <Button style={styles.button('#ec4a58')} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
+              <Text>Далее</Text>
+          </Button>
+      </View>
 
       </Form>
     )
   }
 };
 
-export const SignUp = reduxForm({
-  form: 'signup',
+export const SignUpOne = reduxForm({
+  form: 'signupone',
   validate,
   destroyOnUnmount: false,
 })(connect(
-  (state) => ({...state.settings}),
-  {}
+    (state) => ({...state.settings})
 )(innerComponent));

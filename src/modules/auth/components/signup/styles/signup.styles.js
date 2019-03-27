@@ -65,8 +65,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   form: {
     flex: 1,
-    minWidth: width * 0.7,
-    marginTop: 20
+    minWidth: width * 0.7
   },
   button(color) {
     return {
