@@ -17,6 +17,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
       ? getSizeFonts(settingsFonts.FONT_SIZE_10, fontSize) 
       : getSizeFonts(settingsFonts.FONT_SIZE_18, fontSize),
     color: '#747A7B',
+    marginBottom: 5
   },
   inputStyle: {
     fontSize: height < 750 

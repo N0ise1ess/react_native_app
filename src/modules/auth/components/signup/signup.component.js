@@ -38,7 +38,7 @@ class innerComponent extends React.Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
-  renderInput = ({ input, label, type, meta: { touched, error, warning }, iconName, placeholder }) => {
+  renderInput = ({ input, label, type, meta: { touched, error, warning }, iconName, placeholder, iconRight }) => {
     var hasError = false;
     if (error !== undefined) {
       hasError = true;
@@ -54,6 +54,7 @@ class innerComponent extends React.Component {
           style={this.state.styles.inputStyle}
         />
         {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
+      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.inputIcon, {marginRight: 10}]} /> : null}
       </Item>
     );
   };
@@ -83,7 +84,7 @@ class innerComponent extends React.Component {
     return (
       <Form style={styles.form}>
         {this.upperCaseWord('Выбирете имя пользователя (логин):')}
-        <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" component={this.renderInput} />
+        <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
         {this.upperCaseWord('Введите пароль:')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
         {this.upperCaseWord('Подтвердите пароль:')}
