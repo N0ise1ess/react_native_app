@@ -38,10 +38,6 @@ class InnerComponent extends Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
-  componentWillMount() {
-    this.props.getDepartments('');
-  }
-
   render() {
     const { userStatus, navigation, token } = this.props;
     const {styles} = this.state;
@@ -91,7 +87,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getDepartments: searchedText => dispatch(getDepartments(searchedText)),
   dispatch,
 });
 
