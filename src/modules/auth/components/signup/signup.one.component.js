@@ -8,23 +8,6 @@ import { styles } from './styles';
 
 const { height, width } = Dimensions.get('window');
 
-const validate = values => {
-  const error = {};
-  error.password = '';
-  error.username = '';
-  if (values.password === undefined) {
-  }
-  if (values.username === undefined) {
-  }
-  if (!values.password) {
-    error.password = 'Пустое поле';
-  }
-  if (!values.username) {
-    error.username = 'Пустое поле';
-  }
-  return error;
-};
-
 class innerComponent extends React.Component {
 
   constructor(props) {
@@ -50,7 +33,7 @@ class innerComponent extends React.Component {
           {...input}
           placeholder={placeholder}
           placeholderTextColor="#747A7B"
-          secureTextEntry={type == 'password'}
+          secureTextEntry={type === 'password'}
           style={this.state.styles.inputStyle}
         />
         {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
@@ -59,7 +42,10 @@ class innerComponent extends React.Component {
     );
   };
 
-  upperCaseWord = word => <Label style={this.state.styles.label}>{word.toUpperCase()}</Label>;
+    upperCaseWord = (word, asterisk = false) =>
+        <Label style={this.state.styles.label}>{word.toUpperCase()}
+            {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
+        </Label>;
 
   render() {
     const { handleSubmit, reset, isLoading, fontSize } = this.props;
@@ -67,22 +53,22 @@ class innerComponent extends React.Component {
 
     return (
       <Form style={styles.form}>
-        {this.upperCaseWord('Фамилия:')}
+        {this.upperCaseWord('Фамилия:', true)}
         <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
-        {this.upperCaseWord('Имя:')}
+        {this.upperCaseWord('Имя:', true)}
         <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
         {this.upperCaseWord('Отчество (при наличии):')}
         <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('E-mail:')}
+        {this.upperCaseWord('E-mail:', true)}
         <Field name="password" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Номер телефона:')}
+        {this.upperCaseWord('Номер телефона:',true)}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
       <View style={styles.buttons}>
-          <Button rounded style={styles.button('#227bd4')}>
+          <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
               <Text>Отмена</Text>
           </Button>
-          <Button style={styles.button('#ec4a58')} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
+          <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
               <Text>Далее</Text>
           </Button>
       </View>
@@ -94,7 +80,6 @@ class innerComponent extends React.Component {
 
 export const SignUpOne = reduxForm({
   form: 'signupone',
-  validate,
   destroyOnUnmount: false,
 })(connect(
     (state) => ({...state.settings})

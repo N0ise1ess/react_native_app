@@ -12,7 +12,6 @@ class InnerComponent extends Component {
         headerTitleStyle: {
             paddingLeft: 0,
             marginLeft: 0,
-            // fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, this.props.fontSize),
             fontWeight: 'normal',
         },
         title: 'Регистрация (2 из 3)',

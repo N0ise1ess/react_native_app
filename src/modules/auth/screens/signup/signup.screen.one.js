@@ -12,7 +12,6 @@ class InnerComponent extends Component {
         headerTitleStyle: {
             paddingLeft: 0,
             marginLeft: 0,
-            // fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, this.props.fontSize),
             fontWeight: 'normal',
         },
         title: 'Регистрация (1 из 3)',
@@ -40,7 +39,7 @@ class InnerComponent extends Component {
         return (
             <Container style={styles.container}>
                 <KeyboardAvoidingView>
-                    <ScrollView contentContainerStyle={[styles.container, {marginTop: 10}]} keyboardShouldPersistTaps={'handled'}>
+                    <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
                         <SignUpOne {...this.props}/>
                     </ScrollView>
                 </KeyboardAvoidingView>

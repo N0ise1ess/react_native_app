@@ -42,7 +42,10 @@ class innerComponent extends React.Component {
     );
   };
 
-  upperCaseWord = word => <Label style={this.state.styles.label}>{word.toUpperCase()}</Label>;
+    upperCaseWord = (word, asterisk = false) =>
+        <Label style={this.state.styles.label}>{word.toUpperCase()}
+            {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
+        </Label>;
 
   renderCheckbox = ({ input, label, type, meta: { touched, error, warning } }) => {
     return (
@@ -72,7 +75,7 @@ class innerComponent extends React.Component {
 
         <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
           <View style={styles.buttons}>
-              <Button rounded style={styles.backButton}>
+              <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
                   <Text>Назад</Text>
               </Button>
               <Button style={styles.nextButton} rounded>
@@ -84,7 +87,7 @@ class innerComponent extends React.Component {
   }
 };
 
-export const SignUp = reduxForm({
+export const SignUpThree = reduxForm({
   form: 'signup',
   destroyOnUnmount: false,
 })(connect(

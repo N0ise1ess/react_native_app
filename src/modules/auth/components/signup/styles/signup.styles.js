@@ -86,5 +86,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     paddingTop: 0,
     paddingRight: 0,
     backgroundColor: '#fff'
+  },
+  asterisk: {
+    color:'red',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_8, fontSize)
   }
 });
