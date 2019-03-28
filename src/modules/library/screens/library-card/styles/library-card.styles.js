@@ -148,9 +148,7 @@ export const styles = (fontSize) => StyleSheet.create({
     alignItems: 'center',
   },
   qrcodeImage: {
-    width: 350,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    width: '100%',
     height: 200,
     resizeMode: 'contain',
   },
