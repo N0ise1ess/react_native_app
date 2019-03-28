@@ -85,14 +85,14 @@ class innerComponent extends React.Component {
     passport = () => {
       const styles = this.state.styles
       return (
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,flex: 1, alignItems: 'stretch', justifyContent: 'center'} ]}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: 30}}>
+            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,flex:1, alignItems: 'stretch', justifyContent: 'center', height: '100%'} ]}>
               <CustomIcon name="arrow_left" style={styles.iconLeft} />
             </TouchableOpacity>
-            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center'}}>
+            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center', height: '100%'}}>
               <Text style={styles.passportText}>Паспорт</Text>
             </View>
-            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D', flex: 1, alignItems: 'stretch', justifyContent: 'center'}]}>
+            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D',flex:1, alignItems: 'stretch', justifyContent: 'center', height: '100%'}]}>
               <CustomIcon name="arrow_right" style={styles.iconRight} />
             </TouchableOpacity>
           </View>

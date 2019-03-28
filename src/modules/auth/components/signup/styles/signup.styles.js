@@ -94,14 +94,12 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   tabHeadingRight: {
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
-    marginRight: 15,
     borderColor:'white',
     borderWidth: 0.5,
     paddingTop: 5,
     paddingBottom: 5,
   },
   tabHeadingLeft: {
-    marginLeft: 15,
     borderTopLeftRadius: 25,
     borderBottomLeftRadius: 25,
     borderColor:'white',
