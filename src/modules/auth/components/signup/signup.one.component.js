@@ -28,7 +28,6 @@ class innerComponent extends React.Component {
     }
     return (
       <Item regular error={touched && hasError} style={this.state.styles.item}>
-        <Icon type="FontAwesome" name={iconName} style={this.state.styles.inputIcon} />
         <Input
           {...input}
           placeholder={placeholder}
@@ -37,7 +36,6 @@ class innerComponent extends React.Component {
           style={this.state.styles.inputStyle}
         />
         {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
-      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.inputIcon, {marginRight: 10}]} /> : null}
       </Item>
     );
   };

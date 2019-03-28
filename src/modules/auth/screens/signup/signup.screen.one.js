@@ -15,7 +15,7 @@ class InnerComponent extends Component {
             fontWeight: 'normal',
         },
         title: 'Регистрация (1 из 3)',
-        headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
+        headerLeft: <ButtonBack onPress={() => navigation.navigate('Auth')}/>,
     });
 
     constructor(props) {

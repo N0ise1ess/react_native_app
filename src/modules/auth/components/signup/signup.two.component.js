@@ -1,10 +1,11 @@
-import { Button, CheckBox, Form, Icon, Input, Item, Label, ListItem, Spinner, Text,Body } from 'native-base';
+import {Button, Form, Icon, Input, Item, Label, Text} from 'native-base';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
-import { Field, reduxForm } from 'redux-form';
+import {Dimensions, TouchableOpacity, View} from 'react-native';
+import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 
-import { styles } from './styles';
+import {styles} from './styles';
+import {CustomIcon} from "../../../shared/components/custom-icon";
 
 const { height, width } = Dimensions.get('window');
 
@@ -14,6 +15,8 @@ class innerComponent extends React.Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      currentTab : 0,
+      currentTabPassport : 0,
     }
   }
 
@@ -28,7 +31,6 @@ class innerComponent extends React.Component {
     }
     return (
       <Item regular error={touched && hasError} style={this.state.styles.item}>
-        <Icon type="FontAwesome" name={iconName} style={this.state.styles.inputIcon} />
         <Input
           {...input}
           placeholder={placeholder}
@@ -37,7 +39,6 @@ class innerComponent extends React.Component {
           style={this.state.styles.inputStyle}
         />
         {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
-      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.inputIcon, {marginRight: 10}]} /> : null}
       </Item>
     );
   };
@@ -47,6 +48,57 @@ class innerComponent extends React.Component {
             {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
         </Label>;
 
+    gender = () => {
+      return (
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity
+                onPress={() => this.setState({currentTab: 0})}
+                style={[
+              this.state.currentTab % 3 === 0 ? this.state.styles.activeTabStyle : {backgroundColor:'#163D7D', },
+                this.state.styles.tabHeadingLeft, {flex: 1, alignItems: 'center', justifyContent: 'center'} ]}>
+              <Text style={{color: 'white'}}>Женский</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => this.setState({currentTab: 1})}
+                style={[
+              this.state.currentTab % 3 === 1 ? this.state.styles.activeTabStyle : {backgroundColor:'#163D7D', },
+                this.state.styles.tabHeadingRight, {flex: 1, alignItems: 'center', justifyContent: 'center'}]}>
+              <Text style={{color: 'white'}}>Мужской</Text>
+            </TouchableOpacity>
+          </View>
+      )
+    }
+
+    dateOfBirth = () => {
+      const styles = this.state.styles
+      return (
+          <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center', width : '60%'}}>
+            <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4"/>
+            <Text style={{color:'#C4C4C4'}}>/ </Text>
+            <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4"/>
+            <Text style={{color:'#C4C4C4'}}>/ </Text>
+            <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4"/>
+          </View>
+      )
+    }
+
+    passport = () => {
+      const styles = this.state.styles
+      return (
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,flex: 1, alignItems: 'stretch', justifyContent: 'center'} ]}>
+              <CustomIcon name="arrow_left" style={styles.iconLeft} />
+            </TouchableOpacity>
+            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center'}}>
+              <Text style={styles.passportText}>Паспорт</Text>
+            </View>
+            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D', flex: 1, alignItems: 'stretch', justifyContent: 'center'}]}>
+              <CustomIcon name="arrow_right" style={styles.iconRight} />
+            </TouchableOpacity>
+          </View>
+      )
+    };
+
   render() {
     const { handleSubmit, reset, isLoading, fontSize } = this.props;
     const {styles} = this.state;
@@ -54,13 +106,13 @@ class innerComponent extends React.Component {
     return (
       <Form style={styles.form}>
         {this.upperCaseWord('Пол')}
-        <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
+        <Field name="username" placeholder="Иванов" type="username" component={this.gender} />
         {this.upperCaseWord('Дата рождения', true)}
-        <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
+        <Field name="password" placeholder="Иван" type="text" component={this.dateOfBirth} />
         {this.upperCaseWord('Тип документа')}
-        <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
+        <Field name="password" placeholder="Иванович" type="text" component={this.passport} />
         {this.upperCaseWord('Номер документа')}
-        <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
+        <Field name="password" placeholder="XXXXXXXX" type="password" component={this.renderInput} />
 
       <View style={styles.buttons}>
           <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>

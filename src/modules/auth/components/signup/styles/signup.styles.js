@@ -90,5 +90,59 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   asterisk: {
     color:'red',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_8, fontSize)
+  },
+  tabHeadingRight: {
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    marginRight: 15,
+    borderColor:'white',
+    borderWidth: 0.5,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  tabHeadingLeft: {
+    marginLeft: 15,
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderColor:'white',
+    borderWidth: 0.5,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  activeTabStyle: {
+    backgroundColor: '#0e63f4',
+  },
+  dateOfBirthInput: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    fontFamily: 'MyriadPro-Regular',
+    padding: 0,
+    height: 34,
+    backgroundColor: '#fff',
+    borderWidth:1,
+    borderColor: "#C4C4C4"
+  },
+  iconLeft: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    alignSelf: 'center'
+  },
+  iconRight: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    alignSelf: 'center'
+  },
+  passportText: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    paddingLeft: 50,
+    paddingRight: 50
   }
 });
