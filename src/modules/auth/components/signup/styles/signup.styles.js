@@ -28,13 +28,6 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     height: 34,
     backgroundColor: '#fff',
   },
-  resetInputStyle: {
-    backgroundColor: '#fff',
-  },
-  resetInputStyle_error: {
-    borderColor: '#ED3944',
-    borderWidth: 1,
-  },
   inputIcon: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     fontFamily: 'MyriadPro-Regular',
@@ -42,13 +35,6 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     paddingTop: 0,
     paddingRight: 0,
     backgroundColor: '#fff',
-  },
-  item: {
-    backgroundColor: '#fff',
-  },
-  buttonStyle: {
-    marginTop: height < 550 ? 0 : 10,
-    backgroundColor: '#0C68FF',
   },
   textStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
