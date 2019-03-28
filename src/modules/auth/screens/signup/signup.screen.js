@@ -12,10 +12,9 @@ class InnerComponent extends Component {
     headerTitleStyle: {
       paddingLeft: 0,
       marginLeft: 0,
-      // fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, this.props.fontSize),
       fontWeight: 'normal',
     },
-    title: 'Регистрация (3 из 3)',
+    title: 'Регистрация',
     headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
   });
 
@@ -40,8 +39,8 @@ class InnerComponent extends Component {
     return (
       <Container style={styles.container}>
         <KeyboardAvoidingView>
-          <ScrollView contentContainerStyle={[styles.container, {marginTop: 10}]} keyboardShouldPersistTaps={'handled'}>
-            <SignUp {...this.props}/>
+          <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
+            <SignUp/>
           </ScrollView>
         </KeyboardAvoidingView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
