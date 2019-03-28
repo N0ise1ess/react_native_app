@@ -2,7 +2,7 @@ import { Text } from 'native-base';
 import React from 'react';
 import { Image, KeyboardAvoidingView, ScrollView, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
-import { reset } from 'redux-form';
+import { reset, isValid } from 'redux-form';
 
 import { login } from '../../../../actions/authorizationAction';
 import { img_logo } from '../../../../assets/images';
@@ -47,6 +47,8 @@ class InnerComponent extends React.Component {
 
   onButtonPress = async () => {
     const { form } = this.props;
+
+    this.props.isFormValid &&
     await this.props.login(form.values);
     !form.values.checkbox && this.props.reset();
   };
@@ -87,6 +89,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     form: state.form.login,
+    isFormValid: isValid('login')(state)
   };
 };
 
