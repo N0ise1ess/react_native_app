@@ -68,12 +68,15 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     minWidth: width * 0.7,
     marginTop: 20
   },
-  button(color) {
-    return {
-      backgroundColor: color || '#747A7B',
+  backButton: {
+      backgroundColor: '#227bd4',
       paddingLeft: 20,
       paddingRight: 20
-    }
+  },
+  nextButton: {
+      backgroundColor: '#ec4a58',
+      paddingLeft: 20,
+      paddingRight: 20
   },
   listItem: {
     borderBottomWidth: 0,
@@ -86,5 +89,14 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   personal: {
     flex:1,
     marginTop: -5
+  },
+  sortDownIcon: {
+    marginRight: 10,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_20, fontSize),
+    fontFamily: 'MyriadPro-Regular',
+    color: '#163D7D',
+    paddingTop: 0,
+    paddingRight: 0,
+    backgroundColor: '#fff'
   }
 });

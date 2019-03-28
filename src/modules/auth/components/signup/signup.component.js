@@ -8,23 +8,6 @@ import { styles } from './styles';
 
 const { height, width } = Dimensions.get('window');
 
-const validate = values => {
-  const error = {};
-  error.password = '';
-  error.username = '';
-  if (values.password === undefined) {
-  }
-  if (values.username === undefined) {
-  }
-  if (!values.password) {
-    error.password = 'Пустое поле';
-  }
-  if (!values.username) {
-    error.username = 'Пустое поле';
-  }
-  return error;
-};
-
 class innerComponent extends React.Component {
 
   constructor(props) {
@@ -50,11 +33,11 @@ class innerComponent extends React.Component {
           {...input}
           placeholder={placeholder}
           placeholderTextColor="#747A7B"
-          secureTextEntry={type == 'password'}
+          secureTextEntry={type === 'password'}
           style={this.state.styles.inputStyle}
         />
         {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
-      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.inputIcon, {marginRight: 10}]} /> : null}
+      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.sortDownIcon]} /> : null}
       </Item>
     );
   };
@@ -62,9 +45,6 @@ class innerComponent extends React.Component {
   upperCaseWord = word => <Label style={this.state.styles.label}>{word.toUpperCase()}</Label>;
 
   renderCheckbox = ({ input, label, type, meta: { touched, error, warning } }) => {
-    if (input.value === '') {
-      input.onChange(!input.value);
-    }
     return (
           <ListItem style={this.state.styles.listItem}>
               <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
@@ -83,7 +63,7 @@ class innerComponent extends React.Component {
 
     return (
       <Form style={styles.form}>
-        {this.upperCaseWord('Выбирете имя пользователя (логин):')}
+        {this.upperCaseWord('Выберите имя пользователя (логин)')}
         <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
         {this.upperCaseWord('Введите пароль:')}
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
@@ -91,16 +71,14 @@ class innerComponent extends React.Component {
         <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
         <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
-
           <View style={styles.buttons}>
-              <Button rounded style={styles.button('#227bd4')}>
+              <Button rounded style={styles.backButton}>
                   <Text>Назад</Text>
               </Button>
-              <Button style={styles.button('#ec4a58')} rounded>
+              <Button style={styles.nextButton} rounded>
                   <Text>Готово</Text>
               </Button>
           </View>
-
       </Form>
     )
   }
@@ -108,7 +86,6 @@ class innerComponent extends React.Component {
 
 export const SignUp = reduxForm({
   form: 'signup',
-  validate,
   destroyOnUnmount: false,
 })(connect(
   (state) => ({...state.settings}),
