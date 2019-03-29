@@ -3,7 +3,14 @@ export { ChatScreen } from './chats';
 export { BuildingDormsScreen, ContactsScreen, DivisionsScreen, BuildingDormsCardScreen } from './contacts';
 export { FinanceScreen } from './finances';
 export { HomeScreen } from './home';
-export { LibraryScreen, LibraryCardScreen, ServicesScreen, RequestsInfoScreen, RequestsLibraryScreen } from './library';
+export {
+    LibraryScreen,
+    LibraryCardScreen,
+    ServicesScreen,
+    RequestsInfoScreen,
+    RequestsLibraryScreen,
+    LibrarySearchScreen
+ } from './library';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { NotificationsScreen } from './notifications';
 export { ParentScreen, ParentsListScreen } from './parents';
