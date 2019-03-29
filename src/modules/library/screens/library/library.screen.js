@@ -19,6 +19,7 @@ import { styles } from './styles';
 const itemList = [
   {
     title: 'Поиск книг',
+    route: 'LibrarySearch',
     image: img_search,
   },
   {
