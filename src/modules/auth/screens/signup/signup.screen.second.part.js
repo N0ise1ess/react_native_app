@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {styles} from './styles';
 import {View, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {Container,Button, Content, Form, Spinner, Text} from "native-base";
-import {SignUpOne, SignUpTwo} from "../../components/signup";
+import {SignUpFirstPart, SignUpSecondPart} from "../../components/signup";
 import {ButtonBack} from "../../../shared/components/button-back";
 import {FooterSection} from "../../../shared/components/footer";
 
@@ -40,7 +40,7 @@ class InnerComponent extends Component {
             <View style={styles.container}>
                 <KeyboardAvoidingView>
                     <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-                        <SignUpTwo {...this.props}/>
+                        <SignUpSecondPart {...this.props}/>
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch,
 });
 
-export const SignUpScreenTwo = connect(
+export const SignUpScreenSecondPart = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(InnerComponent);

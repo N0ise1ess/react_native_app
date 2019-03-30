@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {styles} from './styles';
 import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
-import {SignUpOne} from "../../components/signup";
+import {SignUpFirstPart} from "../../components/signup";
 import {ButtonBack} from "../../../shared/components/button-back";
 import {FooterSection} from "../../../shared/components/footer";
 
@@ -39,7 +39,7 @@ class InnerComponent extends Component {
             <View style={styles.container}>
                 <KeyboardAvoidingView>
                     <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-                        <SignUpOne {...this.props}/>
+                        <SignUpFirstPart {...this.props}/>
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch,
 });
 
-export const SignUpScreenOne = connect(
+export const SignUpScreenFirstPart = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(InnerComponent);

@@ -65,9 +65,9 @@ class innerComponent extends React.Component {
       return (
           <View style={styles.dateOfBirth}>
             <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4"/>
-            <Text style={{color:'#7f7f7f'}}> / </Text>
+            <Text style={styles.separator}> / </Text>
             <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4"/>
-            <Text style={{color:'#7f7f7f'}}> / </Text>
+            <Text style={styles.separator}> / </Text>
             <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4"/>
           </View>
       )
@@ -110,7 +110,7 @@ class innerComponent extends React.Component {
             <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
               <Text>Назад</Text>
             </Button>
-            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp3')}>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUpThirdScreen')}>
               <Text>Далее</Text>
             </Button>
           </View>
@@ -119,7 +119,7 @@ class innerComponent extends React.Component {
   }
 }
 
-export const SignUpTwo = reduxForm({
+export const SignUpSecondPart = reduxForm({
   form: 'signuptwo',
   destroyOnUnmount: false,
 })(connect(

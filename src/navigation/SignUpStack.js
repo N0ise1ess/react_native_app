@@ -2,19 +2,19 @@ import { Button, Icon, Right } from 'native-base';
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
-import {SignUpScreenThree, SignUpScreenOne, SignUpScreenTwo} from '../modules/auth';
+import {SignUpScreenThirdPart, SignUpScreenFirstPart, SignUpScreenSecondPart} from '../modules/auth';
 import { CustomIcon } from '../modules/shared/components/custom-icon';
 
 import { styles } from './styles';
 
 const SignUpStack = createStackNavigator(
     {
-        SignUp1: SignUpScreenOne,
-        SignUp2: SignUpScreenTwo,
-        SignUp3: SignUpScreenThree,
+        SignUpFirstScreen: SignUpScreenFirstPart,
+        SignUpSecondScreen: SignUpScreenSecondPart,
+        SignUpThirdScreen: SignUpScreenThirdPart,
     },
     {
-        initialRouteName: 'SignUp1',
+        initialRouteName: 'SignUpFirstScreen',
         defaultNavigationOptions: ({ navigation }) => ({
             headerStyle: styles.headerStyle,
             headerTintColor: '#fff',

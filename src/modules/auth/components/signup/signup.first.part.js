@@ -82,10 +82,10 @@ class innerComponent extends React.Component {
             <Field name="phone" placeholder="*********" iconName="lock" type="text" component={this.renderPhone} />
           </Form>
           <View style={styles.buttons}>
-            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.navigate('Auth')}>
               <Text>Отмена</Text>
             </Button>
-            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUpSecondScreen')}>
               <Text>Далее</Text>
             </Button>
           </View>
@@ -94,7 +94,7 @@ class innerComponent extends React.Component {
   }
 };
 
-export const SignUpOne = reduxForm({
+export const SignUpFirstPart = reduxForm({
   form: 'signupone',
   destroyOnUnmount: false,
 })(connect(

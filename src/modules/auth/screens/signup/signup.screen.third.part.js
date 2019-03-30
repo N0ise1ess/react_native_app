@@ -5,7 +5,7 @@ import {styles} from './styles';
 import {View, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {Container,Button, Content, Form, Spinner, Text} from "native-base";
 import {FooterSection} from "../../../shared/components/footer/index";
-import {SignUpThree} from "../../components";
+import {SignUpThirdPart} from "../../components";
 
 class InnerComponent extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -40,7 +40,7 @@ class InnerComponent extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView>
           <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-            <SignUpThree {...this.props}/>
+            <SignUpThirdPart {...this.props}/>
           </ScrollView>
         </KeyboardAvoidingView>
         <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export const SignUpScreenThree = connect(
+export const SignUpScreenThirdPart = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(InnerComponent);

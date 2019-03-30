@@ -1,3 +1,3 @@
-export * from './signup.three.component';
-export * from './signup.one.component';
-export * from './signup.two.component';
+export * from './signup.third.part';
+export * from './signup.first.part';
+export * from './signup.second.part';

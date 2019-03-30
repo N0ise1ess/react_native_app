@@ -83,7 +83,7 @@ class innerComponent extends React.Component {
   }
 };
 
-export const SignUpThree = reduxForm({
+export const SignUpThirdPart = reduxForm({
   form: 'signup',
   destroyOnUnmount: false,
 })(connect(

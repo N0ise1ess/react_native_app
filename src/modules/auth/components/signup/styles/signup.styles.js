@@ -224,5 +224,8 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     backgroundColor:'#fff',
     width: '100%',
     height:34
+  },
+  separator : {
+    color: "#7f7f7f"
   }
 });

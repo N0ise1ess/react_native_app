@@ -1,3 +1,3 @@
-export * from './signup.screen.three'
-export * from './signup.screen.one'
-export * from './signup.screen.two'
+export * from './signup.screen.third.part'
+export * from './signup.screen.first.part'
+export * from './signup.screen.second.part'
