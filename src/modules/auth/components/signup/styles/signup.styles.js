@@ -141,7 +141,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   passportText: {
     fontSize: height < 750
-        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
     backgroundColor:'#163D7D'

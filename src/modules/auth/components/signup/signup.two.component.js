@@ -85,9 +85,9 @@ class innerComponent extends React.Component {
             <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,alignItems: 'center', justifyContent: 'center', flex:1} ]}>
               <CustomIcon name="arrow_left" style={styles.iconLeft} />
             </TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center',flex:3, height: '90%'}}>
+            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center',flex:3, height: '90%'}}>
               <Text style={styles.passportText} uppercase={true}>Паспорт</Text>
-            </TouchableOpacity>
+            </View>
             <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D', alignItems: 'center', justifyContent: 'center', flex: 1}]}>
               <CustomIcon name="arrow_right" style={styles.iconRight} />
             </TouchableOpacity>
