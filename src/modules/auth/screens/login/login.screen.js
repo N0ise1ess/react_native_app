@@ -8,7 +8,7 @@ import { login } from '../../../../actions/authorizationAction';
 import { img_logo } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
-import { 
+import {
   FooterSection,
   CustomSnackbar
  } from '../../../shared/components';
@@ -71,7 +71,9 @@ class InnerComponent extends React.Component {
               <Image source={img_logo} resizeMode="contain" style={styles.imageStyle} />
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
-                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text
+                  onPress={() => navigation.navigate('SignUp')}
+                  style={styles.linkedTextStyle}>Зарегистрироваться</Text>
                 <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
                   Восстановить пароль
                 </Text>
