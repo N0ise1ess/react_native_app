@@ -194,7 +194,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: height < 750 ? 0.15 : 0.3,
+    flex: height < 600 ? 0.3 : 0.15,
     marginBottom: 20,
   },
   dateOfBirth: {
