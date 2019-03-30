@@ -205,5 +205,24 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+  },
+  policy: {
+    color:'#0C68FF',
+    paddingLeft: 10,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontFamily: 'MyriadPro-Regular'
+  },
+  inputPhone: {
+    color: 'gray',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    marginTop: 5,
+    marginRight: 5,
+    padding: 5,
+    borderColor: 'transparent',
+    borderWidth: 1,
+    borderRadius: 2,
+    backgroundColor:'#fff',
+    width: '100%',
+    height:34
   }
 });

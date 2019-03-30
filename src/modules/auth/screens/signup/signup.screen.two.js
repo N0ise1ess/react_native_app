@@ -39,7 +39,7 @@ class InnerComponent extends Component {
         return (
             <View style={styles.container}>
                 <KeyboardAvoidingView>
-                    <ScrollView contentContainerStyle={[styles.container, {marginTop: 10}]} keyboardShouldPersistTaps={'handled'}>
+                    <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
                         <SignUpTwo {...this.props}/>
                     </ScrollView>
                 </KeyboardAvoidingView>

@@ -52,8 +52,9 @@ class InnerComponent extends Component {
 
 const mapStateToProps = state => {
     return {
-        ...state.authReducer,
-        ...state.settings,
+      ...state.authReducer,
+      ...state.accountReducer,
+      ...state.settings
     };
 };
 

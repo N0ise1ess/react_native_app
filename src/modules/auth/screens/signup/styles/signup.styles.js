@@ -14,6 +14,8 @@ export const styles = (fontSize) => StyleSheet.create({
         backgroundColor: '#CED8DA',
         flex: 1,
         alignItems: 'center',
-        marginTop: 20,
+        width: width,
+        height,
+        minHeight: 450,
     }
 });

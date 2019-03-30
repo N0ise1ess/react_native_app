@@ -1,12 +1,14 @@
 import { Button, CheckBox, Form, Icon, Input, Item, Label, ListItem, Spinner, Text,Body } from 'native-base';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 
 import { styles } from './styles';
+import TextInputMask from 'react-native-text-input-mask';
 
-const { height, width } = Dimensions.get('window');
+const PHONE_REGEXP = new RegExp("^[0-9]+$");
+const PHONE_MASK = '([000]) [000]-[00]-[00]';
 
 class innerComponent extends React.Component {
 
@@ -14,6 +16,7 @@ class innerComponent extends React.Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      phoneNumber: ('123') + ' 456' + '-78' + '-90'
     }
   }
 
@@ -36,10 +39,29 @@ class innerComponent extends React.Component {
     );
   };
 
-    upperCaseWord = (word, asterisk = false) =>
-        <Label style={this.state.styles.label}>{word.toUpperCase()}
-            {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
-        </Label>;
+  renderPhone = () => {
+    const { phoneNumber, styles } = this.state
+    return (
+        <TextInputMask
+            editable={true}
+            value={phoneNumber}
+            onChangeText={() => {this._inputPhone}}
+            style={styles.inputPhone}
+            mask={PHONE_MASK}
+        />
+    )
+  }
+
+  _inputPhone = text => {
+    if (PHONE_REGEXP.test(text)) {
+      this.setState({ phoneNumber: text });
+    }
+  }
+
+  upperCaseWord = (word, asterisk = false) =>
+      <Label style={this.state.styles.label}>{word.toUpperCase()}
+          {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
+      </Label>;
 
   render() {
     const { handleSubmit, reset, isLoading, fontSize } = this.props;
@@ -49,15 +71,15 @@ class innerComponent extends React.Component {
         <View style={styles.form}>
           <Form style={styles.form}>
             {this.upperCaseWord('Фамилия:', true)}
-            <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
+            <Field name="surname" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
             {this.upperCaseWord('Имя:', true)}
-            <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
+            <Field name="name" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
             {this.upperCaseWord('Отчество (при наличии):')}
-            <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
+            <Field name="lastName" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
             {this.upperCaseWord('E-mail:', true)}
-            <Field name="password" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
+            <Field name="email" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
             {this.upperCaseWord('Номер телефона:',true)}
-            <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
+            <Field name="phone" placeholder="*********" iconName="lock" type="text" component={this.renderPhone} />
           </Form>
           <View style={styles.buttons}>
             <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>

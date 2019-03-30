@@ -6,8 +6,6 @@ import {connect} from 'react-redux';
 
 import { styles } from './styles';
 
-const { height, width } = Dimensions.get('window');
-
 class innerComponent extends React.Component {
 
   constructor(props) {
@@ -49,7 +47,7 @@ class innerComponent extends React.Component {
               <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
               <View style={this.state.styles.personal}>
                   <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
-                  <Text style={[this.state.styles.text, {color:'#0C68FF'}]}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
+                  <Text style={this.state.styles.policy}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
                       и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
               </View>
           </ListItem>
