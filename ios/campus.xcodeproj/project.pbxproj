@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -62,6 +63,7 @@
 		D33DF7CF8FE24E91B9EA56B0 /* InputMask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D09D6F44484D61BF3D5052 /* InputMask.framework */; };
 		D91A245778474F1A9084BA2A /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC469985DCE749EFB34B43D6 /* Roboto_medium.ttf */; };
 		DD834C9270B94534B3846318 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A9A09FD9294B29AA3ED1EB /* libSplashScreen.a */; };
+		E1086F0F224FCD470002F346 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1086F03224FCD1A0002F346 /* libReactNativeNavigation.a */; };
 		E1B3CDE3221B28FF007CBC84 /* InputMask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B3CDE2221B28FF007CBC84 /* InputMask.framework */; };
 		E1B3CDE4221B28FF007CBC84 /* InputMask.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1B3CDE2221B28FF007CBC84 /* InputMask.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE49E15C77A545768427E09C /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F21091C7AA4AF3994576EF /* libRNDeviceInfo-tvOS.a */; };
@@ -343,6 +345,20 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		E1086F02224FCD1A0002F346 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1086ED6224FCD1A0002F346 /* ReactNativeNavigation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8AFADBD1BEE6F3F00A4592D;
+			remoteInfo = ReactNativeNavigation;
+		};
+		E1086F04224FCD1A0002F346 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1086ED6224FCD1A0002F346 /* ReactNativeNavigation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7B49FEBB1E95090800DEB3EA;
+			remoteInfo = ReactNativeNavigationTests;
+		};
 		E19534172246A83700BCD13C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93BA382D7C5649858D367FD8 /* RNGestureHandler.xcodeproj */;
@@ -495,6 +511,7 @@
 		D97A4EBF76B34F0EBC37F037 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		DFA043F9FEDD4D559CC694B5 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		E0A9A09FD9294B29AA3ED1EB /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
+		E1086ED6224FCD1A0002F346 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		E1B3CDE2221B28FF007CBC84 /* InputMask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InputMask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81CB23A92464B3D8BB52048 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		F3163C77A651434ABF0F47DD /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
@@ -514,6 +531,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1086F0F224FCD470002F346 /* libReactNativeNavigation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -711,6 +729,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E1086ED6224FCD1A0002F346 /* ReactNativeNavigation.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -801,6 +820,15 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1086ED7224FCD1A0002F346 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1086F03224FCD1A0002F346 /* libReactNativeNavigation.a */,
+				E1086F05224FCD1A0002F346 /* ReactNativeNavigationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1045,6 +1073,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = E1086ED7224FCD1A0002F346 /* Products */;
+					ProjectRef = E1086ED6224FCD1A0002F346 /* ReactNativeNavigation.xcodeproj */;
 				},
 				{
 					ProductGroup = E1B3CDC8221B28E0007CBC84 /* Products */;
@@ -1339,6 +1371,20 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1086F03224FCD1A0002F346 /* libReactNativeNavigation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeNavigation.a;
+			remoteRef = E1086F02224FCD1A0002F346 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1086F05224FCD1A0002F346 /* ReactNativeNavigationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactNativeNavigationTests.xctest;
+			remoteRef = E1086F04224FCD1A0002F346 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E19534182246A83700BCD13C /* libRNGestureHandler-tvOS.a */ = {
