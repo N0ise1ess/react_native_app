@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {styles} from './styles';
-import {View, ScrollView, KeyboardAvoidingView} from 'react-native';
-import {Container,Button, Content, Form, Spinner, Text} from "native-base";
+import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
 import {SignUpOne} from "../../components/signup";
 import {ButtonBack} from "../../../shared/components/button-back";
 import {FooterSection} from "../../../shared/components/footer";

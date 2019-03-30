@@ -74,7 +74,7 @@ class innerComponent extends React.Component {
             <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
               <Text>Назад</Text>
             </Button>
-            <Button style={styles.nextButton} rounded>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('Auth')}>
               <Text>Готово</Text>
             </Button>
           </View>
