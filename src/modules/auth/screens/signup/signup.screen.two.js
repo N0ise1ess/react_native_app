@@ -37,14 +37,14 @@ class InnerComponent extends Component {
         const {userStatus, navigation, token} = this.props;
         const {styles} = this.state;
         return (
-            <Container style={styles.container}>
+            <View style={styles.container}>
                 <KeyboardAvoidingView>
                     <ScrollView contentContainerStyle={[styles.container, {marginTop: 10}]} keyboardShouldPersistTaps={'handled'}>
                         <SignUpTwo {...this.props}/>
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
-            </Container>
+            </View>
         )
 
     }

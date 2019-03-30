@@ -46,28 +46,28 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-      <Form style={styles.form}>
-        {this.upperCaseWord('Фамилия:', true)}
-        <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
-        {this.upperCaseWord('Имя:', true)}
-        <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Отчество (при наличии):')}
-        <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('E-mail:', true)}
-        <Field name="password" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Номер телефона:',true)}
-        <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
-
-      <View style={styles.buttons}>
-          <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+        <View style={styles.form}>
+          <Form style={styles.form}>
+            {this.upperCaseWord('Фамилия:', true)}
+            <Field name="username" placeholder="Иванов" iconName="user" type="username" iconRight={true} component={this.renderInput} />
+            {this.upperCaseWord('Имя:', true)}
+            <Field name="password" placeholder="Иван" iconName="lock" type="password" component={this.renderInput} />
+            {this.upperCaseWord('Отчество (при наличии):')}
+            <Field name="password" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput} />
+            {this.upperCaseWord('E-mail:', true)}
+            <Field name="password" placeholder="email@email.com" iconName="lock" type="password" component={this.renderInput} />
+            {this.upperCaseWord('Номер телефона:',true)}
+            <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
+          </Form>
+          <View style={styles.buttons}>
+            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
               <Text>Отмена</Text>
-          </Button>
-          <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
+            </Button>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp2')}>
               <Text>Далее</Text>
-          </Button>
-      </View>
-
-      </Form>
+            </Button>
+          </View>
+        </View>
     )
   }
 };

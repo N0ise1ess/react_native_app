@@ -61,24 +61,26 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-      <Form style={styles.form}>
-        {this.upperCaseWord('Выберите имя пользователя (логин)')}
-        <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
-        {this.upperCaseWord('Введите пароль:')}
-        <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
-        {this.upperCaseWord('Подтвердите пароль:')}
-        <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
+        <View style={styles.form}>
+          <Form style={styles.form}>
+            {this.upperCaseWord('Выберите имя пользователя (логин)')}
+            <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
+            {this.upperCaseWord('Введите пароль:')}
+            <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
+            {this.upperCaseWord('Подтвердите пароль:')}
+            <Field name="password" placeholder="*********" iconName="lock" type="password" component={this.renderInput} />
 
-        <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
+            <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
+          </Form>
           <View style={styles.buttons}>
-              <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
-                  <Text>Назад</Text>
-              </Button>
-              <Button style={styles.nextButton} rounded>
-                  <Text>Готово</Text>
-              </Button>
+            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+              <Text>Назад</Text>
+            </Button>
+            <Button style={styles.nextButton} rounded>
+              <Text>Готово</Text>
+            </Button>
           </View>
-      </Form>
+        </View>
     )
   }
 };

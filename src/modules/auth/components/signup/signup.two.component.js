@@ -7,8 +7,6 @@ import {connect} from 'react-redux';
 import {styles} from './styles';
 import {CustomIcon} from "../../../shared/components/custom-icon";
 
-const { height, width } = Dimensions.get('window');
-
 class innerComponent extends React.Component {
 
   constructor(props) {
@@ -45,20 +43,17 @@ class innerComponent extends React.Component {
         </Label>;
 
     gender = () => {
+      const { styles } = this.state;
       return (
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+          <View style={styles.genderContainer}>
             <TouchableOpacity
                 onPress={() => this.setState({currentTab: 0})}
-                style={[
-              this.state.currentTab % 3 === 0 ? this.state.styles.activeTabStyle : {backgroundColor:'#163D7D', },
-                this.state.styles.tabHeadingLeft, {flex: 1, alignItems: 'center', justifyContent: 'center'} ]}>
+                style={[this.state.currentTab % 3 === 0 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingLeft ]}>
               <Text style={{color: 'white'}}>Женский</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => this.setState({currentTab: 1})}
-                style={[
-              this.state.currentTab % 3 === 1 ? this.state.styles.activeTabStyle : {backgroundColor:'#163D7D', },
-                this.state.styles.tabHeadingRight, {flex: 1, alignItems: 'center', justifyContent: 'center'}]}>
+                style={[this.state.currentTab % 3 === 1 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingRight]}>
               <Text style={{color: 'white'}}>Мужской</Text>
             </TouchableOpacity>
           </View>
@@ -68,27 +63,27 @@ class innerComponent extends React.Component {
     dateOfBirth = () => {
       const styles = this.state.styles
       return (
-          <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center', width : '60%'}}>
+          <View style={styles.dateOfBirth}>
             <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4"/>
-            <Text style={{color:'#C4C4C4'}}>/ </Text>
+            <Text style={{color:'#7f7f7f'}}> / </Text>
             <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4"/>
-            <Text style={{color:'#C4C4C4'}}>/ </Text>
+            <Text style={{color:'#7f7f7f'}}> / </Text>
             <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4"/>
           </View>
       )
     }
 
-    passport = () => {
+    document = () => {
       const styles = this.state.styles
       return (
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex:0.1}}>
-            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,alignItems: 'center', justifyContent: 'center', flex:1} ]}>
+          <View style={styles.documentContainer}>
+            <TouchableOpacity style={this.state.styles.iconContainerLeft}>
               <CustomIcon name="arrow_left" style={styles.iconLeft} />
             </TouchableOpacity>
-            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center',flex:3, height: '90%'}}>
-              <Text style={styles.passportText} uppercase={true}>Паспорт</Text>
+            <View style={styles.document}>
+              <Text style={styles.documentText} uppercase={true}>Паспорт</Text>
             </View>
-            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D', alignItems: 'center', justifyContent: 'center', flex: 1}]}>
+            <TouchableOpacity style={this.state.styles.iconContainerRight}>
               <CustomIcon name="arrow_right" style={styles.iconRight} />
             </TouchableOpacity>
           </View>
@@ -100,29 +95,29 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-      <Form style={styles.form}>
-        {this.upperCaseWord('Пол')}
-        <Field name="username" placeholder="Иванов" type="username" component={this.gender} />
-        {this.upperCaseWord('Дата рождения', true)}
-        <Field name="password" placeholder="Иван" type="text" component={this.dateOfBirth} />
-        {this.upperCaseWord('Тип документа')}
-        <Field name="password" placeholder="Иванович" type="text" component={this.passport} />
-        {this.upperCaseWord('Номер документа')}
-        <Field name="document" placeholder="XXXXXXXX" type="text" component={this.renderInput} />
-
-      <View style={styles.buttons}>
-          <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+        <View style={styles.form}>
+          <Form style={styles.form}>
+            {this.upperCaseWord('Пол')}
+            <Field name="username" placeholder="Иванов" type="username" component={this.gender} />
+            {this.upperCaseWord('Дата рождения', true)}
+            <Field name="password" placeholder="Иван" type="text" component={this.dateOfBirth} />
+            {this.upperCaseWord('Тип документа')}
+            <Field name="password" placeholder="Иванович" type="text" component={this.document} />
+            {this.upperCaseWord('Номер документа')}
+            <Field name="document" placeholder="XXXXXXXX" type="text" component={this.renderInput} />
+          </Form>
+          <View style={styles.buttons}>
+            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
               <Text>Назад</Text>
-          </Button>
-          <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp3')}>
+            </Button>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('SignUp3')}>
               <Text>Далее</Text>
-          </Button>
-      </View>
-
-      </Form>
+            </Button>
+          </View>
+        </View>
     )
   }
-};
+}
 
 export const SignUpTwo = reduxForm({
   form: 'signuptwo',

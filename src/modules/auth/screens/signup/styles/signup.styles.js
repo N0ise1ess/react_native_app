@@ -14,6 +14,6 @@ export const styles = (fontSize) => StyleSheet.create({
         backgroundColor: '#CED8DA',
         flex: 1,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 20,
     }
 });
