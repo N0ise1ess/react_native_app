@@ -48,7 +48,7 @@ class InnerComponent extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getSearchedTimetable('', this.props.token);
 
     const { role } = this.props;

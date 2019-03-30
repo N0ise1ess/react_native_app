@@ -30,7 +30,7 @@ class InnerComponent extends Component {
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getLibraryQRCode(this.props.token);
     this.props.getLibraryCard(this.props.token);
     this.props.getLibraryBook(this.props.token);

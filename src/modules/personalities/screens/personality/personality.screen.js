@@ -25,7 +25,7 @@ class InnerComponent extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const personId = this.props.navigation.state.params.personId;
     this.props.findPersonalityById(personId)
   }

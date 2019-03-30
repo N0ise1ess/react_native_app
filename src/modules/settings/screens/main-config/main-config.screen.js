@@ -21,8 +21,6 @@ class Settings extends Component {
     };
   }
 
-  componentDidMount() {}
-
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }

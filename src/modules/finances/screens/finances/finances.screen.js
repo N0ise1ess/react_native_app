@@ -41,7 +41,7 @@ class InnerComponent extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { token } = this.props;
     this.props.getFinancePayment(token);
     this.props.getFinanceScholarships(token);

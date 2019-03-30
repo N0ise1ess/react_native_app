@@ -154,15 +154,14 @@ class InnerComponent extends Component {
     };
   }
 
-  static navigationOptions = (props) => {
+  static navigationOptions = ({ firstName, secondName, lastName, userStatus }) => {
     return {
-      title:
-        props.navigation.state.params &&
-        props.navigation.state.params.userFullName,
+      title: lastName || firstName || secondName
+        ? `${lastName} ${firstName} ${secondName}`
+        : 'Гость',
       headerLeft: (
         <Left>
-          {props.navigation.state.params &&
-          props.navigation.state.params.userStatus === 'student' ? (
+          {userStatus === 'student' ? (
             <Image
               style={{ resizeMode: 'contain', height: 30 }}
               source={img_student}
@@ -177,17 +176,6 @@ class InnerComponent extends Component {
       ),
     };
   };
-
-  componentWillMount() {
-    const { firstName, secondName, lastName, userStatus } = this.props;
-    this.props.navigation.setParams({
-      userFullName:
-        lastName || firstName || secondName
-          ? `${lastName} ${firstName} ${secondName}`
-          : 'Гость',
-      userStatus: userStatus,
-    });
-  }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize &&
