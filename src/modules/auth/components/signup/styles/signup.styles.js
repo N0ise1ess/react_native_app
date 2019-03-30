@@ -136,8 +136,10 @@ export const styles = (fontSize = 0) => StyleSheet.create({
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
     alignSelf: 'center',
+    justifyContent:'center',
+    alignItems:'center',
     paddingRight:10,
-    paddingLeft:10,
+    paddingLeft:10
   },
   iconRight: {
     fontSize: height < 750
@@ -145,8 +147,10 @@ export const styles = (fontSize = 0) => StyleSheet.create({
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
     alignSelf: 'center',
+    justifyContent:'center',
+    alignItems:'center',
     paddingLeft:10,
-    paddingRight:10,
+    paddingRight:10
   },
   documentText: {
     fontSize: height < 750
@@ -190,7 +194,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex:0.15,
+    flex: height < 750 ? 0.15 : 0.3,
     marginBottom: 20,
   },
   dateOfBirth: {
