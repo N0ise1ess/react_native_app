@@ -94,21 +94,21 @@ class InnerComponent extends Component {
         dataArray={list}
         renderRow={item => (
           <View style={styles.listItemStyle}>
-            <View style={styles.beginningItems}>
-              <View style={styles.upperSection}>
+            <View style={styles.upperSection}>
+              <View style={styles.requestIndexSection}>
                 {item.completed ? (
                   <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
                 ) : (
                   <View style={styles.markIcon}></View>
                 )}
-                <Text style={styles.title}>{'\u2116	'} {item.id}</Text>
+                <Text style={styles.title}>{'\u2116'} {item.id}</Text>
               </View>
-              {item.name && <Text style={styles.textStyle}>{item.name}</Text>}
-              <Text style={[styles.textStyle, styles.statusStyle]}>{item.status}</Text>
+              <View>
+                <Text style={styles.dateStyle}>{item.date}</Text>
+              </View>
             </View>
-            <View>
-              <Text style={styles.dateStyle}>{item.date}</Text>
-            </View>
+            {item.name && <Text style={styles.textStyle}>{item.name}</Text>}
+            <Text style={[styles.textStyle, styles.statusStyle]}>{item.status}</Text>
           </View>
         )}
       />

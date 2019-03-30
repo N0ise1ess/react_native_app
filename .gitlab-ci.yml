@@ -33,6 +33,7 @@ build:
   stage: build
   only:
     - develop
+    - schedules
   script:
     - ./gradlew assembleRelease
     - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk

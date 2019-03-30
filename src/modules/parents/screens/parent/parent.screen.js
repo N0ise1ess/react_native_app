@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { img_parent } from '../../../../assets/images';
 import { Parent } from '../../components';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
@@ -22,7 +22,7 @@ class InnerComponent extends Component {
     };
   }
 
-  renderLabel = text => <Text style={styles.label}>{text.toUpperCase()}</Text>;
+  renderLabel = text => <Text style={this.state.styles.label}>{text.toUpperCase()}</Text>;
   onHandleEdit = () => {
     this.setState(prevState => ({ editableMode: !prevState.editableMode }));
     this.state.editableMode && console.log('saved in server');
@@ -37,7 +37,9 @@ class InnerComponent extends Component {
       <Container style={styles.container}>
         <View style={styles.content}>
           <View style={styles.sectionStyle}>
-            <Image source={img_parent} style={styles.imageStyle} />
+            <View style={styles.btnImageStyle}>
+              <Image source={img_parent} style={styles.imageStyle} />
+            </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.nameStyle}>Иванов Яков Самойлович</Text>
               <View style={styles.info}>
@@ -46,14 +48,20 @@ class InnerComponent extends Component {
                 </View>
               </View>
               <View style={styles.dataSection}>
-                {this.renderLabel('Учетные данные')}
+                {this.renderLabel('Учетные данные: ')}
                 <Text style={styles.dataStyle}>Зарегистрирован 20.10.2018</Text>
-                <Text style={styles.dataStyle}>Логин akjdaso</Text>
-                <Text style={styles.dataStyle}>Email akjdaso@kleo.com</Text>
+                <View style={{flexDirection: "row"}}>
+                  <Text style={styles.dataStyle}>Логин </Text>
+                  <Text style={[styles.dataStyle, {color:'black', fontWeight: 'bold',}]}>akjdaso</Text>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                  <Text style={styles.dataStyle}>Email </Text>
+                  <Text style={[styles.dataStyle, {color:'#3c87f2', fontWeight: 'bold',}]}>akjdaso@kleo.com</Text>
+                </View>
               </View>
               <View style={styles.dataSection}>
-                {this.renderLabel('Доступ')}
-                <Parent />
+                {this.renderLabel('Доступ:')}
+                <Parent styles={styles}/>
               </View>
             </View>
           </View>

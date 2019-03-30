@@ -2,6 +2,8 @@ import { StyleSheet, Dimensions } from 'react-native';
 import * as settingsFonts from '../../../../../constants/styles';
 import {getSizeFonts} from '../../../../shared/functions/styles';
 
+const {width, height} = Dimensions.get('window');
+
 export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -23,34 +25,36 @@ export const styles = (fontSize) => StyleSheet.create({
     resizeMode: 'contain',
   },
   imageStyle: {
-    width: 40,
-    height: 40,
+    width: width * 0.09,
+    height: width * 0.09,
     resizeMode: 'contain',
-    tintColor: '#4099F4',
-    marginLeft: 10,
-    marginRight: 10,
+    tintColor: '#4099F4'
   },
   nameStyle: {
     fontWeight: 'bold',
     marginBottom: 5,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
   },
   label: {
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_10, fontSize),
     paddingTop: 12,
+    color: '#979797'
   },
   textStyle: {
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     marginTop: 5,
+    color: '#979797'
   },
   dataStyle: {
     fontFamily: 'MyriadPro-Regular',
-    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
     paddingTop: 5,
+    color: '#979797'
   },
   dataSection: {
-    borderColor: 'black',
+    borderColor: '#979797',
     borderTopWidth: 1,
     paddingTop: 10,
     paddingBottom: 20,
@@ -74,10 +78,37 @@ export const styles = (fontSize) => StyleSheet.create({
     marginBottom: 50,
   },
   buttonStyle: {
+    position:'relative',
+    left: (width / 2) - 3,
+    bottom: 10,
     paddingLeft: 25,
     paddingRight: 25,
     margin: 5,
-    backgroundColor: '#ED3944',
-    alignSelf: 'flex-end',
+    backgroundColor: '#e91b47'
   },
+  btnImageStyle: {
+    borderRadius: width * 0.12,
+    height: width * 0.12,
+    width: width * 0.12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    borderColor: '#4099F4',
+    borderWidth: 1,
+    marginRight: 20,
+    marginLeft: 10
+  },
+  parentLabel: {
+    paddingLeft: 10,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    color: '#979797'
+  },
+  parentForm: {
+    borderBottomWidth: 0,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginLeft: 0,
+    paddingTop: 10,
+    paddingBottom: 0
+  }
 });
