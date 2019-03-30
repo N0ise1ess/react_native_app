@@ -123,24 +123,27 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   iconLeft: {
     fontSize: height < 750
-        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingRight:10,
+    paddingLeft:10,
   },
   iconRight: {
     fontSize: height < 750
-        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingLeft:10,
+    paddingRight:10,
   },
   passportText: {
     fontSize: height < 750
         ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
         : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#fff',
-    paddingLeft: 50,
-    paddingRight: 50
+    backgroundColor:'#163D7D'
   }
 });

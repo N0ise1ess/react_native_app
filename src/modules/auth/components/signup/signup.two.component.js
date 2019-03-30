@@ -25,12 +25,8 @@ class innerComponent extends React.Component {
   }
 
   renderInput = ({ input, label, type, meta: { touched, error, warning }, iconName, placeholder, iconRight }) => {
-    var hasError = false;
-    if (error !== undefined) {
-      hasError = true;
-    }
     return (
-      <Item regular error={touched && hasError} style={this.state.styles.item}>
+      <Item regular error={touched && error} style={this.state.styles.item}>
         <Input
           {...input}
           placeholder={placeholder}
@@ -38,7 +34,7 @@ class innerComponent extends React.Component {
           secureTextEntry={type === 'password'}
           style={this.state.styles.inputStyle}
         />
-        {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
+        {touched && error && <Text style={this.state.styles.errorStyle}>{error}</Text>}
       </Item>
     );
   };
@@ -85,14 +81,14 @@ class innerComponent extends React.Component {
     passport = () => {
       const styles = this.state.styles
       return (
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,flex:1, alignItems: 'stretch', justifyContent: 'center'} ]}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex:0.1}}>
+            <TouchableOpacity style={[this.state.styles.tabHeadingLeft, {backgroundColor:'#163D7D' ,alignItems: 'center', justifyContent: 'center', flex:1} ]}>
               <CustomIcon name="arrow_left" style={styles.iconLeft} />
             </TouchableOpacity>
-            <View style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center'}}>
+            <TouchableOpacity style={{backgroundColor:'#163D7D', alignItems:'center', justifyContent:'center',flex:3, height: '90%'}}>
               <Text style={styles.passportText} uppercase={true}>Паспорт</Text>
-            </View>
-            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D',flex:1, alignItems: 'stretch', justifyContent: 'center'}]}>
+            </TouchableOpacity>
+            <TouchableOpacity style={[this.state.styles.tabHeadingRight, {backgroundColor:'#163D7D', alignItems: 'center', justifyContent: 'center', flex: 1}]}>
               <CustomIcon name="arrow_right" style={styles.iconRight} />
             </TouchableOpacity>
           </View>
@@ -112,7 +108,7 @@ class innerComponent extends React.Component {
         {this.upperCaseWord('Тип документа')}
         <Field name="password" placeholder="Иванович" type="text" component={this.passport} />
         {this.upperCaseWord('Номер документа')}
-        <Field name="password" placeholder="XXXXXXXX" type="password" component={this.renderInput} />
+        <Field name="document" placeholder="XXXXXXXX" type="text" component={this.renderInput} />
 
       <View style={styles.buttons}>
           <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>

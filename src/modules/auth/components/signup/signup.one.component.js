@@ -22,12 +22,8 @@ class innerComponent extends React.Component {
   }
 
   renderInput = ({ input, label, type, meta: { touched, error, warning }, iconName, placeholder, iconRight }) => {
-    var hasError = false;
-    if (error !== undefined) {
-      hasError = true;
-    }
     return (
-      <Item regular error={touched && hasError} style={this.state.styles.item}>
+      <Item regular error={touched && error} style={this.state.styles.item}>
         <Input
           {...input}
           placeholder={placeholder}
@@ -35,7 +31,7 @@ class innerComponent extends React.Component {
           secureTextEntry={type === 'password'}
           style={this.state.styles.inputStyle}
         />
-        {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
+        {touched && error && <Text style={this.state.styles.errorStyle}>{error}</Text>}
       </Item>
     );
   };
