@@ -1,12 +1,15 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { AsyncStorage, Clipboard, Image, Text, View } from 'react-native';
+import firebase from 'react-native-firebase';
 import { Bar } from 'react-native-progress';
-import { connect } from 'react-redux';
-import { initLoad } from '../../../../actions/loadingAction';
-import { img_logo_white } from '../../../../assets/images';
-import { styles } from './styles';
-import { setFontSize } from '../../../../actions/settingsAction';
 import SplashScreen from 'react-native-splash-screen';
+import { connect } from 'react-redux';
+
+import { initLoad } from '../../../../actions/loadingAction';
+import { setFontSize } from '../../../../actions/settingsAction';
+import { img_logo_white } from '../../../../assets/images';
+import { CustomSnackbar } from '../../../shared/components';
+import { styles } from './styles';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -27,8 +30,67 @@ class InnerComponent extends React.Component {
   componentWillMount() {
     this.props.initLoad();
   }
-  componentDidMount() {
+
+  async componentDidMount() {
     SplashScreen.hide()
+    this.checkPermission();
+    this.createNotificationListeners(); //add this line
+  }
+
+  async checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
+    }
+  }
+
+  async requestPermission() {
+    try {
+      await firebase.messaging().requestPermission();
+      // User has authorised
+      this.getToken();
+    } catch (error) {
+      // User has rejected permissions
+      console.log('permission rejected');
+    }
+  }
+
+  async getToken() {
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    if (!fcmToken) {
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+      }
+    }
+    if (__DEV__) {
+      Clipboard.setString(fcmToken);
+      CustomSnackbar.show({ title: 'Copied!' });
+    }
+  }
+  //Remove listeners allocated in createNotificationListeners()
+  componentWillUnmount() {
+    this.notificationListener();
+  }
+
+  async createNotificationListeners() {
+    // /*
+    // * Triggered when a particular notification has been received in foreground
+    // * */
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification((notification) => {
+        this.props.navigation.navigate(notification.data.route)
+      });
+
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification();
+    if (notificationOpen) {
+      this.props.navigation.navigate(notificationOpen.notification.data.route);
+    }
   }
 
   _retrieveData = async () => {
