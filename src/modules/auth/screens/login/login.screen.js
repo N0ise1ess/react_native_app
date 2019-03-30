@@ -2,13 +2,13 @@ import { Text } from 'native-base';
 import React from 'react';
 import { Image, KeyboardAvoidingView, ScrollView, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
-import { reset } from 'redux-form';
+import { reset, isValid } from 'redux-form';
 
 import { login } from '../../../../actions/authorizationAction';
 import { img_logo } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
-import { 
+import {
   FooterSection,
   CustomSnackbar
  } from '../../../shared/components';
@@ -47,6 +47,8 @@ class InnerComponent extends React.Component {
 
   onButtonPress = async () => {
     const { form } = this.props;
+
+    this.props.isFormValid &&
     await this.props.login(form.values);
     !form.values.checkbox && this.props.reset();
   };
@@ -69,7 +71,9 @@ class InnerComponent extends React.Component {
               <Image source={img_logo} resizeMode="contain" style={styles.imageStyle} />
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
-                <Text style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                <Text
+                  onPress={() => navigation.navigate('SignUp')}
+                  style={styles.linkedTextStyle}>Зарегистрироваться</Text>
                 <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
                   Восстановить пароль
                 </Text>
@@ -87,6 +91,7 @@ const mapStateToProps = state => {
   return {
     ...state.authReducer,
     form: state.form.login,
+    isFormValid: isValid('login')(state)
   };
 };
 
