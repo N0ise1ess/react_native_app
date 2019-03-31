@@ -1,6 +1,16 @@
 import axios from 'axios';
 import { endpoints } from './endpoints';
 
+const checkForSuccessful = (response) => {
+  if (response.status === 200) {
+    console.log('test:all OK');
+    return response;
+  }
+
+  console.log('test:not all OK');
+  throw response;
+}
+
 export function loginApi(values) {
   let data = new FormData();
 
@@ -120,7 +130,11 @@ export function timeTableSearchApi(searchedText, token) {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     } : {}})
-    .then(response => response.json())
+    .then(checkForSuccessful)
+    .then(response => {
+      console.log('test:', response.json());
+      return response.json();
+    })
 }
 
 export function timeTableGetApi(search, token) {

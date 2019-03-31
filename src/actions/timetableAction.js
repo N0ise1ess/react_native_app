@@ -20,12 +20,14 @@ export const getSearchedTimetable = (searchedText, token) => async dispatch => {
   await timeTableSearchApi(searchedText, token)
     .then(
       response => {
+        console.log('test2:', response);
         dispatch({
           type: SEARCH_SUCCESS,
           payload: response
         });
       },
       err => {
+        console.log('test3:', err);
         dispatch({
           type: SEARCH_FAILURE,
           payload: err
