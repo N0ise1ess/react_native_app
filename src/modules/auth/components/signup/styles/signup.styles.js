@@ -237,5 +237,8 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   separator : {
     color: "#7f7f7f"
+  },
+  genderText: {
+    color:'white'
   }
 });

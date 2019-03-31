@@ -49,12 +49,12 @@ class innerComponent extends React.Component {
           <TouchableOpacity
               onPress={() => this.setState({currentTab: 0})}
               style={[this.state.currentTab % 3 === 0 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingLeft ]}>
-            <Text style={{color: 'white'}}>Женский</Text>
+            <Text style={styles.genderText}>Женский</Text>
           </TouchableOpacity>
           <TouchableOpacity
               onPress={() => this.setState({currentTab: 1})}
               style={[this.state.currentTab % 3 === 1 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingRight]}>
-            <Text style={{color: 'white'}}>Мужской</Text>
+            <Text style={styles.genderText}>Мужской</Text>
           </TouchableOpacity>
         </View>
     )
