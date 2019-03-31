@@ -17,5 +17,11 @@ export const styles = (fontSize) => StyleSheet.create({
         width: width,
         height,
         minHeight: 450,
+    },
+    elevation0 : {
+        elevation: 0
+    },
+    height0: {
+        height: 0
     }
 });

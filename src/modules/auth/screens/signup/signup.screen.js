@@ -49,8 +49,8 @@ class InnerComponent extends Component {
                         <Tabs initialPage={0}
                               locked={true}
                               page={this.state.currentTab}
-                              renderTabBar={(() => <View style={{height: 0}}/>)}
-                              tabContainerStyle={{ elevation: 0}}
+                              renderTabBar={(() => <View style={styles.height0}/>)}
+                              tabContainerStyle={styles.elevation0}
                               tabBarUnderlineStyle={{ backgroundColor: 'transparent'}}>
                             <Tab heading={<Text/>}>
                                 <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab}/>
