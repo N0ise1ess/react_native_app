@@ -55,10 +55,10 @@ class InnerComponent extends Component {
                             <Tab heading={<Text/>}>
                                 <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab}/>
                             </Tab>
-                            <Tab heading={<TabHeading><Text/></TabHeading>}>
+                            <Tab heading={<Text/>}>
                                 <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab}/>
                             </Tab>
-                            <Tab heading={<TabHeading><Text/></TabHeading>}>
+                            <Tab heading={<Text/>}>
                                 <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab}/>
                             </Tab>
                         </Tabs>
