@@ -239,7 +239,7 @@ class InnerComponent extends Component {
                 </TouchableOpacity>
 
                 {this.currentSuggestionType() !== 'TEACHER' ? (
-                  <Text style={{ color: '#1784d3' }}>
+                  <Text style={styles.groupTitle}>
                     Группа {groupNames[this.state.currentGroupIndex]}
                   </Text>) : null}
 
@@ -250,7 +250,7 @@ class InnerComponent extends Component {
             ) : (
               <View style={[styles.groupSection, { justifyContent: 'center' }]}>
                 {this.currentSuggestionType() !== 'TEACHER' ? (
-                  <Text style={{ color: '#1784d3' }}>Группа {groupNames[0]}</Text>
+                  <Text style={styles.groupTitle}>Группа {groupNames[0]}</Text>
                 ) : null}
               </View>
             )

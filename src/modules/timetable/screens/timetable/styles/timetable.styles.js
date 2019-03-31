@@ -155,6 +155,9 @@ export const styles = (fontSize) => StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%'
   },
+  groupTitle: {
+    color: '#1784d3'
+  },
   iconLeft: {
     width: 25,
     height: 25,
