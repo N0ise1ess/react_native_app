@@ -3,11 +3,9 @@ import { endpoints } from './endpoints';
 
 const checkForSuccessful = (response) => {
   if (response.status === 200) {
-    console.log('test:all OK');
     return response;
   }
 
-  console.log('test:not all OK');
   throw response;
 }
 
@@ -131,10 +129,7 @@ export function timeTableSearchApi(searchedText, token) {
       'Content-Type': 'application/json',
     } : {}})
     .then(checkForSuccessful)
-    .then(response => {
-      console.log('test:', response.json());
-      return response.json();
-    })
+    .then(response => response.json())
 }
 
 export function timeTableGetApi(search, token) {
@@ -150,6 +145,7 @@ export function timeTableGetApi(search, token) {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     } : {}})
+    .then(checkForSuccessful)
     .then(response => response.json())
 }
 
