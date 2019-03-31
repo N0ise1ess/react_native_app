@@ -43,7 +43,7 @@ class InnerComponent extends Component {
             <SignUp/>
           </ScrollView>
         </KeyboardAvoidingView>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        <FooterSection userStatus={userStatus}/>
       </Container>
     )
 

@@ -52,7 +52,7 @@ public class MainApplication extends NavigationApplication {
         new VectorIconsPackage(),
         new SvgPackage(),
         new RNGestureHandlerPackage(),
-        new CampusPackage(),
+        new CampusPackage()
     );
   }
 

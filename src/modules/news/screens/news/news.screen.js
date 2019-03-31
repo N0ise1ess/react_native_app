@@ -120,7 +120,7 @@ class InnerComponent extends React.Component {
             </View>
           }
         </HeaderProvider>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus} />
       </React.Fragment>
     );
   }

@@ -202,11 +202,11 @@ class InnerComponent extends Component {
                         {item.title}
                       </Text>
                     }
-                    navigate={() =>
-                      this.props.navigation.navigate(
-                        item.route ? item.route : '',
-                      )
-                    }
+                    // navigate={() =>
+                    //   this.props.navigation.navigate(
+                    //     item.route ? item.route : '',
+                    //   )
+                    // }
                   />
                 ))}
               </View>
@@ -239,7 +239,7 @@ class InnerComponent extends Component {
             </View>
           )}
         />
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus} />
       </Container>
     );
   }

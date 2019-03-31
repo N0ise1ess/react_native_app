@@ -69,7 +69,7 @@ class InnerComponent extends React.Component {
             </View>
           )}
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus}/>
       </Container>
     );
   }

@@ -14,6 +14,7 @@ import {
  } from '../../../shared/components';
 import { styles } from './styles';
 import {setFontSize} from '../../../../actions/settingsAction';
+import {Navigation} from 'react-native-navigation';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -38,7 +39,11 @@ class InnerComponent extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (this.props.token !== newProps.token) {
-      this.props.navigation.navigate('News');
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: "News",
+        }
+      });
     }
     if (this.props.errorMessage !== newProps.errorMessage) {
       this.showToast(newProps.errorMessage);
@@ -60,7 +65,7 @@ class InnerComponent extends React.Component {
   }
 
   render() {
-    const { authLoading, errorMessage, userStatus, navigation } = this.props;
+    const { authLoading, errorMessage, userStatus } = this.props;
     const {styles} = this.state;
     return (
       <MainView>
@@ -72,15 +77,26 @@ class InnerComponent extends React.Component {
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
                 <Text
-                  onPress={() => navigation.navigate('SignUp')}
+                  onPress={() => Navigation.push(this.props.componentId, {
+                    component: {
+                      name: "SignUp",
+                    }
+                  })}
                   style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-                <Text onPress={() => navigation.navigate('ResetPassword')} style={styles.linkedTextStyle}>
+                <Text 
+                  onPress={() => Navigation.push(this.props.componentId, {
+                    component: {
+                      name: "ResetPassword",
+                    }
+                  })} 
+                  style={styles.linkedTextStyle}
+                >
                   Восстановить пароль
                 </Text>
               </View>
             </View>
           </ScrollView>
-          <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+          <FooterSection userStatus={userStatus} />
         </KeyboardAvoidingView>
       </MainView>
     );

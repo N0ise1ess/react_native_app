@@ -1,3 +1,4 @@
+export * from './auth';
 export { AboutScreen } from './about';
 export { ChatScreen } from './chats';
 export { BuildingDormsScreen, ContactsScreen, DivisionsScreen, BuildingDormsCardScreen } from './contacts';

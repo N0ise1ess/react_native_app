@@ -89,7 +89,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus} />
       </Container>
     );
   }

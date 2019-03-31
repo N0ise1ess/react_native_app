@@ -1,70 +1,40 @@
 /** @format */
+import { Navigation } from 'react-native-navigation';
+import { registerScreens } from './src/navigation/navigation';
+import { CustomIcon } from './src/modules/shared/components/custom-icon';
 
-import { AppRegistry } from 'react-native';
-// import App from './App';
-import { name as appName } from './app.json';
-
-import React from 'react';
-import { Navigation } from "react-native-navigation";
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-import SplashScreen from 'react-native-splash-screen';
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-    android:
-        'Double tap R on your keyboard to reload,\n' +
-        'Shake or press menu button for dev menu',
+Navigation.events().registerAppLaunchedListener(async () => {
+	await Navigation.setDefaultOptions({
+		statusBar: {
+			visible: false,
+			style: 'light',
+		},
+		layout: {
+			backgroundColor: 'white',
+			orientation: ['portrait']
+		},
+		topBar: {
+			visible: true,
+			drawBehind: false,
+			title: {
+				fontSize: 16,
+				fontWeight: 'normal',
+				color: '#fff',
+			},
+			background: {
+				color: '#163D7D',
+			},
+			backButton: {
+				color: "#fff",
+      },
+		},
+	});
+	await registerScreens();
+	Navigation.setRoot({
+		root: {
+			component: {
+				name: "AuthLoading"
+			}
+		}
+	});
 });
-
-type Props = {};
-export default class App extends React.Component<Props> {
-
-    componentDidMount() {
-        SplashScreen.hide()
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>Welcome to React Native!</Text>
-                <Text style={styles.instructions}>To get started, edit App.js</Text>
-                <Text style={styles.instructions}>{instructions}</Text>
-            </View>
-        );
-    }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});
-
-
-Navigation.registerComponent(`App`, () => App);
-
-Navigation.events().registerAppLaunchedListener(() => {
-    Navigation.setRoot({
-        root: {
-            component: {
-                name: "App"
-            }
-        }
-    });
-});
-
-// AppRegistry.registerComponent(appName, () => App);

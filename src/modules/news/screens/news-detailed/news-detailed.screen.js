@@ -31,7 +31,7 @@ class InnerComponent extends Component {
             description={params.description}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection userStatus={userStatus} />
       </Container>
     );
   }
