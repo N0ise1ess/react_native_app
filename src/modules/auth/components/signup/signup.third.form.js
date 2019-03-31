@@ -21,37 +21,37 @@ class innerComponent extends React.Component {
 
   renderInput = ({ input, label, type, meta: { touched, error, warning }, iconName, placeholder, iconRight }) => {
     return (
-      <Item regular error={touched && error} style={this.state.styles.item}>
-        <Icon type="FontAwesome" name={iconName} style={this.state.styles.inputIcon} />
-        <Input
-          {...input}
-          placeholder={placeholder}
-          placeholderTextColor="#747A7B"
-          secureTextEntry={type === 'password'}
-          style={this.state.styles.inputStyle}
-        />
-        {touched && error && <Text style={this.state.styles.errorStyle}>{error}</Text>}
-      {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.sortDownIcon]} /> : null}
-      </Item>
+        <Item regular error={touched && error} style={this.state.styles.item}>
+          <Icon type="FontAwesome" name={iconName} style={this.state.styles.inputIcon} />
+          <Input
+              {...input}
+              placeholder={placeholder}
+              placeholderTextColor="#747A7B"
+              secureTextEntry={type === 'password'}
+              style={this.state.styles.inputStyle}
+          />
+          {touched && error && <Text style={this.state.styles.errorStyle}>{error}</Text>}
+          {iconRight ? <Icon type="FontAwesome" name='sort-down' style={[this.state.styles.sortDownIcon]} /> : null}
+        </Item>
     );
   };
 
-    upperCaseWord = (word, asterisk = false) =>
-        <Label style={this.state.styles.label}>{word.toUpperCase()}
-            {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
-        </Label>;
+  upperCaseWord = (word, asterisk = false) =>
+      <Label style={this.state.styles.label}>{word.toUpperCase()}
+        {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
+      </Label>;
 
   renderCheckbox = ({ input, label, type, meta: { touched, error, warning } }) => {
     return (
-          <ListItem style={this.state.styles.listItem}>
-              <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
-              <View style={this.state.styles.personal}>
-                  <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
-                  <Text style={this.state.styles.policy}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
-                      и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
-              </View>
-          </ListItem>
-      )
+        <ListItem style={this.state.styles.listItem}>
+          <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
+          <View style={this.state.styles.personal}>
+            <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
+            <Text style={this.state.styles.policy}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
+              и Положения об обработке и защите персональных данных в ФБГОУ ВО "СамГТУ"</Text>
+          </View>
+        </ListItem>
+    )
   };
 
   render() {
@@ -59,7 +59,7 @@ class innerComponent extends React.Component {
     const {styles} = this.state;
 
     return (
-        <View style={styles.form}>
+        <View style={styles.formContainer}>
           <Form style={styles.form}>
             {this.upperCaseWord('Выберите имя пользователя (логин)')}
             <Field name="username" placeholder="ivanov.ivan" iconName="user" type="username" iconRight={true} component={this.renderInput} />
@@ -71,10 +71,10 @@ class innerComponent extends React.Component {
             <Field name="checkbox" type="checkbox" component={this.renderCheckbox}/>
           </Form>
           <View style={styles.buttons}>
-            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+            <Button rounded style={styles.backButton} onPress={() => this.props.handleSwitchTab(1)}>
               <Text>Назад</Text>
             </Button>
-            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('Auth')}>
+            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('Login')}>
               <Text>Готово</Text>
             </Button>
           </View>
@@ -83,10 +83,10 @@ class innerComponent extends React.Component {
   }
 };
 
-export const SignUpThirdPart = reduxForm({
-  form: 'signup',
+export const SignUpThirdForm = reduxForm({
+  form: 'signupthirdform',
   destroyOnUnmount: false,
 })(connect(
-  (state) => ({...state.settings}),
-  {}
+    (state) => ({...state.settings}),
+    {}
 )(innerComponent));

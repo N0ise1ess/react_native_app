@@ -49,12 +49,18 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   buttons: {
     flexDirection: 'row',
     flex: 0.2,
-    justifyContent: 'space-around',
+    width: width * 0.7,
+    justifyContent: 'space-between',
     marginTop: 20,
   },
-  form: {
+  formContainer: {
     flex: 1,
-    minWidth: width * 0.7
+    alignItems:'center',
+    backgroundColor: '#CED8DA',
+  },
+  form: {
+    width: width * 0.7,
+    flex: 1
   },
   backButton: {
       backgroundColor: '#227bd4',
