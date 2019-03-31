@@ -48,14 +48,19 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    flex: 1,
+    flex: 0.2,
+    width: width * 0.7,
     justifyContent: 'space-between',
     marginTop: 20,
   },
-  form: {
+  formContainer: {
     flex: 1,
-    minWidth: width * 0.7,
-    marginTop: 20
+    alignItems:'center',
+    backgroundColor: '#CED8DA',
+  },
+  form: {
+    width: width * 0.7,
+    flex: 1
   },
   backButton: {
       backgroundColor: '#227bd4',
@@ -87,5 +92,153 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     paddingTop: 0,
     paddingRight: 0,
     backgroundColor: '#fff'
+  },
+  asterisk: {
+    color:'red',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_8, fontSize)
+  },
+  tabHeadingRight: {
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    borderColor:'white',
+    borderWidth: 0.5,
+    paddingTop: 5,
+    paddingBottom: 5,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  tabHeadingLeft: {
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderColor:'white',
+    borderWidth: 0.5,
+    paddingTop: 5,
+    paddingBottom: 5,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  activeTabStyle: {
+    backgroundColor: '#0e63f4',
+  },
+  inactiveTabStyle: {
+    backgroundColor: '#163D7D',
+  },
+  dateOfBirthInput: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    fontFamily: 'MyriadPro-Regular',
+    padding: 0,
+    height: 34,
+    backgroundColor: '#fff',
+    borderWidth:1,
+    borderColor: "#C4C4C4"
+  },
+  iconLeft: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    alignSelf: 'center',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingRight:10,
+    paddingLeft:10
+  },
+  iconRight: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    alignSelf: 'center',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingLeft:10,
+    paddingRight:10
+  },
+  documentText: {
+    fontSize: height < 750
+        ? getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize)
+        : getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#fff',
+    backgroundColor:'#163D7D'
+  },
+  iconContainerLeft: {
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderColor:'white',
+    borderWidth: 0.5,
+    backgroundColor:'#163D7D' ,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex:1,
+    height: '100%'
+  },
+  iconContainerRight: {
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    borderColor:'white',
+    borderWidth: 0.5,
+    backgroundColor:'#163D7D' ,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex:1,
+    height: '100%'
+  },
+  document: {
+    backgroundColor:'#163D7D',
+    alignItems:'center',
+    justifyContent:'center',
+    flex: 3,
+    height: '95%',
+    paddingLeft:15,
+    paddingRight:15
+  },
+  documentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: height < 600 ? 0.3 : 0.15,
+    marginBottom: 20,
+  },
+  dateOfBirth: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    width : '60%',
+    marginBottom: 20,
+  },
+  genderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  policy: {
+    color:'#0C68FF',
+    paddingLeft: 10,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+    fontFamily: 'MyriadPro-Regular'
+  },
+  inputPhone: {
+    color: 'gray',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    marginTop: 5,
+    marginRight: 5,
+    padding: 5,
+    borderColor: 'transparent',
+    borderWidth: 1,
+    borderRadius: 2,
+    backgroundColor:'#fff',
+    width: '100%',
+    height:34
+  },
+  separator : {
+    color: "#7f7f7f"
+  },
+  genderText: {
+    color:'white'
   }
 });

@@ -14,6 +14,14 @@ export const styles = (fontSize) => StyleSheet.create({
         backgroundColor: '#CED8DA',
         flex: 1,
         alignItems: 'center',
-        marginTop: 10,
+        width: width,
+        height,
+        minHeight: 450,
+    },
+    elevation0 : {
+        elevation: 0
+    },
+    height0: {
+        height: 0
     }
 });
