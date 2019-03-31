@@ -7,6 +7,12 @@ export const styles = (fontSize) => StyleSheet.create({
   container: {
     backgroundColor: '#C8D1D3',
   },
+  advancedSearchWrapper: {
+    width: '100%',
+    flex: 1,
+    backgroundColor: '#fff',
+    marginTop: 10,
+  },
   iconStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
     color: '#163D7D',
@@ -21,6 +27,16 @@ export const styles = (fontSize) => StyleSheet.create({
   searchInput: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+  },
+  picker: {
+    width: '48%',
+  },
+  searchPickers: {
+    justifyContent: 'space-between',
+  },
+  searchWrapperBordered: {
+    borderWidth: .5,
+    borderColor: '#979797',
   },
   searchIcon: {
     color: '#4D6270',
@@ -105,5 +121,24 @@ export const styles = (fontSize) => StyleSheet.create({
     backgroundColor: '#ff003c',
     alignSelf: 'center',
     marginTop: 20,
-	},
+    marginBottom: 20,
+  },
+  operationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '70%',
+    alignSelf: 'center',
+    marginBottom: 5,
+  },
+  operationButton: {
+    width: '32%',
+    height: 35,
+    backgroundColor: '#818181',
+  },
+  operationText: {
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_11, fontSize),
+  },
+  activeOperation: {
+    backgroundColor: '#0f64ee',
+  }
 });
