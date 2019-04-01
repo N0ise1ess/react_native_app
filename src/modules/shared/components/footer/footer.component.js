@@ -12,28 +12,30 @@ const navigate = (screen, componentId, passProps) => Navigation.push(componentId
   }
 });
 
-export const FooterSection = ({ userStatus, componentId, maxHeight, firstName, secondName, lastName }) => {
+export const FooterSection = ({ userStatus, componentId, maxHeight, firstName, secondName, lastName, navPosition }) => {
+  console.log(componentId);
+  
   return (
     <Footer style={[{ backgroundColor: '#163D7D' }, maxHeight ? { maxHeight: maxHeight } : {}]}>
       <FooterTab style={{ backgroundColor: '#163D7D' }}>
-        <TouchableOpacity style={styles.button} onPress={() => componentId !== 'Finance' 
+        <TouchableOpacity style={styles.button} onPress={() => navPosition !== 'Finance' 
           && navigate('Finance', componentId)}>
           {userStatus !== 'guest' && <CustomIcon name={'finance'} style={styles.image} />}
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => componentId !== 'Chat' 
+        <TouchableOpacity style={styles.button} onPress={() => navPosition !== 'Chat' 
           && navigate('Chat', componentId)}>
           {userStatus !== 'guest' && <CustomIcon name={'chat_2'} style={styles.image} />}
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => componentId !== 'TimeTable' 
+        <TouchableOpacity style={styles.button} onPress={() => navPosition !== 'TimeTable' 
           && navigate('TimeTable', componentId)}>
           <CustomIcon name={'schedule'} style={styles.image} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => componentId !== 'Notifications' 
+        <TouchableOpacity style={styles.button} onPress={() => navPosition !== 'Notifications' 
           && navigate('Notifications', componentId)}>
           <CustomIcon name={'notification_2'} style={styles.image} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => componentId !== 'Home' 
-          && navigate('Home', componentId, {firstName, secondName, lastName})}>
+        <TouchableOpacity style={styles.button} onPress={() => navPosition !== 'Home' 
+          && navigate('Home', componentId, {firstName, secondName, lastName, userStatus})}>
           <CustomIcon name={'menu'} style={styles.image} />
         </TouchableOpacity>
       </FooterTab>

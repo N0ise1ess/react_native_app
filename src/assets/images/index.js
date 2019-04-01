@@ -34,7 +34,7 @@ export const img_logout = require('./logout.png');
 export const img_login = require('./login.png');
 export const img_settings = require('./settings.png');
 export const img_about = require('./about.png');
-export const img_account = require('./account.png');
+export const img_account = require('./account_2.png');
 
 //University ContactsScreen
 

@@ -17,12 +17,7 @@ const { height: NAVBAR_HEIGHT, } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Новости университета',
-      headerLeft: <ButtonBack onPress={() => navigation.replace('Home')} />,
-    };
-  };
+  
   constructor(props) {
     super(props);
 

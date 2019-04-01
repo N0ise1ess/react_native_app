@@ -29,7 +29,7 @@ const itemList = [
   },
   {
     title: 'Выход из учетной записи',
-    route: 'Login',
+    route: 'Auth',
     image: 'exit',
     image2: 'entry',
   },
@@ -52,7 +52,7 @@ const itemGuestList = [
   },
   {
     title: 'Выход из учетной записи',
-    route: 'Login',
+    route: 'Auth',
     image: 'exit',
     image2: 'entry',
   },

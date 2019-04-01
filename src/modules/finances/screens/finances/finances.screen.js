@@ -253,7 +253,7 @@ class InnerComponent extends Component {
             </Button>
           </View>
         ) : null}
-        <FooterSection {...this.props}/>
+        <FooterSection navPosition='Finance' {...this.props}/>
       </Container>
     );
   }

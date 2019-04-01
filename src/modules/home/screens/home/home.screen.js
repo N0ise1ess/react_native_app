@@ -165,6 +165,7 @@ class InnerComponent extends Component {
         },
         leftButtons: [
           {
+            visible: false,
             id: 'buttonOne',
             icon: userStatus === 'student' ? img_student : img_account,
           }
@@ -237,7 +238,7 @@ class InnerComponent extends Component {
             </View>
           )}
         />
-        <FooterSection {...this.props} />
+        <FooterSection {...this.props} navPosition='Home'/>
       </Container>
     );
   }

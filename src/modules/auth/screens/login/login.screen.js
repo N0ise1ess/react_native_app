@@ -35,6 +35,7 @@ class InnerComponent extends React.Component {
         title: {
           text: 'Авторизация',
         },
+        leftButtons: [],
       }
     };
   }
@@ -74,6 +75,7 @@ class InnerComponent extends React.Component {
   render() {
     const { authLoading, errorMessage, userStatus } = this.props;
     const { styles } = this.state;
+    
     return (
       <MainView>
         <StatusBar />

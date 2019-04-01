@@ -25,9 +25,15 @@ Navigation.events().registerAppLaunchedListener(async () => {
 				color: '#163D7D',
 			},
 			backButton: {
-				color: "#fff",
-				icon: require('./src/assets/images/back.png')
+				
 			},
+			leftButtons: [
+				{
+					visible: false,
+					id: 'buttonLeft',
+					icon: require('./src/assets/images/back.png'),
+				}
+			],
 			rightButtons: [
 				{
 					id: 'buttonSettings',
@@ -45,10 +51,19 @@ Navigation.events().registerAppLaunchedListener(async () => {
 		}
 	});
 	Navigation.events().registerNavigationButtonPressedListener((event) => {
-		event.buttonId === 'buttonSettings' && Navigation.push(event.componentId, {
-			component: {
-				name: "Settings",
+		switch (event.buttonId) {
+			case 'buttonSettings': {
+				Navigation.push(event.componentId, {
+					component: {
+						name: "Settings",
+					}
+				});
+				break;
 			}
-		})
+			case 'buttonLeft': {
+				Navigation.pop(event.componentId);
+				break;
+			}
+		}
 	})
 });

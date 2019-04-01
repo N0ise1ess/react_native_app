@@ -297,7 +297,7 @@ class InnerComponent extends Component {
               /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
             }
           </Content>
-          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+          <FooterSection navPosition='TimeTable' componentId={this.props.componentId} userStatus={userStatus} />
         </Container>
       )
     }

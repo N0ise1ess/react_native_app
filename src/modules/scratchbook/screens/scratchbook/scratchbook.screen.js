@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import {Navigation} from 'react-native-navigation';
 
 import { Container, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
 

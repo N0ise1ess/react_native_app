@@ -67,7 +67,7 @@ class InnerComponent extends Component {
             />
           )}
         </Content>
-        <FooterSection {...this.props} />
+        <FooterSection {...this.props} navPosition='Notifications' />
       </Container>
     );
   }

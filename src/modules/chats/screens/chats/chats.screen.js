@@ -96,7 +96,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection {...this.props} />
+        <FooterSection navPosition='Chat' {...this.props} />
       </Container>
     );
   }
