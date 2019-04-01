@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { Container, Content, Button, Tab, TabHeading, Tabs, Icon, Input, Text, Picker, List } from 'native-base';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -8,10 +9,16 @@ import { View } from 'react-native';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Поиск книг',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Поиск книг',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -143,7 +150,7 @@ class InnerComponent extends Component {
                       mode="dropdown"
                       selectedValue={item.selectedOption}
                       onValueChange={option => this._handleOptionSelect(index, option)}>
-                      <Picker.Item label="Наичнается с" value="Наичнается с"/>
+                      <Picker.Item label="Начинается с" value="Начинается с"/>
                       <Picker.Item label="Равно" value="Равно"/>
                     </Picker>
                   </View>
@@ -179,7 +186,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { userStatus, navigation, token } = this.props;
+    const { userStatus } = this.props;
     const {styles} = this.state;
     return (<Container style={styles.container}>
       <View style={styles.upperButtons}>
@@ -197,7 +204,7 @@ class InnerComponent extends Component {
         {this._renderSimpleSearch()}
         {this._renderAdvancedSearch()}
       </Tabs>
-      <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+      <FooterSection {...this.props} />
     </Container>);
   }
 }

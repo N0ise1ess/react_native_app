@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
 import { News } from '../../components';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 import * as settingsFonts from '../../../../constants/styles';
@@ -17,12 +17,7 @@ const { height: NAVBAR_HEIGHT, } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Новости университета',
-      headerLeft: <ButtonBack onPress={() => navigation.replace('Home')} />,
-    };
-  };
+  
   constructor(props) {
     super(props);
 
@@ -275,7 +270,7 @@ class InnerComponent extends Component {
           {currentTab === 1 && advertisement && this.renderUpdates(advertisement)}
           {currentTab === 2 && event && this.renderEvents(event)}
         </RN.Animated.ScrollView>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navigate={navigation.navigate} />
       </NB.Container>
     );
   }

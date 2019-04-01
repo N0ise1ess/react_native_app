@@ -4,7 +4,7 @@ import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { img_parent } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../..//shared/components';
+import { FooterSection } from '../../..//shared/components';
 import { styles } from './styles';
 
 const itemList = [
@@ -23,10 +23,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Родители',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Родители',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -62,7 +68,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navigate={navigation.navigate} />
       </Container>
     );
   }

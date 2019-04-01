@@ -2,16 +2,23 @@ import { Container, Content, Icon, List, Text, Spinner } from 'native-base';
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 import * as actions from '../../../../actions/questionnairesAction';
 
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Анкетные опросы',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Анкетные опросы',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -26,14 +33,21 @@ class InnerComponent extends Component {
   }
 
   handleClickQuestionnaire = (id, title) => {
-    this.props.navigation.navigate('QuestionnairesStep', {
-      itemId: id,
-      itemTitle: title, 
-    });
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'QuestionnairesStep',
+        passProps: {
+          dataQuestionnaire: {
+            itemId: id,
+            itemTitle: title, 
+          }
+        }
+      },
+    })
   }
 
   render() {
-    const { userStatus, navigation, listQuestionnaires } = this.props;
+    const { userStatus, listQuestionnaires } = this.props;
     const {styles} = this.state;
     
     return (
@@ -58,7 +72,7 @@ class InnerComponent extends Component {
           /> : <Spinner color="blue"/>}
           
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

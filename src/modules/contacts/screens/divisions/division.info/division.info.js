@@ -1,12 +1,11 @@
 import { styles } from "./styles";
 import { Animated, Linking, NativeModules, Text, View } from "react-native";
 import React, { Component } from "react";
-import Collapsible from "react-native-collapsible";
 import {
   CustomIcon,
   CustomSnackbar
 } from "../../../../shared/components";
-import {Button} from "native-base";
+import { Button } from "native-base";
 
 export class DivisionInfo extends Component {
   constructor(props) {
@@ -20,9 +19,9 @@ export class DivisionInfo extends Component {
     const { item, isOpened } = this.props
     const { directors, building } = item;
     const { styles } = this.state;
-    return (
-      <Collapsible collapsed={!isOpened} style={{ flex: 1 }}>
-        <View style={styles.container}>
+    return <React.Fragment>
+      {
+        isOpened ? <View style={styles.container}>
           <View style={styles.content}>
             <View style={styles.dummy} />
             <View style={[styles.section, styles.borderLine]}>
@@ -33,21 +32,21 @@ export class DivisionInfo extends Component {
             </View>
           </View>
           {directors && directors.map((item, index) => this.renderDirectorSection(item, index, directors.length))}
-        </View>
-      </Collapsible>
-    )
+        </View> : <View />
+      }
+    </React.Fragment>
   }
 
   renderDirectorSection(directorInfo, index, arrayLength) {
-    const { styles } = this.state;    
+    const { styles } = this.state;
     return <View style={styles.content} key={index}>
       <View style={styles.dummy} />
       <View style={[styles.section, index !== arrayLength - 1 ? styles.borderLine : {}]}>
-      {directorInfo && directorInfo.name !== null && <View style={styles.directorSection}>
+        {directorInfo && directorInfo.name !== null && <View style={styles.directorSection}>
           {this.renderLabel(directorInfo.post)}
           <Text style={styles.nameStyle}>{directorInfo.name}</Text>
         </View>}
-        {directorInfo && directorInfo.phoneNumber !== null &&<View style={[styles.dataSection]}>
+        {directorInfo && directorInfo.phoneNumber !== null && <View style={[styles.dataSection]}>
           <View style={{ flexDirection: 'column' }}>
             {this.renderLabel('Телефон')}
             <Text style={styles.dataStyle}>{directorInfo.phoneNumber}</Text>
