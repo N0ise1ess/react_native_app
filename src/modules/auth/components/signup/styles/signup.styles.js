@@ -20,7 +20,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     marginBottom: 5
   },
   item: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   inputStyle: {
     fontSize: height < 750 
@@ -247,5 +247,14 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   genderText: {
     color:'white'
+  },
+  errorStyle: {
+    color: 'red',
+    height:34,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontFamily: 'MyriadPro-Regular',
+    marginTop: 10,
+    marginRight: 10,
+    marginBottom: -5
   }
 });

@@ -8,7 +8,17 @@ import {styles} from './styles';
 import TextInputMask from 'react-native-text-input-mask';
 
 const PHONE_REGEXP = new RegExp("^[0-9]+$");
+const EMAIL_REGEXP = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 const PHONE_MASK = '([000]) [000]-[00]-[00]';
+
+const validate = values => {
+  const error = {};
+  error.email = '';
+  if (!EMAIL_REGEXP.test(values.email)) {
+    error.email = 'Email неправильный'
+  }
+  return error;
+};
 
 class innerComponent extends React.Component {
 
@@ -26,8 +36,12 @@ class innerComponent extends React.Component {
   }
 
   renderInput = ({input, label, type, meta: {touched, error, warning}, iconName, placeholder, iconRight}) => {
+    var hasError = false;
+    if (error !== undefined) {
+      hasError = true;
+    }
     return (
-        <Item regular error={touched && error} style={this.state.styles.item}>
+        <Item regular error={touched && hasError} style={this.state.styles.item}>
           <Input
               {...input}
               placeholder={placeholder}
@@ -35,7 +49,7 @@ class innerComponent extends React.Component {
               secureTextEntry={type === 'password'}
               style={this.state.styles.inputStyle}
           />
-          {touched && error && <Text style={this.state.styles.errorStyle}>{error}</Text>}
+          {touched && hasError && <Text style={this.state.styles.errorStyle}>{error}</Text>}
         </Item>
     );
   };
@@ -80,11 +94,11 @@ class innerComponent extends React.Component {
             <Field name="surname" placeholder="Иванов" iconName="user" type="username" iconRight={true}
                    component={this.renderInput}/>
             {this.upperCaseWord('Имя:', true)}
-            <Field name="name" placeholder="Иван" iconName="lock" type="password" component={this.renderInput}/>
+            <Field name="name" placeholder="Иван" iconName="lock" type="text" component={this.renderInput}/>
             {this.upperCaseWord('Отчество (при наличии):')}
-            <Field name="lastName" placeholder="Иванович" iconName="lock" type="password" component={this.renderInput}/>
+            <Field name="lastName" placeholder="Иванович" iconName="lock" type="text" component={this.renderInput}/>
             {this.upperCaseWord('E-mail:', true)}
-            <Field name="email" placeholder="email@email.com" iconName="lock" type="password"
+            <Field name="email" placeholder="email@email.com" iconName="lock" type="text"
                    component={this.renderInput}/>
             {this.upperCaseWord('Номер телефона:', true)}
             <Field name="phone" placeholder="*********" iconName="lock" type="text" component={this.renderPhone}/>
@@ -104,6 +118,7 @@ class innerComponent extends React.Component {
 
 export const SignUpFirstForm = reduxForm({
   form: 'signupfirstform',
+  validate,
   destroyOnUnmount: false,
 })(connect(
     (state) => ({...state.settings})
