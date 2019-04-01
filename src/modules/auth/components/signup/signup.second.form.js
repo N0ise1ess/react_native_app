@@ -69,22 +69,25 @@ class innerComponent extends React.Component {
         <View style={styles.dateOfBirth}>
           <Input style={styles.dateOfBirthInput}
                  value={this.state.date}
+                 keyboardType='numeric'
                  placeholder="  ДД" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'date')}/>
           <Text style={styles.separator}> / </Text>
           <Input style={styles.dateOfBirthInput}
                  value={this.state.month}
+                 keyboardType='numeric'
                  placeholder="  ММ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'month')}/>
           <Text style={styles.separator}> / </Text>
           <Input style={styles.dateOfBirthInput}
                  value={this.state.year}
+                 keyboardType='numeric'
                  placeholder="  ГГГГ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 4, 'year')}/>
         </View>
     )
   }
 
   _validateDigit = (text, length, field) => {
-    if (DIGITS_REGEXP.test(text) && text.length <= length) {
-      this.setState({[field]: field});
+    if (DIGITS_REGEXP.test(text) && text.length <= length || text.length === 0) {
+      this.setState({[field]: text});
     }
   }
 

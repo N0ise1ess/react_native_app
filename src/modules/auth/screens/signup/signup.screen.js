@@ -74,8 +74,8 @@ class InnerComponent extends Component {
         const {userStatus, navigation, token} = this.props;
         const {styles} = this.state;
         return (
-            <ScrollView contentContainerStyle={styles.container}>
-                <KeyboardAvoidingView keyboardVerticalOffset={100}>
+            <View style={styles.container}>
+                <KeyboardAvoidingView>
                     <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
                         <Tabs initialPage={0}
                               locked={true}
@@ -96,7 +96,7 @@ class InnerComponent extends Component {
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
-            </ScrollView>
+            </View>
         )
 
     }

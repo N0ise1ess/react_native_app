@@ -56,7 +56,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   formContainer: {
     flex: 1,
     alignItems:'center',
-    backgroundColor: '#CED8DA',
+    backgroundColor: '#CED8DA'
   },
   form: {
     width: width * 0.7,
@@ -206,8 +206,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: height < 600 ? 0.3 : 0.15,
-    marginBottom: 20
+    marginBottom: 20,
+    height: height * 0.05,
+    minHeight: height * 0.05,
   },
   dateOfBirth: {
     flexDirection: 'row',

@@ -44,6 +44,7 @@ class innerComponent extends React.Component {
     const {phoneNumber, styles} = this.state
     return (
         <TextInputMask
+            keyboardType='numeric'
             editable={true}
             value={phoneNumber}
             onChangeText={() => {
