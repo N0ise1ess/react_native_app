@@ -6,7 +6,7 @@ import {Navigation} from 'react-native-navigation';
 import { Container, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
 
 import { styles } from './styles';
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { Attendance } from '../attendance';
 import { Result } from '../result';
 import * as actions from '../../../../actions/scratchBookAction';

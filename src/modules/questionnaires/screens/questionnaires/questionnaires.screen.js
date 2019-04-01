@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 import * as actions from '../../../../actions/questionnairesAction';
 
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {

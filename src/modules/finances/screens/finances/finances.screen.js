@@ -20,7 +20,7 @@ import {
   getFinancePayment,
   getFinanceScholarships,
 } from '../../../../actions/financeAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { CustomIcon } from '../../../shared/components/custom-icon';
 import { getSizeFonts } from '../../../shared/functions/styles';

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { img_account, img_students } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { CustomIcon } from '../../../shared/components/custom-icon';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [
@@ -59,7 +59,7 @@ class InnerComponent extends Component {
           renderRow={item => (
             <ListItem
               button
-              onPress={() => Navigation.push(this.props.componentId, {
+              onPress={() => item.route && Navigation.push(this.props.componentId, {
                 component: {
                   name: item.route,
                 }

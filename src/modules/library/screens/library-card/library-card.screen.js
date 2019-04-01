@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../../../actions/libraryAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {

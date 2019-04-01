@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import { connect } from 'react-redux';
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 import * as actions from "../../../../actions/contactsAction";
 
@@ -59,10 +59,12 @@ class InnerComponent extends Component {
                 onPress={() => Navigation.push(this.props.componentId, {
                   component: {
                     name: "BuildingDormsCard",
+                    passProps: {
+                      dataNavigation: {
+                        item,
+                      }
+                    }
                   },
-                  passProps: {
-                    item,
-                  }
                 })}
                 style={styles.listItemStyle}
               >
@@ -90,7 +92,7 @@ class InnerComponent extends Component {
             <NB.Text style={styles.textStyle}>{'Ничего не найдено'}</NB.Text>
           </View>}
         </NB.Content>
-        <FooterSection {...this.props} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </NB.Container>
     );
   }

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 import {CustomIcon} from '../../../shared/components/custom-icon';
 import { getDepartments } from '../../../../actions/contactsAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
 import { News } from '../../components';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 import * as settingsFonts from '../../../../constants/styles';

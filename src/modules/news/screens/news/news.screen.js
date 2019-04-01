@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { HeaderProvider, Tab, Head } from '../../components';
 
 import { styles as myStyles } from './styles';

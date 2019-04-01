@@ -3,7 +3,7 @@ import React from 'react';
 import { KeyboardAvoidingView, View } from 'react-native';
 import { connect } from 'react-redux';
 import * as action from '../../../../actions/authorizationAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { PasswordReset, PasswordResetSuccess } from '../../components';
 import { styles } from './styles';
 

@@ -2,7 +2,7 @@ import { Container, Content } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { News } from '../../components';
 
 class InnerComponent extends Component {

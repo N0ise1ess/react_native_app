@@ -4,7 +4,7 @@ import { Image, KeyboardAvoidingView, Linking, StatusBar, View } from 'react-nat
 import DeviceInfo from 'react-native-device-info';
 import { img_logo_notext } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';

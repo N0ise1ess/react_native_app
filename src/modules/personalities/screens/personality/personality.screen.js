@@ -4,7 +4,7 @@ import {Image, View, Linking, NativeModules} from 'react-native';
 import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {
   CustomIcon,
@@ -33,8 +33,7 @@ class InnerComponent extends Component {
   }
 
   componentDidMount() {
-    // const personId = this.props.navigation.state.params.personId;
-    this.props.findPersonalityById(personId)
+    this.props.findPersonalityById(this.props.dataNavigate.personId)
   }
 
   componentDidUpdate(props) {

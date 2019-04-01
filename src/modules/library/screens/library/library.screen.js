@@ -14,7 +14,7 @@ import {
   img_services,
   img_star,
 } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 import { setRequestLibrary, sendRequestLibrary } from '../../../../actions/libraryAction'
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
@@ -53,7 +53,7 @@ class InnerComponent extends Component {
 			<Button
 				rounded
 				style={[styles.button, styles.button__blue]}
-				onPress={() => this.props.navigation.goBack()}
+				onPress={() => Navigation.pop(this.props.componentId)}
 			>
 				<Text>{'Отмена'}</Text>
 			</Button>
@@ -90,7 +90,7 @@ class InnerComponent extends Component {
 			<Button
 				rounded
 				style={[styles.button, styles.button__red, styles.margin_left__15]}
-				onPress={() => this.props.navigation.goBack()}
+				onPress={() => Navigation.pop(this.props.componentId)}
 			>
 				<Text>{'Готово'}</Text>
 			</Button>

@@ -1,10 +1,10 @@
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 import { FlatList, View, Keyboard } from 'react-native';
 
-import { ButtonBack, CustomIcon, FooterSection } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { getDepartments, setOpenedIdItemDivisions } from "../../../../actions/contactsAction";
 import { DivisionInfo } from "./division.info/division.info";
@@ -19,6 +19,9 @@ class InnerComponent extends Component {
         title: {
           text: passProps.currentTitle || 'Подразделения',
         },
+        backButton: {
+          id: 'back'
+        }
       }
     };
   }
@@ -31,6 +34,7 @@ class InnerComponent extends Component {
       searchedText: '',
       openedIdItem: '',
     };
+    Navigation.events().bindComponent(this);
   }
 
   componentDidMount() {
@@ -44,7 +48,7 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus, navigation, departments, departmentsLoading } = this.props;
-    const { styles,openedIdItem } = this.state;
+    const { styles, openedIdItem } = this.state;
 
     return (
       <Container style={styles.container}>
@@ -71,7 +75,7 @@ class InnerComponent extends Component {
                 <ListItem
                   button
                   onPress={() => item.directors
-                    && this.setState({openedIdItem: item.id === this.state.openedIdItem ? '' : item.id})}
+                    && this.setState({ openedIdItem: item.id === this.state.openedIdItem ? '' : item.id })}
                   style={[styles.listItemStyle, styles.listItemContainer]}
                 >
                   <View style={styles.listItem}>
@@ -82,7 +86,10 @@ class InnerComponent extends Component {
                       && <TouchableOpacity
                         style={{ width: 40, height: 40 }}
                         onPress={() => this.handlePressNextStep(item, index)}>
-                        <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
+                        <Icon type="Ionicons" 
+                          onPress={() => this.handlePressNextStep(item, index)} 
+                          name="ios-arrow-round-forward" style={styles.iconStyle} 
+                        />
                       </TouchableOpacity>}
                   </View>
                   {openedIdItem === item.id && <DivisionInfo item={item}
@@ -106,6 +113,7 @@ class InnerComponent extends Component {
   }
 
   handlePressNextStep(item, index) {
+    
     this.content._root.scrollToPosition(0, 0, false);
     if (item && item.departments && item.departments.length > 0) {
       const { stepStack } = this.state;
@@ -113,12 +121,22 @@ class InnerComponent extends Component {
         index,
         title: item.name,
       });
-      // this.props.navigation.setParams({ currentTitle: item.name });
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          title: {
+            text: item.name,
+          }
+        },
+      });
       this.setState({ stepStack });
     } else {
       this.props.setOpenedIdItemDivisions(this.props.openedIdItem === item.id ? '' : item.id);
     }
   };
+
+  navigationButtonPressed({ buttonId }) {
+    buttonId === 'back' && this.handleBackArrow();
+  }
 
   handleBackArrow = () => {
     this.content._root.scrollToPosition(0, 0, false);
@@ -127,12 +145,16 @@ class InnerComponent extends Component {
     if (stepStack && stepStack.length > 0) {
       stepStack.pop();
       this.setState(stepStack);
-      // this.props.navigation.setParams({
-      //   currentTitle: stepStack[stepStack.length - 1]
-      //     ? stepStack[stepStack.length - 1].title
-      //     : ''
-      // });
-    } else this.props.navigation.goBack();
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          title: {
+            text: stepStack[stepStack.length - 1]
+              ? stepStack[stepStack.length - 1].title
+              : 'Подразделения'
+          }
+        },
+      });
+    } else Navigation.pop(this.props.componentId);
   };
 
   onHandleSubmit = () => {

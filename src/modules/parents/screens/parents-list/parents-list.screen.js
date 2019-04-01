@@ -4,7 +4,7 @@ import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { img_parent } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../..//shared/components';
+import { FooterSection } from '../../..//shared/components';
 import { styles } from './styles';
 
 const itemList = [

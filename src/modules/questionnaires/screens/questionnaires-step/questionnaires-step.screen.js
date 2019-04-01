@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {Navigation} from 'react-native-navigation';
 import { View, TouchableOpacity, ScrollView } from 'react-native';
@@ -8,11 +8,6 @@ import { Container, Text, Button, Card, Spinner } from 'native-base';
 import * as actions from '../../../../actions/questionnairesAction';
 
 class InnerComponent extends React.Component {
-
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: navigation.getParam('itemTitle'),
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
 
   static options({dataQuestionnaire}) {
     return {
@@ -90,11 +85,6 @@ class InnerComponent extends React.Component {
 
   handlePressButton = () => {  
     this.state.isFinished && Navigation.pop(this.props.componentId);
-    this.state.isFinished && Navigation.push(this.props.componentId, {
-      component: {
-        name: 'Questionnaires',
-      }
-    });
     if (this.props.questionnaires && this.state.step === this.props.questionnaires.questions.length) {
       this.props.saveAnswers({
         isFull: true,

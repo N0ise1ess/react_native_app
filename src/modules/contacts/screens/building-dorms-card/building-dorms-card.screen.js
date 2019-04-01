@@ -2,7 +2,7 @@ import React from 'react';
 import * as NB from 'native-base';
 import { View, Linking } from 'react-native';
 import { connect } from 'react-redux';
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends React.Component {
@@ -26,7 +26,7 @@ class InnerComponent extends React.Component {
 
 	render() {
 		const { styles } = this.state;
-		const item = this.props.navigation.getParam('item');
+		const item = this.props.dataNavigation.item;
 
 		return (<NB.Container style={styles.container}>
 			<NB.Grid>
