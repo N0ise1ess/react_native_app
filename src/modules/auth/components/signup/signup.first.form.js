@@ -16,7 +16,7 @@ class innerComponent extends React.Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      phoneNumber: ('123') + ' 456' + '-78' + '-90',
+      phoneNumber: '',
       currentTab: 0
     }
   }
@@ -51,6 +51,8 @@ class innerComponent extends React.Component {
             }}
             style={styles.inputPhone}
             mask={PHONE_MASK}
+            maskDefaultValue={false}
+            placeholder={'(XXX) XXX-XX-XX'}
         />
     )
   }

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import {styles} from './styles';
-import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, View, BackHandler} from 'react-native';
 import {SignUpFirstForm, SignUpSecondForm, SignUpThirdForm} from "../../components/signup";
 import {ButtonBack} from "../../../shared/components/button-back";
 import {FooterSection} from "../../../shared/components/footer";
@@ -15,7 +15,7 @@ class InnerComponent extends Component {
             fontWeight: 'normal',
         },
         title: `Регистрация (${navigation.getParam("step") || '1'} из 3)`,
-        headerLeft: <ButtonBack onPress={() => navigation.navigate('Auth')}/>,
+        headerLeft: <ButtonBack onPress={() => navigation.navigate('Login')}/>,
     });
 
     constructor(props) {
@@ -25,6 +25,7 @@ class InnerComponent extends Component {
             currentTab: 0
         };
         this.handleSwitchTab = this.handleSwitchTab.bind(this)
+        this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
     }
 
     componentDidUpdate(props) {
@@ -33,6 +34,26 @@ class InnerComponent extends Component {
 
     componentDidMount() {
         this.props.navigation.setParams({ step: 1 });
+    }
+
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
+    }
+
+    _handleBackButtonClick() {
+        if (this.state.currentTab === 0) {
+            this.props.navigation.navigate('Login');
+        } else {
+            this.setState(prevState => ({
+                currentTab: prevState.currentTab - 1
+            }));
+            this.props.navigation.setParams({ step : this.state.currentTab + 1})
+        }
+        return true;
     }
 
     onValueChange = key => {
