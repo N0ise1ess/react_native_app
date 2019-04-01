@@ -2,14 +2,20 @@ import { Container, Content } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { News } from '../../components';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Новости университета',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Новости университета',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -18,20 +24,15 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
-    const { params } = this.props.navigation.state;
+    const { userStatus } = this.props;
     return (
       <Container>
         <Content>
           <News
-            newsType={params.newsType}
-            title={params.title}
-            time={params.time}
-            image={params.image}
-            description={params.description}
+            {...this.props.dataNews}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

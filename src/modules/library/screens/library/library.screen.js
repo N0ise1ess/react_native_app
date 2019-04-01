@@ -1,6 +1,7 @@
 import { Container, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { Image, ScrollView, Linking } from 'react-native';
+import {Navigation} from 'react-native-navigation';
 import { connect } from 'react-redux';
 
 import {
@@ -13,7 +14,7 @@ import {
   img_services,
   img_star,
 } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [
@@ -56,10 +57,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Библиотека',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Библиотека',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -74,7 +81,11 @@ class InnerComponent extends Component {
 
   onListItemClick = (item) => {
     if (item.route) {
-      this.props.navigation.navigate(item.route ? item.route : '');
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: item.route,
+        }
+      })
     }
     if (item.link) {
       Linking.openURL(item.link).catch(err => console.error('An error occurred', err));
@@ -82,7 +93,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus } = this.props;
     const { styles } = this.state;
     return (
       <Container style={styles.container}>
@@ -103,7 +114,7 @@ class InnerComponent extends Component {
             )}
           />
         </ScrollView>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props}/>
       </Container>
     );
   }

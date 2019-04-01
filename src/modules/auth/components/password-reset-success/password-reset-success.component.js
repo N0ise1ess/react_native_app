@@ -1,5 +1,6 @@
 import { Button, Text } from 'native-base';
 import React from 'react';
+import { Navigation } from 'react-native-navigation';
 
 import { styles } from './styles';
 
@@ -20,7 +21,7 @@ export class PasswordResetSuccess extends React.Component {
           Пожалуйста, следуйте указанным в{'\n'}
           письме инструкциям.
         </Text>
-        <Button full rounded style={styles.resetButtonStyle} onPress={() => this.props.goBack()}>
+        <Button full rounded style={styles.resetButtonStyle} onPress={() => Navigation.pop(this.props.componentId)}>
           <Text style={styles.resetButtonStyle_text}>Вернуться к авторизации</Text>
         </Button>
       </React.Fragment>

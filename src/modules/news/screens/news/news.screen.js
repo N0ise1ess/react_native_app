@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Dimensions, View, TouchableOpacity, Text, } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -17,12 +18,16 @@ const initialLayout = {
 
 class InnerComponent extends React.Component {
 
-  static navigationOptions = ({ navigation }) => {
+  static options(passProps) {
     return {
-      title: 'Новости университета',
-      headerLeft: <ButtonBack onPress={() => navigation.replace('Home')} />,
+      topBar: {
+        title: {
+          text: 'Новости университета',
+        },
+        leftButtons: [],
+      }
     };
-  };
+  }
 
   constructor(props) {
     super(props);
@@ -83,7 +88,7 @@ class InnerComponent extends React.Component {
   );
   
   renderTab = connect(mapStateToProps,
-    mapDispatchToProps)((props) => <Tab {...props} navigation={this.props.navigation}/>)
+    mapDispatchToProps)((props) => <Tab {...props} componentId={this.props.componentId}/>)
 
   _renderScene = SceneMap({
     news: this.renderTab,
@@ -96,7 +101,7 @@ class InnerComponent extends React.Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus } = this.props;
 
     return (
       <React.Fragment>
@@ -120,7 +125,7 @@ class InnerComponent extends React.Component {
             </View>
           }
         </HeaderProvider>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </React.Fragment>
     );
   }

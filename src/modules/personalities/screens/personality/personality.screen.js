@@ -2,8 +2,9 @@ import {Button, Container, Content, Spinner, Text} from 'native-base';
 import React, { Component } from 'react';
 import {Image, View, Linking, NativeModules} from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import {
   CustomIcon,
@@ -12,10 +13,16 @@ import {
 import {findPersonalityById} from "../../../../actions/personalityAction";
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Персоналии',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Персоналии',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -25,9 +32,8 @@ class InnerComponent extends Component {
     };
   }
 
-  componentWillMount() {
-    const personId = this.props.navigation.state.params.personId;
-    this.props.findPersonalityById(personId)
+  componentDidMount() {
+    this.props.findPersonalityById(this.props.dataNavigate.personId)
   }
 
   componentDidUpdate(props) {
@@ -42,7 +48,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { userStatus, navigation, personality, personalityIsLoading } = this.props;
+    const { userStatus, personality, personalityIsLoading } = this.props;
     
     const { styles } = this.state;
     return (
@@ -96,7 +102,7 @@ class InnerComponent extends Component {
             </View>
           </View> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center', flex: 1}}/>}
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

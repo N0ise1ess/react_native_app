@@ -2,6 +2,7 @@ import { Button, Right } from 'native-base';
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { CustomIcon } from '../modules/shared/components/custom-icon';
+import { TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 
@@ -81,9 +82,9 @@ const AppStack = createStackNavigator(
       headerTitleStyle: styles.headerTitleStyle,
       headerRight: (
         <Right>
-          <Button transparent onPress={() => navigation.navigate('Settings')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
             <CustomIcon name={"settings"} style={styles.rightIconStyle} />
-          </Button>
+          </TouchableOpacity>
         </Right>
       ),
     }),
