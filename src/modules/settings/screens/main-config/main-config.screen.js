@@ -9,10 +9,15 @@ import { styles } from './styles';
 
 class Settings extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Основные',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Основные',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);

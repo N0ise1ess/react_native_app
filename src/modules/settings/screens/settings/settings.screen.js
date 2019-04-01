@@ -1,6 +1,7 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { logout } from '../../../../actions/authorizationAction';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
@@ -58,10 +59,17 @@ const itemGuestList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Настройки',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Настройки',
+        },
+        rightButtons: [],
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -75,16 +83,16 @@ class InnerComponent extends Component {
   }
 
   onAuthHandle = () => {
-    if (this.props.token) {
-      this.props.logout();
-      this.props.navigation.navigate('Login');
-    } else {
-      this.props.navigation.navigate('Login');
-    }
+    this.props.token && this.props.logout();
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'Login',
+      }
+    })
   };
 
   render() {
-    const { userStatus, navigation, token } = this.props;
+    const { userStatus, token } = this.props;
     const {styles} = this.state;
     return (
       <Container style={styles.container}>
@@ -98,7 +106,12 @@ class InnerComponent extends Component {
                 onPress={() =>
                   item.route === 'Login'
                     ? this.onAuthHandle()
-                    : this.props.navigation.navigate(item.route ? item.route : '')
+                    : Navigation.push(this.props.componentId, {
+                      component: {
+                        name: item.route,
+                      }
+                    })
+
                 }
                 style={styles.listItemStyle}
               >
@@ -113,7 +126,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

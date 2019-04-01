@@ -8,15 +8,16 @@ import {FooterSection} from "../../../shared/components/footer/index";
 import {SignUp} from "../../components";
 
 class InnerComponent extends Component {
-  static navigationOptions = ({navigation}) => ({
-    headerTitleStyle: {
-      paddingLeft: 0,
-      marginLeft: 0,
-      fontWeight: 'normal',
-    },
-    title: 'Регистрация',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Регистрация',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -43,7 +44,7 @@ class InnerComponent extends Component {
             <SignUp/>
           </ScrollView>
         </KeyboardAvoidingView>
-        <FooterSection userStatus={userStatus}/>
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
       </Container>
     )
 

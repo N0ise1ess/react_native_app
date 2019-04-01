@@ -7,10 +7,15 @@ import { styles } from './styles';
 
 class InnerComponent extends React.Component {
 
-	static navigationOptions = ({ navigation }) => ({
-		title: 'Корпуса и общежития',
-		headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-	});
+	static options(passProps) {
+		return {
+		  topBar: {
+			title: {
+			  text: 'Корпуса и общежития',
+			},
+		  }
+		};
+	  }
 
 	constructor(props) {
 		super(props);

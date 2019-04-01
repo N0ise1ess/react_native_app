@@ -3,25 +3,32 @@ import { Footer, FooterTab, Button } from 'native-base';
 import {TouchableOpacity} from 'react-native';
 import { styles } from './styles';
 import { CustomIcon } from '..';
+import {Navigation} from 'react-native-navigation';
 
-export const FooterSection = ({ userStatus, navigate, maxHeight }) => {
+const navigate = (screen, componentId) => Navigation.push(componentId, {
+  component: {
+    name: screen,
+  }
+});
+
+export const FooterSection = ({ userStatus, componentId, maxHeight }) => {
   console.log('userStatus', userStatus);
   return (
     <Footer style={[{ backgroundColor: '#163D7D' }, maxHeight ? {maxHeight : maxHeight} : {}]}>
       <FooterTab style={{ backgroundColor: '#163D7D' }}>
-        <TouchableOpacity style={styles.button}  onPress={() => navigate('Finance')}>
+        <TouchableOpacity style={styles.button}  onPress={() => navigate('Finance', componentId)}>
           {userStatus !== 'guest' && <CustomIcon name={'finance'} style={styles.image} />}
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigate('Chat')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigate('Chat', componentId)}>
           {userStatus !== 'guest' && <CustomIcon name={'chat_2'} style={styles.image} />}
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigate('TimeTable')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigate('TimeTable', componentId)}>
           <CustomIcon name={'schedule'} style={styles.image} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigate('Notifications')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigate('Notifications', componentId)}>
           <CustomIcon name={'notification_2'} style={styles.image} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigate('Home')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigate('Home', componentId)}>
           <CustomIcon name={'menu'} style={styles.image} />
         </TouchableOpacity>
       </FooterTab>

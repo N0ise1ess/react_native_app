@@ -1,6 +1,7 @@
 import { Container, Content, Tab, TabHeading, Tabs, List, Text } from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
@@ -65,10 +66,16 @@ const literatureList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Информация о заявках',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Информация о заявках',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -79,7 +86,7 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   _upperCase(word) {
@@ -99,8 +106,8 @@ class InnerComponent extends Component {
                 {item.completed ? (
                   <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
                 ) : (
-                  <View style={styles.markIcon}></View>
-                )}
+                    <View style={styles.markIcon}></View>
+                  )}
                 <Text style={styles.title}>{'\u2116'} {item.id}</Text>
               </View>
               <View>
@@ -154,17 +161,17 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { userStatus, navigation, token } = this.props;
-    const {styles} = this.state;
+    const { userStatus, } = this.props;
+    const { styles } = this.state;
     return (<Container style={styles.container}>
       <Tabs
-        tabContainerStyle={{elevation : 0}}
+        tabContainerStyle={{ elevation: 0 }}
         onChangeTab={({ i }) => this.setState({ currentTab: i })}
         tabBarUnderlineStyle={styles.tabBarUnderline}>
         {this._renderԼiteratureList()}
         {this._renderRequestsList()}
       </Tabs>
-      <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+      <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
     </Container>);
   }
 }

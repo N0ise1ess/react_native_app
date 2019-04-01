@@ -1,16 +1,23 @@
 import { Container, Content, Tab, TabHeading, Tabs, List, Text, Textarea, Button, Spinner } from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 import { setRequestLibrary, sendRequestLibrary } from '../../../../actions/libraryAction'
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		headerTitle: 'Заявка на подбор литературы',
-		headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-	});
+
+	static options(passProps) {
+		return {
+			topBar: {
+				title: {
+					text: 'Заявка на подбор литературы',
+				},
+			}
+		};
+	}
 
 	constructor(props) {
 		super(props);
@@ -26,7 +33,7 @@ class InnerComponent extends Component {
 	}
 
 	_handlerGoNext = () => {
-		this.props.sendRequestLibrary({token: this.props.token, text: this.props.requestLibrary});
+		this.props.sendRequestLibrary({ token: this.props.token, text: this.props.requestLibrary });
 		this.setState({ isComplited: true });
 	}
 
@@ -52,10 +59,10 @@ class InnerComponent extends Component {
 			</Button>
 			<Button
 				rounded
-				style={[styles.button, 
-					styles.button__red, 
-					styles.margin_left__15, 
-					!this.props.requestLibrary && styles.button__disabled,
+				style={[styles.button,
+				styles.button__red,
+				styles.margin_left__15,
+				!this.props.requestLibrary && styles.button__disabled,
 				]}
 				onPress={() => this._handlerGoNext()}
 				disabled={!this.props.requestLibrary}
@@ -65,7 +72,7 @@ class InnerComponent extends Component {
 		</View>
 	</React.Fragment>
 
-	_renderThankYouPage = (styles) => this.props.isLoadingRequestLibrary ? <Spinner  color='#blue'/> : <React.Fragment>
+	_renderThankYouPage = (styles) => this.props.isLoadingRequestLibrary ? <Spinner color='#blue' /> : <React.Fragment>
 		<View style={styles.content}>
 			<View style={styles.text_block}>
 				<Text style={[styles.text, styles.text__blue]}>{'Спасибо!'}</Text>
@@ -91,14 +98,14 @@ class InnerComponent extends Component {
 	</React.Fragment>
 
 	render() {
-		const { userStatus, navigation, token } = this.props;
+		const { userStatus, } = this.props;
 		const { styles, isComplited } = this.state;
 		return (<Container style={styles.container} >
 			<View style={styles.content}>
 				{!isComplited && this._renderGeneralScreen(styles)}
 				{isComplited && this._renderThankYouPage(styles)}
 			</View>
-			<FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+			<FooterSection componentId={this.props.componentId} userStatus={userStatus} />
 		</Container>);
 	}
 }

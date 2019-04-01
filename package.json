@@ -5,8 +5,7 @@
   "scripts": {
     "start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "android": "react-native run-android",
-    "build-android": "cd android && ./gradlew assembleRelease",
-    "release-android": "cd ./android && ./gradlew app:assembleRelease",
+    "build-android": "cd ./android && ./gradlew app:assembleRelease",
     "install-android": "adb install -r build/android/outputs/apk/release/app-release.apk ",
     "test": "jest"
   },

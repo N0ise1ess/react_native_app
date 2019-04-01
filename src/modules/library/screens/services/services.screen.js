@@ -1,6 +1,7 @@
 import { Container, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { CustomIcon } from '../../../shared/components/custom-icon';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -24,10 +25,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Библиотека. Услуги',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Библиотека. Услуги',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -41,7 +48,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus, } = this.props;
     const {styles} = this.state;
     return (
       <Container style={styles.container}>
@@ -52,7 +59,11 @@ class InnerComponent extends Component {
           renderRow={item => (
             <ListItem
               button
-              onPress={() => this.props.navigation.navigate(item.route ? item.route : '')}
+              onPress={() => Navigation.push(this.props.componentId, {
+                component: {
+                  name: item.route,
+                }
+              })}
               style={styles.listItemStyle}
             >
               <CustomIcon name={item.image} style={styles.iconStyle} />
@@ -60,7 +71,7 @@ class InnerComponent extends Component {
             </ListItem>
           )}
         />
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

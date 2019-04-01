@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Spinner, Text } from 'native-base';
 import m from 'moment/min/moment-with-locales';
+import {Navigation} from 'react-native-navigation';
 import { FlatList, News } from '../';
 
 export class Tab extends React.PureComponent {
@@ -21,13 +22,17 @@ export class Tab extends React.PureComponent {
     image={item.image}
     description={item.text}
     isTruncate={true}
-    onPress={() =>
-      this.props.navigation.navigate('NewsDetails', {
-        newsType: 'news',
-        title: item.title,
-        time: item.time,
-        image: item.image,
-        description: item.text,
+    onPress={() => Navigation.push(this.props.componentId, {
+        component: {
+          name: 'NewsDetails',
+        },
+        passProps: {
+          newsType: 'news',
+          title: item.title,
+          time: item.time,
+          image: item.image,
+          description: item.text,
+        }
       })
     }
   />
@@ -39,12 +44,16 @@ export class Tab extends React.PureComponent {
     time={item.time}
     description={item.text}
     isTruncate={true}
-    onPress={() =>
-      this.props.navigation.navigate('NewsDetails', {
-        newsType: 'advertisement',
+    onPress={() => Navigation.push(this.props.componentId, {
+        component: {
+          name: 'NewsDetails',
+        },
+        passProps: {
+          newsType: 'advertisement',
         title: item.title,
         time: item.time,
         description: item.text,
+        }
       })
     }
   />

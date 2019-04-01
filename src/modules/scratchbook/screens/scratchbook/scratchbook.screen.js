@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
+import {Navigation} from 'react-native-navigation';
 
 import { Container, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
 
@@ -11,10 +12,16 @@ import { Result } from '../result';
 import * as actions from '../../../../actions/scratchBookAction';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Зачетная книжка',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Зачетная книжка',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -102,7 +109,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus } = this.props;
     const { currentYearId, currentSemesterId, styles } = this.state;
     return (
     <Container style={styles.container}>
@@ -133,7 +140,7 @@ class InnerComponent extends Component {
           {this._renderAttendance()}
         </Tabs>
         </React.Fragment> }
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
       </Container>
     );
   }

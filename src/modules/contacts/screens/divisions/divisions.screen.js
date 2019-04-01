@@ -1,6 +1,7 @@
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 import { FlatList, View, Keyboard } from 'react-native';
 
 import { ButtonBack, CustomIcon, FooterSection } from '../../../shared/components';
@@ -11,16 +12,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitleStyle: {
-      paddingLeft: 0,
-      marginLeft: 0,
-      fontSize: 16,
-      fontWeight: 'normal',
-    },
-    title: navigation.getParam("currentTitle") || 'Подразделения',
-    headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack", () => { })} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: passProps.currentTitle || 'Подразделения',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -33,7 +34,7 @@ class InnerComponent extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
+    // this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
     this.props.getDepartments('');
   }
 
@@ -92,7 +93,7 @@ class InnerComponent extends Component {
             />
           }
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     )
   }
@@ -112,7 +113,7 @@ class InnerComponent extends Component {
         index,
         title: item.name,
       });
-      this.props.navigation.setParams({ currentTitle: item.name });
+      // this.props.navigation.setParams({ currentTitle: item.name });
       this.setState({ stepStack });
     } else {
       this.props.setOpenedIdItemDivisions(this.props.openedIdItem === item.id ? '' : item.id);
@@ -126,11 +127,11 @@ class InnerComponent extends Component {
     if (stepStack && stepStack.length > 0) {
       stepStack.pop();
       this.setState(stepStack);
-      this.props.navigation.setParams({
-        currentTitle: stepStack[stepStack.length - 1]
-          ? stepStack[stepStack.length - 1].title
-          : ''
-      });
+      // this.props.navigation.setParams({
+      //   currentTitle: stepStack[stepStack.length - 1]
+      //     ? stepStack[stepStack.length - 1].title
+      //     : ''
+      // });
     } else this.props.navigation.goBack();
   };
 

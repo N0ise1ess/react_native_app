@@ -2,6 +2,7 @@ import {Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, 
 import React, {Component} from 'react';
 import {Image, View, Animated, TouchableOpacity, Dimensions, Keyboard, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import {img_teacher} from '../../../../assets/images';
 import {ButtonBack, FooterSection} from '../../../shared/components';
@@ -14,10 +15,16 @@ const { height, width } = Dimensions.get("window")
 const alphabets = 'абвгдежзиклмнопрстуфхцчшщэюя'.split('');
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Персоналии',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Персоналии',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -46,16 +53,16 @@ class InnerComponent extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.addListener("didFocus", () => {
-      if(this.props.personalities.length === 0) { 
-        this.props.findPersonalityByName('', 20, null)
-        this.setState({isLoading: false})
-      }
-    });
+    // this.props.navigation.addListener("didFocus", () => {
+    //   if(this.props.personalities.length === 0) { 
+    //     this.props.findPersonalityByName('', 20, null)
+    //     this.setState({isLoading: false})
+    //   }
+    // });
 
-    this.props.navigation.addListener("didBlur", () => {
-      this.setState({isLoading: true})
-    });
+    // this.props.navigation.addListener("didBlur", () => {
+    //   this.setState({isLoading: true})
+    // });
   }
 
   componentDidUpdate(props) {
@@ -86,7 +93,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const {userStatus, navigation, token, personalities, personalitiesIsLoading, personalitiesIsRefreshing} = this.props;
+    const {userStatus, personalities, personalitiesIsLoading, personalitiesIsRefreshing} = this.props;
     const {styles, personalitiesWidth, sidebarWidth, isLoading} = this.state;
 
     return (
@@ -123,7 +130,15 @@ class InnerComponent extends Component {
                   style={styles.listStyle}
                   dataArray={personalities}
                   renderRow={item => (
-                    <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Personality', {personId : item.personId})}>
+                    <ListItem button style={styles.listItemStyle} onPress={() => Navigation.push(this.props.componentId, {
+                      component: {
+                        name: 'Personality',
+                      },
+                      passProps: {
+                        personId : item.personId
+                      }
+                    })
+                    }>
                       <Image source={img_teacher} style={styles.iconStyle}/>
                       <View style={styles.columnStyle}>
                         <Text style={styles.titleStyle}>{item.name}</Text>
@@ -136,7 +151,7 @@ class InnerComponent extends Component {
             </Content>
           </Animated.View>
         </View>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} maxHeight={40}/>
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} maxHeight={40}/>
       </Container>
     );
   }

@@ -1,6 +1,7 @@
 import {Button, Container, Content, Icon, Picker, List, ListItem, Toast, Text, CardItem, Card} from 'native-base';
 import React, {Component} from 'react';
 import {Dimensions, View} from 'react-native';
+import {Navigation} from 'react-native-navigation';
 import {connect} from 'react-redux';
 import {styles} from "./styles";
 import * as settingsFonts from '../../../../constants/styles';
@@ -14,16 +15,16 @@ import {
 
 
 class InnerComponent extends Component {
-  static navigationOptions = ({navigation}) => ({
-    headerTitleStyle: {
-      paddingLeft: 0,
-      marginLeft: 0,
-      // fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, this.props.fontSize),
-      fontWeight: 'normal',
-    },
-    title: 'Доступ к Wi-Fi',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Доступ к Wi-Fi',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -60,7 +61,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const {userStatus, navigation, token} = this.props;
+    const {userStatus, token} = this.props;
     let wifiPassIsPresent = this.state.wifiPass.length > 0;
     const {styles} = this.state;
     return (
@@ -112,7 +113,7 @@ class InnerComponent extends Component {
               </View> : null}
           </View>
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     )
 

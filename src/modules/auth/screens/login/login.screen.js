@@ -29,9 +29,15 @@ class InnerComponent extends React.Component {
     };
   }
 
-  static navigationOptions = {
-    headerTitle: 'Авторизация',
-  };
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Авторизация',
+        },
+      }
+    };
+  }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
@@ -96,7 +102,7 @@ class InnerComponent extends React.Component {
               </View>
             </View>
           </ScrollView>
-          <FooterSection userStatus={userStatus} />
+          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
         </KeyboardAvoidingView>
       </MainView>
     );

@@ -1,16 +1,17 @@
 /** @format */
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/navigation/navigation';
-import { CustomIcon } from './src/modules/shared/components/custom-icon';
 
 Navigation.events().registerAppLaunchedListener(async () => {
 	await Navigation.setDefaultOptions({
 		statusBar: {
-			visible: false,
+			hideWithTopBar: true,
+			visible: true,
 			style: 'light',
 		},
 		layout: {
-			backgroundColor: 'white',
+			direction: 'ltr',
+			backgroundColor: '#CED8DA',
 			orientation: ['portrait']
 		},
 		topBar: {
@@ -26,7 +27,15 @@ Navigation.events().registerAppLaunchedListener(async () => {
 			},
 			backButton: {
 				color: "#fff",
-      },
+				// visible: true,
+				icon: require('./src/assets/images/back.png')
+			},
+			rightButtons: [
+				{
+					id: 'buttonSettings',
+					icon: require('./src/assets/images/settings.png'),
+				}
+			]
 		},
 	});
 	await registerScreens();
@@ -37,4 +46,11 @@ Navigation.events().registerAppLaunchedListener(async () => {
 			}
 		}
 	});
+	Navigation.events().registerNavigationButtonPressedListener((event) => {
+		event.buttonId === 'buttonSettings' && Navigation.push(event.componentId, {
+			component: {
+				name: "Settings",
+			}
+		})
+	})
 });

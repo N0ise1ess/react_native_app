@@ -1,16 +1,23 @@
 import * as NB from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import {Navigation} from 'react-native-navigation';
 import { connect } from 'react-redux';
 import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 import * as actions from "../../../../actions/contactsAction";
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Корпуса и общежития',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Корпуса и общежития',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -26,7 +33,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, token, buildingsDorms } = this.props;
+    const { userStatus, token, buildingsDorms } = this.props;
     const {styles, searchedText} = this.state;
     const data = buildingsDorms && buildingsDorms.filter(item => item.name.search(searchedText) > -1);
     return (
@@ -49,8 +56,13 @@ class InnerComponent extends Component {
               <NB.ListItem
                 key={item.id}
                 button
-                onPress={() => navigation.navigate('BuildingDormsCard', {
-                  item,
+                onPress={() => Navigation.push(this.props.componentId, {
+                  component: {
+                    name: "BuildingDormsCard",
+                  },
+                  passProps: {
+                    item,
+                  }
                 })}
                 style={styles.listItemStyle}
               >
@@ -78,7 +90,7 @@ class InnerComponent extends Component {
             <NB.Text style={styles.textStyle}>{'Ничего не найдено'}</NB.Text>
           </View>}
         </NB.Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} navigate={navigation.navigate} />
       </NB.Container>
     );
   }

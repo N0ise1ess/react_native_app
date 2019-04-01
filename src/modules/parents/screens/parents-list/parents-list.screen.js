@@ -23,10 +23,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Родители',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Родители',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -62,7 +68,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} navigate={navigation.navigate} />
       </Container>
     );
   }

@@ -3,12 +3,24 @@ import { Container, Content, Icon, List, Spinner, Tab, TabHeading, Tabs, Text } 
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../../../actions/libraryAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Читательский билет',
+        },
+      }
+    };
+  }
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +36,6 @@ class InnerComponent extends Component {
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
-
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Читательский билет',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
 
   componentDidMount() {
     this.props.getLibraryQRCode(this.props.token);
@@ -175,7 +182,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { cardInfo, bookInfo, userStatus, navigation } = this.props;
+    const { cardInfo, bookInfo, userStatus } = this.props;
     const { currentTab, styles } = this.state;
     return (
       <Container style={styles.container}>
@@ -192,7 +199,7 @@ class InnerComponent extends Component {
             {this.renderLibraryBook()}
           </Tabs>
         )}
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

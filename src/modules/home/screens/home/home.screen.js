@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import {
   img_account,
@@ -154,28 +155,47 @@ class InnerComponent extends Component {
     };
   }
 
-  static navigationOptions = ({ firstName, secondName, lastName, userStatus }) => {
+  // static navigationOptions = ({ firstName, secondName, lastName, userStatus }) => {
+  //   return {
+  //     title: lastName || firstName || secondName
+  //       ? `${lastName} ${firstName} ${secondName}`
+  //       : 'Гость',
+  //     headerLeft: (
+  //       <Left>
+  //         {userStatus === 'student' ? (
+  //           <Image
+  //             style={{ resizeMode: 'contain', height: 30 }}
+  //             source={img_student}
+  //           />
+  //         ) : (
+  //           <Image
+  //             style={{ resizeMode: 'contain', height: 30, marginLeft: 10 }}
+  //             source={img_account}
+  //           />
+  //         )}
+  //       </Left>
+  //     ),
+  //   };
+  // };
+
+  static options(passProps) {
+    
+    // const { firstName, secondName, lastName, userStatus } = this.props;
+
     return {
-      title: lastName || firstName || secondName
-        ? `${lastName} ${firstName} ${secondName}`
-        : 'Гость',
-      headerLeft: (
-        <Left>
-          {userStatus === 'student' ? (
-            <Image
-              style={{ resizeMode: 'contain', height: 30 }}
-              source={img_student}
-            />
-          ) : (
-            <Image
-              style={{ resizeMode: 'contain', height: 30, marginLeft: 10 }}
-              source={img_account}
-            />
-          )}
-        </Left>
-      ),
+      topBar: {
+        title: {
+          text: 'Гость',
+        },
+        leftButtons: [
+          {
+            id: 'buttonOne',
+            icon: 'student' === 'student' ? img_student : img_account,
+          }
+        ],
+      }
     };
-  };
+  }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize &&
@@ -183,7 +203,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { navigation, userStatus } = this.props;
+    const { userStatus } = this.props;
     const { styles } = this.state;
     return (
       <Container style={styles.container}>
@@ -202,11 +222,13 @@ class InnerComponent extends Component {
                         {item.title}
                       </Text>
                     }
-                    // navigate={() =>
-                    //   this.props.navigation.navigate(
-                    //     item.route ? item.route : '',
-                    //   )
-                    // }
+                    navigate={() =>
+                      Navigation.push(this.props.componentId, {
+                        component: {
+                          name: item.route,
+                        }
+                      })
+                    }
                   />
                 ))}
               </View>
@@ -239,7 +261,7 @@ class InnerComponent extends Component {
             </View>
           )}
         />
-        <FooterSection userStatus={userStatus} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

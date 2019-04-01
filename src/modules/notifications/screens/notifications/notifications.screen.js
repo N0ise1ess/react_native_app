@@ -1,6 +1,7 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { logout } from '../../../../actions/authorizationAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -16,6 +17,16 @@ const itemList = [
 
 class InnerComponent extends Component {
 
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Уведомления',
+        },
+      }
+    };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,18 +34,13 @@ class InnerComponent extends Component {
     }
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Уведомления',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
-
   onAuthHandle = () => {
-    if (this.props.token) {
-      this.props.logout();
-      this.props.navigation.navigate('Login');
-    } else {
-      this.props.navigation.navigate('Login');
-    }
+    this.props.token && this.props.logout();
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'Login',
+      }
+    })
   };
 
   componentDidUpdate(props) {
@@ -42,7 +48,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
+    const { userStatus } = this.props;
     const {styles} = this.state;
     return (
       <Container style={styles.container}>
@@ -61,7 +67,7 @@ class InnerComponent extends Component {
             />
           )}
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

@@ -2,6 +2,7 @@ import { Button, Container, Text } from 'native-base';
 import React, { Component, Fragment } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { img_parent } from '../../../../assets/images';
 import { Parent } from '../../components';
@@ -9,10 +10,16 @@ import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components'
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Родители',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Родители',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -31,8 +38,8 @@ class InnerComponent extends Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
   render() {
-    const { userStatus, navigation, lastName, firstName, secondName, phoneNumber, role, email, id } = this.props;
-    const { editableMode, text, styles } = this.state;
+    const { userStatus } = this.props;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <View style={styles.content}>
@@ -69,7 +76,7 @@ class InnerComponent extends Component {
             <Text>Сохранить</Text>
           </Button>
         </View>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

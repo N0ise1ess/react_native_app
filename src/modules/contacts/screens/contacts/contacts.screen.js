@@ -2,6 +2,7 @@ import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 import {CustomIcon} from '../../../shared/components/custom-icon';
 import { getDepartments } from '../../../../actions/contactsAction';
 import { ButtonBack, FooterSection } from '../../../shared/components';
@@ -23,10 +24,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Контакты университета',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Контакты университета',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -50,7 +57,11 @@ class InnerComponent extends Component {
             renderRow={item => (
               <ListItem
                 button
-                onPress={() => navigation.navigate(item.route ? item.route : '')}
+                onPress={() => item.route ? Navigation.push(this.props.componentId, {
+                  component: {
+                    name: item.route,
+                  }
+                }) : ''}
                 style={styles.listItemStyle}
               >
                 {/* <Image source={item.image} style={styles.iconStyle} /> */}
@@ -73,7 +84,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

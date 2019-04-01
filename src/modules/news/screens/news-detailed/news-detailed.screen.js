@@ -6,10 +6,16 @@ import { ButtonBack, FooterSection } from '../../../shared/components';
 import { News } from '../../components';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Новости университета',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Новости университета',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -31,7 +37,7 @@ class InnerComponent extends Component {
             description={params.description}
           />
         </Content>
-        <FooterSection userStatus={userStatus} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
       </Container>
     );
   }

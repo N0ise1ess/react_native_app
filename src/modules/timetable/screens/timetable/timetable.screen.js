@@ -17,6 +17,7 @@ import {View, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
+import {Navigation} from 'react-native-navigation';
 import {getSearchedTimetable, getTimetable} from '../../../../actions/timetableAction';
 import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import {styles} from './styles';
@@ -32,10 +33,16 @@ const days = {
 }
 
 class InnerComponent extends Component {
-  static navigationOptions = ({navigation}) => ({
-    headerTitle: 'Расписание',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()}/>
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Расписание',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -212,7 +219,6 @@ class InnerComponent extends Component {
   render() {
     const {
       userStatus,
-      navigation,
       timeTableLoading,
       errorCode,
       error,
@@ -264,7 +270,7 @@ class InnerComponent extends Component {
               )}
             </Content>
           )}
-          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
         </Container>
       );
     } else {
@@ -291,7 +297,7 @@ class InnerComponent extends Component {
               /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
             }
           </Content>
-          <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
+          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
         </Container>
       )
     }

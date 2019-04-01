@@ -8,10 +8,16 @@ import { PasswordReset, PasswordResetSuccess } from '../../components';
 import { styles } from './styles';
 
 class InnerComponent extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Восстановление пароля',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Восстановление пароля',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -69,7 +75,7 @@ class InnerComponent extends React.Component {
             </View>
           )}
         </Content>
-        <FooterSection userStatus={userStatus}/>
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
       </Container>
     );
   }

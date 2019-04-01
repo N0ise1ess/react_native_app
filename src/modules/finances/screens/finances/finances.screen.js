@@ -14,6 +14,7 @@ import {
 import React, { Component } from 'react';
 import { View, Linking, TouchableOpacity, NativeModules } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import {
   getFinancePayment,
@@ -26,10 +27,16 @@ import { getSizeFonts } from '../../../shared/functions/styles';
 import * as settingsFonts from '../../../../constants/styles';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Финансы',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Финансы',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -68,7 +75,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, finances } = this.props;
+    const { userStatus, finances } = this.props;
     const { currentTab, styles, groupNames } = this.state;
     // TODO fix 3350 to 0 after testing
     const debt = finances && finances[0] ? finances[0].debt : 3350;
@@ -246,7 +253,7 @@ class InnerComponent extends Component {
             </Button>
           </View>
         ) : null}
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
       </Container>
     );
   }
