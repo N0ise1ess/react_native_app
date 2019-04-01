@@ -66,13 +66,19 @@ class innerComponent extends React.Component {
     const styles = this.state.styles
     return (
         <View style={styles.dateOfBirth}>
-          <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'date')}/>
           <Text style={styles.separator}> / </Text>
-          <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'month')}/>
           <Text style={styles.separator}> / </Text>
-          <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 4, 'year')}/>
         </View>
     )
+  }
+
+  _validateDigit = (text, length, field) => {
+    if (DIGITS_REGEXP.test(text) && text.length <= length) {
+      this.setState({[field]: field});
+    }
   }
 
   document = () => {
@@ -110,10 +116,10 @@ class innerComponent extends React.Component {
           </Form>
           <View style={styles.buttons}>
             <Button rounded style={styles.backButton} onPress={() => this.props.handleSwitchTab(0)}>
-              <Text>Назад</Text>
+              <Text style={styles.buttonText}>Назад</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(2)}>
-              <Text>Далее...</Text>
+              <Text style={styles.buttonText}>Далее...</Text>
             </Button>
           </View>
         </View>

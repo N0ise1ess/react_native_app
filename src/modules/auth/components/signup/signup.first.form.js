@@ -90,10 +90,10 @@ class innerComponent extends React.Component {
           </Form>
           <View style={styles.buttons}>
             <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
-              <Text>Отмена</Text>
+              <Text style={styles.buttonText}>Отмена</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(1)}>
-              <Text>Далее...</Text>
+              <Text style={styles.buttonText}>Далее...</Text>
             </Button>
           </View>
         </View>

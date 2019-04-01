@@ -63,14 +63,20 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flex: 1
   },
   backButton: {
-      backgroundColor: '#227bd4',
-      paddingLeft: 20,
-      paddingRight: 20
+      backgroundColor: '#227bd4'
+  },
+  buttonText: {
+    paddingLeft: 30,
+    paddingRight: 30
   },
   nextButton: {
       backgroundColor: '#ec4a58',
-      paddingLeft: 20,
-      paddingRight: 20
+  },
+  disabledNextButton: {
+    backgroundColor: '#d23f50',
+    paddingLeft: 20,
+    paddingRight: 20,
+    opacity: 0.7
   },
   listItem: {
     borderBottomWidth: 0,

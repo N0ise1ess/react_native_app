@@ -12,6 +12,7 @@ class innerComponent extends React.Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      policyAgreement: false
     }
   }
 
@@ -42,9 +43,10 @@ class innerComponent extends React.Component {
       </Label>;
 
   renderCheckbox = ({ input, label, type, meta: { touched, error, warning } }) => {
+    const {policyAgreement} = this.state;
     return (
         <ListItem style={this.state.styles.listItem}>
-          <CheckBox {...input} onPress={() => input.onChange(!input.value)} checked={!input.value} color="#163D7D" />
+          <CheckBox {...input} onPress={() => this._handleCheckBox(input)} checked={policyAgreement} color="#163D7D" />
           <View style={this.state.styles.personal}>
             <Text style={this.state.styles.text}>Согласен на обработку своих персональных данных согласно</Text>
             <Text style={this.state.styles.policy}>Политики обработки персональных данных в ФБГОУ ВО "СамГТУ"
@@ -53,6 +55,12 @@ class innerComponent extends React.Component {
         </ListItem>
     )
   };
+
+  _handleCheckBox(input) {
+    const {policyAgreement} = this.state;
+    input.onChange(!policyAgreement)
+    this.setState((prevState) => ({policyAgreement: !prevState.policyAgreement}))
+  }
 
   render() {
     const { handleSubmit, reset, isLoading, fontSize } = this.props;
@@ -72,10 +80,12 @@ class innerComponent extends React.Component {
           </Form>
           <View style={styles.buttons}>
             <Button rounded style={styles.backButton} onPress={() => this.props.handleSwitchTab(1)}>
-              <Text>Назад</Text>
+              <Text style={styles.buttonText}>Назад</Text>
             </Button>
-            <Button style={styles.nextButton} rounded onPress={() => this.props.navigation.navigate('Login')}>
-              <Text>Готово</Text>
+            <Button style={this.state.policyAgreement ? styles.nextButton : styles.disabledNextButton}
+                    disabled={!this.state.policyAgreement}
+                    rounded onPress={() => this.props.navigation.navigate('Login')}>
+              <Text style={styles.buttonText}>Готово</Text>
             </Button>
           </View>
         </View>
