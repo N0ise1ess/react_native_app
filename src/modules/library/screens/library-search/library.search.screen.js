@@ -143,7 +143,7 @@ class InnerComponent extends Component {
                       mode="dropdown"
                       selectedValue={item.selectedOption}
                       onValueChange={option => this._handleOptionSelect(index, option)}>
-                      <Picker.Item label="Наичнается с" value="Наичнается с"/>
+                      <Picker.Item label="Начинается с" value="Начинается с"/>
                       <Picker.Item label="Равно" value="Равно"/>
                     </Picker>
                   </View>
