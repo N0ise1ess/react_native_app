@@ -72,12 +72,10 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     paddingRight: 30
   },
   nextButton: {
-      backgroundColor: '#ec4a58',
+    backgroundColor: '#ec4a58',
   },
   disabledNextButton: {
     backgroundColor: '#d23f50',
-    paddingLeft: 20,
-    paddingRight: 20,
     opacity: 0.7
   },
   listItem: {
@@ -260,7 +258,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     marginBottom: -5
   },
   readyBtnText: {
-    paddingRight: 5,
-    paddingLeft: 5
+    paddingLeft: 20,
+    paddingRight: 20,
   }
 });

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 
 import {styles} from './styles';
 import TextInputMask from 'react-native-text-input-mask';
+import { Navigation } from 'react-native-navigation';
 
 const PHONE_REGEXP = new RegExp("^[0-9]+$");
 const EMAIL_REGEXP = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
@@ -36,10 +37,7 @@ class innerComponent extends React.Component {
   }
 
   renderInput = ({input, label, type, meta: {touched, error, warning}, iconName, placeholder, iconRight}) => {
-    var hasError = false;
-    if (error !== undefined) {
-      hasError = true;
-    }
+    let hasError = error !== undefined
     return (
         <Item regular error={touched && hasError} style={this.state.styles.item}>
           <Input
@@ -104,7 +102,10 @@ class innerComponent extends React.Component {
             <Field name="phone" placeholder="*********" iconName="lock" type="text" component={this.renderPhone}/>
           </Form>
           <View style={styles.buttons}>
-            <Button rounded style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
+            <Button rounded style={styles.backButton} onPress={() => Navigation.push(this.props.componentId, {
+              component: {
+                name: "Auth",
+              }})}>
               <Text style={styles.buttonText}>Отмена</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(1)}>

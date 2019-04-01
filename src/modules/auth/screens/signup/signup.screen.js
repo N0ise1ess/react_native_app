@@ -5,6 +5,10 @@ import { KeyboardAvoidingView, ScrollView, View , BackHandler} from 'react-nativ
 import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from "../../components/signup";
 import { FooterSection } from "../../../shared/components/footer";
 import { Tab, Tabs, Text } from "native-base";
+import {ButtonBack} from "../../../shared/components/button-back";
+
+// text: `Регистрация (${passProps.getParam("step") || '1'} из 3)`,
+//<ButtonBack onPress={passProps.getParam("customGoBack", () => { })}/>
 
 class InnerComponent extends Component {
 
@@ -12,32 +16,30 @@ class InnerComponent extends Component {
     return {
       topBar: {
         title: {
-          text: 'Регистрация',
+          text: `Регистрация`,
         },
-        title: `Регистрация (${navigation.getParam("step") || '1'} из 3)`,
-        headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack", () => { })}/>,
-    });
-      }
-    };
-  }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            styles: styles(props.fontSize),
-            currentTab: 0
-        };
-        this.handleSwitchTab = this.handleSwitchTab.bind(this)
-        this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
+        leftButtons: [],
     }
+  }
+}
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          styles: styles(props.fontSize),
+          currentTab: 0
+      };
+      this.handleSwitchTab = this.handleSwitchTab.bind(this)
+      this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
+  }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
     componentDidMount() {
-      this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
-      this.props.navigation.setParams({ step: 1 });
+      // this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
+      // this.props.navigation.setParams({ step: 1 });
     }
 
   componentWillMount() {
@@ -64,7 +66,7 @@ class InnerComponent extends Component {
             this.setState(prevState => ({
                 currentTab: prevState.currentTab - 1
             }));
-            this.props.navigation.setParams({ step : this.state.currentTab + 1})
+            // this.props.navigation.setParams({ step : this.state.currentTab + 1})
         }
         return true;
     }
@@ -74,38 +76,37 @@ class InnerComponent extends Component {
     }
 
     render() {
-        const {styles } = this.state;
-    return (
-      <View style={styles.container}>
-        <KeyboardAvoidingView>
-          <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-            <Tabs initialPage={0}
-              locked={true}
-              page={this.state.currentTab}
-              renderTabBar={(() => <View style={styles.height0} />)}
-              tabContainerStyle={styles.elevation0}
-              tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
-              <Tab heading={<Text />}>
-                <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-              </Tab>
-              <Tab heading={<Text />}>
-                <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-              </Tab>
-              <Tab heading={<Text />}>
-                <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-              </Tab>
-            </Tabs>
-          </ScrollView>
-        </KeyboardAvoidingView>
-        <FooterSection {...this.props} />
-      </View>
-    )
-
+      const {styles } = this.state;
+      return (
+        <View style={styles.container}>
+          <KeyboardAvoidingView>
+            <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
+              <Tabs initialPage={0}
+                locked={true}
+                page={this.state.currentTab}
+                renderTabBar={(() => <View style={styles.height0} />)}
+                tabContainerStyle={styles.elevation0}
+                tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
+                <Tab heading={<Text />}>
+                  <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+                </Tab>
+                <Tab heading={<Text />}>
+                  <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+                </Tab>
+                <Tab heading={<Text />}>
+                  <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+                </Tab>
+              </Tabs>
+            </ScrollView>
+          </KeyboardAvoidingView>
+          <FooterSection {...this.props} />
+        </View>
+      )
   }
 
   handleSwitchTab(value) {
     this.setState({ currentTab: value })
-    this.props.navigation.setParams({ step: value + 1 })
+    // this.props.navigation.setParams({ step: value + 1 })
   }
 }
 

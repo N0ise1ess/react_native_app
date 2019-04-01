@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 
 import { styles } from './styles';
+import {Navigation} from "react-native-navigation";
 
 class innerComponent extends React.Component {
 
@@ -84,7 +85,8 @@ class innerComponent extends React.Component {
             </Button>
             <Button style={this.state.policyAgreement ? styles.nextButton : styles.disabledNextButton}
                     disabled={!this.state.policyAgreement}
-                    rounded onPress={() => this.props.navigation.navigate('Login')}>
+                    rounded
+                    onPress={() => Navigation.push(this.props.componentId, {component: {name: "Auth",}})}>
               <Text style={styles.readyBtnText}>Готово</Text>
             </Button>
           </View>
