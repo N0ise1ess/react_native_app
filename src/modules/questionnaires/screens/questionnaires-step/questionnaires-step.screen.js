@@ -1,17 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
+import {Navigation} from 'react-native-navigation';
 import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Container, Text, Button, Card, Spinner } from 'native-base';
 import * as actions from '../../../../actions/questionnairesAction';
 
 class InnerComponent extends React.Component {
 
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: navigation.getParam('itemTitle'),
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  static options({dataQuestionnaire}) {
+    return {
+      topBar: {
+        title: {
+          text: dataQuestionnaire.itemTitle,
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -21,7 +27,7 @@ class InnerComponent extends React.Component {
       step: 1,
       selectedAnswers: [],
     };
-    props.getQuestionnaires(props.navigation.getParam('itemId'), props.token)
+    props.getQuestionnaires(props.dataQuestionnaire.itemId, props.token)
   }
 
   componentDidUpdate(props) {
@@ -78,11 +84,11 @@ class InnerComponent extends React.Component {
   )
 
   handlePressButton = () => {  
-    this.state.isFinished && this.props.navigation.navigate('Questionnaires');
+    this.state.isFinished && Navigation.pop(this.props.componentId);
     if (this.props.questionnaires && this.state.step === this.props.questionnaires.questions.length) {
       this.props.saveAnswers({
         isFull: true,
-        questionnaireId: this.props.navigation.getParam('itemId'),
+        // questionnaireId: this.props.navigation.getParam('itemId'),
         answerLinks: this.state.selectedAnswers.map((id) => ({"answerId": id})),
       }, this.props.token)
       this.setState({ isFinished: true })
@@ -94,7 +100,7 @@ class InnerComponent extends React.Component {
   render() {
 
     const { styles, isFinished, selectedAnswers, step } = this.state;
-    const { userStatus, navigation, questionnaires } = this.props;
+    const { userStatus, questionnaires } = this.props;
     const isDisabledButton = !selectedAnswers[step - 1];
 
     return (
@@ -117,7 +123,7 @@ class InnerComponent extends React.Component {
           </View>
         </React.Fragment>
           : <View style={styles.full_container}><Spinner color="blue"/></View>}
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props}/>
       </Container>
     )
   }

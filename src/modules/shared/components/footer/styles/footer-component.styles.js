@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 22,
   },
+  button: {
+    padding: 15,
+  },
 });

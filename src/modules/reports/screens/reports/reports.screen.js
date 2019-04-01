@@ -2,8 +2,9 @@ import { Container, Content, Tab, TabHeading, Tabs, List, Text } from 'native-ba
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
-import { ButtonBack, FooterSection, CustomIcon } from '../../../shared/components';
+import { FooterSection, CustomIcon } from '../../../shared/components';
 import { styles } from './styles';
 
 const statementsList = [
@@ -63,10 +64,16 @@ const reportsList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Ведомости и отчеты',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Ведомости и отчеты',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -152,7 +159,7 @@ class InnerComponent extends Component {
   };
 
   render() {
-    const { userStatus, navigation, token } = this.props;
+    const { userStatus,} = this.props;
     const {styles} = this.state;
     return (<Container style={styles.container}>
       <Tabs
@@ -162,7 +169,7 @@ class InnerComponent extends Component {
         {this._renderStatements()}
         {this._renderReports()}
       </Tabs>
-      <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+      <FooterSection {...this.props}/>
     </Container>);
   }
 }

@@ -2,9 +2,10 @@ import { Button, Container, Content, Icon, Input, Item, List, ListItem, Text } f
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { img_account, img_students } from '../../../../assets/images';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
 const itemList = [
@@ -41,10 +42,16 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Чат',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Чат',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -79,7 +86,7 @@ class InnerComponent extends Component {
             style={styles.listStyle}
             dataArray={itemList}
             renderRow={item => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('')}>
+              <ListItem button style={styles.listItemStyle}>
                 <Image source={item.image} style={styles.imageStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
@@ -89,7 +96,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection navPosition='Chat' {...this.props} />
       </Container>
     );
   }

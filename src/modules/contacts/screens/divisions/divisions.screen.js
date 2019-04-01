@@ -1,9 +1,10 @@
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 import { FlatList, View, Keyboard } from 'react-native';
 
-import { ButtonBack, CustomIcon, FooterSection } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { getDepartments, setOpenedIdItemDivisions } from "../../../../actions/contactsAction";
 import { DivisionInfo } from "./division.info/division.info";
@@ -11,16 +12,19 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitleStyle: {
-      paddingLeft: 0,
-      marginLeft: 0,
-      fontSize: 16,
-      fontWeight: 'normal',
-    },
-    title: navigation.getParam("currentTitle") || 'Подразделения',
-    headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack", () => { })} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: passProps.currentTitle || 'Подразделения',
+        },
+        backButton: {
+          id: 'back'
+        }
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -28,11 +32,14 @@ class InnerComponent extends Component {
       styles: styles(props.fontSize),
       stepStack: [],
       searchedText: '',
+      openedIdItem: '',
     };
+    Navigation.events().bindComponent(this);
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
+    // this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
+    this.props.getDepartments('');
   }
 
   componentDidUpdate(props) {
@@ -40,8 +47,8 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation, departments, openedIdItem, departmentsLoading } = this.props;
-    const { styles } = this.state;
+    const { userStatus, navigation, departments, departmentsLoading } = this.props;
+    const { styles, openedIdItem } = this.state;
 
     return (
       <Container style={styles.container}>
@@ -62,49 +69,51 @@ class InnerComponent extends Component {
             ? <Spinner color='blue' style={{ justifyContent: 'center', alignItems: 'center' }} />
             : <FlatList
               data={this.getDataList(departments)}
-              extraData={{openedIdItem: this.props.openedIdItem}}
+              extraData={{ openedIdItem: this.props.openedIdItem }}
               keyExtractor={(item, index) => item.id.toString()}
-              renderItem={(({item, index}) => (
+              renderItem={({ item, index }) => (
                 <ListItem
                   button
                   onPress={() => item.directors
-                    && this.props.setOpenedIdItemDivisions(openedIdItem === item.id ? '' : item.id)}
-                  style={styles.listItemStyle}
+                    && this.setState({ openedIdItem: item.id === this.state.openedIdItem ? '' : item.id })}
+                  style={[styles.listItemStyle, styles.listItemContainer]}
                 >
-                  <View style={styles.listItemContainer}>
-                    <View style={styles.listItem}>
-                      <CustomIcon style={styles.iconUniversity} name="university" />
-                      <Text style={styles.titleStyle}>{item.name}</Text>
-                      {item.departments
-                        && item.departments.length > 0
-                        && <TouchableOpacity
-                            style={{width: 40, height: 40}}
-                            onPress={() => this.handlePressNextStep(item, index)}>
-                          <Icon type="Ionicons" name="ios-arrow-round-forward" style={styles.iconStyle} />
-                        </TouchableOpacity>}
-                    </View>
-                    {openedIdItem===item.id && <DivisionInfo item={item}
-                      isOpened={openedIdItem===item.id}
-                      fontSize={this.props.fontSize} />}
+                  <View style={styles.listItem}>
+                    <CustomIcon style={styles.iconUniversity} name="university" />
+                    <Text style={styles.titleStyle}>{item.name}</Text>
+                    {item.departments
+                      && item.departments.length > 0
+                      && <TouchableOpacity
+                        style={{ width: 40, height: 40 }}
+                        onPress={() => this.handlePressNextStep(item, index)}>
+                        <Icon type="Ionicons" 
+                          onPress={() => this.handlePressNextStep(item, index)} 
+                          name="ios-arrow-round-forward" style={styles.iconStyle} 
+                        />
+                      </TouchableOpacity>}
                   </View>
+                  {openedIdItem === item.id && <DivisionInfo item={item}
+                    isOpened={openedIdItem === item.id}
+                    fontSize={this.props.fontSize} />}
                 </ListItem>
-              ))}
-            />            
+              )}
+            />
           }
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     )
   }
 
   getDataList = (data) => {
-    if(data) this.state.stepStack.forEach((item) => {
+    if (data) this.state.stepStack.forEach((item) => {
       data = data[item.index].departments;
-    });    
+    });
     return data;
   }
 
   handlePressNextStep(item, index) {
+    
     this.content._root.scrollToPosition(0, 0, false);
     if (item && item.departments && item.departments.length > 0) {
       const { stepStack } = this.state;
@@ -112,12 +121,22 @@ class InnerComponent extends Component {
         index,
         title: item.name,
       });
-      this.props.navigation.setParams({ currentTitle: item.name });
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          title: {
+            text: item.name,
+          }
+        },
+      });
       this.setState({ stepStack });
     } else {
       this.props.setOpenedIdItemDivisions(this.props.openedIdItem === item.id ? '' : item.id);
     }
   };
+
+  navigationButtonPressed({ buttonId }) {
+    buttonId === 'back' && this.handleBackArrow();
+  }
 
   handleBackArrow = () => {
     this.content._root.scrollToPosition(0, 0, false);
@@ -126,12 +145,16 @@ class InnerComponent extends Component {
     if (stepStack && stepStack.length > 0) {
       stepStack.pop();
       this.setState(stepStack);
-      this.props.navigation.setParams({
-        currentTitle: stepStack[stepStack.length - 1]
-          ? stepStack[stepStack.length - 1].title
-          : ''
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          title: {
+            text: stepStack[stepStack.length - 1]
+              ? stepStack[stepStack.length - 1].title
+              : 'Подразделения'
+          }
+        },
       });
-    } else this.props.navigation.goBack();
+    } else Navigation.pop(this.props.componentId);
   };
 
   onHandleSubmit = () => {

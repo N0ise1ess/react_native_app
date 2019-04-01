@@ -3,15 +3,21 @@ import React from 'react';
 import { KeyboardAvoidingView, View } from 'react-native';
 import { connect } from 'react-redux';
 import * as action from '../../../../actions/authorizationAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { PasswordReset, PasswordResetSuccess } from '../../components';
 import { styles } from './styles';
 
 class InnerComponent extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Восстановление пароля',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Восстановление пароля',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -69,7 +75,7 @@ class InnerComponent extends React.Component {
             </View>
           )}
         </Content>
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props}/>
       </Container>
     );
   }

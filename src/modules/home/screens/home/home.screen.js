@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 
 import {
   img_account,
@@ -154,39 +155,23 @@ class InnerComponent extends Component {
     };
   }
 
-  static navigationOptions = (props) => {
+  static options({ firstName, secondName, lastName, userStatus }) {
     return {
-      title:
-        props.navigation.state.params &&
-        props.navigation.state.params.userFullName,
-      headerLeft: (
-        <Left>
-          {props.navigation.state.params &&
-          props.navigation.state.params.userStatus === 'student' ? (
-            <Image
-              style={{ resizeMode: 'contain', height: 30 }}
-              source={img_student}
-            />
-          ) : (
-            <Image
-              style={{ resizeMode: 'contain', height: 30, marginLeft: 10 }}
-              source={img_account}
-            />
-          )}
-        </Left>
-      ),
+      topBar: {
+        title: {
+          text: lastName || firstName || secondName
+            ? `${lastName} ${firstName} ${secondName}`
+            : 'Гость',
+        },
+        leftButtons: [
+          {
+            visible: false,
+            id: 'buttonOne',
+            icon: userStatus === 'student' ? img_student : img_account,
+          }
+        ],
+      }
     };
-  };
-
-  componentWillMount() {
-    const { firstName, secondName, lastName, userStatus } = this.props;
-    this.props.navigation.setParams({
-      userFullName:
-        lastName || firstName || secondName
-          ? `${lastName} ${firstName} ${secondName}`
-          : 'Гость',
-      userStatus: userStatus,
-    });
   }
 
   componentDidUpdate(props) {
@@ -195,7 +180,7 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { navigation, userStatus } = this.props;
+    const { userStatus } = this.props;
     const { styles } = this.state;
     return (
       <Container style={styles.container}>
@@ -215,9 +200,11 @@ class InnerComponent extends Component {
                       </Text>
                     }
                     navigate={() =>
-                      this.props.navigation.navigate(
-                        item.route ? item.route : '',
-                      )
+                      Navigation.push(this.props.componentId, {
+                        component: {
+                          name: item.route,
+                        }
+                      })
                     }
                   />
                 ))}
@@ -229,29 +216,29 @@ class InnerComponent extends Component {
               {userStatus === 'guest' ? (
                 <Text />
               ) : (
-                cardList.map((image, index) => (
-                  <View
-                    onPress={() => move(index)}
-                    key={index}
-                    style={[
-                      {
-                        backgroundColor: '#163D7D',
-                        bottom: 10,
-                        width: 10,
-                        height: 10,
-                        borderRadius: 20,
-                        marginLeft: 5,
-                        marginRight: 5,
-                      },
-                      position === index && styles.buttonSelected,
-                    ]}
-                  />
-                ))
-              )}
+                  cardList.map((image, index) => (
+                    <View
+                      onPress={() => move(index)}
+                      key={index}
+                      style={[
+                        {
+                          backgroundColor: '#163D7D',
+                          bottom: 10,
+                          width: 10,
+                          height: 10,
+                          borderRadius: 20,
+                          marginLeft: 5,
+                          marginRight: 5,
+                        },
+                        position === index && styles.buttonSelected,
+                      ]}
+                    />
+                  ))
+                )}
             </View>
           )}
         />
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navPosition='Home'/>
       </Container>
     );
   }

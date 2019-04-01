@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Spinner, Text } from 'native-base';
 import m from 'moment/min/moment-with-locales';
+import { Navigation } from 'react-native-navigation';
 import { FlatList, News } from '../';
 
 export class Tab extends React.PureComponent {
@@ -21,14 +22,20 @@ export class Tab extends React.PureComponent {
     image={item.image}
     description={item.text}
     isTruncate={true}
-    onPress={() =>
-      this.props.navigation.navigate('NewsDetails', {
-        newsType: 'news',
-        title: item.title,
-        time: item.time,
-        image: item.image,
-        description: item.text,
-      })
+    onPress={() => Navigation.push(this.props.componentId, {
+      component: {
+        name: 'NewsDetails',
+        passProps: {
+          dataNews: {
+            newsType: 'news',
+            title: item.title,
+            time: item.time,
+            image: item.image,
+            description: item.text,
+          }
+        }
+      },
+    })
     }
   />
 
@@ -39,19 +46,25 @@ export class Tab extends React.PureComponent {
     time={item.time}
     description={item.text}
     isTruncate={true}
-    onPress={() =>
-      this.props.navigation.navigate('NewsDetails', {
-        newsType: 'advertisement',
-        title: item.title,
-        time: item.time,
-        description: item.text,
-      })
+    onPress={() => Navigation.push(this.props.componentId, {
+      component: {
+        name: 'NewsDetails',
+        passProps: {
+          dataNews: {
+            newsType: 'advertisement',
+            title: item.title,
+            time: item.time,
+            description: item.text,
+          }
+        }
+      },
+    })
     }
   />
 
   renderEvents = item => <View>
     <Text
-      style={{textAlign: 'center', color: '#053c81'}}
+      style={{ textAlign: 'center', color: '#053c81' }}
     >
       {m(item.time).format('LL')}
     </Text>
@@ -66,6 +79,7 @@ export class Tab extends React.PureComponent {
   </View>
 
   render() {
+
     return (<React.Fragment>
       <FlatList
         data={this.props[this.props.route.key]}
@@ -76,7 +90,7 @@ export class Tab extends React.PureComponent {
           && this.props.getNews(this.props.newsPage + 1)}
         tabRoute={this.props.route.key}
         renderItem={({ item, index }) => (<React.Fragment>
-          {index === 0 && <View style={{height: 170}}></View>}
+          {index === 0 && <View style={{ height: 170 }}></View>}
           {this.props.route.key === 'news' && this.renderNews(item)}
           {this.props.route.key === 'advertisement' && this.renderUpdates(item)}
           {this.props.route.key === 'event' && this.renderEvents(item)}
