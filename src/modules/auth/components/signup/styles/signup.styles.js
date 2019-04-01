@@ -52,11 +52,13 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     width: width * 0.7,
     justifyContent: 'space-between',
     marginTop: 20,
+    alignSelf:'center'
   },
   formContainer: {
     flex: 1,
     alignItems:'center',
-    backgroundColor: '#CED8DA'
+    backgroundColor: '#CED8DA',
+    justifyContent:'space-between'
   },
   form: {
     width: width * 0.7,
@@ -256,5 +258,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     marginTop: 10,
     marginRight: 10,
     marginBottom: -5
+  },
+  readyBtnText: {
+    paddingRight: 5,
+    paddingLeft: 5
   }
 });

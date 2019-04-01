@@ -85,7 +85,7 @@ class innerComponent extends React.Component {
             <Button style={this.state.policyAgreement ? styles.nextButton : styles.disabledNextButton}
                     disabled={!this.state.policyAgreement}
                     rounded onPress={() => this.props.navigation.navigate('Login')}>
-              <Text style={styles.buttonText}>Готово</Text>
+              <Text style={styles.readyBtnText}>Готово</Text>
             </Button>
           </View>
         </View>
