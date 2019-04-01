@@ -20,7 +20,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     marginBottom: 5
   },
   item: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   inputStyle: {
     fontSize: height < 750 
@@ -52,25 +52,31 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     width: width * 0.7,
     justifyContent: 'space-between',
     marginTop: 20,
+    alignSelf:'center'
   },
   formContainer: {
     flex: 1,
     alignItems:'center',
     backgroundColor: '#CED8DA',
+    justifyContent:'space-between'
   },
   form: {
     width: width * 0.7,
     flex: 1
   },
   backButton: {
-      backgroundColor: '#227bd4',
-      paddingLeft: 20,
-      paddingRight: 20
+      backgroundColor: '#227bd4'
+  },
+  buttonText: {
+    paddingLeft: 30,
+    paddingRight: 30
   },
   nextButton: {
-      backgroundColor: '#ec4a58',
-      paddingLeft: 20,
-      paddingRight: 20
+    backgroundColor: '#ec4a58',
+  },
+  disabledNextButton: {
+    backgroundColor: '#d23f50',
+    opacity: 0.7
   },
   listItem: {
     borderBottomWidth: 0,
@@ -200,8 +206,9 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: height < 600 ? 0.3 : 0.15,
     marginBottom: 20,
+    height: height * 0.05,
+    minHeight: height * 0.05,
   },
   dateOfBirth: {
     flexDirection: 'row',
@@ -240,5 +247,18 @@ export const styles = (fontSize = 0) => StyleSheet.create({
   },
   genderText: {
     color:'white'
+  },
+  errorStyle: {
+    color: 'red',
+    height:34,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
+    fontFamily: 'MyriadPro-Regular',
+    marginTop: 10,
+    marginRight: 10,
+    marginBottom: -5
+  },
+  readyBtnText: {
+    paddingLeft: 20,
+    paddingRight: 20,
   }
 });
