@@ -11,6 +11,8 @@ import { img_logo_white } from '../../../../assets/images';
 import { CustomSnackbar } from '../../../shared/components';
 import { styles } from './styles';
 
+import {goToAuth} from '../../../../navigation/navigation'
+
 class InnerComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -21,9 +23,7 @@ class InnerComponent extends React.Component {
 
   componentWillReceiveProps(props) {
     if (props.isLoaded) {
-      this.props.navigation.navigate(
-        this.props.token !== null ? 'App' : 'Auth',
-      );
+      goToAuth();
     }
   }
 

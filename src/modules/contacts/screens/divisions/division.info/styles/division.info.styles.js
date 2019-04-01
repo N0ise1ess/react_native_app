@@ -51,6 +51,7 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   imageStyle: {
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_17, fontSize),
+    marginTop: 2,
     color: 'white',
     alignContent: 'center',
     alignSelf: 'center',

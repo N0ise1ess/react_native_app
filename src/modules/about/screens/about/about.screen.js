@@ -4,9 +4,10 @@ import { Image, KeyboardAvoidingView, Linking, StatusBar, View } from 'react-nat
 import DeviceInfo from 'react-native-device-info';
 import { img_logo_notext } from '../../../../assets/images';
 import { MainView } from '../../../../components/Views/MainView';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 import * as actions from '../../../../actions/settingsAction';
 
 class About extends Component {
@@ -22,13 +23,18 @@ class About extends Component {
     this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'О приложении',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
-  });
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'О приложении',
+        },
+      }
+    };
+  }
 
   render() {
-    const { authLoading, errorMessage, userStatus, navigation } = this.props;
+    const { userStatus } = this.props;
     const {styles} = this.state;
     return (
       <MainView>
@@ -50,7 +56,7 @@ class About extends Component {
               </Text>
             </View>
           </View>
-          <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+          <FooterSection {...this.props} />
         </KeyboardAvoidingView>
       </MainView>
     );

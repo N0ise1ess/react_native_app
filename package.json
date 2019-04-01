@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "android": "react-native run-android",
-    "build-android": "cd android && ./gradlew assembleRelease",
+    "start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
+    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
+    "build-android": "cd ./android && ./gradlew app:assembleRelease",
     "install-android": "adb install -r build/android/outputs/apk/release/app-release.apk ",
     "test": "jest"
   },
@@ -23,6 +23,7 @@
     "react-native-firebase": "^5.2.3",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-image-slider": "^2.0.3",
+    "react-native-navigation": "^2.16.0",
     "react-native-progress": "^3.5.0",
     "react-native-render-html": "^3.10.0",
     "react-native-slider": "^0.11.0",

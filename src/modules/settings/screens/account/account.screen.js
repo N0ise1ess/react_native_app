@@ -4,6 +4,7 @@ import React, { Component, Fragment } from 'react';
 import { View } from 'react-native';
 import TextInputMask from 'react-native-text-input-mask';
 import { connect } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 
 import { editPhoneNumber } from '../../../../actions/authorizationAction';
 import {
@@ -17,10 +18,16 @@ const PHONE_REGEXP = new RegExp(/^\(\d{3}\)\ \d{3}\-\d{2}\-\d{2}$/); // "(xxx) x
 const PHONE_MASK = '([000]) [000]-[00]-[00]';
 
 class InnerComponent extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'Учетная запись',
-    headerLeft: <ButtonBack onPress={() => navigation.goBack()} />
-  });
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Учетная запись',
+        },
+      }
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -39,7 +46,6 @@ class InnerComponent extends Component {
   render() {
     const {
       userStatus,
-      navigation,
       lastName,
       firstName,
       secondName,
@@ -170,7 +176,7 @@ class InnerComponent extends Component {
           </View>
         </View>
 
-        <FooterSection userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }
