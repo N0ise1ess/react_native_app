@@ -93,7 +93,7 @@ class innerComponent extends React.Component {
               <Text>Отмена</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(1)}>
-              <Text>Далее</Text>
+              <Text>Далее...</Text>
             </Button>
           </View>
         </View>

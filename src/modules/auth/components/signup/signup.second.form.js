@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import {styles} from './styles';
 import {CustomIcon} from "../../../shared/components/custom-icon";
 
+const DIGITS_REGEXP = new RegExp("^[0-9]+$");
+
 class innerComponent extends React.Component {
 
   constructor(props) {
@@ -111,7 +113,7 @@ class innerComponent extends React.Component {
               <Text>Назад</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(2)}>
-              <Text>Далее</Text>
+              <Text>Далее...</Text>
             </Button>
           </View>
         </View>
