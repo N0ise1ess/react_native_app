@@ -106,7 +106,7 @@ class InnerComponent extends Component {
                 onPress={() =>
                   item.route === 'Auth'
                     ? this.onAuthHandle()
-                    : Navigation.push(this.props.componentId, {
+                    : item.route && Navigation.push(this.props.componentId, {
                       component: {
                         name: item.route,
                       }

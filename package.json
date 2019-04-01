@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
-    "android": "react-native run-android",
+    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "build-android": "cd ./android && ./gradlew app:assembleRelease",
     "install-android": "adb install -r build/android/outputs/apk/release/app-release.apk ",
     "test": "jest"

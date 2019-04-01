@@ -1,11 +1,10 @@
-import React, {Component} from "react";
-import {ButtonBack} from "../../../shared/components";
-import {connect} from 'react-redux';
-import {styles} from './styles';
-import {View, ScrollView, KeyboardAvoidingView} from 'react-native';
-import {Container,Button, Content, Form, Spinner, Text} from "native-base";
-import {FooterSection} from "../../../shared/components/footer/index";
-import {SignUp} from "../../components";
+import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { styles } from './styles';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from "../../components/signup";
+import { FooterSection } from "../../../shared/components/footer";
+import { Tab, Tabs, Text } from "native-base";
 
 class InnerComponent extends Component {
 
@@ -23,38 +22,63 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      currentTab: 0
     };
+    this.handleSwitchTab = this.handleSwitchTab.bind(this)
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ step: 1 });
   }
 
   onValueChange = key => {
-    this.setState({selected: key})
+    this.setState({ selected: key })
   }
-
   render() {
-    const {userStatus, navigation, token} = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
-      <Container style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAvoidingView>
           <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-            <SignUp/>
+            <Tabs initialPage={0}
+              locked={true}
+              page={this.state.currentTab}
+              renderTabBar={(() => <View style={styles.height0} />)}
+              tabContainerStyle={styles.elevation0}
+              tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
+              <Tab heading={<Text />}>
+                <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+              <Tab heading={<Text />}>
+                <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+              <Tab heading={<Text />}>
+                <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+            </Tabs>
           </ScrollView>
         </KeyboardAvoidingView>
-        <FooterSection {...this.props}/>
-      </Container>
+        <FooterSection {...this.props} />
+      </View>
     )
 
+  }
+
+  handleSwitchTab(value) {
+    this.setState({ currentTab: value })
+    this.props.navigation.setParams({ step: value + 1 })
   }
 }
 
 const mapStateToProps = state => {
   return {
     ...state.authReducer,
-    ...state.settings,
+    ...state.accountReducer,
+    ...state.settings
   };
 };
 

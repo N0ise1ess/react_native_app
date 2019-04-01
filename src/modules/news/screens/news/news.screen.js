@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
-import { FooterSection } from '../../../shared/components';
+import { ButtonBack, FooterSection } from '../../../shared/components';
 import { HeaderProvider, Tab, Head } from '../../components';
 
 import { styles as myStyles } from './styles';
@@ -24,6 +24,7 @@ class InnerComponent extends React.Component {
         title: {
           text: 'Новости университета',
         },
+        leftButtons: [],
       }
     };
   }
