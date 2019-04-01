@@ -1,7 +1,6 @@
 /** @format */
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/navigation/navigation';
-
 Navigation.events().registerAppLaunchedListener(async () => {
 	await Navigation.setDefaultOptions({
 		statusBar: {
@@ -27,7 +26,6 @@ Navigation.events().registerAppLaunchedListener(async () => {
 			},
 			backButton: {
 				color: "#fff",
-				// visible: true,
 				icon: require('./src/assets/images/back.png')
 			},
 			rightButtons: [

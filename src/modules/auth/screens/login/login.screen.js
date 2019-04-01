@@ -11,10 +11,10 @@ import { Login } from '../../components';
 import {
   FooterSection,
   CustomSnackbar
- } from '../../../shared/components';
+} from '../../../shared/components';
 import { styles } from './styles';
-import {setFontSize} from '../../../../actions/settingsAction';
-import {Navigation} from 'react-native-navigation';
+import { setFontSize } from '../../../../actions/settingsAction';
+import { Navigation } from 'react-native-navigation';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -40,27 +40,28 @@ class InnerComponent extends React.Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   componentWillReceiveProps(newProps) {
     if (this.props.token !== newProps.token) {
-      Navigation.push(this.props.componentId, {
-        component: {
-          name: "News",
+      Navigation.setStackRoot(this.props.componentId, [
+        {
+          component: {
+            name: 'News',
+          },
         }
-      });
+      ])
     }
-    if (this.props.errorMessage !== newProps.errorMessage) {
+    this.props.errorMessage !== newProps.errorMessage &&
       this.showToast(newProps.errorMessage);
-    }
   }
 
   onButtonPress = async () => {
     const { form } = this.props;
 
     this.props.isFormValid &&
-    await this.props.login(form.values);
+      await this.props.login(form.values);
     !form.values.checkbox && this.props.reset();
   };
 
@@ -72,7 +73,7 @@ class InnerComponent extends React.Component {
 
   render() {
     const { authLoading, errorMessage, userStatus } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <MainView>
         <StatusBar />
@@ -89,12 +90,12 @@ class InnerComponent extends React.Component {
                     }
                   })}
                   style={styles.linkedTextStyle}>Зарегистрироваться</Text>
-                <Text 
+                <Text
                   onPress={() => Navigation.push(this.props.componentId, {
                     component: {
                       name: "ResetPassword",
                     }
-                  })} 
+                  })}
                   style={styles.linkedTextStyle}
                 >
                   Восстановить пароль
