@@ -48,6 +48,9 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+        new RNFirebasePackage(),
+        new RNFirebaseMessagingPackage(),
+        new RNFirebaseNotificationsPackage(),
         new SplashScreenReactPackage(),
         new SnackbarPackage(),
         new RNDeviceInfo(),
@@ -74,17 +77,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFirebasePackage(),
-            new RNFirebaseMessagingPackage(),
-            new RNFirebaseNotificationsPackage(),
-            new SplashScreenReactPackage(),
-            new SnackbarPackage(),
-            new RNDeviceInfo(),
-            new RNTextInputMaskPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNGestureHandlerPackage(),
-            new CampusPackage()
+          new CampusPackage()
       );
     }
 
