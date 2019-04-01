@@ -103,7 +103,7 @@ class InnerComponent extends Component {
             </View>
           </View> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center', flex: 1}}/>}
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

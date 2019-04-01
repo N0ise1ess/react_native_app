@@ -105,7 +105,7 @@ class InnerComponent extends Component {
 				{!isComplited && this._renderGeneralScreen(styles)}
 				{isComplited && this._renderThankYouPage(styles)}
 			</View>
-			<FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+			<FooterSection {...this.props} />
 		</Container>);
 	}
 }

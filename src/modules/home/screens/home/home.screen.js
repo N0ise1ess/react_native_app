@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import {
   img_account,
@@ -155,42 +155,18 @@ class InnerComponent extends Component {
     };
   }
 
-  // static navigationOptions = ({ firstName, secondName, lastName, userStatus }) => {
-  //   return {
-  //     title: lastName || firstName || secondName
-  //       ? `${lastName} ${firstName} ${secondName}`
-  //       : 'Гость',
-  //     headerLeft: (
-  //       <Left>
-  //         {userStatus === 'student' ? (
-  //           <Image
-  //             style={{ resizeMode: 'contain', height: 30 }}
-  //             source={img_student}
-  //           />
-  //         ) : (
-  //           <Image
-  //             style={{ resizeMode: 'contain', height: 30, marginLeft: 10 }}
-  //             source={img_account}
-  //           />
-  //         )}
-  //       </Left>
-  //     ),
-  //   };
-  // };
-
-  static options(passProps) {
-    
-    // const { firstName, secondName, lastName, userStatus } = this.props;
-
+  static options({ firstName, secondName, lastName, userStatus }) {
     return {
       topBar: {
         title: {
-          text: 'Гость',
+          text: lastName || firstName || secondName
+            ? `${lastName} ${firstName} ${secondName}`
+            : 'Гость',
         },
         leftButtons: [
           {
             id: 'buttonOne',
-            icon: 'student' === 'student' ? img_student : img_account,
+            icon: userStatus === 'student' ? img_student : img_account,
           }
         ],
       }
@@ -239,29 +215,29 @@ class InnerComponent extends Component {
               {userStatus === 'guest' ? (
                 <Text />
               ) : (
-                cardList.map((image, index) => (
-                  <View
-                    onPress={() => move(index)}
-                    key={index}
-                    style={[
-                      {
-                        backgroundColor: '#163D7D',
-                        bottom: 10,
-                        width: 10,
-                        height: 10,
-                        borderRadius: 20,
-                        marginLeft: 5,
-                        marginRight: 5,
-                      },
-                      position === index && styles.buttonSelected,
-                    ]}
-                  />
-                ))
-              )}
+                  cardList.map((image, index) => (
+                    <View
+                      onPress={() => move(index)}
+                      key={index}
+                      style={[
+                        {
+                          backgroundColor: '#163D7D',
+                          bottom: 10,
+                          width: 10,
+                          height: 10,
+                          borderRadius: 20,
+                          marginLeft: 5,
+                          marginRight: 5,
+                        },
+                        position === index && styles.buttonSelected,
+                      ]}
+                    />
+                  ))
+                )}
             </View>
           )}
         />
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

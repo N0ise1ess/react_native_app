@@ -44,7 +44,7 @@ class InnerComponent extends Component {
             <SignUp/>
           </ScrollView>
         </KeyboardAvoidingView>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
+        <FooterSection {...this.props}/>
       </Container>
     )
 

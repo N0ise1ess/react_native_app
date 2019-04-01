@@ -87,7 +87,7 @@ class InnerComponent extends React.Component {
   );
   
   renderTab = connect(mapStateToProps,
-    mapDispatchToProps)((props) => <Tab {...props}/>)
+    mapDispatchToProps)((props) => <Tab {...props} componentId={this.props.componentId}/>)
 
   _renderScene = SceneMap({
     news: this.renderTab,
@@ -124,7 +124,7 @@ class InnerComponent extends React.Component {
             </View>
           }
         </HeaderProvider>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </React.Fragment>
     );
   }

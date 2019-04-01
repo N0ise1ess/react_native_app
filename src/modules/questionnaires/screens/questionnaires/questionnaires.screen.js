@@ -36,11 +36,13 @@ class InnerComponent extends Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'QuestionnairesStep',
+        passProps: {
+          dataQuestionnaire: {
+            itemId: id,
+            itemTitle: title, 
+          }
+        }
       },
-      passProps: {
-        itemId: id,
-      itemTitle: title, 
-      }
     })
   }
 
@@ -70,7 +72,7 @@ class InnerComponent extends Component {
           /> : <Spinner color="blue"/>}
           
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

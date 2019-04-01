@@ -5,14 +5,14 @@ import { styles } from './styles';
 import { CustomIcon } from '..';
 import { Navigation } from 'react-native-navigation';
 
-const navigate = (screen, componentId) => Navigation.push(componentId, {
+const navigate = (screen, componentId, passProps) => Navigation.push(componentId, {
   component: {
     name: screen,
+    passProps,
   }
 });
 
-export const FooterSection = ({ userStatus, componentId, maxHeight }) => {
-  console.log('userStatus', userStatus);
+export const FooterSection = ({ userStatus, componentId, maxHeight, firstName, secondName, lastName }) => {
   return (
     <Footer style={[{ backgroundColor: '#163D7D' }, maxHeight ? { maxHeight: maxHeight } : {}]}>
       <FooterTab style={{ backgroundColor: '#163D7D' }}>
@@ -33,7 +33,7 @@ export const FooterSection = ({ userStatus, componentId, maxHeight }) => {
           <CustomIcon name={'notification_2'} style={styles.image} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => componentId !== 'Home' 
-          && navigate('Home', componentId)}>
+          && navigate('Home', componentId, {firstName, secondName, lastName})}>
           <CustomIcon name={'menu'} style={styles.image} />
         </TouchableOpacity>
       </FooterTab>

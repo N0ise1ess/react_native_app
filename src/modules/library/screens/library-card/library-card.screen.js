@@ -199,7 +199,7 @@ class InnerComponent extends Component {
             {this.renderLibraryBook()}
           </Tabs>
         )}
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

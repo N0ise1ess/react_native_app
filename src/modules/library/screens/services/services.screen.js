@@ -71,7 +71,7 @@ class InnerComponent extends Component {
             </ListItem>
           )}
         />
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

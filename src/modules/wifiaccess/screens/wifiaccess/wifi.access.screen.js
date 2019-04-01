@@ -113,7 +113,7 @@ class InnerComponent extends Component {
               </View> : null}
           </View>
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     )
 

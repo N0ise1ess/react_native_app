@@ -169,7 +169,7 @@ class InnerComponent extends Component {
         {this._renderStatements()}
         {this._renderReports()}
       </Tabs>
-      <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
+      <FooterSection {...this.props}/>
     </Container>);
   }
 }

@@ -151,7 +151,7 @@ class InnerComponent extends Component {
             </Content>
           </Animated.View>
         </View>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} maxHeight={40}/>
+        <FooterSection {...this.props} maxHeight={40}/>
       </Container>
     );
   }

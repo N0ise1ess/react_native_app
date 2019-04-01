@@ -24,20 +24,15 @@ class InnerComponent extends Component {
   }
 
   render() {
-    const { userStatus, navigation } = this.props;
-    const { params } = this.props.navigation.state;
+    const { userStatus } = this.props;
     return (
       <Container>
         <Content>
           <News
-            newsType={params.newsType}
-            title={params.title}
-            time={params.time}
-            image={params.image}
-            description={params.description}
+            {...this.props.dataNews}
           />
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

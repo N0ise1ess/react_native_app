@@ -56,7 +56,7 @@ class About extends Component {
               </Text>
             </View>
           </View>
-          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+          <FooterSection {...this.props} />
         </KeyboardAvoidingView>
       </MainView>
     );

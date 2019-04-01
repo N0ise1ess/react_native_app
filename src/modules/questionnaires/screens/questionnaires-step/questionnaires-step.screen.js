@@ -14,11 +14,11 @@ class InnerComponent extends React.Component {
     headerLeft: <ButtonBack onPress={() => navigation.goBack()} />,
   });
 
-  static options(passProps) {
+  static options({dataQuestionnaire}) {
     return {
       topBar: {
         title: {
-          text: 'Анкетные опросы',
+          text: dataQuestionnaire.itemTitle,
         },
       }
     };
@@ -32,7 +32,7 @@ class InnerComponent extends React.Component {
       step: 1,
       selectedAnswers: [],
     };
-    // props.getQuestionnaires(props.navigation.getParam('itemId'), props.token)
+    props.getQuestionnaires(props.dataQuestionnaire.itemId, props.token)
   }
 
   componentDidUpdate(props) {
@@ -89,11 +89,12 @@ class InnerComponent extends React.Component {
   )
 
   handlePressButton = () => {  
+    this.state.isFinished && Navigation.pop(this.props.componentId);
     this.state.isFinished && Navigation.push(this.props.componentId, {
       component: {
         name: 'Questionnaires',
       }
-    })
+    });
     if (this.props.questionnaires && this.state.step === this.props.questionnaires.questions.length) {
       this.props.saveAnswers({
         isFull: true,
@@ -132,7 +133,7 @@ class InnerComponent extends React.Component {
           </View>
         </React.Fragment>
           : <View style={styles.full_container}><Spinner color="blue"/></View>}
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus}/>
+        <FooterSection {...this.props}/>
       </Container>
     )
   }

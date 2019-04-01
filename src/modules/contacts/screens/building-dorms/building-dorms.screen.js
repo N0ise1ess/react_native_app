@@ -90,7 +90,7 @@ class InnerComponent extends Component {
             <NB.Text style={styles.textStyle}>{'Ничего не найдено'}</NB.Text>
           </View>}
         </NB.Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navigate={navigation.navigate} />
       </NB.Container>
     );
   }

@@ -114,7 +114,7 @@ class InnerComponent extends Component {
         {this._renderSimpleSearch()}
         {this._renderAdvancedSearch()}
       </Tabs>
-      <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+      <FooterSection {...this.props} />
     </Container>);
   }
 }

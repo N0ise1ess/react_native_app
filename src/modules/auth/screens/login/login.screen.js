@@ -103,7 +103,7 @@ class InnerComponent extends React.Component {
               </View>
             </View>
           </ScrollView>
-          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+          <FooterSection {...this.props} />
         </KeyboardAvoidingView>
       </MainView>
     );

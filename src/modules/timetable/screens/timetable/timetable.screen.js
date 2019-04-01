@@ -270,7 +270,7 @@ class InnerComponent extends Component {
               )}
             </Content>
           )}
-          <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+          <FooterSection {...this.props} />
         </Container>
       );
     } else {

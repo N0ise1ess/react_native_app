@@ -86,7 +86,7 @@ class InnerComponent extends Component {
     this.props.token && this.props.logout();
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'Login',
+        name: 'Auth',
       }
     })
   };
@@ -104,7 +104,7 @@ class InnerComponent extends Component {
               <ListItem
                 button
                 onPress={() =>
-                  item.route === 'Login'
+                  item.route === 'Auth'
                     ? this.onAuthHandle()
                     : Navigation.push(this.props.componentId, {
                       component: {
@@ -117,16 +117,16 @@ class InnerComponent extends Component {
               >
                 <CustomIcon 
                   style={styles.iconStyle}
-                  name={item.route === 'Login' ? (token ? item.image : item.image2) : item.image}
+                  name={item.route === 'Auth' ? (token ? item.image : item.image2) : item.image}
                 />
                 <Text style={styles.textStyle}>
-                  {item.route === 'Login' ? (token ? item.title : 'Войти в учетную запись') : item.title}
+                  {item.route === 'Auth' ? (token ? item.title : 'Войти в учетную запись') : item.title}
                 </Text>
               </ListItem>
             )}
           />
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

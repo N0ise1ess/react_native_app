@@ -171,7 +171,7 @@ class InnerComponent extends Component {
         {this._renderԼiteratureList()}
         {this._renderRequestsList()}
       </Tabs>
-      <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+      <FooterSection {...this.props} />
     </Container>);
   }
 }

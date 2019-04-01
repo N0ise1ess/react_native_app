@@ -275,7 +275,7 @@ class InnerComponent extends Component {
           {currentTab === 1 && advertisement && this.renderUpdates(advertisement)}
           {currentTab === 2 && event && this.renderEvents(event)}
         </RN.Animated.ScrollView>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navigate={navigation.navigate} />
       </NB.Container>
     );
   }

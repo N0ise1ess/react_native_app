@@ -76,7 +76,7 @@ class InnerComponent extends Component {
             <Text>Сохранить</Text>
           </Button>
         </View>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }

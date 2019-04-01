@@ -68,7 +68,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection componentId={this.props.componentId} userStatus={userStatus} navigate={navigation.navigate} />
+        <FooterSection {...this.props} navigate={navigation.navigate} />
       </Container>
     );
   }
