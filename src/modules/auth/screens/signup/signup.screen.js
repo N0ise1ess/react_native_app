@@ -15,7 +15,7 @@ class InnerComponent extends Component {
             fontWeight: 'normal',
         },
         title: `Регистрация (${navigation.getParam("step") || '1'} из 3)`,
-        headerLeft: <ButtonBack onPress={() => navigation.navigate('Login')}/>,
+        headerLeft: <ButtonBack onPress={navigation.getParam("customGoBack", () => { })}/>,
     });
 
     constructor(props) {
@@ -33,7 +33,8 @@ class InnerComponent extends Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ step: 1 });
+      this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
+      this.props.navigation.setParams({ step: 1 });
     }
 
     componentWillMount() {
@@ -43,6 +44,15 @@ class InnerComponent extends Component {
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
     }
+
+    handleBackArrow = () => {
+      if (this.state.currentTab !== 0){
+        this.setState(prevState => ({
+          currentTab: prevState.currentTab - 1
+        }));
+        this.props.navigation.setParams({ step : this.state.currentTab + 1 })
+      } else this.props.navigation.navigate('Login');
+    };
 
     _handleBackButtonClick() {
         if (this.state.currentTab === 0) {
@@ -64,8 +74,8 @@ class InnerComponent extends Component {
         const {userStatus, navigation, token} = this.props;
         const {styles} = this.state;
         return (
-            <View style={styles.container}>
-                <KeyboardAvoidingView>
+            <ScrollView contentContainerStyle={styles.container}>
+                <KeyboardAvoidingView keyboardVerticalOffset={100}>
                     <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
                         <Tabs initialPage={0}
                               locked={true}
@@ -86,7 +96,7 @@ class InnerComponent extends Component {
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <FooterSection userStatus={userStatus} navigate={navigation.navigate}/>
-            </View>
+            </ScrollView>
         )
 
     }

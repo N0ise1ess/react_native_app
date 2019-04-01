@@ -207,7 +207,7 @@ export const styles = (fontSize = 0) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: height < 600 ? 0.3 : 0.15,
-    marginBottom: 20,
+    marginBottom: 20
   },
   dateOfBirth: {
     flexDirection: 'row',
