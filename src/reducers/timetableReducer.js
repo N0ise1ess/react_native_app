@@ -33,14 +33,12 @@ export default timetableReducer = (state = initialState.timetableReducer, action
       return {
         ...state,
         timeTableLoading: false,
-        timetables: action.payload,
-        suggestions: []
+        timetables: action.payload
       }
     case TIMETABLE_GET_PENDING:
       return {
         ...state,
-        timeTableLoading: true,
-        suggestions: []
+        timeTableLoading: true
       }
     case TIMETABLE_GET_FAILURE:
       return {
