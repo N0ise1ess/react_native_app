@@ -6,6 +6,9 @@ import { CustomSnackbar } from './src/modules/shared/components';
 
 export class NotificationListener {
   subscribeToNotifications() {
+    const channel = new firebase.notifications.Android.Channel('notifications_channel', 'Notifications Channel', firebase.notifications.Android.Importance.Max)
+    .setDescription('Campus notifications');
+    firebase.notifications().android.createChannel(channel);
     Navigation.events().registerComponentDidAppearListener(
       ({ componentId }) => {
         this.componentId = componentId;
@@ -49,17 +52,27 @@ export class NotificationListener {
   async createNotificationListeners() {
     this.notificationListener = firebase
       .notifications()
-      .onNotification((notification) => {
-        Navigation.push(this.componentId, {
-          component: {
-            name: 'Notifications',
-          },
-        });
-        //fixme: we should create headsup here
+      .onNotification((message) => {
+        const notification = new firebase.notifications.Notification()
+          .setNotificationId(message.notificationId)
+          .setTitle(message.title)
+          .setBody(message.body)
+        //   .setSound('default')
+          .setData(message.data);
+
+        notification.android
+          .setChannelId('notifications_channel')
+          .android.setSmallIcon('ic_notification')
+          .android.setPriority(firebase.notifications.Android.Priority.Max);
+
+        firebase.notifications().displayNotification(notification);
       });
 
     firebase.notifications().onNotificationOpened((tapped) => {
       if (tapped) {
+        firebase
+          .notifications()
+          .removeDeliveredNotification(tapped.notification.notificationId);
         Navigation.push(this.componentId, {
           component: {
             name: 'Notifications',
