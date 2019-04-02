@@ -18,8 +18,7 @@ class InnerComponent extends Component {
       topBar: {
         title: {
           text: `Регистрация`,
-        },
-        leftButtons: [],
+        }
     }
   }
 }
