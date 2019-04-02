@@ -178,6 +178,7 @@ def increaseVersionCodeOnRelease() {
 }
 
 dependencies {
+    compile(project(':react-native-firebase')) { transitive = false }
     compile project(':react-native-splash-screen')
     compile project(':react-native-snackbar')
     compile project(':react-native-device-info')
@@ -188,6 +189,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.google.android.gms:play-services-base:15.0.0"
+    implementation "com.google.firebase:firebase-core:15.0.2"
+    implementation "com.google.firebase:firebase-messaging:15.0.2"
     implementation project(':react-native-navigation')
 }
 
@@ -197,3 +201,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

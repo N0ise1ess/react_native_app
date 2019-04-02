@@ -51,7 +51,8 @@ class InnerComponent extends Component {
       searchedText: '',
       styles: styles(props.fontSize),
       groupNames: [],
-      currentGroupIndex: -1
+      currentGroupIndex: -1,
+      selectedGroupName: ''
     };
   }
 
@@ -145,6 +146,15 @@ class InnerComponent extends Component {
 
   currentSuggestionType() {
     return this.props.suggestions.length ? this.props.suggestions[0].type : '';
+  }
+
+  onItemClick(item, token) {
+    item.type === 'STUDENT_GROUP' &&
+    this.setState({
+      selectedGroupName: item.title
+    });
+    
+    this.props.getTimetable(item, token);
   }
 
   renderEven = () => {
@@ -245,7 +255,7 @@ class InnerComponent extends Component {
 
                 {this.currentSuggestionType() !== 'TEACHER' ? (
                   <Text style={styles.groupTitle}>
-                    Группа {groupNames[this.state.currentGroupIndex]}
+                    Группа {this.state.selectedGroupName}
                   </Text>) : null}
 
                 <TouchableOpacity onPress={() => this.switchGroup('right')}>
@@ -255,7 +265,7 @@ class InnerComponent extends Component {
             ) : (
               <View style={[styles.groupSection, { justifyContent: 'center' }]}>
                 {this.currentSuggestionType() !== 'TEACHER' ? (
-                  <Text style={styles.groupTitle}>Группа {groupNames[0]}</Text>
+                  <Text style={styles.groupTitle}>Группа {this.state.selectedGroupName}</Text>
                 ) : null}
               </View>
             )
@@ -294,7 +304,7 @@ class InnerComponent extends Component {
                 renderRow={item => (
                   <ListItem
                     button
-                    onPress={() => this.props.getTimetable(item, token)}
+                    onPress={() => this.onItemClick(item, token)}
                     style={styles.listItemStyle}
                   >
                     <View style={styles.columnStyle}>
