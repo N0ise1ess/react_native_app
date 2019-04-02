@@ -35,7 +35,7 @@ build:
     - develop
     - schedules
   script:
-    - ./gradlew assembleRelease
+    - ./gradlew app:assembleRelease
     - cp -rp app/build/outputs/apk/release/*.apk ~/release/$latest-app-release.apk
     - cd ~/campus
     - git pull

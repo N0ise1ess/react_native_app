@@ -30,7 +30,7 @@ class InnerComponent extends Component {
           currentTab: 0
       };
       this.handleSwitchTab = this.handleSwitchTab.bind(this)
-      this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
+      // this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
   }
 
   componentDidUpdate(props) {
@@ -43,33 +43,33 @@ class InnerComponent extends Component {
     }
 
   componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
+        // BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
     }
 
     componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
+        // BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
     }
 
-    handleBackArrow = () => {
-      if (this.state.currentTab !== 0){
-        this.setState(prevState => ({
-          currentTab: prevState.currentTab - 1
-        }));
-        this.props.navigation.setParams({ step : this.state.currentTab + 1 })
-      } else this.props.navigation.navigate('Login');
-    };
+    // handleBackArrow = () => {
+    //   if (this.state.currentTab !== 0){
+    //     this.setState(prevState => ({
+    //       currentTab: prevState.currentTab - 1
+    //     }));
+    //     this.props.navigation.setParams({ step : this.state.currentTab + 1 })
+    //   } else this.props.navigation.goBack();
+    // };
 
-    _handleBackButtonClick() {
-        if (this.state.currentTab === 0) {
-            this.props.navigation.navigate('Login');
-        } else {
-            this.setState(prevState => ({
-                currentTab: prevState.currentTab - 1
-            }));
-            // this.props.navigation.setParams({ step : this.state.currentTab + 1})
-        }
-        return true;
-    }
+    // _handleBackButtonClick() {
+    //     if (this.state.currentTab === 0) {
+    //         this.props.navigation.goBack();
+    //     } else {
+    //         this.setState(prevState => ({
+    //             currentTab: prevState.currentTab - 1
+    //         }));
+    //         // this.props.navigation.setParams({ step : this.state.currentTab + 1})
+    //     }
+    //     return true;
+    // }
 
     onValueChange = key => {
         this.setState({selected: key})
