@@ -91,7 +91,8 @@ export const styles = (fontSize) => StyleSheet.create({
   time: {
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize),
-    marginTop: 5
+    marginTop: 5,
+    width: getSizeFonts(settingsFonts.FONT_SIZE_12, fontSize) * 5.2
   },
   title: {
     fontFamily: 'MyriadPro-Regular',
@@ -148,6 +149,9 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
+  },
+  groupTitle: {
+    color: '#1784d3'
   },
   iconLeft: {
     width: 25,

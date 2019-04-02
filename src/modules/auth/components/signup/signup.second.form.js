@@ -7,14 +7,17 @@ import {connect} from 'react-redux';
 import {styles} from './styles';
 import {CustomIcon} from "../../../shared/components/custom-icon";
 
+const DIGITS_REGEXP = new RegExp("^[0-9]+$");
+
 class innerComponent extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-      currentTab : 0,
+      currentTab : 1,
       currentTabPassport : 0,
+      gender: 'female'
     }
   }
 
@@ -42,18 +45,18 @@ class innerComponent extends React.Component {
         {asterisk ? <Text style={this.state.styles.asterisk}>*</Text> : null}
       </Label>;
 
-  gender = () => {
+  gender = ({ input, label, type, meta: { touched, error, warning }, currentTab  }) => {
     const { styles } = this.state;
     return (
         <View style={styles.genderContainer}>
           <TouchableOpacity
               onPress={() => this.setState({currentTab: 0})}
-              style={[this.state.currentTab % 3 === 0 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingLeft ]}>
+              style={[currentTab === 0 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingLeft ]}>
             <Text style={styles.genderText}>Женский</Text>
           </TouchableOpacity>
           <TouchableOpacity
               onPress={() => this.setState({currentTab: 1})}
-              style={[this.state.currentTab % 3 === 1 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingRight]}>
+              style={[currentTab === 1 ? styles.activeTabStyle : styles.inactiveTabStyle, styles.tabHeadingRight]}>
             <Text style={styles.genderText}>Мужской</Text>
           </TouchableOpacity>
         </View>
@@ -64,13 +67,28 @@ class innerComponent extends React.Component {
     const styles = this.state.styles
     return (
         <View style={styles.dateOfBirth}>
-          <Input style={styles.dateOfBirthInput} placeholder="  ДД" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput}
+                 value={this.state.date}
+                 keyboardType='numeric'
+                 placeholder="  ДД" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'date')}/>
           <Text style={styles.separator}> / </Text>
-          <Input style={styles.dateOfBirthInput} placeholder="  ММ" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput}
+                 value={this.state.month}
+                 keyboardType='numeric'
+                 placeholder="  ММ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 2, 'month')}/>
           <Text style={styles.separator}> / </Text>
-          <Input style={styles.dateOfBirthInput} placeholder="  ГГГГ" placeholderTextColor="#C4C4C4"/>
+          <Input style={styles.dateOfBirthInput}
+                 value={this.state.year}
+                 keyboardType='numeric'
+                 placeholder="  ГГГГ" placeholderTextColor="#C4C4C4" onChangeText={(text) => this._validateDigit(text, 4, 'year')}/>
         </View>
     )
+  }
+
+  _validateDigit = (text, length, field) => {
+    if (DIGITS_REGEXP.test(text) && text.length <= length || text.length === 0) {
+      this.setState({[field]: text});
+    }
   }
 
   document = () => {
@@ -98,9 +116,9 @@ class innerComponent extends React.Component {
         <View style={styles.formContainer}>
           <Form style={styles.form}>
             {this.upperCaseWord('Пол')}
-            <Field name="username" placeholder="Иванов" type="username" component={this.gender} />
+            <Field name="username" placeholder="Иванов" type="username" component={this.gender} currentTab={this.state.currentTab}/>
             {this.upperCaseWord('Дата рождения', true)}
-            <Field name="password" placeholder="Иван" type="text" component={this.dateOfBirth} />
+            <Field name="dateofBirth" placeholder="Иван" type="text" component={this.dateOfBirth} />
             {this.upperCaseWord('Тип документа')}
             <Field name="password" placeholder="Иванович" type="text" component={this.document} />
             {this.upperCaseWord('Номер документа')}
@@ -108,10 +126,10 @@ class innerComponent extends React.Component {
           </Form>
           <View style={styles.buttons}>
             <Button rounded style={styles.backButton} onPress={() => this.props.handleSwitchTab(0)}>
-              <Text>Назад</Text>
+              <Text style={styles.buttonText}>Назад</Text>
             </Button>
             <Button style={styles.nextButton} rounded onPress={() => this.props.handleSwitchTab(2)}>
-              <Text>Далее</Text>
+              <Text style={styles.buttonText}>Далее...</Text>
             </Button>
           </View>
         </View>

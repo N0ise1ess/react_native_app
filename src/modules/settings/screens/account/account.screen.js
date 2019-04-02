@@ -84,10 +84,10 @@ class InnerComponent extends Component {
     };
 
     const renderEmail = () => {
+      if(!email) return <></>
       return (
         <>
           <Text style={styles.label}>{'E-mail'.toUpperCase()}</Text>
-
           {email && <Text style={styles.textStyle}>{email}</Text>}
         </>
       );
