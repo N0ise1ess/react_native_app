@@ -41,12 +41,10 @@ export class NotificationListener {
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
       if (fcmToken) {
+        Clipboard.setString(fcmToken);
+        CustomSnackbar.show({ title: 'Copied!' });
         await AsyncStorage.setItem('fcmToken', fcmToken);
       }
-    }
-    if (__DEV__) {
-      Clipboard.setString(fcmToken);
-      CustomSnackbar.show({ title: 'Copied!' });
     }
   }
   async createNotificationListeners() {
