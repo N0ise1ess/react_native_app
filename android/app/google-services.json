@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1053260502113",
+    "firebase_url": "https://notifications-95391.firebaseio.com",
+    "project_id": "notifications-95391",
+    "storage_bucket": "notifications-95391.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053260502113:android:7f8045271bcc712f",
+        "android_client_info": {
+          "package_name": "com.campus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCalnhYnHxSnNi4bmdL5LEoAmstRjNZF0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053260502113-cgd9ess9vi3o5t5488k75prjldqf4ib9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
