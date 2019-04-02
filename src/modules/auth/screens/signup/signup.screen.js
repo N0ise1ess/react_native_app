@@ -6,6 +6,7 @@ import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from "../../compon
 import { FooterSection } from "../../../shared/components/footer";
 import { Tab, Tabs, Text } from "native-base";
 import {ButtonBack} from "../../../shared/components/button-back";
+import {Navigation} from "react-native-navigation";
 
 // text: `Регистрация (${passProps.getParam("step") || '1'} из 3)`,
 //<ButtonBack onPress={passProps.getParam("customGoBack", () => { })}/>
@@ -30,7 +31,7 @@ class InnerComponent extends Component {
           currentTab: 0
       };
       this.handleSwitchTab = this.handleSwitchTab.bind(this)
-      // this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
+      this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
   }
 
   componentDidUpdate(props) {
@@ -43,11 +44,11 @@ class InnerComponent extends Component {
     }
 
   componentWillMount() {
-        // BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
+        BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
     }
 
     componentWillUnmount() {
-        // BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
+        BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
     }
 
     // handleBackArrow = () => {
@@ -59,17 +60,20 @@ class InnerComponent extends Component {
     //   } else this.props.navigation.goBack();
     // };
 
-    // _handleBackButtonClick() {
-    //     if (this.state.currentTab === 0) {
-    //         this.props.navigation.goBack();
-    //     } else {
-    //         this.setState(prevState => ({
-    //             currentTab: prevState.currentTab - 1
-    //         }));
-    //         // this.props.navigation.setParams({ step : this.state.currentTab + 1})
-    //     }
-    //     return true;
-    // }
+    _handleBackButtonClick() {
+        if (this.state.currentTab === 0) {
+          Navigation.push(this.props.componentId, {
+            component: {
+              name: "Auth",
+            }})
+        } else {
+            this.setState(prevState => ({
+                currentTab: prevState.currentTab - 1
+            }));
+            // this.props.navigation.setParams({ step : this.state.currentTab + 1})
+        }
+        return true;
+    }
 
     onValueChange = key => {
         this.setState({selected: key})
