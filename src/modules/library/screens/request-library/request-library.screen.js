@@ -39,7 +39,7 @@ class InnerComponent extends Component {
 
 	_renderGeneralScreen = (styles) => <React.Fragment>
 		<View style={styles.text_block}>
-			{this._upperCase('введите ключевые слова или запрос в своболной форме')}
+			{this._upperCase('введите ключевые слова или запрос в свободной форме')}
 		</View>
 		<Textarea
 			placeholder={'Например, нефть, нефтедобыча...'}
@@ -98,7 +98,6 @@ class InnerComponent extends Component {
 	</React.Fragment>
 
 	render() {
-		const { userStatus, } = this.props;
 		const { styles, isComplited } = this.state;
 		return (<Container style={styles.container} >
 			<View style={styles.content}>
