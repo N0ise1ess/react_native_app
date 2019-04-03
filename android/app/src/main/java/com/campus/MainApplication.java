@@ -3,6 +3,9 @@ package com.campus;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -45,6 +48,9 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+        new RNFirebasePackage(),
+        new RNFirebaseMessagingPackage(),
+        new RNFirebaseNotificationsPackage(),
         new SplashScreenReactPackage(),
         new SnackbarPackage(),
         new RNDeviceInfo(),
@@ -71,14 +77,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SplashScreenReactPackage(),
-            new SnackbarPackage(),
-            new RNDeviceInfo(),
-            new RNTextInputMaskPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNGestureHandlerPackage(),
-            new CampusPackage()
+          new CampusPackage()
       );
     }
 

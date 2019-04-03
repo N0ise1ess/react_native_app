@@ -1,14 +1,17 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { AsyncStorage, Clipboard, Image, Text, View } from 'react-native';
+import firebase from 'react-native-firebase';
+import { Navigation } from 'react-native-navigation';
 import { Bar } from 'react-native-progress';
-import { connect } from 'react-redux';
-import { initLoad } from '../../../../actions/loadingAction';
-import { img_logo_white } from '../../../../assets/images';
-import { styles } from './styles';
-import { setFontSize } from '../../../../actions/settingsAction';
 import SplashScreen from 'react-native-splash-screen';
+import { connect } from 'react-redux';
 
-import {goToAuth} from '../../../../navigation/navigation'
+import { initLoad } from '../../../../actions/loadingAction';
+import { setFontSize } from '../../../../actions/settingsAction';
+import { img_logo_white } from '../../../../assets/images';
+import { goToAuth } from '../../../../navigation/navigation';
+import { CustomSnackbar } from '../../../shared/components';
+import { styles } from './styles';
 
 class InnerComponent extends React.Component {
   constructor(props) {
@@ -27,8 +30,9 @@ class InnerComponent extends React.Component {
   componentWillMount() {
     this.props.initLoad();
   }
-  componentDidMount() {
-    SplashScreen.hide()
+
+  async componentDidMount() {
+    SplashScreen.hide();
   }
 
   _retrieveData = async () => {
@@ -72,7 +76,7 @@ class InnerComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.loadingScreen,
@@ -80,9 +84,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   initLoad: () => dispatch(initLoad()),
-  setFontSize: fontSize => dispatch(setFontSize(fontSize)),
+  setFontSize: (fontSize) => dispatch(setFontSize(fontSize)),
 });
 
 export const LoadingScreen = connect(
