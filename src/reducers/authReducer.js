@@ -69,7 +69,22 @@ export default (authReducer = (state = initialState.authReducer, action) => {
       return {
         ...state,
       };
-
+    case constants.GET_RAITING_PENDING:
+      return {
+        ...state,
+        isLoadingRaiting: true,
+      }
+    case constants.GET_RAITING_SUCCESS:
+      return {
+        ...state,
+        isLoadingRaiting: false,
+        userRaiting: action.payload,
+      }
+    case constants.GET_RAITING_FAILURE:
+      return {
+        ...state,
+        isLoadingRaiting: false,
+      }
     default:
       return state;
   }
