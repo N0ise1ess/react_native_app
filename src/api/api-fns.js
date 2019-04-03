@@ -173,6 +173,18 @@ export function resetPassword(email) {
   });
 }
 
+export async function getRaiting(token) {
+  let response = await fetch(endpoints.user.getRaiting, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status };
+}
+
 export function editPhoneNumber(phoneNumber, token) {
   let data = new FormData();
 

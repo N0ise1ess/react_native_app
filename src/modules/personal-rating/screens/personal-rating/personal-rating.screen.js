@@ -1,9 +1,9 @@
-import { Container, Content, List, ListItem, Text } from 'native-base';
+import { Container, Content, List, ListItem, Text, Spinner, Card } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
-import { logout } from '../../../../actions/authorizationAction';
+import { getRaitingUser } from '../../../../actions/authorizationAction';
 import { FooterSection } from '../../../shared/components';
 import { styles } from './styles';
 
@@ -32,7 +32,7 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-  
+
   static options(passProps) {
     return {
       topBar: {
@@ -50,28 +50,45 @@ class InnerComponent extends Component {
     };
   }
 
-  componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+  componentDidMount() {
+    this.props.getRaitingUser(this.props.token);
   }
 
+  componentDidUpdate(props) {
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
+  }
+
+  getSumm = () => this.props.userRaiting
+    .items.reduce((accumulator, item) => accumulator + parseFloat(item.value), 0);
+
   render() {
-    const { userStatus, token } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
+    const { userRaiting, isLoadingRaiting } = this.props;
+
     return (
       <Container style={styles.container}>
         <Content>
-          <List
-            style={styles.listStyle}
-            dataArray={itemList}
-            renderRow={item => (
-              <ListItem button style={[styles.listItemStyle, item.last && styles.lastItemStyle]}>
-                <Text style={[styles.textStyle, item.last && styles.lastTextStyle]}>{item.title}</Text>
-                <Text style={[item.score > 0 && styles.scoreStyle, item.last && styles.lastTextStyle]}>
-                  {item.score}
-                </Text>
-              </ListItem>
-            )}
-          />
+          {isLoadingRaiting ? <Spinner /> : <React.Fragment>
+            {userRaiting && userRaiting.items && <List
+              style={styles.listStyle}
+              dataArray={userRaiting.items}
+              renderRow={item => (
+                <ListItem button style={[styles.listItemStyle, item.last && styles.lastItemStyle]}>
+                  <Text style={[styles.textStyle, item.last && styles.lastTextStyle]}>{item.name}</Text>
+                  <Text style={[item.score > 0 && styles.scoreStyle, item.last && styles.lastTextStyle]}>
+                    {item.value}
+                  </Text>
+                </ListItem>
+              )}
+            />}
+            {userRaiting && userRaiting.items && <ListItem
+              button style={[styles.listItemStyle, styles.lastItemStyle]}>
+              <Text style={[styles.textStyle, styles.lastTextStyle]}>{'Всего баллов'}</Text>
+              <Text style={[styles.scoreStyle, styles.lastTextStyle]}>
+                {this.getSumm()}
+              </Text>
+            </ListItem>}
+          </React.Fragment>}
         </Content>
         <FooterSection {...this.props} />
       </Container>
@@ -87,7 +104,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
+  getRaitingUser: (token) => dispatch(getRaitingUser(token)),
   dispatch,
 });
 

@@ -91,3 +91,21 @@ export const editPhoneNumber = (phoneNumber, token) => async dispatch => {
     });
   }
 };
+
+export const getRaitingUser = (token) => async dispatch => {
+  try {
+    dispatch({
+      type: constants.GET_RAITING_PENDING,
+    })
+    let { data } = await api.getRaiting(token);
+    data && dispatch({
+      type: constants.GET_RAITING_SUCCESS,
+      payload: data[0],
+    })
+  } catch (e) {
+    dispatch({
+      type: constants.GET_RAITING_FAILURE,
+      payload: 'Произошла ошибка',
+    });
+  }
+}
