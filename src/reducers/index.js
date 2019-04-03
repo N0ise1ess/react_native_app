@@ -11,6 +11,7 @@ import settings from './settingsReducer';
 import personalityReducer from "./personalityReducer";
 import questionnaires from './questionnairesReducer';
 import scratchBook from './scratchBookReducer';
+import wifi from './wifiReducer';
 
 export default combineReducers({
   authReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
   questionnaires,
   settings,
   scratchBook,
+  wifi,
 });

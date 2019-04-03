@@ -49,5 +49,8 @@ export default {
   scratchBook: {
     dataScratchBook: {},
     isLoading: true,
+  },
+  wifi: {
+    isLoadingWifi: true,
   }
 };
