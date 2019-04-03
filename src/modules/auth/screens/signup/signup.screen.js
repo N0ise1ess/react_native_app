@@ -8,9 +8,6 @@ import { Tab, Tabs, Text } from "native-base";
 import {ButtonBack} from "../../../shared/components/button-back";
 import {Navigation} from "react-native-navigation";
 
-// text: `Регистрация (${passProps.getParam("step") || '1'} из 3)`,
-//<ButtonBack onPress={passProps.getParam("customGoBack", () => { })}/>
-
 class InnerComponent extends Component {
 
   static options(passProps) {
@@ -30,34 +27,19 @@ class InnerComponent extends Component {
           currentTab: 0
       };
       this.handleSwitchTab = this.handleSwitchTab.bind(this)
-      this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
   }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
-    componentDidMount() {
-      // this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
-      // this.props.navigation.setParams({ step: 1 });
-    }
-
   componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
+        BackHandler.addEventListener('hardwareBackPress', () => this._handleBackButtonClick());
     }
 
     componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
+        BackHandler.removeEventListener('hardwareBackPress', () => this._handleBackButtonClick());
     }
-
-    // handleBackArrow = () => {
-    //   if (this.state.currentTab !== 0){
-    //     this.setState(prevState => ({
-    //       currentTab: prevState.currentTab - 1
-    //     }));
-    //     this.props.navigation.setParams({ step : this.state.currentTab + 1 })
-    //   } else this.props.navigation.goBack();
-    // };
 
     _handleBackButtonClick() {
         if (this.state.currentTab === 0) {
@@ -69,7 +51,6 @@ class InnerComponent extends Component {
             this.setState(prevState => ({
                 currentTab: prevState.currentTab - 1
             }));
-            // this.props.navigation.setParams({ step : this.state.currentTab + 1})
         }
         return true;
     }
@@ -109,7 +90,6 @@ class InnerComponent extends Component {
 
   handleSwitchTab(value) {
     this.setState({ currentTab: value })
-    // this.props.navigation.setParams({ step: value + 1 })
   }
 }
 
