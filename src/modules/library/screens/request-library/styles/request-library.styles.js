@@ -27,6 +27,7 @@ export const styles = (fontSize) => StyleSheet.create({
 	},
 	texterea: {
 		color: '#58739d',
+		backgroundColor: '#fff',
 		flex: 1,
 		borderWidth: 1,
 		borderColor: '#484848',

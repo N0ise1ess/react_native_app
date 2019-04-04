@@ -1,13 +1,13 @@
-import {Button, Container, Content, Icon, Picker, List, ListItem, Toast, Text, CardItem, Card} from 'native-base';
-import React, {Component} from 'react';
-import {Dimensions, View} from 'react-native';
-import {Navigation} from 'react-native-navigation';
-import {connect} from 'react-redux';
-import {styles} from "./styles";
+import { Button, Container, Content, Icon, Picker, List, ListItem, Toast, Text, CardItem, Card, Spinner } from 'native-base';
+import React, { Component } from 'react';
+import { Dimensions, Clipboard, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import { connect } from 'react-redux';
+import { styles } from "./styles";
 import * as settingsFonts from '../../../../constants/styles';
-import {getSizeFonts} from '../../../shared/functions/styles';
+import { getSizeFonts } from '../../../shared/functions/styles';
+import * as action from '../../../../actions/wifiAction';
 import {
-  ButtonBack,
   FooterSection,
   CustomIcon,
   CustomSnackbar
@@ -31,45 +31,55 @@ class InnerComponent extends Component {
     this.state = {
       selected: 'key0',
       wifiPass: "",
+      isShowedPassword: false,
       styles: styles(props.fontSize),
     };
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
+  }
+
+  componentDidMount() {
+
+    console.log(this.props);
+    this.props.getWifi(this.props.token);
   }
 
   renderPicker = () => {
     return (
       <View style={this.state.styles.picker}>
-        <CustomIcon name={'wifi'} style={this.state.styles.pickerIcon}/>
-        <Picker
-          mode="dropdown"
-          style={this.state.styles.pickerShadow}
-          selectedValue={this.state.selected}
-          onValueChange={this.onValueChange}
-        >
-          <Picker.Item label="SSTU-main" value="key0"/>
-          <Picker.Item label='SSTU-main2' value="key1"/>
-        </Picker>
+        {Array.isArray(this.props.dataWifi) ? <React.Fragment>
+          <CustomIcon name={'wifi'} style={this.state.styles.pickerIcon} />
+          <Picker
+            mode="dropdown"
+            style={this.state.styles.pickerShadow}
+            selectedValue={this.state.selected}
+            onValueChange={this.onValueChange}
+          >
+            {this.props.dataWifi.map(item => <Picker.Item label={item.name} value={item.password} />)}
+          </Picker>
+        </React.Fragment> : this.props.dataWifi
+          && <Text style={this.state.styles.pickerShadow}>
+            {this.props.dataWifi.name}
+          </Text>}
       </View>
     )
   }
 
   onValueChange = key => {
-    this.setState({selected: key})
+    this.setState({ selected: key })
   }
 
   render() {
-    const {userStatus, token} = this.props;
-    let wifiPassIsPresent = this.state.wifiPass.length > 0;
-    const {styles} = this.state;
+    const { isLoadingWifi, dataWifi } = this.props;
+    const { styles, selected, isShowedPassword } = this.state;
     return (
       <Container style={styles.container}>
         <Content>
           <View style={styles.content}>
             <View style={styles.dataSection}>
-              <View style={styles.dummy}/>
+              <View style={styles.dummy} />
               <Text style={styles.title}>Для подключения к сети Wi-Fi университета:</Text>
             </View>
             <View style={styles.dataSection}>
@@ -77,19 +87,19 @@ class InnerComponent extends Component {
               <Text style={styles.dataText}>Найдите одну из следующих доступных сетей:</Text>
             </View>
             <View style={styles.dataSection}>
-              <View style={styles.dummy}/>
-              {this.renderPicker()}
+              <View style={styles.dummy} />
+              {isLoadingWifi ? <Spinner color="blue" /> : this.renderPicker()}
             </View>
-            <View style={[styles.dataSection, {paddingBottom: 0}]}>
+            <View style={[styles.dataSection, { paddingBottom: 0 }]}>
               <Text style={styles.stepText}>2)</Text>
-              <Text style={[styles.dataText, {marginTop: 0}]}>Сгенерируйте пароль для данной сети:</Text>
+              <Text style={[styles.dataText, { marginTop: 0 }]}>Сгенерируйте пароль для данной сети:</Text>
             </View>
             <View style={styles.dataSection}>
-              <View style={styles.dummy}/>
-              <Button onPress={this.generatePassword}
-                      disabled={wifiPassIsPresent}
-                      full rounded style={!wifiPassIsPresent ? styles.activeButtonStyle : styles.inactiveButtonStyle}>
-                <Text allowFontScaling={false} style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Сгенерировать пароль</Text>
+              <View style={styles.dummy} />
+              <Button onPress={() => this.setState({ isShowedPassword: true })}
+                disabled={selected && Array.isArray(this.props.dataWifi)}
+                full rounded style={!(selected && Array.isArray(this.props.dataWifi)) ? styles.activeButtonStyle : styles.inactiveButtonStyle}>
+                <Text allowFontScaling={false} style={{ fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize) }}>Сгенерировать пароль</Text>
               </Button>
             </View>
             <View style={styles.dataSection}>
@@ -98,16 +108,18 @@ class InnerComponent extends Component {
                 при подключении к сети.
               </Text>
             </View>
-            {wifiPassIsPresent ?
+            {isShowedPassword && ((Array.isArray(dataWifi) && selected) || dataWifi.password) ?
               <View style={styles.dataSection}>
-                <View style={styles.dummy}/>
+                <View style={styles.dummy} />
                 <View style={styles.card}>
                   <View style={styles.cardPassText}>
-                    <Text style={{color: 'grey', marginTop: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, this.props.fontSize)}}>Ваш пароль:</Text>
-                    <Text style={{color: 'grey', marginBottom: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_26, this.props.fontSize)}}>{this.state.wifiPass}</Text>
+                    <Text style={{ color: 'grey', marginTop: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, this.props.fontSize) }}>Ваш пароль:</Text>
+                    <Text
+                      style={{ color: 'grey', marginBottom: 5, fontSize: getSizeFonts(settingsFonts.FONT_SIZE_26, this.props.fontSize) }}
+                    >{Array.isArray(dataWifi) ? selected : dataWifi.password}</Text>
                   </View>
                   <Button onPress={this.copyPass} full rounded style={styles.copyPassBtn}>
-                    <Text style={{fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize)}}>Скопировать пароль</Text>
+                    <Text style={{ fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize) }}>Скопировать пароль</Text>
                   </Button>
                 </View>
               </View> : null}
@@ -119,9 +131,11 @@ class InnerComponent extends Component {
 
   }
 
-  copyPass = () => {
+  copyPass = async () => {
+    let password = Array.isArray(this.props.dataWifi) ? this.state.selected : this.props.dataWifi.password;
+    await Clipboard.setString(password);
     CustomSnackbar.show({
-        title: "Скопировано в буфер обмена",
+      title: "Скопировано в буфер обмена",
     });
   }
 
@@ -131,22 +145,17 @@ class InnerComponent extends Component {
     while (pass.length !== 5) {
       pass += chars[Math.floor(Math.random() * chars.length)]
     }
-    this.setState({wifiPass: pass})
+    this.setState({ wifiPass: pass })
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    ...state.authReducer,
-    ...state.settings,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  dispatch,
-});
+const mapStateToProps = state => ({
+  ...state.authReducer,
+  ...state.settings,
+  ...state.wifi,
+})
 
 export const WifiAccessScreen = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  { ...action },
 )(InnerComponent);

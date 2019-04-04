@@ -15,6 +15,11 @@ class InnerComponent extends React.Component {
         title: {
           text: dataQuestionnaire.itemTitle,
         },
+        leftButtons: [
+          {
+            id: 'buttonLeftQuestionnarire',
+          },
+        ],
       }
     };
   }
@@ -27,7 +32,18 @@ class InnerComponent extends React.Component {
       step: 1,
       selectedAnswers: [],
     };
-    props.getQuestionnaires(props.dataQuestionnaire.itemId, props.token)
+    Navigation.events().bindComponent(this);
+  }
+
+  navigationButtonPressed({ buttonId }) {
+    if(buttonId === 'buttonLeftQuestionnarire') {
+      this.props.resetQuestionnaires();
+      Navigation.pop(this.props.componentId);
+    }
+  }
+
+  componentDidMount() {
+    this.props.getQuestionnaires(this.props.dataQuestionnaire.itemId, this.props.token)
   }
 
   componentDidUpdate(props) {
@@ -84,7 +100,10 @@ class InnerComponent extends React.Component {
   )
 
   handlePressButton = () => {  
-    this.state.isFinished && Navigation.pop(this.props.componentId);
+    if(this.state.isFinished) {
+      this.props.resetQuestionnaires();
+      Navigation.pop(this.props.componentId);
+    }
     if (this.props.questionnaires && this.state.step === this.props.questionnaires.questions.length) {
       this.props.saveAnswers({
         isFull: true,
@@ -100,7 +119,7 @@ class InnerComponent extends React.Component {
   render() {
 
     const { styles, isFinished, selectedAnswers, step } = this.state;
-    const { userStatus, questionnaires } = this.props;
+    const { questionnaires } = this.props;
     const isDisabledButton = !selectedAnswers[step - 1];
 
     return (

@@ -31,6 +31,10 @@ export const endpoints = {
     editPhoneNumber: 'http://opencode.su/campus/integration/api/users/edit/phoneNumber',
     /** Восстановить пароль */
     resetPassword: 'http://opencode.su/campus/integration/api/users/reset/password',
+    
+    getRaiting: 'http://opencode.su/campus/integration/api/users/raiting',
+
+    wifi: 'http://opencode.su/campus/integration/api/users/wifi',
   },
   /** Корпуса общежития */
   buildings: {

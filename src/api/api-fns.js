@@ -9,6 +9,18 @@ const checkForSuccessful = (response) => {
   throw response;
 }
 
+export async function getWifi(token) {
+  let response = await fetch(endpoints.user.wifi, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status };
+}
+
 export function loginApi(values) {
   let data = new FormData();
 
@@ -127,7 +139,8 @@ export function timeTableSearchApi(searchedText, token) {
     headers: token ? {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
-    } : {}})
+    } : {}
+  })
     .then(checkForSuccessful)
     .then(response => response.json())
 }
@@ -144,7 +157,8 @@ export function timeTableGetApi(search, token) {
     headers: token ? {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
-    } : {}})
+    } : {}
+  })
     .then(checkForSuccessful)
     .then(response => response.json())
 }
@@ -173,6 +187,18 @@ export function resetPassword(email) {
   });
 }
 
+export async function getRaiting(token) {
+  let response = await fetch(endpoints.user.getRaiting, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status };
+}
+
 export function editPhoneNumber(phoneNumber, token) {
   let data = new FormData();
 
@@ -186,10 +212,10 @@ export function editPhoneNumber(phoneNumber, token) {
   });
 }
 
-export async function getPersonalityByName(name = '', size = 20, page= 1) {
+export async function getPersonalityByName(name = '', size = 20, page = 1) {
   let endpoint = `${
     endpoints.personality.personalityUrl
-  }?search=${name}&size=${size}`;
+    }?search=${name}&size=${size}`;
   if (page) {
     endpoint = endpoint + `&page=${page}`;
   }
