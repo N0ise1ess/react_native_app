@@ -26,6 +26,7 @@ const itemList = [
   {
     title: 'Избранное',
     image: img_star,
+    route: 'LibraryFavourite'
   },
   {
     title: 'Коллекции',
