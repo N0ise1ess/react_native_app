@@ -26,21 +26,22 @@ export const styles = (fontSize) => StyleSheet.create({
     width: 32,
     height: 32,
     marginLeft: 15,
-    marginRight: 15,
-    fontSize: 30,
-    color: '#2386e1',
+    marginRight: 5,
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
+    color: '#163D7D',
+    paddingTop: 2
   },
   titleStyle: {
-    color: '#163D7D',
+    color: 'black',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingRight: 5
+    paddingRight: 5,
+    fontWeight: 'bold',
+    flexWrap: 'wrap',
+    paddingBottom: 5
   },
   listItemStyle: {
-    paddingTop: 15,
+    paddingTop: 10,
     paddingBottom: 15,
     marginBottom: 5,
     backgroundColor: '#fff',
@@ -52,16 +53,12 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'column',
     width: width
   },
-  listStyle: {},
-  columnStyle: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
   listItemContainer: {
     flex: 1,
     width: '100%'
   },
   listItem: {
+    flex:1,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -72,8 +69,21 @@ export const styles = (fontSize) => StyleSheet.create({
   listBooks: {
     flex: 1,
     flexWrap: 'wrap',
-    color: 'grey',
+    color: '#747A7B',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+  },
+  collectionInfo: {
+    flex:1,
+    alignSelf: 'flex-start',
+    alignItems:'flex-start',
+    paddingBottom: 5
+  },
+  spinner: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btnFind: {
+    color: "#163D7D"
   }
 });
