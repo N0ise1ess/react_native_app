@@ -22,7 +22,7 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270'
   },
-  iconUniversity: {
+  iconGrid: {
     width: 32,
     height: 32,
     marginLeft: 15,

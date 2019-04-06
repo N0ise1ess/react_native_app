@@ -68,7 +68,7 @@ class InnerComponent extends Component {
                             onPress={() => {alert('Go to view')}}
                         >
                           <View style={styles.listItem}>
-                            <CustomIcon style={styles.iconUniversity} name="grid"/>
+                            <CustomIcon style={styles.iconGrid} name="grid"/>
                             <View style={styles.listItemContent}>
                               <View>
                                 <View style={styles.collectionTitle}>
