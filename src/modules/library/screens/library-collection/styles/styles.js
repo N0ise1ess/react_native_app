@@ -94,5 +94,10 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
     width: '100%',
     marginLeft: 35
+  },
+  authorName: {
+    color: '#747A7B',
+    fontFamily: 'MyriadPro-Regular',
+    fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
   }
 });

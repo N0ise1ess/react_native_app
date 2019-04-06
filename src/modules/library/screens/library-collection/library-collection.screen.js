@@ -20,7 +20,7 @@ const collections = [
       },
       {
         id:2,
-        author: 'Author 2',
+        author: 'Хорина И.В.',
         additionalInfo: '2015, Самар.гос.техн.ун-т, Производственный менеджмент, печатное издание',
         name: 'Экономика-математические методы исследования и моделирования национальной экономики: практические решения'
       },
@@ -169,7 +169,7 @@ class InnerComponent extends Component {
                     <View style={styles.booksListItemContainer}>
                       <View>
                         <View style={styles.collectionInfo}>
-                          <Text style={styles.listBooks}>{item.author}</Text>
+                          <Text style={styles.authorName}>{item.author}</Text>
                         </View>
                         <View style={styles.collectionTitle}>
                           <Text style={styles.titleStyle}>{item.name}</Text>
