@@ -67,16 +67,20 @@ export const styles = (fontSize) => StyleSheet.create({
     justifyContent: 'space-around'
   },
   listBooks: {
-    flex: 1,
-    flexWrap: 'wrap',
     color: '#747A7B',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),
+  },
+  collectionTitle: {
+    flex:1,
+    alignSelf: 'flex-start',
+    alignItems:'flex-start',
   },
   collectionInfo: {
     flex:1,
     alignSelf: 'flex-start',
     alignItems:'flex-start',
+    paddingTop:5,
     paddingBottom: 5
   },
   spinner: {

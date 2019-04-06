@@ -70,15 +70,15 @@ class InnerComponent extends Component {
                           <View style={styles.listItem}>
                             <CustomIcon style={styles.iconUniversity} name="grid"/>
                             <View style={styles.listItemContent}>
-                              <View style={styles.collectionInfo}>
-                                <View>
+                              <View>
+                                <View style={styles.collectionTitle}>
                                   <Text style={styles.titleStyle}>{item.title}</Text>
                                 </View>
-                                <View>
+                                <View style={styles.collectionInfo}>
                                   <Text style={styles.listBooks}>{item.books.length} книги</Text>
                                 </View>
                                   {item.books.length > 0 ?
-                                    <View>
+                                    <View style={styles.collectionInfo}>
                                       <Text style={styles.listBooks}>{item.books.join(", ")}</Text>
                                     </View> : null}
                               </View>
