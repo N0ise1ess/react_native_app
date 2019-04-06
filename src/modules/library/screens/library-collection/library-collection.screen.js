@@ -82,9 +82,7 @@ class InnerComponent extends Component {
                                       <Text style={styles.listBooks}>{item.books.join(", ")}</Text>
                                     </View> : null}
                               </View>
-
                             </View>
-
                           </View>
                         </ListItem>
                     )}
