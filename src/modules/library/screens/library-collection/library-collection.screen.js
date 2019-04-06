@@ -129,7 +129,7 @@ class InnerComponent extends Component {
                     onPress={() => {item.books ? this.setState({books : item.books}) : {}}}
                 >
                   <View style={styles.listItem}>
-                    <CustomIcon style={styles.iconUniversity} name="grid"/>
+                    <CustomIcon style={styles.iconGrid} name="grid"/>
                     <View style={styles.listItemContent}>
                       <View>
                         <View style={styles.collectionTitle}>
