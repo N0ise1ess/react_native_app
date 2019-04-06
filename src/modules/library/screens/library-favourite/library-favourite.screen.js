@@ -69,7 +69,7 @@ class InnerComponent extends Component {
     return {
       topBar: {
         title: {
-          text: 'Коллекции',
+          text: 'Избранное',
         },
         backButton: {
           id: 'back'
@@ -208,7 +208,7 @@ class InnerComponent extends Component {
       Navigation.mergeOptions(this.props.componentId, {
         topBar: {
           title: {
-            text: 'Коллекции'
+            text: 'Избранное'
           }
         },
       });
