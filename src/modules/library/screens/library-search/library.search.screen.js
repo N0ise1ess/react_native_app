@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 
 import { Container, Content, Button, Tab, TabHeading, Tabs, Icon, Input, Text, Picker, List } from 'native-base';
-import { ButtonBack, FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared/components';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 
 import { styles } from './styles';
@@ -42,7 +43,23 @@ class InnerComponent extends Component {
   }
 
   _handleSearch() {
-    // TODO show search results
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: 'Результаты поиска'
+        }
+      },
+    });
+    this.setState({
+      showResults: true,
+      results: [{
+        author: 'Бражникова М.А.',
+        name: 'Управления изменениями: базовый курс: учеб. пособие',
+        date: '2015',
+        place: 'Самар. гос.тех.ун-т',
+        section: 'Производственный менеджмент',
+        type: 'печатное издание'}]
+    });
   }
 
   _handleCriteriaSelect = (index, criteria) => {
@@ -187,23 +204,39 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus } = this.props;
-    const {styles} = this.state;
+    const {styles, results} = this.state;
     return (<Container style={styles.container}>
-      <View style={styles.upperButtons}>
-        <Button style={[styles.upperButton, styles.buttonElectronic]}>
-          {this._upperCase('Электронное')}
-        </Button>
-        <Button style={[styles.upperButton, styles.buttonPrinted]}>
-          {this._upperCase('Печатное')}
-        </Button>
-      </View>
-      <Tabs
-        tabContainerStyle={{elevation : 0}}
-        onChangeTab={({ i }) => this.setState({ currentTab: i })}
-        tabBarUnderlineStyle={styles.tabBarUnderline}>
-        {this._renderSimpleSearch()}
-        {this._renderAdvancedSearch()}
-      </Tabs>
+      {this.state.showResults ?
+        <List
+          dataArray={results}
+          renderRow={item => (
+            <TouchableOpacity onPress={() => this.handleItemClick(item)}>
+              <View style={styles.listItemStyle}>
+                <Text style={styles.textStyle}>{item.author}</Text>
+                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.textStyle}>{item.date}, {item.place}</Text>
+                <Text style={[styles.textStyle, styles.details]}>{item.section},</Text>
+                <Text style={[styles.textStyle, styles.details]}>{item.type}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+        : <Fragment><View style={styles.upperButtons}>
+          <Button style={[styles.upperButton, styles.buttonElectronic]}>
+            {this._upperCase('Электронное')}
+          </Button>
+          <Button style={[styles.upperButton, styles.buttonPrinted]}>
+            {this._upperCase('Печатное')}
+          </Button>
+        </View>
+        <Tabs
+          tabContainerStyle={{elevation : 0}}
+          onChangeTab={({ i }) => this.setState({ currentTab: i })}
+          tabBarUnderlineStyle={styles.tabBarUnderline}>
+          {this._renderSimpleSearch()}
+          {this._renderAdvancedSearch()}
+        </Tabs>
+      </Fragment>}
       <FooterSection {...this.props} />
     </Container>);
   }
