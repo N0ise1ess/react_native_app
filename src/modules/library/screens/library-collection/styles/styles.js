@@ -89,5 +89,10 @@ export const styles = (fontSize) => StyleSheet.create({
   },
   btnFind: {
     color: "#163D7D"
+  },
+  booksListItemContainer: {
+    flex: 1,
+    width: '100%',
+    marginLeft: 35
   }
 });
