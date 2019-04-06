@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Keyboard, FlatList, View} from "react-native";
 import {CustomIcon} from "../../../shared/components/custom-icon";
 import {FooterSection} from "../../../shared/components/footer";
+import {Navigation} from "react-native-navigation";
 
 const collections = [
   {
@@ -73,6 +74,9 @@ class InnerComponent extends Component {
         title: {
           text: 'Коллекции',
         },
+        backButton: {
+          id: 'back'
+        }
       }
     };
   }
@@ -82,8 +86,10 @@ class InnerComponent extends Component {
     this.state = {
       styles: styles(props.fontSize),
       searchedText: '',
-      books: []
+      books: [],
+      step: 0
     };
+    Navigation.events().bindComponent(this);
   }
 
   render() {
@@ -126,7 +132,7 @@ class InnerComponent extends Component {
                 <ListItem
                     style={styles.listItemStyle}
                     button
-                    onPress={() => {item.books ? this.setState({books : item.books}) : {}}}
+                    onPress={() => {item.books ? this.handleClick(item.books, item.title) : {}}}
                 >
                   <View style={styles.listItem}>
                     <CustomIcon style={styles.iconGrid} name="grid"/>
@@ -160,9 +166,7 @@ class InnerComponent extends Component {
                 <ListItem
                     style={styles.listItemStyle}
                     button
-                    onPress={() => {
-                      alert('Book')
-                    }}
+                    onPress={() => {}}
                 >
                   <View style={styles.listItem}>
                     <View style={styles.booksListItemContainer}>
@@ -181,6 +185,35 @@ class InnerComponent extends Component {
                   </View>
                 </ListItem>
             )}/>
+  }
+
+  navigationButtonPressed({ buttonId }) {
+    buttonId === 'buttonLeft' && this._handleBackButton();
+  }
+
+  handleClick(books, title) {
+    this.setState({books : books, step: 1})
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: title
+        }
+      }
+    });
+  }
+
+  _handleBackButton = () => {
+    const { step } = this.state;
+    if (step > 0) {
+      this.setState({books : [], step: 0})
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          title: {
+            text: 'Коллекции'
+          }
+        },
+      });
+    } else Navigation.pop(this.props.componentId);
   }
 
   onHandleSubmit = () => {
