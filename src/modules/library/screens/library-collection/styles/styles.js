@@ -66,7 +66,7 @@ export const styles = (fontSize) => StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around'
   },
-  listBooks: {
+  generalText: {
     color: '#747A7B',
     fontFamily: 'MyriadPro-Regular',
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_14, fontSize),

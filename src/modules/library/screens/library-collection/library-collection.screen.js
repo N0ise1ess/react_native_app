@@ -136,12 +136,11 @@ class InnerComponent extends Component {
                           <Text style={styles.titleStyle}>{item.title}</Text>
                         </View>
                         <View style={styles.collectionInfo}>
-                          <Text style={styles.listBooks}>{item.books.length} книги</Text>
+                          <Text style={styles.generalText}>{item.books.length} книги</Text>
                         </View>
                         {item.books.length > 0 ?
                             <View style={styles.collectionInfo}>
-                              <Text
-                                  style={styles.listBooks}>{item.booksTitles.join(", ")}</Text>
+                              <Text style={styles.generalText}>{item.booksTitles.join(", ")}</Text>
                             </View> : null}
                       </View>
                     </View>
@@ -175,7 +174,7 @@ class InnerComponent extends Component {
                           <Text style={styles.titleStyle}>{item.name}</Text>
                         </View>
                         <View style={styles.collectionInfo}>
-                          <Text style={styles.listBooks}>{item.additionalInfo}</Text>
+                          <Text style={styles.generalText}>{item.additionalInfo}</Text>
                         </View>
                       </View>
                     </View>
