@@ -37,7 +37,8 @@ import {
   BuildingDormsCardScreen,
   RequestsInfoScreen,
   RequestsLibraryScreen,
-  LibrarySearchScreen
+  LibrarySearchScreen,
+  LibraryCollectionScreen
 } from '../modules';
 
 const AppStack = createStackNavigator(
@@ -46,6 +47,7 @@ const AppStack = createStackNavigator(
     Home: HomeScreen,
     Library: LibraryScreen,
     LibraryCard: LibraryCardScreen,
+    LibraryCollections: LibraryCollectionScreen,
     Services: ServicesScreen,
     RequestsInfo: RequestsInfoScreen,
     RequestsLibrary: RequestsLibraryScreen,

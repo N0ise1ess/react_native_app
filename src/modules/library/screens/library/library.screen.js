@@ -30,6 +30,7 @@ const itemList = [
   {
     title: 'Коллекции',
     image: img_collection,
+    route: 'LibraryCollections'
   },
   {
     title: 'Список книг',
