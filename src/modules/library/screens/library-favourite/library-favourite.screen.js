@@ -11,7 +11,6 @@ const collections = [
   {
     id: 1,
     title: 'Раздел по умолчанию',
-    count: 10,
     books: [
       {
         id: 1,
@@ -30,7 +29,6 @@ const collections = [
   {
     id: 2,
     title: 'Экономика',
-    count: 5,
     books: [
       {
         id: 1,
@@ -49,7 +47,6 @@ const collections = [
   {
     id: 3,
     title: 'Разработка нефтянных месторождений',
-    count: 5,
     books: [
       {
         id: 1,
@@ -146,7 +143,7 @@ class InnerComponent extends Component {
                       <Text style={styles.titleStyle}>{item.title}</Text>
                     </View>
                     <View style={styles.collectionInfo}>
-                      <Text style={styles.generalText}>{item.count} книг</Text>
+                      <Text style={styles.generalText}>{item.books.length} книги</Text>
                     </View>
                   </View>
                 </View>
@@ -164,7 +161,7 @@ class InnerComponent extends Component {
         keyExtractor={(item, index) => item.id}
         renderItem={({item, index}) => (
             <ListItem
-                style={styles.listItemStyle}
+                style={[styles.listItemStyle, styles.marginTop0]}
                 button
                 onPress={() => {
                 }}

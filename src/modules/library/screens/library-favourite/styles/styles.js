@@ -54,6 +54,9 @@ export const styles = (fontSize) => StyleSheet.create({
     flexDirection: 'column',
     width: width
   },
+  marginTop0: {
+    marginTop: 0,
+  },
   listItemContainer: {
     flex: 1,
     width: '100%'
