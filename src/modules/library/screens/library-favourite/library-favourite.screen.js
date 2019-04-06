@@ -93,9 +93,10 @@ class InnerComponent extends Component {
     const {styles, books} = this.state
     const {collectionLoading} = this.props
 
+    const booksPresented = books && books.length > 0;
     return (
         <Container style={styles.container}>
-          {books && books.length > 0 ?
+          {booksPresented ?
             <Item style={styles.searchBar}>
               <Icon name="ios-search" style={styles.searchIcon}/>
               <Input
@@ -111,7 +112,7 @@ class InnerComponent extends Component {
           }
           <Content ref={node => this.content = node}>
             {collectionLoading ? <Spinner color='blue' style={styles.spinner}/>
-                : books && books.length > 0
+                : booksPresented
                     ? this._renderBooksList()
                     : this._renderCollection()
             }
