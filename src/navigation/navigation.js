@@ -26,6 +26,8 @@ export const registerScreens = () => {
     Navigation.registerComponentWithRedux(`About`, () => Modules.AboutScreen, Provider, store);
     Navigation.registerComponentWithRedux(`Library`, () => Modules.LibraryScreen, Provider, store);
     Navigation.registerComponentWithRedux(`LibraryCard`, () => Modules.LibraryCardScreen, Provider, store);
+    Navigation.registerComponentWithRedux(`LibraryCollections`, () => Modules.LibraryCollectionScreen, Provider, store);
+    Navigation.registerComponentWithRedux(`LibraryFavourite`, () => Modules.LibraryFavouriteScreen, Provider, store);
     Navigation.registerComponentWithRedux(`Services`, () => Modules.ServicesScreen, Provider, store);
     Navigation.registerComponentWithRedux(`RequestsInfo`, () => Modules.RequestsInfoScreen, Provider, store);
     Navigation.registerComponentWithRedux(`RequestsLibrary`, () => Modules.RequestsLibraryScreen, Provider, store);

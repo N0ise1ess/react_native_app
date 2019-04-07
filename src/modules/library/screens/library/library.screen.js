@@ -26,10 +26,12 @@ const itemList = [
   {
     title: 'Избранное',
     image: img_star,
+    route: 'LibraryFavourite'
   },
   {
     title: 'Коллекции',
     image: img_collection,
+    route: 'LibraryCollections'
   },
   {
     title: 'Список книг',

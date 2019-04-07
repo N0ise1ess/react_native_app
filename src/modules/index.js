@@ -10,7 +10,9 @@ export {
     ServicesScreen,
     RequestsInfoScreen,
     RequestsLibraryScreen,
-    LibrarySearchScreen
+    LibrarySearchScreen,
+    LibraryCollectionScreen,
+    LibraryFavouriteScreen
  } from './library';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { NotificationsScreen } from './notifications';
