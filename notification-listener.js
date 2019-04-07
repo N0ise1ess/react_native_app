@@ -6,8 +6,11 @@ import { CustomSnackbar } from './src/modules/shared/components';
 
 export class NotificationListener {
   subscribeToNotifications() {
-    const channel = new firebase.notifications.Android.Channel('notifications_channel', 'Notifications Channel', firebase.notifications.Android.Importance.Max)
-    .setDescription('Campus notifications');
+    const channel = new firebase.notifications.Android.Channel(
+      'notifications_channel',
+      'Notifications Channel',
+      firebase.notifications.Android.Importance.Max,
+    ).setDescription('Campus notifications');
     firebase.notifications().android.createChannel(channel);
     Navigation.events().registerComponentDidAppearListener(
       ({ componentId }) => {
@@ -55,7 +58,7 @@ export class NotificationListener {
           .setNotificationId(message.notificationId)
           .setTitle(message.title)
           .setBody(message.body)
-        //   .setSound('default')
+          .setSound('default')
           .setData(message.data);
 
         notification.android
@@ -65,7 +68,18 @@ export class NotificationListener {
 
         firebase.notifications().displayNotification(notification);
       });
-
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification();
+    if (notificationOpen) {
+      setTimeout(() => {
+        Navigation.push(this.componentId, {
+          component: {
+            name: 'Notifications',
+          },
+        });
+      }, 1000);
+    }
     firebase.notifications().onNotificationOpened((tapped) => {
       if (tapped) {
         firebase
