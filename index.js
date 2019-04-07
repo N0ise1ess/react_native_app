@@ -1,7 +1,7 @@
 /** @format */
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/navigation/navigation';
-import { NotificationListener } from './notifications';
+import { NotificationListener } from './notification-listener';
 
 Navigation.events().registerAppLaunchedListener(async () => {
   await Navigation.setDefaultOptions({
