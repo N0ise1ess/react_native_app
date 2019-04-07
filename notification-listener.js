@@ -2,7 +2,7 @@ import { AsyncStorage, Clipboard } from 'react-native';
 import firebase from 'react-native-firebase';
 import { Navigation } from 'react-native-navigation';
 
-import { CustomSnackbar } from './src/modules/shared/components';
+import { CustomSnackbar } from './src/modules/shared';
 
 export class NotificationListener {
   subscribeToNotifications() {
@@ -12,11 +12,9 @@ export class NotificationListener {
       firebase.notifications.Android.Importance.Max,
     ).setDescription('Campus notifications');
     firebase.notifications().android.createChannel(channel);
-    Navigation.events().registerComponentDidAppearListener(
-      ({ componentId }) => {
-        this.componentId = componentId;
-      },
-    );
+    Navigation.events().registerComponentDidAppearListener(({ componentId }) => {
+      this.componentId = componentId;
+    });
 
     this.checkPermission();
     this.createNotificationListeners();
@@ -51,26 +49,22 @@ export class NotificationListener {
     }
   }
   async createNotificationListeners() {
-    this.notificationListener = firebase
-      .notifications()
-      .onNotification((message) => {
-        const notification = new firebase.notifications.Notification()
-          .setNotificationId(message.notificationId)
-          .setTitle(message.title)
-          .setBody(message.body)
-          .setSound('default')
-          .setData(message.data);
+    this.notificationListener = firebase.notifications().onNotification((message) => {
+      const notification = new firebase.notifications.Notification()
+        .setNotificationId(message.notificationId)
+        .setTitle(message.title)
+        .setBody(message.body)
+        .setSound('default')
+        .setData(message.data);
 
-        notification.android
-          .setChannelId('notifications_channel')
-          .android.setSmallIcon('ic_notification')
-          .android.setPriority(firebase.notifications.Android.Priority.Max);
+      notification.android
+        .setChannelId('notifications_channel')
+        .android.setSmallIcon('ic_notification')
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
 
-        firebase.notifications().displayNotification(notification);
-      });
-    const notificationOpen = await firebase
-      .notifications()
-      .getInitialNotification();
+      firebase.notifications().displayNotification(notification);
+    });
+    const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
       setTimeout(() => {
         Navigation.push(this.componentId, {
@@ -82,9 +76,7 @@ export class NotificationListener {
     }
     firebase.notifications().onNotificationOpened((tapped) => {
       if (tapped) {
-        firebase
-          .notifications()
-          .removeDeliveredNotification(tapped.notification.notificationId);
+        firebase.notifications().removeDeliveredNotification(tapped.notification.notificationId);
         Navigation.push(this.componentId, {
           component: {
             name: 'Notifications',

@@ -22,7 +22,7 @@ import {
   img_wifi,
   img_reports,
 } from '../../../../assets/images';
-import { CardItem, FooterSection } from '../../../shared/components';
+import { CardItem, FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const cardList = [
@@ -159,24 +159,21 @@ class InnerComponent extends Component {
     return {
       topBar: {
         title: {
-          text: lastName || firstName || secondName
-            ? `${lastName} ${firstName} ${secondName}`
-            : 'Гость',
+          text: lastName || firstName || secondName ? `${lastName} ${firstName} ${secondName}` : 'Гость',
         },
         leftButtons: [
           {
             visible: false,
             id: 'buttonOne',
             icon: userStatus === 'student' ? img_student : img_account,
-          }
+          },
         ],
-      }
+      },
     };
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-      this.setState({ styles: styles(this.props.fontSize) });
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
@@ -203,7 +200,7 @@ class InnerComponent extends Component {
                       Navigation.push(this.props.componentId, {
                         component: {
                           name: item.route,
-                        }
+                        },
                       })
                     }
                   />
@@ -216,29 +213,29 @@ class InnerComponent extends Component {
               {userStatus === 'guest' ? (
                 <Text />
               ) : (
-                  cardList.map((image, index) => (
-                    <View
-                      onPress={() => move(index)}
-                      key={index}
-                      style={[
-                        {
-                          backgroundColor: '#163D7D',
-                          bottom: 10,
-                          width: 10,
-                          height: 10,
-                          borderRadius: 20,
-                          marginLeft: 5,
-                          marginRight: 5,
-                        },
-                        position === index && styles.buttonSelected,
-                      ]}
-                    />
-                  ))
-                )}
+                cardList.map((image, index) => (
+                  <View
+                    onPress={() => move(index)}
+                    key={index}
+                    style={[
+                      {
+                        backgroundColor: '#163D7D',
+                        bottom: 10,
+                        width: 10,
+                        height: 10,
+                        borderRadius: 20,
+                        marginLeft: 5,
+                        marginRight: 5,
+                      },
+                      position === index && styles.buttonSelected,
+                    ]}
+                  />
+                ))
+              )}
             </View>
           )}
         />
-        <FooterSection {...this.props} navPosition='Home'/>
+        <FooterSection {...this.props} navPosition="Home" />
       </Container>
     );
   }

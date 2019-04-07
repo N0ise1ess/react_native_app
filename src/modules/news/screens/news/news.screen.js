@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet, Dimensions, View, TouchableOpacity, Text, } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SceneMap, TabView } from 'react-native-tab-view';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
-import { ButtonBack, FooterSection } from '../../../shared/components';
-import { HeaderProvider, Tab, Head } from '../../components';
-
+import { FooterSection } from '../../../shared';
+import { Head, HeaderProvider, Tab } from '../../components';
+import { getEventsPagination, getNewsPagination, getUpdatesPagination } from '../../store/news-actions';
+import { ifAndroid, ifIphoneX } from '../../utils';
 import { styles as myStyles } from './styles';
-import { ifIphoneX, ifAndroid } from '../../utils';
 
 const initialLayout = {
   width: Dimensions.get('window').width,
@@ -17,7 +15,6 @@ const initialLayout = {
 };
 
 class InnerComponent extends React.Component {
-
   static options(passProps) {
     return {
       topBar: {
@@ -25,7 +22,7 @@ class InnerComponent extends React.Component {
           text: 'Новости университета',
         },
         leftButtons: [],
-      }
+      },
     };
   }
 
@@ -47,48 +44,55 @@ class InnerComponent extends React.Component {
     animation.onTabPress(this.state.routes[index]);
     this.setState({
       currentTab: this.state.routes[index].key,
-      index
+      index,
     });
-  }
+  };
 
   _getLabelText = ({ route }) => route.title;
 
   _upperCase(word) {
-    return <Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return (
+      <Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>
+        {word.toUpperCase()}
+      </Text>
+    );
   }
 
-  _renderHeader = (animation, canJumpToTab) => props => (
+  _renderHeader = (animation, canJumpToTab) => (props) => (
     <Head
       animation={animation}
       slider={this.props.slider}
       imagesOnLoading={this.props.imagesOnLoading}
-      renderTabBar={() =>
-        <View
-          style={this.state.styles.tabbarBox}
-        >{
-            props.navigationState.routes.map((route, i) => (<TouchableOpacity
+      renderTabBar={() => (
+        <View style={this.state.styles.tabbarBox}>
+          {props.navigationState.routes.map((route, i) => (
+            <TouchableOpacity
               key={i}
               onPress={() => {
                 if (route.key != this.state.currentTab && canJumpToTab) {
                   animation.onTabPress(route);
-                  this.setState({ currentTab: route.key, index: i })
+                  this.setState({ currentTab: route.key, index: i });
                 }
               }}
-              style={[this.state.styles.tabStyle
-                , route.key === this.state.currentTab && this.state.styles.activeTabStyle
-                , i === 0 && this.state.styles.tabLeft
-                , i === 2 && this.state.styles.tabRight
+              style={[
+                this.state.styles.tabStyle,
+                route.key === this.state.currentTab && this.state.styles.activeTabStyle,
+                i === 0 && this.state.styles.tabLeft,
+                i === 2 && this.state.styles.tabRight,
               ]}
             >
               {this._upperCase(route.title)}
-            </TouchableOpacity>))}
+            </TouchableOpacity>
+          ))}
         </View>
-      }
+      )}
     />
   );
-  
-  renderTab = connect(mapStateToProps,
-    mapDispatchToProps)((props) => <Tab {...props} componentId={this.props.componentId}/>)
+
+  renderTab = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )((props) => <Tab {...props} componentId={this.props.componentId} />);
 
   _renderScene = SceneMap({
     news: this.renderTab,
@@ -106,8 +110,8 @@ class InnerComponent extends React.Component {
     return (
       <React.Fragment>
         <HeaderProvider currentTab={this.state.currentTab}>
-          {(animation, { canJumpToTab }) =>
-            <View style={{flex: 1}}>
+          {(animation, { canJumpToTab }) => (
+            <View style={{ flex: 1 }}>
               <TabView
                 style={styles.container}
                 navigationState={this.state}
@@ -123,7 +127,7 @@ class InnerComponent extends React.Component {
                 useNativeDriver
               />
             </View>
-          }
+          )}
         </HeaderProvider>
         <FooterSection {...this.props} />
       </React.Fragment>
@@ -131,8 +135,7 @@ class InnerComponent extends React.Component {
   }
 }
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.newsReducer,
@@ -140,7 +143,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getNews: (page) => dispatch(getNewsPagination(page)),
   getUpdate: (page) => dispatch(getUpdatesPagination(page)),
   getEvents: (page) => dispatch(getEventsPagination(page)),
@@ -152,30 +155,28 @@ export const NewsScreen = connect(
   mapDispatchToProps,
 )(InnerComponent);
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#edeef0'
+    backgroundColor: '#edeef0',
   },
   tabbar: {
     backgroundColor: '#fff',
-    elevation: 0
+    elevation: 0,
   },
   indicator: {
-    backgroundColor: '#45688e'
+    backgroundColor: '#45688e',
   },
   label: {
     color: '#45688e',
     margin: 0,
     marginTop: 6,
     marginBottom: 6,
-    fontWeight: '400'
+    fontWeight: '400',
   },
   suggestionWrap: {
     position: 'absolute',
     backgroundColor: '#fff',
-    zIndex: 3
-  }
+    zIndex: 3,
+  },
 });

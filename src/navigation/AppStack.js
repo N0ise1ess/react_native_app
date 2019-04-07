@@ -1,14 +1,12 @@
-import { Button, Right } from 'native-base';
+import { Right } from 'native-base';
 import React from 'react';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { CustomIcon } from '../modules/shared/components/custom-icon';
 import { TouchableOpacity } from 'react-native';
-
-import { styles } from './styles';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import {
   AboutScreen,
   AccountScreen,
+  BuildingDormsCardScreen,
   BuildingDormsScreen,
   ChatScreen,
   ContactsScreen,
@@ -16,8 +14,10 @@ import {
   FinanceScreen,
   HomeScreen,
   LibraryCardScreen,
+  LibraryCollectionScreen,
+  LibraryFavouriteScreen,
   LibraryScreen,
-  ServicesScreen,
+  LibrarySearchScreen,
   MainConfigScreen,
   NewsDetailsScreen,
   NewsScreen,
@@ -29,18 +29,17 @@ import {
   PersonalRatingScreen,
   QuestionnairesScreen,
   QuestionnairesStep,
+  ReportsScreen,
+  RequestsInfoScreen,
+  RequestsLibraryScreen,
+  ScratchBookScreen,
+  ServicesScreen,
   SettingsScreen,
   TimeTableScreen,
   WifiAccessScreen,
-  ScratchBookScreen,
-  ReportsScreen,
-  BuildingDormsCardScreen,
-  RequestsInfoScreen,
-  RequestsLibraryScreen,
-  LibrarySearchScreen,
-  LibraryCollectionScreen,
-  LibraryFavouriteScreen
 } from '../modules';
+import { CustomIcon } from '../modules/shared';
+import { styles } from './styles';
 
 const AppStack = createStackNavigator(
   {
@@ -87,7 +86,7 @@ const AppStack = createStackNavigator(
       headerRight: (
         <Right>
           <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-            <CustomIcon name={"settings"} style={styles.rightIconStyle} />
+            <CustomIcon name={'settings'} style={styles.rightIconStyle} />
           </TouchableOpacity>
         </Right>
       ),

@@ -1,27 +1,28 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import * as settingsFonts from '../../../../../constants/styles';
-import {getSizeFonts} from '../../../../shared/functions/styles';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+import { getSizeFonts, fontSettings } from '../../../../shared';
 
-export const styles = (fontSize) => StyleSheet.create({
+const { width, height } = Dimensions.get('window');
+
+export const styles = (fontSize) =>
+  StyleSheet.create({
     container: {
-        backgroundColor: '#CED8DA',
-        flex: 1,
-        alignItems: 'center'
+      backgroundColor: '#CED8DA',
+      flex: 1,
+      alignItems: 'center',
     },
     scrollContainer: {
-        backgroundColor: '#CED8DA',
-        flex: 1,
-        alignItems: 'center',
-        width: width,
-        height,
-        minHeight: 450,
+      backgroundColor: '#CED8DA',
+      flex: 1,
+      alignItems: 'center',
+      width: width,
+      height,
+      minHeight: 450,
     },
-    elevation0 : {
-        elevation: 0
+    elevation0: {
+      elevation: 0,
     },
     height0: {
-        height: 0
-    }
-});
+      height: 0,
+    },
+  });

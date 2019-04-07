@@ -1,24 +1,22 @@
-import { connect } from 'react-redux';
+import { Container, Spinner, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 
-import { Container, Tab, TabHeading, Tabs, Text, Spinner } from 'native-base';
-
-import { styles } from './styles';
-import { FooterSection, CustomIcon } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared';
+import * as actions from '../../store/scratchbook-actions';
 import { Attendance } from '../attendance';
 import { Result } from '../result';
-import * as actions from '../../../../actions/scratchBookAction';
+import { styles } from './styles';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Зачетная книжка',
         },
-      }
+      },
     };
   }
 
@@ -28,7 +26,7 @@ class InnerComponent extends Component {
       currentTab: 0,
       currentYearId: 0,
       currentSemesterId: 0,
-      styles: styles(props.fontSize)
+      styles: styles(props.fontSize),
     };
   }
 
@@ -37,34 +35,40 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   previous = (field) => {
     if (field === 'year') {
       this.setState({
-        currentYearId : !!this.state.currentYearId ? this.state.currentYearId - 1 : this.props.dataScratchBook.length - 1
+        currentYearId: !!this.state.currentYearId
+          ? this.state.currentYearId - 1
+          : this.props.dataScratchBook.length - 1,
       });
     } else {
       const semesters = this.props.dataScratchBook[this.state.currentYearId].semesters;
       this.setState({
-        currentSemesterId : !!this.state.currentSemesterId ? this.state.currentSemesterId - 1 : semesters.length - 1
+        currentSemesterId: !!this.state.currentSemesterId ? this.state.currentSemesterId - 1 : semesters.length - 1,
       });
     }
-  }
+  };
 
   next = (field) => {
     if (field === 'year') {
       this.setState({
-        currentYearId : !!(this.props.dataScratchBook.length - 1 - this.state.currentYearId) ? this.state.currentYearId + 1 : 0
+        currentYearId: !!(this.props.dataScratchBook.length - 1 - this.state.currentYearId)
+          ? this.state.currentYearId + 1
+          : 0,
       });
     } else {
       const semesters = this.props.dataScratchBook[this.state.currentYearId].semesters;
       this.setState({
-        currentSemesterId : !!(semesters.length - 1 - this.state.currentSemesterId) ? this.state.currentSemesterId + 1 : 0
+        currentSemesterId: !!(semesters.length - 1 - this.state.currentSemesterId)
+          ? this.state.currentSemesterId + 1
+          : 0,
       });
     }
-  }
+  };
 
   _upperCase(word) {
     return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
@@ -72,15 +76,13 @@ class InnerComponent extends Component {
 
   _renderResult = () => {
     const { currentTab, styles } = this.state;
-    const {dataScratchBook} = this.props;
+    const { dataScratchBook } = this.props;
 
     return (
       <Tab
         heading={
           <TabHeading style={styles.tabHeaderStyle}>
-            <View
-              style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}
-            >
+            <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}>
               {this._upperCase('Результат')}
             </View>
           </TabHeading>
@@ -88,64 +90,82 @@ class InnerComponent extends Component {
       >
         <Result
           data={dataScratchBook[this.state.currentYearId].semesters[this.state.currentSemesterId].disciplines}
-          fontSize={this.props.fontSize} />
+          fontSize={this.props.fontSize}
+        />
       </Tab>
     );
   };
 
   _renderAttendance = () => {
     const { currentYearId, currentSemesterId, styles, currentTab } = this.state;
-    return <Tab heading={<TabHeading style={styles.tabHeaderStyle}>
-      <View
-        style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 0 && styles.activeTabStyle]}>
-        {this._upperCase('Посещаемость')}
-      </View>
-      </TabHeading>}>
-      <Attendance 
-        data={this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].disciplines}
-        fontSize={this.props.fontSize} />
-    </Tab>
+    return (
+      <Tab
+        heading={
+          <TabHeading style={styles.tabHeaderStyle}>
+            <View
+              style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 0 && styles.activeTabStyle]}
+            >
+              {this._upperCase('Посещаемость')}
+            </View>
+          </TabHeading>
+        }
+      >
+        <Attendance
+          data={this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].disciplines}
+          fontSize={this.props.fontSize}
+        />
+      </Tab>
+    );
   };
 
   render() {
     const { userStatus } = this.props;
     const { currentYearId, currentSemesterId, styles } = this.state;
     return (
-    <Container style={styles.container}>
-    {this.props.isLoading ? <View style={styles.view}><Spinner color='blue'/></View> : <React.Fragment>
-        <View style={styles.year}>
-          <TouchableOpacity onPress={() => this.previous('year')}>
-            <CustomIcon name="arrow_left" style={styles.iconStyle}/>
-          </TouchableOpacity>
-          <Text style={{color:'#486694'}}>Группа {this.props.dataScratchBook[currentYearId].studYear}</Text>
-          <TouchableOpacity onPress={() => this.next('year')}>
-            <CustomIcon name="arrow_right" style={styles.iconStyle}/>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.semester}>
-          <TouchableOpacity onPress={() => this.previous('semester')}>
-            <CustomIcon name="arrow_left" style={styles.iconStyle}/>
-          </TouchableOpacity>
-          <Text style={{color:'#486694'}}>{this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].name}</Text>
-          <TouchableOpacity onPress={() => this.next('semester')}>
-            <CustomIcon name="arrow_right" style={styles.iconStyle}/>
-          </TouchableOpacity>
-        </View>
-        <Tabs
-          tabContainerStyle={{elevation : 0}}
-          onChangeTab={({ i }) => this.setState({ currentTab: i })}
-          tabBarUnderlineStyle={{ backgroundColor: 'transparent', border: 0 }}>
-          {this._renderResult()}
-          {this._renderAttendance()}
-        </Tabs>
-        </React.Fragment> }
-        <FooterSection {...this.props}/>
+      <Container style={styles.container}>
+        {this.props.isLoading ? (
+          <View style={styles.view}>
+            <Spinner color="blue" />
+          </View>
+        ) : (
+          <React.Fragment>
+            <View style={styles.year}>
+              <TouchableOpacity onPress={() => this.previous('year')}>
+                <CustomIcon name="arrow_left" style={styles.iconStyle} />
+              </TouchableOpacity>
+              <Text style={{ color: '#486694' }}>Группа {this.props.dataScratchBook[currentYearId].studYear}</Text>
+              <TouchableOpacity onPress={() => this.next('year')}>
+                <CustomIcon name="arrow_right" style={styles.iconStyle} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.semester}>
+              <TouchableOpacity onPress={() => this.previous('semester')}>
+                <CustomIcon name="arrow_left" style={styles.iconStyle} />
+              </TouchableOpacity>
+              <Text style={{ color: '#486694' }}>
+                {this.props.dataScratchBook[currentYearId].semesters[currentSemesterId].name}
+              </Text>
+              <TouchableOpacity onPress={() => this.next('semester')}>
+                <CustomIcon name="arrow_right" style={styles.iconStyle} />
+              </TouchableOpacity>
+            </View>
+            <Tabs
+              tabContainerStyle={{ elevation: 0 }}
+              onChangeTab={({ i }) => this.setState({ currentTab: i })}
+              tabBarUnderlineStyle={{ backgroundColor: 'transparent', border: 0 }}
+            >
+              {this._renderResult()}
+              {this._renderAttendance()}
+            </Tabs>
+          </React.Fragment>
+        )}
+        <FooterSection {...this.props} />
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
@@ -154,5 +174,6 @@ const mapStateToProps = state => {
 };
 
 export const ScratchBookScreen = connect(
-  mapStateToProps, {...actions}
+  mapStateToProps,
+  { ...actions },
 )(InnerComponent);

@@ -1,10 +1,10 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import { logout } from '../../../../actions/authorizationAction';
-import { FooterSection } from '../../../shared/components';
+import { logout } from '../../../auth/store/auth-actions';
+import { FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
@@ -16,14 +16,13 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Уведомления',
         },
-      }
+      },
     };
   }
 
@@ -31,7 +30,7 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
-    }
+    };
   }
 
   onAuthHandle = () => {
@@ -39,17 +38,17 @@ class InnerComponent extends Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'Login',
-      }
-    })
+      },
+    });
   };
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
     const { userStatus } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Content>
@@ -57,7 +56,7 @@ class InnerComponent extends Component {
             <List
               style={styles.listStyle}
               dataArray={itemList}
-              renderRow={item => (
+              renderRow={(item) => (
                 <ListItem style={styles.listItemStyle}>
                   <Text style={styles.dateStyle}>{item.date}</Text>
                   <Text style={styles.titleStyle}>{item.title}</Text>
@@ -67,20 +66,20 @@ class InnerComponent extends Component {
             />
           )}
         </Content>
-        <FooterSection {...this.props} navPosition='Notifications' />
+        <FooterSection {...this.props} navPosition="Notifications" />
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
   dispatch,
 });

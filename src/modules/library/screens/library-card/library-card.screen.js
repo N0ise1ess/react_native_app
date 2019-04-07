@@ -3,24 +3,22 @@ import { Container, Content, Icon, List, Spinner, Tab, TabHeading, Tabs, Text } 
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../../../actions/libraryAction';
-import { FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared';
+import { getLibraryBook, getLibraryCard, getLibraryQRCode } from '../../store/library-actions';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Читательский билет',
         },
-      }
+      },
     };
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +32,7 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   componentDidMount() {
@@ -44,13 +42,17 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word) {
-    return <Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
+    return (
+      <Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>
+        {word.toUpperCase()}
+      </Text>
+    );
   }
 
   renderLibraryCard = () => {
     const { firstName, lastName, secondName, role, id, qrcodeData } = this.props;
     const { currentTab, styles } = this.state;
-    const studentIndex = role.findIndex(item => item.type === 'STUDENT');
+    const studentIndex = role.findIndex((item) => item.type === 'STUDENT');
     return (
       <Tab
         heading={
@@ -64,7 +66,7 @@ class InnerComponent extends Component {
         }
       >
         <Content style={styles.tabSectionStyle}>
-          {role.some(item => item['type'] === 'STUDENT') ? (
+          {role.some((item) => item['type'] === 'STUDENT') ? (
             role[studentIndex].details && role[studentIndex].details.length === 0 ? (
               <View style={styles.noDataStyle}>
                 <Text style={styles.noDataTextStyle}>Пользователь не содержит данных</Text>
@@ -88,7 +90,8 @@ class InnerComponent extends Component {
               </View>
             )
           ) : (
-            (role.some(item => item['type'] === 'EMPLOYEE_PPS') || role.some(item => item['type'] === 'EMPLOYEE')) && (
+            (role.some((item) => item['type'] === 'EMPLOYEE_PPS') ||
+              role.some((item) => item['type'] === 'EMPLOYEE')) && (
               <View style={styles.dataSection}>
                 <Text style={styles.label}>ФИО</Text>
                 <Text style={styles.dataText}>{`${lastName} ${firstName} ${secondName}`}</Text>
@@ -101,11 +104,7 @@ class InnerComponent extends Component {
           )}
           <View style={styles.qrcodeSection}>
             {qrcodeData && (
-              <Image
-                onLoad={() => <Spinner color="blue" />}
-                source={{ uri: qrcodeData }}
-                style={styles.qrcodeImage}
-              />
+              <Image onLoad={() => <Spinner color="blue" />} source={{ uri: qrcodeData }} style={styles.qrcodeImage} />
             )}
           </View>
         </Content>
@@ -113,8 +112,8 @@ class InnerComponent extends Component {
     );
   };
 
-  formattedDate = date => {
-    console.log('date', date)
+  formattedDate = (date) => {
+    console.log('date', date);
     // const newDate = moment(date, 'MM-DD-YYYY HH:mm:ss')._i;
     return moment(date).format('DD.MM.YYYY');
   };
@@ -143,15 +142,15 @@ class InnerComponent extends Component {
           <Content style={{ backgroundColor: '#CED8DA', marginTop: 40 }}>
             <List
               dataArray={bookInfo}
-              renderRow={item => (
+              renderRow={(item) => (
                 <View style={styles.listStyle}>
                   <View style={styles.listItemStyle}>
                     <View
-                      style={{ 
-                        backgroundColor: item.returned ? '#163D7D' : 'red', 
-                        width: 10, 
-                        height: 10, 
-                        borderRadius: 30, 
+                      style={{
+                        backgroundColor: item.returned ? '#163D7D' : 'red',
+                        width: 10,
+                        height: 10,
+                        borderRadius: 30,
                         marginTop: 5,
                         marginRight: 10,
                       }}
@@ -159,9 +158,7 @@ class InnerComponent extends Component {
                     <Text style={styles.bookTitle}>{item.content.description}</Text>
                   </View>
                   <Text style={styles.bookAuthor}>{item.content.author}</Text>
-                  <Text style={styles.issueDate}>
-                    Выдано {item.dateTo ? item.dateTo : <Spinner color='blue' />}
-                  </Text>
+                  <Text style={styles.issueDate}>Выдано {item.dateTo ? item.dateTo : <Spinner color="blue" />}</Text>
                   {item.returned ? (
                     <View style={styles.listItemStyle}>
                       <Icon type="Octicons" name="check" style={{ color: '#163D7D', fontSize: 15 }} />
@@ -169,7 +166,7 @@ class InnerComponent extends Component {
                     </View>
                   ) : (
                     <Text style={[styles.returnStyle, item.isDelayes && { color: 'red' }, { paddingLeft: 22 }]}>
-                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner color='blue'/>}
+                      {item.dateFrom ? `Вернуть до ${item.dateFrom}` : <Spinner color="blue" />}
                     </Text>
                   )}
                 </View>
@@ -205,7 +202,7 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.libraryReducer,
@@ -213,10 +210,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  getLibraryCard: token => dispatch(getLibraryCard(token)),
-  getLibraryBook: token => dispatch(getLibraryBook(token)),
-  getLibraryQRCode: token => dispatch(getLibraryQRCode(token)),
+const mapDispatchToProps = (dispatch) => ({
+  getLibraryCard: (token) => dispatch(getLibraryCard(token)),
+  getLibraryBook: (token) => dispatch(getLibraryBook(token)),
+  getLibraryQRCode: (token) => dispatch(getLibraryQRCode(token)),
   dispatch,
 });
 
