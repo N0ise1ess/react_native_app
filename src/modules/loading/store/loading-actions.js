@@ -1,5 +1,5 @@
 import * as api from '../../api';
-import * as actionTypes from './loading-action-types';
+import * as types from './loading-action-types';
 import queue from 'async/queue';
 
 export const initLoad = () => async (dispatch) => {
@@ -17,19 +17,19 @@ export const initLoad = () => async (dispatch) => {
 
     let pipeline = queue(async (item, getNext) => {
       dispatch({
-        type: actionTypes.LOAD_PROGRESS,
+        type: types.LOAD_PROGRESS,
         payload: { ...item.payload },
       });
       let value = await item.invoke();
       dispatch({
-        type: actionTypes.NEWS_SUCCESS,
+        type: types.NEWS_SUCCESS,
         payload: { [item.key]: value },
       });
       getNext();
     }, 1);
 
     pipeline.drain = () => {
-      dispatch({ type: actionTypes.LOAD_SUCCESS });
+      dispatch({ type: types.LOAD_SUCCESS });
     };
 
     pipeline.push(requests);

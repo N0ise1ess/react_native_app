@@ -1,12 +1,10 @@
 import { getPersonalityByName, getPersonalityById } from '../../api';
 
-import * as actionTypes from './personalities-action-types';
+import * as types from './personalities-action-types';
 
-export const findPersonalityByName = (searchedName, size, page) => async (
-  dispatch,
-) => {
+export const findPersonalityByName = (searchedName, size, page) => async (dispatch) => {
   dispatch({
-    type: actionTypes.PERSONALITY_SEARCHING_PENDING,
+    type: types.PERSONALITY_SEARCHING_PENDING,
   });
   try {
     const response = await getPersonalityByName(searchedName, size, page);
@@ -14,12 +12,12 @@ export const findPersonalityByName = (searchedName, size, page) => async (
       console.log(response);
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.PERSONALITY_SEARCHING_SUCCESS,
+          type: types.PERSONALITY_SEARCHING_SUCCESS,
           payload: response.data,
         });
       } else {
         dispatch({
-          type: actionTypes.PERSONALITY_SEARCHING_FAILURE,
+          type: types.PERSONALITY_SEARCHING_FAILURE,
           payload: response,
         });
       }
@@ -27,7 +25,7 @@ export const findPersonalityByName = (searchedName, size, page) => async (
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.PERSONALITY_SEARCHING_FAILURE,
+      type: types.PERSONALITY_SEARCHING_FAILURE,
       payload: err,
       error: true,
     });
@@ -36,7 +34,7 @@ export const findPersonalityByName = (searchedName, size, page) => async (
 
 export const updatePersonalityByName = () => async (dispatch) => {
   dispatch({
-    type: actionTypes.PERSONALITY_UPDATE_PENDING,
+    type: types.PERSONALITY_UPDATE_PENDING,
   });
   try {
     const response = await getPersonalityByName();
@@ -44,12 +42,12 @@ export const updatePersonalityByName = () => async (dispatch) => {
       console.log(response);
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.PERSONALITY_UPDATE_SUCCESS,
+          type: types.PERSONALITY_UPDATE_SUCCESS,
           payload: response.data,
         });
       } else {
         dispatch({
-          type: actionTypes.PERSONALITY_UPDATE_FAILURE,
+          type: types.PERSONALITY_UPDATE_FAILURE,
           payload: response,
         });
       }
@@ -57,7 +55,7 @@ export const updatePersonalityByName = () => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.PERSONALITY_UPDATE_FAILURE,
+      type: types.PERSONALITY_UPDATE_FAILURE,
       payload: err,
       error: true,
     });
@@ -66,7 +64,7 @@ export const updatePersonalityByName = () => async (dispatch) => {
 
 export const findPersonalityById = (personId) => async (dispatch) => {
   dispatch({
-    type: actionTypes.PERSONALITY_SEARCHING_BY_ID_PENDING,
+    type: types.PERSONALITY_SEARCHING_BY_ID_PENDING,
   });
   try {
     const response = await getPersonalityById(personId);
@@ -74,12 +72,12 @@ export const findPersonalityById = (personId) => async (dispatch) => {
       console.log(response);
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.PERSONALITY_SEARCHING_BY_ID_SUCCESS,
+          type: types.PERSONALITY_SEARCHING_BY_ID_SUCCESS,
           payload: response.data,
         });
       } else {
         dispatch({
-          type: actionTypes.PERSONALITY_SEARCHING_BY_ID_FAILURE,
+          type: types.PERSONALITY_SEARCHING_BY_ID_FAILURE,
           payload: response,
         });
       }
@@ -87,7 +85,7 @@ export const findPersonalityById = (personId) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.PPERSONALITY_SEARCHING_BY_ID_FAILURE,
+      type: types.PPERSONALITY_SEARCHING_BY_ID_FAILURE,
       payload: err,
       error: true,
     });

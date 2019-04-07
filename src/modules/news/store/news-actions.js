@@ -1,16 +1,16 @@
 import { newsApi, getNews, getAdvertisement, getEvents } from '../../api';
-import * as actionTypes from './news-action-types';
+import * as types from './news-action-types';
 
 export const getNewsPagination = (page) => async (dispatch) => {
   console.log('page', page);
   dispatch({
-    type: actionTypes.NEWS_PAGINATION,
+    type: types.NEWS_PAGINATION,
   });
   try {
     const response = await getNews(page);
     if (response)
       dispatch({
-        type: actionTypes.NEWS_PAGINATION_SUCCESS,
+        type: types.NEWS_PAGINATION_SUCCESS,
         payload: {
           newsPage: page,
           news: response,
@@ -18,13 +18,13 @@ export const getNewsPagination = (page) => async (dispatch) => {
       });
     else
       dispatch({
-        type: actionTypes.NEWS_PAGINATION_FAILURE,
+        type: types.NEWS_PAGINATION_FAILURE,
         payload: response,
       });
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.NEWS_PAGINATION_FAILURE,
+      type: types.NEWS_PAGINATION_FAILURE,
       payload: err,
       error: true,
     });
@@ -34,7 +34,7 @@ export const getNewsPagination = (page) => async (dispatch) => {
 export const getUpdatesPagination = (page) => async (dispatch) => {
   console.log('page', page);
   dispatch({
-    type: actionTypes.UPDATE_PAGINATION,
+    type: types.UPDATE_PAGINATION,
   });
   try {
     const response = await getAdvertisement(page);
@@ -42,7 +42,7 @@ export const getUpdatesPagination = (page) => async (dispatch) => {
     if (response && response.data) {
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.UPDATE_PAGINATION_SUCCESS,
+          type: types.UPDATE_PAGINATION_SUCCESS,
           payload: {
             newsPage: page,
             news: response.data,
@@ -50,7 +50,7 @@ export const getUpdatesPagination = (page) => async (dispatch) => {
         });
       } else {
         dispatch({
-          type: actionTypes.UPDATE_PAGINATION_FAILURE,
+          type: types.UPDATE_PAGINATION_FAILURE,
           payload: response,
         });
       }
@@ -58,7 +58,7 @@ export const getUpdatesPagination = (page) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.UPDATE_PAGINATION_FAILURE,
+      type: types.UPDATE_PAGINATION_FAILURE,
       payload: err,
       error: true,
     });
@@ -68,14 +68,14 @@ export const getUpdatesPagination = (page) => async (dispatch) => {
 export const getEventsPagination = (page) => async (dispatch) => {
   console.log('page', page);
   dispatch({
-    type: actionTypes.EVENTS_PAGINATION,
+    type: types.EVENTS_PAGINATION,
   });
   try {
     const response = await getEvents(page);
     if (response && response.data) {
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.EVENTS_PAGINATION_SUCCESS,
+          type: types.EVENTS_PAGINATION_SUCCESS,
           payload: {
             newsPage: page,
             news: response.data,
@@ -83,7 +83,7 @@ export const getEventsPagination = (page) => async (dispatch) => {
         });
       } else {
         dispatch({
-          type: actionTypes.EVENTS_PAGINATION_FAILURE,
+          type: types.EVENTS_PAGINATION_FAILURE,
           payload: response,
         });
       }
@@ -91,7 +91,7 @@ export const getEventsPagination = (page) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.EVENTS_PAGINATION_FAILURE,
+      type: types.EVENTS_PAGINATION_FAILURE,
       payload: err,
       error: true,
     });
@@ -100,7 +100,7 @@ export const getEventsPagination = (page) => async (dispatch) => {
 
 export const getAllNews = () => async (dispatch) => {
   dispatch({
-    type: actionTypes.NEWS_PENDING,
+    type: types.NEWS_PENDING,
   });
   try {
     const response = await newsApi();
@@ -108,12 +108,12 @@ export const getAllNews = () => async (dispatch) => {
       console.log(response);
       if (response.status == '200') {
         dispatch({
-          type: actionTypes.NEWS_SUCCESS,
+          type: types.NEWS_SUCCESS,
           payload: response.data,
         });
       } else {
         dispatch({
-          type: actionTypes.NEWS_FAILURE,
+          type: types.NEWS_FAILURE,
           payload: response,
         });
       }
@@ -121,7 +121,7 @@ export const getAllNews = () => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch({
-      type: actionTypes.NEWS_FAILURE,
+      type: types.NEWS_FAILURE,
       payload: err,
       error: true,
     });

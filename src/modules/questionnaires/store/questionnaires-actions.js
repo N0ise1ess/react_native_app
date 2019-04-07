@@ -1,8 +1,8 @@
 import * as api from '../../api';
-import * as actionTypes from './questionnaires-action-types';
+import * as types from './questionnaires-action-types';
 
 export const resetQuestionnaires = () => ({
-  type: actionTypes.GET_QUESTIONNAIRES_SUCCESS,
+  type: types.GET_QUESTIONNAIRES_SUCCESS,
   payload: {},
 });
 
@@ -11,7 +11,7 @@ export const getAllQuestionnaires = (token) => async (dispatch) => {
     let { data } = await api.getAllQuestionnaires(token);
     data &&
       dispatch({
-        type: actionTypes.GET_ALL_QUESTIONNAIRES_SUCCESS,
+        type: types.GET_ALL_QUESTIONNAIRES_SUCCESS,
         payload: data,
       });
   } catch (e) {}
@@ -22,7 +22,7 @@ export const getQuestionnaires = (id, token) => async (dispatch) => {
     let { data } = await api.getQuestionnaire(id, token);
     data &&
       dispatch({
-        type: actionTypes.GET_QUESTIONNAIRES_SUCCESS,
+        type: types.GET_QUESTIONNAIRES_SUCCESS,
         payload: data,
       });
   } catch (e) {
@@ -35,7 +35,7 @@ export const saveAnswers = (parametrs, token) => async (dispatch) => {
     let { data } = await api.saveAnswers(parametrs, token);
     data &&
       dispatch({
-        type: actionTypes.SAVE_QUESTIONNAIRES_SUCCESS,
+        type: types.SAVE_QUESTIONNAIRES_SUCCESS,
         payload: data,
       });
     getAllQuestionnaires(token)(dispatch);
