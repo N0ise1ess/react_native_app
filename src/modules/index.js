@@ -20,7 +20,7 @@ export { ParentScreen, ParentsListScreen } from './parents';
 export { PersonalitiesScreen, PersonalityScreen } from './personalities';
 export { PersonalRatingScreen } from './personal-rating';
 export { QuestionnairesScreen, QuestionnairesStep } from './questionnaires';
-export { AccountScreen, MainConfigScreen, SettingsScreen } from './settings';
+export { AccountScreen, MainConfigScreen, SettingsScreen, NotificationSettingsScreen } from './settings';
 export { TimeTableScreen } from './timetable';
 export { WifiAccessScreen } from './wifiaccess';
 export { ScratchBookScreen } from './scratchbook';

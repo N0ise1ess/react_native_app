@@ -55,4 +55,5 @@ export const registerScreens = () => {
     Navigation.registerComponentWithRedux(`Parent`, () => Modules.ParentScreen, Provider, store);
     Navigation.registerComponentWithRedux(`WifiAccess`, () => Modules.WifiAccessScreen, Provider, store);
     Navigation.registerComponentWithRedux(`Reports`, () => Modules.ReportsScreen, Provider, store);
+    Navigation.registerComponentWithRedux(`NotificationSettings`, () => Modules.NotificationSettingsScreen, Provider, store);
 }

@@ -11,6 +11,7 @@ const itemList = [
   {
     title: 'Уведомления',
     image: 'notification_2',
+    route: 'NotificationSettings',
   },
   {
     title: 'Учетная запись',
@@ -39,6 +40,7 @@ const itemGuestList = [
   {
     title: 'Уведомления',
     image: 'notification_2',
+    route: 'NotificationSettings'
   },
   {
     title: 'Основные',
