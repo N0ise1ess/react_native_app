@@ -22,13 +22,13 @@ export const styles = (fontSize) => StyleSheet.create({
   searchIcon: {
     color: '#4D6270'
   },
-  iconGrid: {
+  iconStar: {
     width: 32,
     height: 32,
-    marginLeft: 15,
-    marginRight: 5,
+    marginLeft: 25,
+    marginRight: 0,
     fontSize: getSizeFonts(settingsFonts.FONT_SIZE_16, fontSize),
-    color: '#163D7D',
+    color: '#237cd6',
     paddingTop: 2
   },
   titleStyle: {
@@ -43,6 +43,7 @@ export const styles = (fontSize) => StyleSheet.create({
   listItemStyle: {
     paddingTop: 10,
     paddingBottom: 15,
+    marginTop: 5,
     marginBottom: 5,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
@@ -52,6 +53,9 @@ export const styles = (fontSize) => StyleSheet.create({
     marginRight: 0,
     flexDirection: 'column',
     width: width
+  },
+  marginTop0: {
+    marginTop: 0,
   },
   listItemContainer: {
     flex: 1,
@@ -80,8 +84,8 @@ export const styles = (fontSize) => StyleSheet.create({
     flex:1,
     alignSelf: 'flex-start',
     alignItems:'flex-start',
-    paddingTop:5,
-    paddingBottom: 5
+    paddingTop:2,
+    paddingBottom: 2
   },
   spinner: {
     justifyContent: 'center',

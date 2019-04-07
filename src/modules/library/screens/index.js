@@ -5,3 +5,4 @@ export * from './requestsInfo';
 export * from './request-library';
 export * from './library-search';
 export * from './library-collection';
+export * from './library-favourite';

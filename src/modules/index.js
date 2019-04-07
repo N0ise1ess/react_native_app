@@ -11,7 +11,8 @@ export {
     RequestsInfoScreen,
     RequestsLibraryScreen,
     LibrarySearchScreen,
-    LibraryCollectionScreen
+    LibraryCollectionScreen,
+    LibraryFavouriteScreen
  } from './library';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { NotificationsScreen } from './notifications';
