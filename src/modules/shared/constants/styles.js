@@ -1,0 +1,18 @@
+export const fontSettings = {
+  STEP_CHANGE_FONT_SIZE: 2,
+  FONT_FAMILY_REGULAR: 'MyriadPro-Regular',
+  FONT_FAMILY_LIGHT: 'MyriadPro-Light',
+  FONT_FAMILY_BOLD: 'MyriadPro-Bold',
+  FONT_SIZE_8: 8,
+  FONT_SIZE_10: 10,
+  FONT_SIZE_11: 11,
+  FONT_SIZE_12: 12,
+  FONT_SIZE_14: 14,
+  FONT_SIZE_16: 16,
+  FONT_SIZE_17: 17,
+  FONT_SIZE_18: 18,
+  FONT_SIZE_20: 20,
+  FONT_SIZE_22: 22,
+  FONT_SIZE_26: 26,
+  FONT_SIZE_45: 45,
+};

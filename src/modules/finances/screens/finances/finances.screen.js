@@ -1,40 +1,21 @@
 import moment from 'moment';
-import {
-  Button,
-  Container,
-  Content,
-  List,
-  Spinner,
-  Tab,
-  TabHeading,
-  Tabs,
-  Text,
-  Right,
-} from 'native-base';
+import { Button, Container, Content, List, Spinner, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
-import { View, Linking, TouchableOpacity, NativeModules } from 'react-native';
+import { Linking, NativeModules, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import {
-  getFinancePayment,
-  getFinanceScholarships,
-} from '../../../../actions/financeAction';
-import { FooterSection } from '../../../shared/components';
+import { CustomIcon, fontSettings, FooterSection, getSizeFonts } from '../../../shared';
+import { getFinancePayment, getFinanceScholarships } from '../../store/finances-actions';
 import { styles } from './styles';
-import { CustomIcon } from '../../../shared/components/custom-icon';
-import { getSizeFonts } from '../../../shared/functions/styles';
-import * as settingsFonts from '../../../../constants/styles';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Финансы',
         },
-      }
+      },
     };
   }
 
@@ -57,7 +38,7 @@ class InnerComponent extends Component {
     role.forEach((localRole, index) => {
       if (localRole.type === 'STUDENT') {
         let groupNames = [];
-        role[index].details.forEach(detail => {
+        role[index].details.forEach((detail) => {
           groupNames.push(detail.group.name);
         });
         this.setState({ groupNames: groupNames, currentGroupIndex: 0 });
@@ -66,12 +47,15 @@ class InnerComponent extends Component {
   }
 
   _upperCase(word, style = this.state.styles.tabTitleStyle) {
-    return <Text style={style} allowFontScaling={false}>{word.toUpperCase()}</Text>;
+    return (
+      <Text style={style} allowFontScaling={false}>
+        {word.toUpperCase()}
+      </Text>
+    );
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-      this.setState({ styles: styles(this.props.fontSize) });
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
@@ -88,13 +72,7 @@ class InnerComponent extends Component {
         <Tab
           heading={
             <TabHeading style={styles.tabHeaderStyle}>
-              <View
-                style={[
-                  styles.tabHeadingStyle,
-                  styles.tabHeadingLeft,
-                  currentTab === 0 && styles.activeTabStyle,
-                ]}
-              >
+              <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
                 {this._upperCase('Оплата')}
               </View>
             </TabHeading>
@@ -108,29 +86,18 @@ class InnerComponent extends Component {
                 // dataArray={finances[0] && finances[0].charges}
                 dataArray={[{ amount: 600 }, { amount: 2750 }]}
                 renderRow={(item, sectionId, index) => (
-                  <View
-                    style={[
-                      styles.listStyle,
-                      index === '0' ? { marginTop: 0 } : {},
-                    ]}
-                  >
+                  <View style={[styles.listStyle, index === '0' ? { marginTop: 0 } : {}]}>
                     <View>
                       <Text
                         style={{
                           fontWeight: 'bold',
-                          fontSize: getSizeFonts(
-                            settingsFonts.FONT_SIZE_14,
-                            this.props.fontSize,
-                          ),
+                          fontSize: getSizeFonts(fontSettings.FONT_SIZE_14, this.props.fontSize),
                         }}
                       >
                         Обучение, {this.getSemesterNumber('29-10-18')} семестр
                       </Text>
                       <Text style={styles.deadline}>
-                        Оплатить до{' '}
-                        <Text style={{ fontWeight: 'bold', fontSize: 12 }}>
-                          29.10.18
-                        </Text>
+                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
@@ -141,16 +108,9 @@ class InnerComponent extends Component {
               />
             )}
             {debt > 0 && currentTab === 0 ? (
-              <View
-                style={[
-                  styles.listStyle,
-                  { backgroundColor: '#e91b47', height: 50 },
-                ]}
-              >
+              <View style={[styles.listStyle, { backgroundColor: '#e91b47', height: 50 }]}>
                 <Text style={styles.debtText}>К оплате</Text>
-                <Text style={[styles.paymentAmount, { color: 'white' }]}>
-                  {debt} ₽
-                </Text>
+                <Text style={[styles.paymentAmount, { color: 'white' }]}>{debt} ₽</Text>
               </View>
             ) : null}
           </Content>
@@ -164,13 +124,7 @@ class InnerComponent extends Component {
         <Tab
           heading={
             <TabHeading style={styles.tabHeaderStyle}>
-              <View
-                style={[
-                  styles.tabHeadingStyle,
-                  styles.tabHeadingRight,
-                  currentTab === 1 && styles.activeTabStyle,
-                ]}
-              >
+              <View style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab === 1 && styles.activeTabStyle]}>
                 {this._upperCase('Стипендии')}
               </View>
             </TabHeading>
@@ -179,24 +133,18 @@ class InnerComponent extends Component {
           <Content style={{ backgroundColor: '#CED8DA' }}>
             <List
               dataArray={finances.scholarships}
-              renderRow={item => (
+              renderRow={(item) => (
                 <View style={styles.listStyle}>
                   <View>
                     <Text style={{ fontWeight: 'bold', fontSize: 14 }}>
-                      {this.getSemesterNumber(item.dateStart)} семестр,{' '}
-                      {item.type}
+                      {this.getSemesterNumber(item.dateStart)} семестр, {item.type}
                     </Text>
                     <Text style={styles.deadline}>
-                      Начислена{' '}
-                      <Text style={{ fontWeight: 'bold', fontSize: 12 }}>
-                        {this.formatDate(item.dateStart)}
-                      </Text>
+                      Начислена <Text style={{ fontWeight: 'bold', fontSize: 12 }}>{this.formatDate(item.dateStart)}</Text>
                     </Text>
                   </View>
                   <View>
-                    <Text style={styles.paymentAmount}>
-                      {Math.round(item.sum)} ₽
-                    </Text>
+                    <Text style={styles.paymentAmount}>{Math.round(item.sum)} ₽</Text>
                   </View>
                 </View>
               )}
@@ -214,9 +162,7 @@ class InnerComponent extends Component {
               <TouchableOpacity onPress={() => this.switchGroup('left')}>
                 <CustomIcon name="arrow_left" style={styles.iconLeft} />
               </TouchableOpacity>
-              <Text style={{ color: '#1784d3' }}>
-                Группа {groupNames[this.state.currentGroupIndex]}
-              </Text>
+              <Text style={{ color: '#1784d3' }}>Группа {groupNames[this.state.currentGroupIndex]}</Text>
               <TouchableOpacity onPress={() => this.switchGroup('right')}>
                 <CustomIcon name="arrow_right" style={styles.iconRight} />
               </TouchableOpacity>
@@ -240,20 +186,15 @@ class InnerComponent extends Component {
 
         {debt > 0 && currentTab === 0 ? (
           <View style={styles.paymentButton}>
-            <Button
-              onPress={this.handleOpenSberbank}
-              full
-              rounded
-              style={{ backgroundColor: '#e91b47' }}
-            >
+            <Button onPress={this.handleOpenSberbank} full rounded style={{ backgroundColor: '#e91b47' }}>
               {this._upperCase('оплата в сбербанк-онлайн', {
-                fontSize: settingsFonts.FONT_SIZE_12,
+                fontSize: fontSettings.FONT_SIZE_12,
                 color: 'white',
               })}
             </Button>
           </View>
         ) : null}
-        <FooterSection navPosition='Finance' {...this.props}/>
+        <FooterSection navPosition="Finance" {...this.props} />
       </Container>
     );
   }
@@ -261,39 +202,34 @@ class InnerComponent extends Component {
   handleOpenSberbank = () => {
     NativeModules.CampusModule.openSberbank(() => {
       Linking.openURL('https://online.sberbank.ru/');
-    })
+    });
   };
 
   getNextIndex = (directionName, currentIndex) => {
     let direction = {
       left: {
-        canMoveFrom: index => index !== 0,
-        getNext: index => index - 1,
+        canMoveFrom: (index) => index !== 0,
+        getNext: (index) => index - 1,
         getStartIndex: () => this.state.groupNames.length - 1,
       },
       right: {
-        canMoveFrom: index => index !== this.getLastGroupIndex(),
-        getNext: index => index + 1,
+        canMoveFrom: (index) => index !== this.getLastGroupIndex(),
+        getNext: (index) => index + 1,
         getStartIndex: () => 0,
       },
     }[directionName];
 
-    return direction.canMoveFrom(currentIndex)
-      ? direction.getNext(currentIndex)
-      : direction.getStartIndex();
+    return direction.canMoveFrom(currentIndex) ? direction.getNext(currentIndex) : direction.getStartIndex();
   };
 
   getLastGroupIndex() {
-    return this.state.groupNames.length - 1
+    return this.state.groupNames.length - 1;
   }
 
   switchGroup(direction) {
     if (this.state.groupNames.length > 1) {
       this.setState({
-        currentGroupIndex: this.getNextIndex(
-          direction,
-          this.state.currentGroupIndex,
-        ),
+        currentGroupIndex: this.getNextIndex(direction, this.state.currentGroupIndex),
       });
     }
   }
@@ -310,23 +246,21 @@ class InnerComponent extends Component {
       4: [11, 12, 1],
     };
 
-    return Object.keys(semestersByMonths).find(semester =>
-      semestersByMonths[semester].find(month => month === monthNumber),
-    );
+    return Object.keys(semestersByMonths).find((semester) => semestersByMonths[semester].find((month) => month === monthNumber));
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
-    finances: state.financeReducer,
+    finances: state.finances,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  getFinancePayment: token => dispatch(getFinancePayment(token)),
-  getFinanceScholarships: token => dispatch(getFinanceScholarships(token)),
+const mapDispatchToProps = (dispatch) => ({
+  getFinancePayment: (token) => dispatch(getFinancePayment(token)),
+  getFinanceScholarships: (token) => dispatch(getFinanceScholarships(token)),
   dispatch,
 });
 

@@ -2,20 +2,20 @@ import { Container, Content, Text } from 'native-base';
 import React from 'react';
 import { KeyboardAvoidingView, View } from 'react-native';
 import { connect } from 'react-redux';
-import * as action from '../../../../actions/authorizationAction';
-import { FooterSection } from '../../../shared/components';
+
+import { FooterSection } from '../../../shared';
 import { PasswordReset, PasswordResetSuccess } from '../../components';
+import * as action from '../../store/auth-actions';
 import { styles } from './styles';
 
 class InnerComponent extends React.Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Восстановление пароля',
         },
-      }
+      },
     };
   }
 
@@ -28,13 +28,13 @@ class InnerComponent extends React.Component {
     props.initFirstStepResetPassword();
   }
 
-  onButtonPress = email => {
+  onButtonPress = (email) => {
     this.setState({ isFirstStep: false, email });
     this.props.resetPassword(email);
   };
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
@@ -46,7 +46,7 @@ class InnerComponent extends React.Component {
       isFirstStepResetPassword,
       setErrorResetPassword,
     } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.resetContainer}>
         <Content style={styles.content} scrollEnabled={false}>
@@ -66,21 +66,21 @@ class InnerComponent extends React.Component {
             </KeyboardAvoidingView>
           )) || (
             <View style={styles.resetSection}>
-              <PasswordResetSuccess 
-                fontSize={this.props.fontSize} 
-                styles={styles} 
-                email={this.state.email} 
-                goBack={this.props.navigation.goBack} 
+              <PasswordResetSuccess
+                fontSize={this.props.fontSize}
+                styles={styles}
+                email={this.state.email}
+                goBack={this.props.navigation.goBack}
               />
             </View>
           )}
         </Content>
-        <FooterSection {...this.props}/>
+        <FooterSection {...this.props} />
       </Container>
     );
   }
 }
 export const PasswordResetScreen = connect(
-  state => ({ ...state.authReducer, ...state.settings }),
+  (state) => ({ ...state.authReducer, ...state.settings }),
   { ...action },
 )(InnerComponent);

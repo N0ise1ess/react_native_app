@@ -1,0 +1,3 @@
+export const LOAD_PROGRESS = 'LOAD_PROGRESS';
+export const LOAD_SUCCESS = 'LOAD_SUCCESS';
+export const LOAD_FAILURE = 'LOAD_FAILURE';

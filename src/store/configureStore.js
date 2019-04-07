@@ -3,12 +3,12 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web and AsyncStorage for react-native
 import logger from 'redux-logger';
-import rootReducer from '../reducers';
+import rootReducer from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['authReducer', 'loadingScreen', 'libraryReducer', 'newsReducer', 'financeReducer', 'timetableReducer', 'wifi'],
+  blacklist: ['authReducer', 'loadingScreen', 'libraryReducer', 'newsReducer', 'financesReducer', 'timetableReducer', 'wifi'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -2,18 +2,17 @@ import { Container, Content } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared';
 import { News } from '../../components';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Новости университета',
         },
-      }
+      },
     };
   }
 
@@ -28,9 +27,7 @@ class InnerComponent extends Component {
     return (
       <Container>
         <Content>
-          <News
-            {...this.props.dataNews}
-          />
+          <News {...this.props.dataNews} />
         </Content>
         <FooterSection {...this.props} />
       </Container>
@@ -38,7 +35,7 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
   };

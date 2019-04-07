@@ -1,21 +1,20 @@
 import { Button, Container, Label, ListItem } from 'native-base';
 import React, { Component } from 'react';
-import { AsyncStorage, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Slider from 'react-native-slider';
 import { connect } from 'react-redux';
-import * as actions from '../../../../actions/settingsAction';
-import { ButtonBack } from '../../../shared/components';
+
+import * as actions from '../../store/settings-actions';
 import { styles } from './styles';
 
 class Settings extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Основные',
         },
-      }
+      },
     };
   }
 
@@ -27,11 +26,11 @@ class Settings extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <ListItem button style={styles.listItemStyle}>
@@ -79,4 +78,7 @@ class Settings extends Component {
   }
 }
 
-export const MainConfigScreen = connect((state) => state.settings, actions)(Settings);
+export const MainConfigScreen = connect(
+  (state) => state.settings,
+  actions,
+)(Settings);

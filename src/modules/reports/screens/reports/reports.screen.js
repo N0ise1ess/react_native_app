@@ -1,10 +1,9 @@
-import { Container, Content, Tab, TabHeading, Tabs, List, Text } from 'native-base';
+import { Container, Content, List, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import { FooterSection, CustomIcon } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const statementsList = [
@@ -64,14 +63,13 @@ const reportsList = [
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Ведомости и отчеты',
         },
-      }
+      },
     };
   }
 
@@ -84,7 +82,7 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   _upperCase(word) {
@@ -94,30 +92,35 @@ class InnerComponent extends Component {
   _renderList = (list) => {
     const { styles } = this.state;
 
-    return <Content style={styles.container}>
-      <List
-        dataArray={list}
-        renderRow={item => (
-          <View style={styles.listItemStyle}>
-            <View style={styles.beginningItems}>
-              <View style={styles.upperSection}>
-                {item.passed ? (
-                  <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
-                ) : (
-                  <View style={[styles.markIcon, styles.redCircle]}></View>
-                )}
-                <Text style={styles.title}>{item.title}</Text>
+    return (
+      <Content style={styles.container}>
+        <List
+          dataArray={list}
+          renderRow={(item) => (
+            <View style={styles.listItemStyle}>
+              <View style={styles.beginningItems}>
+                <View style={styles.upperSection}>
+                  {item.passed ? (
+                    <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
+                  ) : (
+                    <View style={[styles.markIcon, styles.redCircle]} />
+                  )}
+                  <Text style={styles.title}>{item.title}</Text>
+                </View>
+                <Text style={styles.textStyle}>{item.type}</Text>
               </View>
-              <Text style={styles.textStyle}>{item.type}</Text>
+              <View>
+                <CustomIcon
+                  name={item.passed ? 'success' : 'error'}
+                  style={[styles.iconStyle, !item.passed && styles.errorIcon]}
+                />
+                <Text style={styles.rateTextStyle}>{item.passed ? 'ЗАПОЛНЕНО' : 'НЕ ЗАПОЛНЕНО'}</Text>
+              </View>
             </View>
-            <View>
-              <CustomIcon name={item.passed ? 'success' : 'error'} style={[styles.iconStyle, !item.passed && styles.errorIcon]} />
-              <Text style={styles.rateTextStyle}>{item.passed ? 'ЗАПОЛНЕНО' : 'НЕ ЗАПОЛНЕНО'}</Text>
-            </View>
-          </View>
-        )}
-      />
-    </Content>
+          )}
+        />
+      </Content>
+    );
   };
 
   _renderStatements = () => {
@@ -127,13 +130,12 @@ class InnerComponent extends Component {
       <Tab
         heading={
           <TabHeading style={styles.tabHeaderStyle}>
-            <View
-              style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}
-            >
+            <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}>
               {this._upperCase('Ведомости')}
             </View>
           </TabHeading>
-        }>
+        }
+      >
         {this._renderList(statementsList)}
       </Tab>
     );
@@ -152,35 +154,37 @@ class InnerComponent extends Component {
               {this._upperCase('Отчеты')}
             </View>
           </TabHeading>
-        }>
+        }
+      >
         {this._renderList(reportsList)}
       </Tab>
     );
   };
 
   render() {
-    const { userStatus,} = this.props;
-    const {styles} = this.state;
-    return (<Container style={styles.container}>
-      <Tabs
-        tabContainerStyle={{elevation : 0}}
-        onChangeTab={({ i }) => this.setState({ currentTab: i })}
-        tabBarUnderlineStyle={styles.tabBarUnderline}>
-        {this._renderStatements()}
-        {this._renderReports()}
-      </Tabs>
-      <FooterSection {...this.props}/>
-    </Container>);
+    const { userStatus } = this.props;
+    const { styles } = this.state;
+    return (
+      <Container style={styles.container}>
+        <Tabs
+          tabContainerStyle={{ elevation: 0 }}
+          onChangeTab={({ i }) => this.setState({ currentTab: i })}
+          tabBarUnderlineStyle={styles.tabBarUnderline}
+        >
+          {this._renderStatements()}
+          {this._renderReports()}
+        </Tabs>
+        <FooterSection {...this.props} />
+      </Container>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-export const ReportsScreen = connect(
-  mapStateToProps,
-)(InnerComponent);
+export const ReportsScreen = connect(mapStateToProps)(InnerComponent);
