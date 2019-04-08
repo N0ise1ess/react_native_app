@@ -9,6 +9,7 @@ import { styles } from './styles';
 const itemList = [
   {
     title: 'Запрос на выдачу литературы',
+    route: 'LiteratureRequest',
     image: 'info_1',
   },
   {
