@@ -11,6 +11,7 @@ export {
   RequestsLibraryScreen,
   LibrarySearchScreen,
   LibraryCollectionScreen,
+  LiteratureRequestScreen,
   LibraryFavouriteScreen,
 } from './library';
 export { LoadingScreen } from './loading';

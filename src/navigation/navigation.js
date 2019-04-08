@@ -33,6 +33,7 @@ export const registerScreens = () => {
   Navigation.registerComponentWithRedux(`RequestsInfo`, () => Modules.RequestsInfoScreen, Provider, store);
   Navigation.registerComponentWithRedux(`RequestsLibrary`, () => Modules.RequestsLibraryScreen, Provider, store);
   Navigation.registerComponentWithRedux(`LibrarySearch`, () => Modules.LibrarySearchScreen, Provider, store);
+  Navigation.registerComponentWithRedux(`LiteratureRequest`, () => Modules.LiteratureRequestScreen, Provider, store);
   Navigation.registerComponentWithRedux(`News`, () => Modules.NewsScreen, Provider, store);
   Navigation.registerComponentWithRedux(`NewsDetails`, () => Modules.NewsDetailsScreen, Provider, store);
   Navigation.registerComponentWithRedux(`TimeTable`, () => Modules.TimeTableScreen, Provider, store);
