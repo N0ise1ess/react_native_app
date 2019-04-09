@@ -25,7 +25,7 @@ class InnerComponent extends React.Component {
   }
 
   componentWillMount() {
-    goToAuth();
+    this.props.initLoad();
   }
 
   async componentDidMount() {
