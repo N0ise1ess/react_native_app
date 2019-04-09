@@ -2,6 +2,10 @@
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './src/navigation/navigation';
 import { NotificationListener } from './notification-listener';
+import { YellowBox } from 'react-native';
+
+// workaround for RNFirebase 5
+YellowBox.ignoreWarnings(['Require cycle:']);
 
 Navigation.events().registerAppLaunchedListener(async () => {
   await Navigation.setDefaultOptions({
