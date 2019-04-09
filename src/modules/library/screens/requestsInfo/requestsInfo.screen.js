@@ -1,10 +1,9 @@
-import { Container, Content, Tab, TabHeading, Tabs, List, Text } from 'native-base';
+import { Container, Content, List, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 
-import { FooterSection, CustomIcon } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const requestsList = [
@@ -13,29 +12,29 @@ const requestsList = [
     name: 'Обработка массивов данных',
     status: 'Отклонена',
     completed: false,
-    date: '21 сентября 2018'
+    date: '21 сентября 2018',
   },
   {
     id: '121312',
     name: 'Разработка скважин',
     status: 'Выполнена',
     completed: true,
-    date: '22 сентября 2018'
+    date: '22 сентября 2018',
   },
   {
     id: '121313',
     name: 'литература на англ',
     status: 'Обработана',
     completed: true,
-    date: '22 сентября 2018'
+    date: '22 сентября 2018',
   },
   {
     id: '121314',
     name: 'нефть, нефтедобыч',
     status: 'Принята',
     completed: true,
-    date: '22 сентября 2018'
-  }
+    date: '22 сентября 2018',
+  },
 ];
 
 const literatureList = [
@@ -43,37 +42,36 @@ const literatureList = [
     id: '121311',
     status: 'Отклонена',
     completed: false,
-    date: '21 сентября 2018'
+    date: '21 сентября 2018',
   },
   {
     id: '121312',
     status: 'Выдано 18 мая 2018 в 13:00',
     completed: true,
-    date: '22 сентября 2018'
+    date: '22 сентября 2018',
   },
   {
     id: '121313',
     status: 'Можно забрать 18 мая 2018 в 13:00',
     completed: true,
-    date: '22 сентября 2018'
+    date: '22 сентября 2018',
   },
   {
     id: '121314',
     status: 'Обрабатываeтся',
     completed: false,
-    date: '22 сентября 2018'
-  }
+    date: '22 сентября 2018',
+  },
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Информация о заявках',
         },
-      }
+      },
     };
   }
 
@@ -96,30 +94,34 @@ class InnerComponent extends Component {
   _renderList = (list) => {
     const { styles } = this.state;
 
-    return <Content style={styles.container}>
-      <List
-        dataArray={list}
-        renderRow={item => (
-          <View style={styles.listItemStyle}>
-            <View style={styles.upperSection}>
-              <View style={styles.requestIndexSection}>
-                {item.completed ? (
-                  <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
-                ) : (
-                    <View style={styles.markIcon}></View>
+    return (
+      <Content style={styles.container}>
+        <List
+          dataArray={list}
+          renderRow={(item) => (
+            <View style={styles.listItemStyle}>
+              <View style={styles.upperSection}>
+                <View style={styles.requestIndexSection}>
+                  {item.completed ? (
+                    <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
+                  ) : (
+                    <View style={styles.markIcon} />
                   )}
-                <Text style={styles.title}>{'\u2116'} {item.id}</Text>
+                  <Text style={styles.title}>
+                    {'\u2116'} {item.id}
+                  </Text>
+                </View>
+                <View>
+                  <Text style={styles.dateStyle}>{item.date}</Text>
+                </View>
               </View>
-              <View>
-                <Text style={styles.dateStyle}>{item.date}</Text>
-              </View>
+              {item.name && <Text style={styles.textStyle}>{item.name}</Text>}
+              <Text style={[styles.textStyle, styles.statusStyle]}>{item.status}</Text>
             </View>
-            {item.name && <Text style={styles.textStyle}>{item.name}</Text>}
-            <Text style={[styles.textStyle, styles.statusStyle]}>{item.status}</Text>
-          </View>
-        )}
-      />
-    </Content>
+          )}
+        />
+      </Content>
+    );
   };
 
   _renderԼiteratureList = () => {
@@ -129,13 +131,12 @@ class InnerComponent extends Component {
       <Tab
         heading={
           <TabHeading style={styles.tabHeaderStyle}>
-            <View
-              style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}
-            >
+            <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 1 && styles.activeTabStyle]}>
               {this._upperCase('Выдача литературы')}
             </View>
           </TabHeading>
-        }>
+        }
+      >
         {this._renderList(literatureList)}
       </Tab>
     );
@@ -154,35 +155,37 @@ class InnerComponent extends Component {
               {this._upperCase('Подбор литературы')}
             </View>
           </TabHeading>
-        }>
+        }
+      >
         {this._renderList(requestsList)}
       </Tab>
     );
   };
 
   render() {
-    const { userStatus, } = this.props;
+    const { userStatus } = this.props;
     const { styles } = this.state;
-    return (<Container style={styles.container}>
-      <Tabs
-        tabContainerStyle={{ elevation: 0 }}
-        onChangeTab={({ i }) => this.setState({ currentTab: i })}
-        tabBarUnderlineStyle={styles.tabBarUnderline}>
-        {this._renderԼiteratureList()}
-        {this._renderRequestsList()}
-      </Tabs>
-      <FooterSection {...this.props} />
-    </Container>);
+    return (
+      <Container style={styles.container}>
+        <Tabs
+          tabContainerStyle={{ elevation: 0 }}
+          onChangeTab={({ i }) => this.setState({ currentTab: i })}
+          tabBarUnderlineStyle={styles.tabBarUnderline}
+        >
+          {this._renderԼiteratureList()}
+          {this._renderRequestsList()}
+        </Tabs>
+        <FooterSection {...this.props} />
+      </Container>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-export const RequestsInfoScreen = connect(
-  mapStateToProps,
-)(InnerComponent);
+export const RequestsInfoScreen = connect(mapStateToProps)(InnerComponent);

@@ -1,22 +1,21 @@
-import { Container, Content, Icon, List, Text, Spinner } from 'native-base';
+import { Container, Content, List, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
-import * as actions from '../../../../actions/questionnairesAction';
 
-import { FooterSection, CustomIcon } from '../../../shared/components';
+import { CustomIcon, FooterSection } from '../../../shared';
+import * as actions from '../../store/questionnaires-actions';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-  
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Анкетные опросы',
         },
-      }
+      },
     };
   }
 
@@ -29,7 +28,7 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   handleClickQuestionnaire = (id, title) => {
@@ -39,38 +38,40 @@ class InnerComponent extends Component {
         passProps: {
           dataQuestionnaire: {
             itemId: id,
-            itemTitle: title, 
-          }
-        }
+            itemTitle: title,
+          },
+        },
       },
-    })
-  }
+    });
+  };
 
   render() {
     const { userStatus, listQuestionnaires } = this.props;
-    const {styles} = this.state;
-    
+    const { styles } = this.state;
+
     return (
       <Container style={styles.container}>
         <Content>
-          {listQuestionnaires ? <List
-            dataArray={listQuestionnaires}
-            renderRow={item => (
-              <TouchableOpacity
-                key={item.id}
-                onPress={() => this.handleClickQuestionnaire(item.id, item.value)}
-                style={[styles.listStyle, item.passed && styles.opacityStyle]}>
-                <View style={styles.listItemStyle}>
-                 {item.passed ? <CustomIcon style={styles.icon} name="ok"/> : <View style={styles.octions}/>}
-                  <Text style={styles.bookTitle}>{item.value}</Text>
-                </View>
-                <Text style={styles.bookAuthor}>
-                  ~{item.minutes} минут
-                </Text>
-              </TouchableOpacity>
-            )}
-          /> : <Spinner color="blue"/>}
-          
+          {listQuestionnaires ? (
+            <List
+              dataArray={listQuestionnaires}
+              renderRow={(item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => this.handleClickQuestionnaire(item.id, item.value)}
+                  style={[styles.listStyle, item.passed && styles.opacityStyle]}
+                >
+                  <View style={styles.listItemStyle}>
+                    {item.passed ? <CustomIcon style={styles.icon} name="ok" /> : <View style={styles.octions} />}
+                    <Text style={styles.bookTitle}>{item.value}</Text>
+                  </View>
+                  <Text style={styles.bookAuthor}>~{item.minutes} минут</Text>
+                </TouchableOpacity>
+              )}
+            />
+          ) : (
+            <Spinner color="blue" />
+          )}
         </Content>
         <FooterSection {...this.props} />
       </Container>
@@ -78,7 +79,7 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.questionnaires,
     ...state.authReducer,
@@ -93,5 +94,5 @@ const mapStateToProps = state => {
 
 export const QuestionnairesScreen = connect(
   mapStateToProps,
-  {...actions},
+  { ...actions },
 )(InnerComponent);

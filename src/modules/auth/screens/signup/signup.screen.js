@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import { Tab, Tabs, Text } from 'native-base';
+import React, { Component } from 'react';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
+
+import { FooterSection } from '../../../shared';
+import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from '../../components/signup';
 import { styles } from './styles';
-import { KeyboardAvoidingView, ScrollView, View , BackHandler} from 'react-native';
-import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from "../../components/signup";
-import { FooterSection } from "../../../shared/components/footer";
-import { Tab, Tabs, Text } from "native-base";
-import {ButtonBack} from "../../../shared/components/button-back";
-import {Navigation} from "react-native-navigation";
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
@@ -18,8 +16,7 @@ class InnerComponent extends Component {
         }
     }
   }
-}
-
+  }
   constructor(props) {
       super(props);
       this.state = {
@@ -55,37 +52,39 @@ class InnerComponent extends Component {
         return true;
     }
 
-    onValueChange = key => {
-        this.setState({selected: key})
-    }
+  onValueChange = (key) => {
+    this.setState({ selected: key });
+  };
 
-    render() {
-      const {styles } = this.state;
-      return (
-        <View style={styles.container}>
-          <KeyboardAvoidingView>
-            <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
-              <Tabs initialPage={0}
-                locked={true}
-                page={this.state.currentTab}
-                renderTabBar={(() => <View style={styles.height0} />)}
-                tabContainerStyle={styles.elevation0}
-                tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
-                <Tab heading={<Text />}>
-                  <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-                </Tab>
-                <Tab heading={<Text />}>
-                  <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-                </Tab>
-                <Tab heading={<Text />}>
-                  <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
-                </Tab>
-              </Tabs>
-            </ScrollView>
-          </KeyboardAvoidingView>
-          <FooterSection {...this.props} />
-        </View>
-      )
+  render() {
+    const { styles } = this.state;
+    return (
+      <View style={styles.container}>
+        <KeyboardAvoidingView>
+          <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps={'handled'}>
+            <Tabs
+              initialPage={0}
+              locked={true}
+              page={this.state.currentTab}
+              renderTabBar={() => <View style={styles.height0} />}
+              tabContainerStyle={styles.elevation0}
+              tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
+            >
+              <Tab heading={<Text />}>
+                <SignUpFirstForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+              <Tab heading={<Text />}>
+                <SignUpSecondForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+              <Tab heading={<Text />}>
+                <SignUpThirdForm {...this.props} handleSwitchTab={this.handleSwitchTab} />
+              </Tab>
+            </Tabs>
+          </ScrollView>
+        </KeyboardAvoidingView>
+        <FooterSection {...this.props} />
+      </View>
+    );
   }
 
   handleSwitchTab(value) {
@@ -93,15 +92,15 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.accountReducer,
-    ...state.settings
+    ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatch,
 });
 

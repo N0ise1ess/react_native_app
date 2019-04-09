@@ -1,11 +1,10 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
-import {CustomIcon} from '../../../shared/components/custom-icon';
-import { getDepartments } from '../../../../actions/contactsAction';
-import { FooterSection } from '../../../shared/components';
+
+import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
@@ -24,14 +23,13 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Контакты университета',
         },
-      }
+      },
     };
   }
 
@@ -42,26 +40,30 @@ class InnerComponent extends Component {
     };
   }
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   render() {
     const { userStatus, navigation, token } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Content>
           <List
             style={styles.listStyle}
             dataArray={itemList}
-            renderRow={item => (
+            renderRow={(item) => (
               <ListItem
                 button
-                onPress={() => item.route ? Navigation.push(this.props.componentId, {
-                  component: {
-                    name: item.route,
-                  }
-                }) : ''}
+                onPress={() =>
+                  item.route
+                    ? Navigation.push(this.props.componentId, {
+                        component: {
+                          name: item.route,
+                        },
+                      })
+                    : ''
+                }
                 style={styles.listItemStyle}
               >
                 {/* <Image source={item.image} style={styles.iconStyle} /> */}
@@ -90,14 +92,14 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatch,
 });
 

@@ -2,22 +2,20 @@ import { Button, Container, Text } from 'native-base';
 import React, { Component, Fragment } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
 import { img_parent } from '../../../../assets/images';
+import { FooterSection } from '../../../shared';
 import { Parent } from '../../components';
-import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
 import { styles } from './styles';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Родители',
         },
-      }
+      },
     };
   }
 
@@ -29,13 +27,13 @@ class InnerComponent extends Component {
     };
   }
 
-  renderLabel = text => <Text style={this.state.styles.label}>{text.toUpperCase()}</Text>;
+  renderLabel = (text) => <Text style={this.state.styles.label}>{text.toUpperCase()}</Text>;
   onHandleEdit = () => {
-    this.setState(prevState => ({ editableMode: !prevState.editableMode }));
+    this.setState((prevState) => ({ editableMode: !prevState.editableMode }));
     this.state.editableMode && console.log('saved in server');
   };
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
   render() {
     const { userStatus } = this.props;
@@ -57,18 +55,18 @@ class InnerComponent extends Component {
               <View style={styles.dataSection}>
                 {this.renderLabel('Учетные данные: ')}
                 <Text style={styles.dataStyle}>Зарегистрирован 20.10.2018</Text>
-                <View style={{flexDirection: "row"}}>
+                <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.dataStyle}>Логин </Text>
-                  <Text style={[styles.dataStyle, {color:'black', fontWeight: 'bold',}]}>akjdaso</Text>
+                  <Text style={[styles.dataStyle, { color: 'black', fontWeight: 'bold' }]}>akjdaso</Text>
                 </View>
-                <View style={{flexDirection: "row"}}>
+                <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.dataStyle}>Email </Text>
-                  <Text style={[styles.dataStyle, {color:'#3c87f2', fontWeight: 'bold',}]}>akjdaso@kleo.com</Text>
+                  <Text style={[styles.dataStyle, { color: '#3c87f2', fontWeight: 'bold' }]}>akjdaso@kleo.com</Text>
                 </View>
               </View>
               <View style={styles.dataSection}>
                 {this.renderLabel('Доступ:')}
-                <Parent styles={styles}/>
+                <Parent styles={styles} />
               </View>
             </View>
           </View>
@@ -82,14 +80,14 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatch,
 });
 

@@ -1,10 +1,9 @@
-import { Container, Content, List, ListItem, Text, Spinner, Card } from 'native-base';
+import { Container, Content, List, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Navigation } from 'react-native-navigation';
 
-import { getRaitingUser } from '../../../../actions/authorizationAction';
-import { FooterSection } from '../../../shared/components';
+import { getRaitingUser } from '../../../auth/store/auth-actions';
+import { FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
@@ -32,14 +31,13 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Персональный рейтинг',
         },
-      }
+      },
     };
   }
 
@@ -58,8 +56,7 @@ class InnerComponent extends Component {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
-  getSumm = () => this.props.userRaiting
-    .items.reduce((accumulator, item) => accumulator + parseFloat(item.value), 0);
+  getSumm = () => this.props.userRaiting.items.reduce((accumulator, item) => accumulator + parseFloat(item.value), 0);
 
   render() {
     const { styles } = this.state;
@@ -68,27 +65,32 @@ class InnerComponent extends Component {
     return (
       <Container style={styles.container}>
         <Content>
-          {isLoadingRaiting ? <Spinner /> : <React.Fragment>
-            {userRaiting && userRaiting.items && <List
-              style={styles.listStyle}
-              dataArray={userRaiting.items}
-              renderRow={item => (
-                <ListItem button style={[styles.listItemStyle, item.last && styles.lastItemStyle]}>
-                  <Text style={[styles.textStyle, item.last && styles.lastTextStyle]}>{item.name}</Text>
-                  <Text style={[item.score > 0 && styles.scoreStyle, item.last && styles.lastTextStyle]}>
-                    {item.value}
-                  </Text>
+          {isLoadingRaiting ? (
+            <Spinner />
+          ) : (
+            <React.Fragment>
+              {userRaiting && userRaiting.items && (
+                <List
+                  style={styles.listStyle}
+                  dataArray={userRaiting.items}
+                  renderRow={(item) => (
+                    <ListItem button style={[styles.listItemStyle, item.last && styles.lastItemStyle]}>
+                      <Text style={[styles.textStyle, item.last && styles.lastTextStyle]}>{item.name}</Text>
+                      <Text style={[item.score > 0 && styles.scoreStyle, item.last && styles.lastTextStyle]}>
+                        {item.value}
+                      </Text>
+                    </ListItem>
+                  )}
+                />
+              )}
+              {userRaiting && userRaiting.items && (
+                <ListItem button style={[styles.listItemStyle, styles.lastItemStyle]}>
+                  <Text style={[styles.textStyle, styles.lastTextStyle]}>{'Всего баллов'}</Text>
+                  <Text style={[styles.scoreStyle, styles.lastTextStyle]}>{this.getSumm()}</Text>
                 </ListItem>
               )}
-            />}
-            {userRaiting && userRaiting.items && <ListItem
-              button style={[styles.listItemStyle, styles.lastItemStyle]}>
-              <Text style={[styles.textStyle, styles.lastTextStyle]}>{'Всего баллов'}</Text>
-              <Text style={[styles.scoreStyle, styles.lastTextStyle]}>
-                {this.getSumm()}
-              </Text>
-            </ListItem>}
-          </React.Fragment>}
+            </React.Fragment>
+          )}
         </Content>
         <FooterSection {...this.props} />
       </Container>
@@ -96,14 +98,14 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getRaitingUser: (token) => dispatch(getRaitingUser(token)),
   dispatch,
 });

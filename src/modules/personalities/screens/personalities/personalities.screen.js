@@ -1,28 +1,27 @@
-import { Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text, } from 'native-base';
+import { Button, Container, Content, Icon, Input, Item, List, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
-import { Image, View, Animated, TouchableOpacity, Dimensions, Keyboard, RefreshControl } from 'react-native';
-import { connect } from 'react-redux';
+import { Animated, Dimensions, Image, Keyboard, RefreshControl, View } from 'react-native';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Navigation } from 'react-native-navigation';
+import { connect } from 'react-redux';
 
 import { img_teacher } from '../../../../assets/images';
-import { FooterSection } from '../../../shared/components';
+import { FooterSection } from '../../../shared';
+import { findPersonalityByName, updatePersonalityByName } from '../../store/personalities-actions';
 import { styles } from './styles';
-import { findPersonalityByName, updatePersonalityByName } from "../../../../actions/personalityAction";
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-const { height, width } = Dimensions.get("window")
+const { height, width } = Dimensions.get('window');
 
 const alphabets = 'абвгдежзиклмнопрстуфхцчшщэюя'.split('');
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Персоналии',
         },
-      }
+      },
     };
   }
 
@@ -34,13 +33,13 @@ class InnerComponent extends Component {
       sideBarInitWidth: 15,
       sideBarFinishWidth: 45,
       sidebarWidth: new Animated.Value(15),
-      personalitiesWidth: new Animated.Value(width - 15)
+      personalitiesWidth: new Animated.Value(width - 15),
     };
   }
 
   componentWillMount() {
     //Getting first 20 contacts
-    this.props.personalities.length === 0 && this.props.findPersonalityByName('', 20, null)
+    this.props.personalities.length === 0 && this.props.findPersonalityByName('', 20, null);
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
   }
 
@@ -49,17 +48,16 @@ class InnerComponent extends Component {
   }
 
   _keyboardDidShow = () => {
-    this['sidebar'].close()
-  }
+    this['sidebar'].close();
+  };
 
   componentDidMount() {
     // this.props.navigation.addListener("didFocus", () => {
-    //   if(this.props.personalities.length === 0) { 
+    //   if(this.props.personalities.length === 0) {
     //     this.props.findPersonalityByName('', 20, null)
     //     this.setState({isLoading: false})
     //   }
     // });
-
     // this.props.navigation.addListener("didBlur", () => {
     //   this.setState({isLoading: true})
     // });
@@ -74,18 +72,19 @@ class InnerComponent extends Component {
       inputRange: [0, 50, 100, 101],
       outputRange: [-20, 0, 0, 1],
     });
-    const { styles } = this.state
+    const { styles } = this.state;
     let alphabetsLocal = alphabets;
     return (
       <Animated.View style={[{ transform: [{ translateX: trans }] }]}>
         <View style={[styles.alphabetContainer]}>
           <View style={{ flex: alphabetsLocal.length }}>
-            {alphabetsLocal.map((item, index) =>
+            {alphabetsLocal.map((item, index) => (
               <View style={styles.wordContainer(alphabetsLocal.length, index)} key={index}>
-                <Text style={{ color: 'white', alignSelf: 'center', fontSize: 12 }}
-                  numberOfLines={1}
-                  uppercase={true}>{item}</Text>
-              </View>)}
+                <Text style={{ color: 'white', alignSelf: 'center', fontSize: 12 }} numberOfLines={1} uppercase={true}>
+                  {item}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
       </Animated.View>
@@ -104,7 +103,7 @@ class InnerComponent extends Component {
             style={styles.searchInput}
             placeholder="Поиск по ФИО"
             value={this.state.searchedText}
-            onChangeText={text => this.setState({ searchedText: text })}
+            onChangeText={(text) => this.setState({ searchedText: text })}
           />
           <Button transparent onPress={this.onHandleSubmit}>
             <Text>Найти</Text>
@@ -113,34 +112,41 @@ class InnerComponent extends Component {
         <View style={{ flex: 4, flexDirection: 'row' }}>
           <Animated.View style={[{ width: sidebarWidth }]}>
             <Swipeable
-              ref={component => this['sidebar'] = component}
+              ref={(component) => (this['sidebar'] = component)}
               onSwipeableWillOpen={this.onSwipeableWillOpen}
               onSwipeableClose={this.onSwipeableWillClose}
               containerStyle={styles.swipeable()}
-              renderLeftActions={this.renderLeftActions} />
+              renderLeftActions={this.renderLeftActions}
+            />
           </Animated.View>
           <Animated.View style={[{ width: personalitiesWidth }, { marginLeft: 5 }]}>
-            <Content onLayout={this.onLayout} refreshControl={
-              <RefreshControl refreshing={personalitiesIsRefreshing}
-                onRefresh={this.props.updatePersonalityByName}
-              />
-            }>
-              {!personalitiesIsLoading && (!isLoading || personalities) ?
+            <Content
+              onLayout={this.onLayout}
+              refreshControl={
+                <RefreshControl refreshing={personalitiesIsRefreshing} onRefresh={this.props.updatePersonalityByName} />
+              }
+            >
+              {!personalitiesIsLoading && (!isLoading || personalities) ? (
                 <List
                   style={styles.listStyle}
                   dataArray={personalities}
-                  renderRow={item => (
-                    <ListItem button style={styles.listItemStyle} onPress={() => Navigation.push(this.props.componentId, {
-                      component: {
-                        name: 'Personality',
-                        passProps: {
-                          dataNavigate: {
-                            personId: item.personId
+                  renderRow={(item) => (
+                    <ListItem
+                      button
+                      style={styles.listItemStyle}
+                      onPress={() =>
+                        Navigation.push(this.props.componentId, {
+                          component: {
+                            name: 'Personality',
+                            passProps: {
+                              dataNavigate: {
+                                personId: item.personId,
+                              },
+                            },
                           },
-                        }
-                      },
-                    })
-                    }>
+                        })
+                      }
+                    >
                       <Image source={img_teacher} style={styles.iconStyle} />
                       <View style={styles.columnStyle}>
                         <Text style={styles.titleStyle}>{item.name}</Text>
@@ -148,8 +154,11 @@ class InnerComponent extends Component {
                         <Text style={styles.textStyle}>{item.department}</Text>
                       </View>
                     </ListItem>
-
-                  )} /> : <Spinner color='#163D7D' style={{ justifyContent: 'center', alignItems: 'center' }} />}
+                  )}
+                />
+              ) : (
+                <Spinner color="#163D7D" style={{ justifyContent: 'center', alignItems: 'center' }} />
+              )}
             </Content>
           </Animated.View>
         </View>
@@ -162,51 +171,51 @@ class InnerComponent extends Component {
     const { sideBarFinishWidth } = this.state;
     Animated.timing(this.state.sidebarWidth, {
       toValue: sideBarFinishWidth,
-      duration: 250
+      duration: 250,
     }).start();
     this.setState({ sidebarWidth: new Animated.Value(sideBarFinishWidth) });
 
     Animated.timing(this.state.personalitiesWidth, {
       toValue: width - sideBarFinishWidth,
-      duration: 250
+      duration: 250,
     }).start();
-    this.setState({ personalitiesWidth: new Animated.Value(width - sideBarFinishWidth) })
-  }
+    this.setState({ personalitiesWidth: new Animated.Value(width - sideBarFinishWidth) });
+  };
 
   onSwipeableWillClose = () => {
     const { sideBarInitWidth } = this.state;
     Animated.timing(this.state.sidebarWidth, {
       toValue: sideBarInitWidth,
-      duration: 250
+      duration: 250,
     }).start();
     this.setState({ sidebarWidth: new Animated.Value(sideBarInitWidth) });
 
     Animated.timing(this.state.personalitiesWidth, {
       toValue: width - sideBarInitWidth,
-      duration: 250
+      duration: 250,
     }).start();
-    this.setState({ personalitiesWidth: new Animated.Value(width - sideBarInitWidth) })
-  }
+    this.setState({ personalitiesWidth: new Animated.Value(width - sideBarInitWidth) });
+  };
 
-  onLayout = event => {
-    this.setState({ personalitiesWidth: new Animated.Value(event.nativeEvent.layout.width) })
-  }
+  onLayout = (event) => {
+    this.setState({ personalitiesWidth: new Animated.Value(event.nativeEvent.layout.width) });
+  };
 
   onHandleSubmit = () => {
-    this.props.findPersonalityByName(this.state.searchedText)
-    this.setState({ searchedPersonalities: [] })
-  }
+    this.props.findPersonalityByName(this.state.searchedText);
+    this.setState({ searchedPersonalities: [] });
+  };
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
-    ...state.personalityReducer,
+    ...state.personalitiesReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dispatch,
   findPersonalityByName: (name, size, page) => dispatch(findPersonalityByName(name, size, page)),
   updatePersonalityByName: () => dispatch(updatePersonalityByName()),

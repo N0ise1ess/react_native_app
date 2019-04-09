@@ -4,7 +4,7 @@ import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { img_parent } from '../../../../assets/images';
-import { FooterSection } from '../../..//shared/components';
+import { FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
@@ -23,14 +23,13 @@ const itemList = [
 ];
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Родители',
         },
-      }
+      },
     };
   }
 
@@ -41,8 +40,7 @@ class InnerComponent extends Component {
     };
   }
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-      this.setState({ styles: styles(this.props.fontSize) });
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
   render() {
     const { styles } = this.state;
@@ -54,11 +52,7 @@ class InnerComponent extends Component {
             style={styles.listStyle}
             dataArray={itemList}
             renderRow={(item) => (
-              <ListItem
-                button
-                style={styles.listItemStyle}
-                onPress={() => navigation.navigate('Parent')}
-              >
+              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Parent')}>
                 <Image source={img_parent} style={styles.imageStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
