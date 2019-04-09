@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { CustomIcon, CustomSnackbar, FooterSection } from '../../../shared';
 import { findPersonalityById } from '../../store/personalities-actions';
 import { styles } from './styles';
+import { img_men } from '../../../../assets/images';
 
 class InnerComponent extends Component {
   static options(passProps) {
@@ -43,6 +44,7 @@ class InnerComponent extends Component {
 
   render() {
     const { userStatus, personality, personalityIsLoading } = this.props;
+    const photo = personality && personality.photo.length > 0 ? personality.photo : null
 
     const { styles } = this.state;
     return (
@@ -52,7 +54,9 @@ class InnerComponent extends Component {
             <View style={styles.content}>
               <View style={styles.sectionStyle}>
                 <View style={[styles.imgTeacher, { width: 40, height: 40 }]} />
-                <Image source={{ uri: `data:image/png;base64,${personality.photo}` }} style={styles.photoStyle} />
+                {photo ?
+                    <Image source={{ uri: `data:image/png;base64,${photo}` }} style={styles.photoStyle} />
+                : <Image source={img_men} style={styles.photoStyle} /> }
               </View>
               <View style={styles.sectionStyle}>
                 <CustomIcon name={'teacher'} style={styles.imgTeacher} />
