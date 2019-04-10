@@ -8,9 +8,6 @@ import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from '../../compon
 import { styles } from './styles';
 import {Navigation} from "react-native-navigation";
 
-// text: `Регистрация (${passProps.getParam("step") || '1'} из 3)`,
-//<ButtonBack onPress={passProps.getParam("customGoBack", () => { })}/>
-
 class InnerComponent extends Component {
 
   static options(passProps) {
