@@ -1,16 +1,12 @@
 import { Tab, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, View, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 
 import { FooterSection } from '../../../shared';
 import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from '../../components/signup';
 import { styles } from './styles';
-import { KeyboardAvoidingView, ScrollView, View , BackHandler} from 'react-native';
-import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from "../../components/signup";
-import { FooterSection } from "../../../shared/components/footer";
-import { Tab, Tabs, Text } from "native-base";
-import {ButtonBack} from "../../../shared/components/button-back";
+import {Navigation} from "react-native-navigation";
 
 // text: `Регистрация (${passProps.getParam("step") || '1'} из 3)`,
 //<ButtonBack onPress={passProps.getParam("customGoBack", () => { })}/>
@@ -21,16 +17,15 @@ class InnerComponent extends Component {
     return {
       topBar: {
         title: {
-          text: `Регистрация`,
+          text: `Регистрация 1 из 3`,
         },
         leftButtons: [],
       },
     };
   }
-}
 
   constructor(props) {
-      super(props);
+      super(props)
       this.state = {
           styles: styles(props.fontSize),
           currentTab: 0
@@ -60,6 +55,13 @@ class InnerComponent extends Component {
             this.setState(prevState => ({
                 currentTab: prevState.currentTab - 1
             }));
+          Navigation.mergeOptions(this.props.componentId, {
+            topBar: {
+              title: {
+                text: `Регистрация ${this.state.currentTab + 1} из 3`,
+              },
+            },
+          });
         }
         return true;
     }
@@ -101,6 +103,13 @@ class InnerComponent extends Component {
 
   handleSwitchTab(value) {
     this.setState({ currentTab: value })
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: `Регистрация ${value + 1} из 3`,
+        },
+      },
+    });
   }
 }
 
