@@ -5,19 +5,16 @@ import * as RN from 'react-native';
 import ImageSlider from 'react-native-image-slider';
 import { connect } from 'react-redux';
 
-import { getNewsPagination, getUpdatesPagination, getEventsPagination } from '../../../../actions/newsAction';
+import * as fontSettings from '../../../../constants/styles';
+import { FooterSection, getSizeFonts, fontSettings } from '../../../shared';
 import { News } from '../../components';
-import { FooterSection } from '../../../shared/components';
+import { getEventsPagination, getNewsPagination, getUpdatesPagination } from '../../store/news-actions';
 import { styles } from './styles';
 
-import * as settingsFonts from '../../../../constants/styles';
-import {getSizeFonts} from '../../../shared/functions/styles';
-
-const { height: NAVBAR_HEIGHT, } = RN.Dimensions.get('window');
+const { height: NAVBAR_HEIGHT } = RN.Dimensions.get('window');
 const imagesOnLoading = [{ isLoading: true }];
 
 class InnerComponent extends Component {
-  
   constructor(props) {
     super(props);
 
@@ -35,89 +32,106 @@ class InnerComponent extends Component {
     m.locale('ru');
   }
 
-  renderNews = data => <React.Fragment>
+  renderNews = (data) => (
+    <React.Fragment>
       <RN.FlatList
         ref={'news'}
         keyExtractor={(item, index) => `${index}_news`}
         data={data}
-        renderItem={({item, index}) => <News
-          fontSize={this.props.fontSize}
-          key={`${index}_news`}
-          title={item.title}
-          time={m(item.time)
-            .format('LL')
-            .replace('г.', '')}
-          image={item.image}
-          description={item.text}
-          isTruncate={true}
-          onPress={() =>
-            this.props.navigation.navigate('NewsDetails', {
-              newsType: 'news',
-              title: item.title,
-              time: item.time,
-              image: item.image,
-              description: item.text,
-            })
-          }
-        />}
+        renderItem={({ item, index }) => (
+          <News
+            fontSize={this.props.fontSize}
+            key={`${index}_news`}
+            title={item.title}
+            time={m(item.time)
+              .format('LL')
+              .replace('г.', '')}
+            image={item.image}
+            description={item.text}
+            isTruncate={true}
+            onPress={() =>
+              this.props.navigation.navigate('NewsDetails', {
+                newsType: 'news',
+                title: item.title,
+                time: item.time,
+                image: item.image,
+                description: item.text,
+              })
+            }
+          />
+        )}
       />
-      <RN.View style={{flexDirection: "row", justifyContent: "center", marginTop: 10,}}>
-        { this.props.isLoadingNews ? <NB.Spinner color="blue" /> :
-          <NB.Button style={this.state.styles.buttonsPagination} onPress={() => this.props.getNews(this.props.newsPage + 1)}>
+      <RN.View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
+        {this.props.isLoadingNews ? (
+          <NB.Spinner color="blue" />
+        ) : (
+          <NB.Button
+            style={this.state.styles.buttonsPagination}
+            onPress={() => this.props.getNews(this.props.newsPage + 1)}
+          >
             <RN.Text style={this.state.styles.textEventWhite}>Показать еще</RN.Text>
-          </NB.Button>}
+          </NB.Button>
+        )}
       </RN.View>
     </React.Fragment>
+  );
 
-  renderUpdates = updates => <React.Fragment>
-    <RN.FlatList
-      ref={'updates'}
-      data={updates}
-      keyExtractor={(item, index) => `${index}_updates`}
-      renderItem={({item, index}) => <News
-        fontSize={this.props.fontSize}
-        newsType='advertisement'
-        key={`${index}_updates`}
-        title={item.title}
-        time={m(item.time)
-          .format('LL')
-          .replace('г.', '')}
-        description={item.text}
-        isTruncate={true}
-        onPress={() =>
-          this.props.navigation.navigate('NewsDetails', {
-            newsType: 'advertisement',
-            title: item.title,
-            time: item.time,
-            description: item.text,
-          })
-        }
-      />}
-    />
-  </React.Fragment>
+  renderUpdates = (updates) => (
+    <React.Fragment>
+      <RN.FlatList
+        ref={'updates'}
+        data={updates}
+        keyExtractor={(item, index) => `${index}_updates`}
+        renderItem={({ item, index }) => (
+          <News
+            fontSize={this.props.fontSize}
+            newsType="advertisement"
+            key={`${index}_updates`}
+            title={item.title}
+            time={m(item.time)
+              .format('LL')
+              .replace('г.', '')}
+            description={item.text}
+            isTruncate={true}
+            onPress={() =>
+              this.props.navigation.navigate('NewsDetails', {
+                newsType: 'advertisement',
+                title: item.title,
+                time: item.time,
+                description: item.text,
+              })
+            }
+          />
+        )}
+      />
+    </React.Fragment>
+  );
 
-  renderEvents = events => <React.Fragment>
+  renderEvents = (events) => (
+    <React.Fragment>
       <RN.FlatList
         ref={'events'}
         data={events}
         keyExtractor={(item, index) => `${index}_events`}
-        renderItem={({item, index}) => <RN.View key={`${index}_events`}>
-            <RN.Text 
-              style={this.state.styles.textEvent}
-            >
-              {m(item.time).format('LL').replace('г.', '')}
+        renderItem={({ item, index }) => (
+          <RN.View key={`${index}_events`}>
+            <RN.Text style={this.state.styles.textEvent}>
+              {m(item.time)
+                .format('LL')
+                .replace('г.', '')}
             </RN.Text>
             <News
               fontSize={this.props.fontSize}
-              newsType='events'
-              time={m(item.time).format('HH:mm') !== '00:00' 
-              ? m(item.time).format('HH:mm') : 'Весь день'}
+              newsType="events"
+              time={m(item.time).format('HH:mm') !== '00:00' ? m(item.time).format('HH:mm') : 'Весь день'}
               title={item.title}
               description={item.text}
             />
-        </RN.View>}
+          </RN.View>
+        )}
       />
     </React.Fragment>
+  );
 
   renderSlider = (slider, styles) => {
     return (
@@ -139,7 +153,7 @@ class InnerComponent extends Component {
             ]}
           >
             {item.isLoading ? (
-              <NB.Spinner color='blue' />
+              <NB.Spinner color="blue" />
             ) : (
               <RN.Image source={{ uri: `data:image/png;base64,${item.image}` }} style={styles.sliderImage} />
             )}
@@ -150,18 +164,23 @@ class InnerComponent extends Component {
             {slider.map((image, index) => {
               return (
                 <RN.View key={index} style={styles.button}>
-                  <RN.View key={index} style={[
-                    {backgroundColor: '#163D7D',
-                     width: 12, 
-                     height: 12, 
-                     borderRadius: 20, 
-                     borderWidth: 1,
-                     borderColor: '#fff',
-                     marginLeft: 5, 
-                     marginBottom: 10,
-                     marginRight: 5,}, 
-                    position === index && styles.buttonSelected]
-                  }/>
+                  <RN.View
+                    key={index}
+                    style={[
+                      {
+                        backgroundColor: '#163D7D',
+                        width: 12,
+                        height: 12,
+                        borderRadius: 20,
+                        borderWidth: 1,
+                        borderColor: '#fff',
+                        marginLeft: 5,
+                        marginBottom: 10,
+                        marginRight: 5,
+                      },
+                      position === index && styles.buttonSelected,
+                    ]}
+                  />
                 </RN.View>
               );
             })}
@@ -172,17 +191,20 @@ class InnerComponent extends Component {
   };
 
   _upperCase(word) {
-    return <NB.Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</NB.Text>;
+    return (
+      <NB.Text allowFontScaling={false} style={this.state.styles.tabTitleStyle}>
+        {word.toUpperCase()}
+      </NB.Text>
+    );
   }
 
   componentDidUpdate(props, state) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
-  isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+  isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
     const paddingToBottom = 20;
-    return layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom;
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   };
 
   handlePressTab = (i) => {
@@ -190,15 +212,15 @@ class InnerComponent extends Component {
       y: 0,
       animated: false,
     });
-    this.setState({currentTab: i });
-  }
+    this.setState({ currentTab: i });
+  };
 
   render() {
     const { slider, news, advertisement, event, userStatus, navigation, isLoadingNews } = this.props;
     const { isSliderShown, currentTab, styles } = this.state;
     const tabY = RN.Animated.add(this.scroll, this.headerY);
     // let isDownloading = true;
-    
+
     return (
       <NB.Container>
         <RN.Animated.View
@@ -221,23 +243,23 @@ class InnerComponent extends Component {
           bounces={false}
           showsVerticalScrollIndicator={false}
           style={{
-            fontSize:getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
+            fontSize: getSizeFonts(fontSettings.FONT_SIZE_12, this.props.fontSize),
             backgroundColor: '#CED8DA',
           }}
           onScroll={RN.Animated.event([{ nativeEvent: { contentOffset: { y: this.scroll } } }], {
             useNativeDriver: true,
-            listener: event => {
+            listener: (event) => {
               if (currentTab === 0 && !isLoadingNews && this.isCloseToBottom(event.nativeEvent)) {
                 this.props.getNews(this.props.newsPage + 1);
               }
             },
           })}
-          ref={ref => (this._scrollView = ref)}
+          ref={(ref) => (this._scrollView = ref)}
         >
           <RN.Animated.View
             style={[
               {
-                fontSize: getSizeFonts(settingsFonts.FONT_SIZE_12, this.props.fontSize),
+                fontSize: getSizeFonts(fontSettings.FONT_SIZE_12, this.props.fontSize),
                 transform: [{ translateY: tabY }],
                 backgroundColor: '#CED8DA',
                 justifyContent: 'center',
@@ -247,19 +269,19 @@ class InnerComponent extends Component {
               RN.Platform.OS === 'ios' ? { paddingTop: 20 } : null,
             ]}
           >
-            <RN.TouchableOpacity 
+            <RN.TouchableOpacity
               onPress={() => this.handlePressTab(0)}
               style={[styles.tabStyle, styles.tabLeft, currentTab === 0 && styles.activeTabStyle]}
             >
               {this._upperCase('Новости')}
             </RN.TouchableOpacity>
-            <RN.TouchableOpacity 
+            <RN.TouchableOpacity
               onPress={() => this.handlePressTab(1)}
               style={[styles.tabStyle, currentTab === 1 && styles.activeTabStyle]}
             >
               {this._upperCase('Объявления')}
             </RN.TouchableOpacity>
-            <RN.TouchableOpacity 
+            <RN.TouchableOpacity
               onPress={() => this.handlePressTab(2)}
               style={[styles.tabStyle, styles.tabRight, currentTab === 2 && styles.activeTabStyle]}
             >
@@ -276,7 +298,7 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.newsReducer,
@@ -284,7 +306,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getNews: (page) => dispatch(getNewsPagination(page)),
   getUpdate: (page) => dispatch(getUpdatesPagination(page)),
   getEvents: (page) => dispatch(getEventsPagination(page)),

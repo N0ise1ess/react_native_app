@@ -5,42 +5,30 @@ import {
   Icon,
   Input,
   Item,
-  List, ListItem,
+  List,
+  ListItem,
   Spinner,
   Tab,
   TabHeading,
   Tabs,
-  Text
+  Text,
 } from 'native-base';
-import React, {Component} from 'react';
-import {View, TouchableOpacity} from 'react-native';
-import {connect} from 'react-redux';
-import moment from 'moment';
+import React, { Component } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 
-import {Navigation} from 'react-native-navigation';
-import {getSearchedTimetable, getTimetable} from '../../../../actions/timetableAction';
-import {ButtonBack, CustomIcon, FooterSection} from '../../../shared/components';
-import {styles} from './styles';
-
-const days = {
-  0: 'sunday',
-  1: 'monday',
-  2: 'tuesday',
-  3: 'wednesday',
-  4: 'thursday',
-  5: 'friday',
-  6: 'saturday'
-}
+import { CustomIcon, FooterSection } from '../../../shared';
+import { getSearchedTimetable, getTimetable } from '../../store/timetable-actions';
+import { styles } from './styles';
 
 class InnerComponent extends Component {
-
   static options(passProps) {
     return {
       topBar: {
         title: {
           text: 'Расписание',
         },
-      }
+      },
     };
   }
 
@@ -52,7 +40,7 @@ class InnerComponent extends Component {
       styles: styles(props.fontSize),
       groupNames: [],
       currentGroupIndex: -1,
-      selectedGroupName: ''
+      selectedGroupName: '',
     };
   }
 
@@ -64,29 +52,26 @@ class InnerComponent extends Component {
       role.forEach((localRole, index) => {
         if (localRole.type === 'STUDENT') {
           let groupNames = [];
-          role[index].details.forEach(detail => {
+          role[index].details.forEach((detail) => {
             groupNames.push(detail.group.name);
           });
-          this.setState({groupNames: groupNames, currentGroupIndex: 0});
+          this.setState({ groupNames: groupNames, currentGroupIndex: 0 });
         }
       });
     }
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize &&
-    this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   _upperCase(word) {
-    return (
-      <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>
-    );
+    return <Text style={this.state.styles.tabTitleStyle}>{word.toUpperCase()}</Text>;
   }
 
   renderOdd = () => {
-    const {currentTab, styles} = this.state;
-    const {timetables} = this.props;
+    const { currentTab, styles } = this.state;
+    const { timetables } = this.props;
 
     const timetable = timetables[1].dayTimetables;
     return (
@@ -94,42 +79,44 @@ class InnerComponent extends Component {
         heading={
           <TabHeading style={styles.tabHeaderStyle}>
             <View
-              style={[
-                styles.tabHeadingStyle,
-                styles.tabHeadingLeft,
-                currentTab % 3 === 0 && styles.activeTabStyle
-              ]}
+              style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab % 3 === 0 && styles.activeTabStyle]}
             >
               {this._upperCase('Нечетная')}
             </View>
           </TabHeading>
         }
       >
-        <Content style={{backgroundColor: '#CED8DA'}}>
-          <View style={{alignSelf: 'center'}}>
+        <Content style={{ backgroundColor: '#CED8DA' }}>
+          <View style={{ alignSelf: 'center' }}>
             <Text>Неделя {timetables[1].weekNumber}</Text>
           </View>
           {Object.keys(timetable).map((key, index) =>
-            timetable[key] && timetable[key][0] ?
+            timetable[key] && timetable[key][0] ? (
               <View key={index} style={styles.timetable}>
                 <View style={styles.weekHeader}>
-                  <Text style={{color: '#1784d3'}}>{timetable[key][0].weekDayName || ''}</Text>
+                  <Text style={{ color: '#1784d3' }}>{timetable[key][0].weekDayName || ''}</Text>
                 </View>
                 <List
                   dataArray={timetable[key]}
-                  renderRow={item => (
+                  renderRow={(item) => (
                     <View style={styles.listStyle}>
                       <View style={[styles.section]}>
                         <Text style={styles.time}>{item.timeName}</Text>
                       </View>
-                      <View style={[styles.section, {flex: 1}]}>
-                        <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
-                        <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
+                      <View style={[styles.section, { flex: 1 }]}>
+                        <Text style={styles.title}>
+                          {item.discriplineName}, {item.planTimeTypeName}.
+                        </Text>
+                        <Text style={styles.text}>
+                          {this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}
+                        </Text>
                       </View>
                     </View>
                   )}
                 />
-              </View> : null)}
+              </View>
+            ) : null,
+          )}
         </Content>
       </Tab>
     );
@@ -141,7 +128,7 @@ class InnerComponent extends Component {
       let teacherSplit = teacherName.split(' ');
       return teacherSplit[0] + ' ' + teacherSplit[1].substr(0, 1) + '. ' + teacherSplit[2].substr(0, 1) + '.';
     }
-    return ''
+    return '';
   }
 
   currentSuggestionType() {
@@ -150,85 +137,87 @@ class InnerComponent extends Component {
 
   onItemClick(item, token) {
     item.type === 'STUDENT_GROUP' &&
-    this.setState({
-      selectedGroupName: item.title
-    });
-    
+      this.setState({
+        selectedGroupName: item.title,
+      });
+
     this.props.getTimetable(item, token);
   }
 
   renderEven = () => {
-    const {currentTab, styles} = this.state;
-    const {timetables} = this.props;
+    const { currentTab, styles } = this.state;
+    const { timetables } = this.props;
     const timetable = timetables[0].dayTimetables;
     return (
       <Tab
         heading={
           <TabHeading style={styles.tabHeaderStyle}>
             <View
-              style={[
-                styles.tabHeadingStyle,
-                styles.tabHeadingRight,
-                currentTab % 3 === 1 && styles.activeTabStyle
-              ]}
+              style={[styles.tabHeadingStyle, styles.tabHeadingRight, currentTab % 3 === 1 && styles.activeTabStyle]}
             >
               {this._upperCase('Четная')}
             </View>
           </TabHeading>
         }
       >
-          <Content style={{backgroundColor: '#CED8DA'}}>
-            <View style={{alignSelf: 'center'}}>
-              <Text>Неделя {timetables[0].weekNumber}</Text>
-            </View>
-            {Object.keys(timetable).map((key, index) =>
-            timetable[key] && timetable[key][0] ?
-            <View key={index} style={styles.timetable}>
-              <View style={styles.weekHeader}>
-                <Text style={{color: '#1784d3'}}>{timetable[key][0].weekDayName || ''}</Text>
+        <Content style={{ backgroundColor: '#CED8DA' }}>
+          <View style={{ alignSelf: 'center' }}>
+            <Text>Неделя {timetables[0].weekNumber}</Text>
+          </View>
+          {Object.keys(timetable).map((key, index) =>
+            timetable[key] && timetable[key][0] ? (
+              <View key={index} style={styles.timetable}>
+                <View style={styles.weekHeader}>
+                  <Text style={{ color: '#1784d3' }}>{timetable[key][0].weekDayName || ''}</Text>
+                </View>
+                <List
+                  dataArray={timetable[key]}
+                  renderRow={(item) => (
+                    <View style={styles.listStyle}>
+                      <View style={[styles.section]}>
+                        <Text style={styles.time}>{item.timeName}</Text>
+                      </View>
+                      <View style={[styles.section, { flex: 1 }]}>
+                        <Text style={styles.title}>
+                          {item.discriplineName}, {item.planTimeTypeName}.
+                        </Text>
+                        <Text style={styles.text}>
+                          {this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                />
               </View>
-              <List
-                dataArray={timetable[key]}
-                renderRow={item => (
-                  <View style={styles.listStyle}>
-                    <View style={[styles.section]}>
-                      <Text style={styles.time}>{item.timeName}</Text>
-                    </View>
-                    <View style={[styles.section, {flex: 1}]}>
-                      <Text style={styles.title}>{item.discriplineName}, {item.planTimeTypeName}.</Text>
-                      <Text style={styles.text}>{this.getFio(item.teacherFIO)}, Ауд.{item.auditoriumNumber}, {item.buildingName}</Text>
-                    </View>
-                  </View>
-                )}
-              />
-            </View> : null)}
-          </Content>
+            ) : null,
+          )}
+        </Content>
       </Tab>
     );
   };
 
   onHandleSubmit = () => {
-    const {searchedText} = this.state;
+    const { searchedText } = this.state;
     this.props.getSearchedTimetable(searchedText, this.props.token);
   };
 
   _renderSearchBar = () => {
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Item style={styles.searchBar}>
-        <Icon name="ios-search" style={styles.searchIcon}/>
+        <Icon name="ios-search" style={styles.searchIcon} />
         <Input
           style={styles.searchInput}
           placeholder="Поиск по расписанию"
           value={this.state.searchedText}
-          onChangeText={text => this.setState({searchedText: text})}
+          onChangeText={(text) => this.setState({ searchedText: text })}
         />
         <Button transparent onPress={this.onHandleSubmit}>
           <Text>Найти</Text>
         </Button>
       </Item>
-    )
-  }
+    );
+  };
 
   render() {
     const {
@@ -239,7 +228,7 @@ class InnerComponent extends Component {
       errorDescription,
       suggestions,
       timetables,
-      token
+      token,
     } = this.props;
     const { styles, groupNames } = this.state;
     if (timetables.length > 0) {
@@ -254,9 +243,8 @@ class InnerComponent extends Component {
                 </TouchableOpacity>
 
                 {this.currentSuggestionType() !== 'TEACHER' ? (
-                  <Text style={styles.groupTitle}>
-                    Группа {this.state.selectedGroupName}
-                  </Text>) : null}
+                  <Text style={styles.groupTitle}>Группа {this.state.selectedGroupName}</Text>
+                ) : null}
 
                 <TouchableOpacity onPress={() => this.switchGroup('right')}>
                   <CustomIcon name="arrow_right" style={styles.iconRight} />
@@ -273,20 +261,16 @@ class InnerComponent extends Component {
           {!errorCode ? (
             <Tabs
               tabContainerStyle={{ elevation: 0 }}
-              onChangeTab={({i}) => this.setState({currentTab: i})}
-              tabBarUnderlineStyle={{backgroundColor: 'transparent'}}
+              onChangeTab={({ i }) => this.setState({ currentTab: i })}
+              tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
             >
               {this.renderOdd()}
               {this.renderEven()}
             </Tabs>
           ) : (
             <Content>
-              {timeTableLoading && <Spinner/>}
-              {errorCode && (
-                <Text style={styles.errorText}>
-                  ErrorCode: {`${errorCode}\n`}
-                </Text>
-              )}
+              {timeTableLoading && <Spinner />}
+              {errorCode && <Text style={styles.errorText}>ErrorCode: {`${errorCode}\n`}</Text>}
             </Content>
           )}
           <FooterSection {...this.props} />
@@ -297,82 +281,74 @@ class InnerComponent extends Component {
         <Container style={styles.container}>
           {this._renderSearchBar()}
           <Content>
-            {!timeTableLoading ?
+            {!timeTableLoading ? (
               <List
                 style={{}}
                 dataArray={suggestions}
-                renderRow={item => (
-                  <ListItem
-                    button
-                    onPress={() => this.onItemClick(item, token)}
-                    style={styles.listItemStyle}
-                  >
+                renderRow={(item) => (
+                  <ListItem button onPress={() => this.onItemClick(item, token)} style={styles.listItemStyle}>
                     <View style={styles.columnStyle}>
                       <Text style={styles.titleStyle}>{item.title}</Text>
-                      <Text style={[styles.textStyle, {color: '#979797'}]}>{item.description}</Text>
+                      <Text style={[styles.textStyle, { color: '#979797' }]}>{item.description}</Text>
                     </View>
                   </ListItem>
                 )}
-              /> : <Spinner color='#163D7D' style={{justifyContent: 'center', alignItems: 'center'}}/>
-            }
+              />
+            ) : (
+              <Spinner color="#163D7D" style={{ justifyContent: 'center', alignItems: 'center' }} />
+            )}
           </Content>
-          <FooterSection navPosition='TimeTable' componentId={this.props.componentId} userStatus={userStatus} />
+          <FooterSection navPosition="TimeTable" componentId={this.props.componentId} userStatus={userStatus} />
         </Container>
-      )
+      );
     }
   }
 
   getNextIndex = (directionName, currentIndex) => {
     let direction = {
       left: {
-        canMoveFrom: index => index !== 0,
-        getNext: index => index - 1,
+        canMoveFrom: (index) => index !== 0,
+        getNext: (index) => index - 1,
         getStartIndex: () => this.state.groupNames.length - 1,
       },
       right: {
-        canMoveFrom: index => index !== this.getLastGroupIndex(),
-        getNext: index => index + 1,
+        canMoveFrom: (index) => index !== this.getLastGroupIndex(),
+        getNext: (index) => index + 1,
         getStartIndex: () => 0,
       },
     }[directionName];
 
-    return direction.canMoveFrom(currentIndex)
-      ? direction.getNext(currentIndex)
-      : direction.getStartIndex();
+    return direction.canMoveFrom(currentIndex) ? direction.getNext(currentIndex) : direction.getStartIndex();
   };
 
   switchGroup(direction) {
     if (this.state.groupNames.length > 1) {
       this.setState({
-        currentGroupIndex: this.getNextIndex(
-          direction,
-          this.state.currentGroupIndex,
-        ),
+        currentGroupIndex: this.getNextIndex(direction, this.state.currentGroupIndex),
       });
     }
   }
 
   getLastGroupIndex() {
-    return this.state.groupNames.length - 1
+    return this.state.groupNames.length - 1;
   }
-
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.timetableReducer,
-    ...state.settings
+    ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getSearchedTimetable: (searchedText, token) => dispatch(getSearchedTimetable(searchedText, token)),
   getTimetable: (search, token) => dispatch(getTimetable(search, token)),
-  dispatch
+  dispatch,
 });
 
 export const TimeTableScreen = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(InnerComponent);

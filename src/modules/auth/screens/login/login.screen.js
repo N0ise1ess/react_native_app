@@ -4,16 +4,12 @@ import { Image, KeyboardAvoidingView, ScrollView, StatusBar, View } from 'react-
 import { connect } from 'react-redux';
 import { reset, isValid } from 'redux-form';
 
-import { login } from '../../../../actions/authorizationAction';
+import { login } from '../../store/auth-actions';
 import { img_logo } from '../../../../assets/images';
-import { MainView } from '../../../../components/Views/MainView';
 import { Login } from '../../components';
-import {
-  FooterSection,
-  CustomSnackbar
-} from '../../../shared/components';
+import { FooterSection, CustomSnackbar, MainView } from '../../../shared';
 import { styles } from './styles';
-import { setFontSize } from '../../../../actions/settingsAction';
+import { setFontSize } from '../../../settings/store/settings-actions';
 import { Navigation } from 'react-native-navigation';
 
 class InnerComponent extends React.Component {
@@ -36,7 +32,7 @@ class InnerComponent extends React.Component {
           text: 'Авторизация',
         },
         leftButtons: [],
-      }
+      },
     };
   }
 
@@ -51,31 +47,29 @@ class InnerComponent extends React.Component {
           component: {
             name: 'News',
           },
-        }
-      ])
+        },
+      ]);
     }
-    this.props.errorMessage !== newProps.errorMessage &&
-      this.showToast(newProps.errorMessage);
+    this.props.errorMessage !== newProps.errorMessage && this.showToast(newProps.errorMessage);
   }
 
   onButtonPress = async () => {
     const { form } = this.props;
 
-    this.props.isFormValid &&
-      await this.props.login(form.values);
+    this.props.isFormValid && (await this.props.login(form.values));
     !form.values.checkbox && this.props.reset();
   };
 
   showToast(message) {
     CustomSnackbar.show({
-      title: message
+      title: message,
     });
   }
 
   render() {
     const { authLoading, errorMessage, userStatus } = this.props;
     const { styles } = this.state;
-    
+
     return (
       <MainView>
         <StatusBar />
@@ -86,18 +80,25 @@ class InnerComponent extends React.Component {
               <Login errorMessage handleSubmit={this.onButtonPress} isLoading={authLoading} />
               <View>
                 <Text
-                  onPress={() => Navigation.push(this.props.componentId, {
-                    component: {
-                      name: "SignUp",
-                    }
-                  })}
-                  style={styles.linkedTextStyle}>Зарегистрироваться</Text>
+                  onPress={() =>
+                    Navigation.push(this.props.componentId, {
+                      component: {
+                        name: 'SignUp',
+                      },
+                    })
+                  }
+                  style={styles.linkedTextStyle}
+                >
+                  Зарегистрироваться
+                </Text>
                 <Text
-                  onPress={() => Navigation.push(this.props.componentId, {
-                    component: {
-                      name: "ResetPassword",
-                    }
-                  })}
+                  onPress={() =>
+                    Navigation.push(this.props.componentId, {
+                      component: {
+                        name: 'ResetPassword',
+                      },
+                    })
+                  }
                   style={styles.linkedTextStyle}
                 >
                   Восстановить пароль
@@ -112,16 +113,16 @@ class InnerComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     form: state.form.login,
-    isFormValid: isValid('login')(state)
+    isFormValid: isValid('login')(state),
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  login: values => dispatch(login(values)),
+const mapDispatchToProps = (dispatch) => ({
+  login: (values) => dispatch(login(values)),
   reset: () => dispatch(reset('login')),
   setFontSize: (fontSize) => dispatch(setFontSize(fontSize)),
   dispatch,

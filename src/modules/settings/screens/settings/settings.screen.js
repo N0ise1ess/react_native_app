@@ -1,16 +1,17 @@
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
-import {Navigation} from 'react-native-navigation';
 
-import { logout } from '../../../../actions/authorizationAction';
-import { FooterSection, CustomIcon } from '../../../shared/components';
+import { logout } from '../../../auth/store/auth-actions';
+import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
   {
     title: 'Уведомления',
     image: 'notification_2',
+    route: 'NotificationSettings',
   },
   {
     title: 'Учетная запись',
@@ -39,6 +40,7 @@ const itemGuestList = [
   {
     title: 'Уведомления',
     image: 'notification_2',
+    route: 'NotificationSettings',
   },
   {
     title: 'Основные',
@@ -59,7 +61,6 @@ const itemGuestList = [
 ];
 
 class InnerComponent extends Component {
-  
   static options(passProps) {
     return {
       topBar: {
@@ -67,7 +68,7 @@ class InnerComponent extends Component {
           text: 'Настройки',
         },
         rightButtons: [],
-      }
+      },
     };
   }
 
@@ -79,7 +80,7 @@ class InnerComponent extends Component {
   }
 
   componentDidUpdate(props) {
-    this.props.fontSize !== props.fontSize && this.setState({styles: styles(this.props.fontSize)});
+    this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
   onAuthHandle = () => {
@@ -87,35 +88,35 @@ class InnerComponent extends Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'Auth',
-      }
-    })
+      },
+    });
   };
 
   render() {
     const { userStatus, token } = this.props;
-    const {styles} = this.state;
+    const { styles } = this.state;
     return (
       <Container style={styles.container}>
         <Content>
           <List
             style={styles.listStyle}
             dataArray={userStatus === 'guest' ? itemGuestList : itemList}
-            renderRow={item => (
+            renderRow={(item) => (
               <ListItem
                 button
                 onPress={() =>
                   item.route === 'Auth'
                     ? this.onAuthHandle()
-                    : item.route && Navigation.push(this.props.componentId, {
-                      component: {
-                        name: item.route,
-                      }
-                    })
-
+                    : item.route &&
+                      Navigation.push(this.props.componentId, {
+                        component: {
+                          name: item.route,
+                        },
+                      })
                 }
                 style={styles.listItemStyle}
               >
-                <CustomIcon 
+                <CustomIcon
                   style={styles.iconStyle}
                   name={item.route === 'Auth' ? (token ? item.image : item.image2) : item.image}
                 />
@@ -132,14 +133,14 @@ class InnerComponent extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
   dispatch,
 });
