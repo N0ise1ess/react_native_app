@@ -1,18 +1,20 @@
 import { Tab, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, View, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 
 import { FooterSection } from '../../../shared';
 import { SignUpFirstForm, SignUpSecondForm, SignUpThirdForm } from '../../components/signup';
 import { styles } from './styles';
+import {Navigation} from "react-native-navigation";
 
 class InnerComponent extends Component {
+
   static options(passProps) {
     return {
       topBar: {
         title: {
-          text: `Регистрация`,
+          text: `Регистрация 1 из 3`,
         },
         leftButtons: [],
       },
@@ -20,52 +22,46 @@ class InnerComponent extends Component {
   }
 
   constructor(props) {
-    super(props);
-    this.state = {
-      styles: styles(props.fontSize),
-      currentTab: 0,
-    };
-    this.handleSwitchTab = this.handleSwitchTab.bind(this);
-    // this._handleBackButtonClick = this._handleBackButtonClick.bind(this);
+      super(props)
+      this.state = {
+          styles: styles(props.fontSize),
+          currentTab: 0
+      };
+      this.handleSwitchTab = this.handleSwitchTab.bind(this)
   }
 
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
-  componentDidMount() {
-    // this.props.navigation.setParams({ customGoBack: this.handleBackArrow });
-    // this.props.navigation.setParams({ step: 1 });
-  }
-
   componentWillMount() {
-    // BackHandler.addEventListener('hardwareBackPress', this._handleBackButtonClick);
-  }
+        BackHandler.addEventListener('hardwareBackPress', () => this._handleBackButtonClick());
+    }
 
-  componentWillUnmount() {
-    // BackHandler.removeEventListener('hardwareBackPress', this._handleBackButtonClick);
-  }
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', () => this._handleBackButtonClick());
+    }
 
-  // handleBackArrow = () => {
-  //   if (this.state.currentTab !== 0){
-  //     this.setState(prevState => ({
-  //       currentTab: prevState.currentTab - 1
-  //     }));
-  //     this.props.navigation.setParams({ step : this.state.currentTab + 1 })
-  //   } else this.props.navigation.goBack();
-  // };
-
-  // _handleBackButtonClick() {
-  //     if (this.state.currentTab === 0) {
-  //         this.props.navigation.goBack();
-  //     } else {
-  //         this.setState(prevState => ({
-  //             currentTab: prevState.currentTab - 1
-  //         }));
-  //         // this.props.navigation.setParams({ step : this.state.currentTab + 1})
-  //     }
-  //     return true;
-  // }
+    _handleBackButtonClick() {
+        if (this.state.currentTab === 0) {
+          Navigation.push(this.props.componentId, {
+            component: {
+              name: "Auth",
+            }})
+        } else {
+            this.setState(prevState => ({
+                currentTab: prevState.currentTab - 1
+            }));
+          Navigation.mergeOptions(this.props.componentId, {
+            topBar: {
+              title: {
+                text: `Регистрация ${this.state.currentTab + 1} из 3`,
+              },
+            },
+          });
+        }
+        return true;
+    }
 
   onValueChange = (key) => {
     this.setState({ selected: key });
@@ -103,20 +99,26 @@ class InnerComponent extends Component {
   }
 
   handleSwitchTab(value) {
-    this.setState({ currentTab: value });
-    // this.props.navigation.setParams({ step: value + 1 })
+    this.setState({ currentTab: value })
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: `Регистрация ${value + 1} из 3`,
+        },
+      },
+    });
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     ...state.authReducer,
     ...state.accountReducer,
-    ...state.settings,
+    ...state.settings
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 

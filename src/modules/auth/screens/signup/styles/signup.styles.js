@@ -10,6 +10,7 @@ export const styles = (fontSize) =>
       backgroundColor: '#CED8DA',
       flex: 1,
       alignItems: 'center',
+      marginTop: 30
     },
     scrollContainer: {
       backgroundColor: '#CED8DA',
