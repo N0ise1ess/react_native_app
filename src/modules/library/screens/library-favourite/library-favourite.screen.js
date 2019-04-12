@@ -2,6 +2,7 @@ import { styles } from './styles';
 import { connect } from 'react-redux';
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
+import Modal from 'react-native-modalbox';
 import { Keyboard, FlatList, View } from 'react-native';
 import { CustomIcon, FooterSection } from '../../../shared';
 import { Navigation } from 'react-native-navigation';
@@ -93,13 +94,15 @@ class InnerComponent extends Component {
       activeBook: null,
       searchedText: '',
       books: [],
+      isOpen: false,
+      isRequestSent: false,
       step: 0,
     };
     Navigation.events().bindComponent(this);
   }
 
   render() {
-    const { styles, books, activeBook } = this.state;
+    const { styles, books, activeBook, isOpen, isRequestSent } = this.state;
     const { collectionLoading } = this.props;
 
     const booksPresented = books && books.length > 0;
@@ -125,18 +128,38 @@ class InnerComponent extends Component {
           {activeBook && this._renderBookView()}
         </Content>
         <FooterSection {...this.props} />
+        <Modal
+          backdrop={true}
+          backdropPressToClose={false}
+          isOpen={isOpen}
+          onClosed={() => this.setState({isOpen: false})}
+          style={[styles.modal]}
+          position={"center"}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              {isRequestSent ? 'Книга успешно добавлена' : 'Подтвердите добавление книги в запрос на выдачу литературы'}
+            </Text>
+            <View style={styles.modalButtons}>
+              {!isRequestSent && <Button onPress={() => this.setState({isOpen: false})} style={[styles.modalButton, styles.buttonCancel]}><Text>ОТМЕНА</Text></Button>}
+              <Button onPress={() => this.setState({isRequestSent: true, isOpen: !isRequestSent})} style={[styles.modalButton, styles.buttonConfirm, isRequestSent && styles.buttonConfirmFull]}><Text>ГОТОВО</Text></Button>
+            </View>
+            <CustomIcon name="close1" style={styles.modalCloseIcon} />
+          </View>
+        </Modal>
       </Container>
     );
   }
 
   _renderBookView = () => {
-    const { styles } = this.state;
+    const { styles, isRequestSent } = this.state;
     const { author, additionalInfo, name } = this.state.activeBook;
 
     return <View style={styles.bookViewerSection}>
       <View style={styles.bookActionButtons}>
         <CustomIcon name="star" style={styles.actionButton} />
-        <Icon type="FontAwesome" name="plus" style={styles.actionButton} />
+        {!isRequestSent && <Button style={styles.actionButton} onPress={() => this.setState({isOpen: true})}>
+          <Icon type="FontAwesome" name="plus" style={styles.buttonText} />
+        </Button>}
       </View>
       <Text style={[styles.authorName, styles.bookViewText]}>{author}</Text>
       <Text style={[styles.titleStyle, styles.bookViewText]}>{name}</Text>

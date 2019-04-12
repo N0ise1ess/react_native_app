@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import { getSizeFonts, fontSettings } from '../../../../shared';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const styles = (fontSize) =>
   StyleSheet.create({
@@ -156,4 +156,74 @@ export const styles = (fontSize) =>
       justifyContent: 'center',
       width: '100%',
     },
+    modal: {
+      width: 320,
+      height: 240,
+      alignSelf: 'flex-start',
+      justifyContent: 'center',
+      position: 'absolute',
+      top: - height / 5 + 30,
+    },
+    modalContent: {
+      width: 300,
+      height: 220,
+      alignSelf: 'center',
+      borderWidth: 1,
+      borderColor: '#000',
+    },
+    modalText: {
+      padding: 30,
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      alignSelf: 'center',
+    },
+    modalCloseIcon: {
+      backgroundColor: '#fff',
+      textAlign: 'center',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      position: 'absolute',
+      height: 22,
+      width: 25,
+      right: -5,
+      top: -3,
+      bottom: 0,
+    },
+    modalButtons: {
+      position: 'absolute',
+      bottom: 20,
+      flexDirection: 'row',
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    modalButton: {
+      marginBottom: 10,
+      marginTop: 10,
+      borderRadius: 15,
+      paddingBottom: 0,
+      paddingTop: 0,
+      justifyContent: 'center',
+      width: 100,
+      height: 35,
+      borderColor: '#fff'
+    },
+    buttonCancel: {
+      backgroundColor: '#1669f9',
+      marginRight: 10,
+    },
+    buttonConfirm: {
+      backgroundColor: '#ff003c',
+    },
+    buttonConfirmFull: {
+      width: '90%',
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    buttonText: {
+      width: '100%',
+      justifyContent: 'center',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      alignSelf: 'center',
+      textAlign: 'center',
+    }
   });
