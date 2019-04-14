@@ -41,6 +41,8 @@ class InnerComponent extends Component {
       groupNames: [],
       currentGroupIndex: -1,
       selectedGroupName: '',
+      groupId: null,
+      role: ""
     };
   }
 
@@ -51,11 +53,14 @@ class InnerComponent extends Component {
     if (role && role.length > 0) {
       role.forEach((localRole, index) => {
         if (localRole.type === 'STUDENT') {
+          const groupId = role[0].details[0].group.id
+          this.props.getTimetable({id : groupId, type: "STUDENT_GROUP"}, this.props.token);
+          this.setState({groupId : groupId})
           let groupNames = [];
           role[index].details.forEach((detail) => {
             groupNames.push(detail.group.name);
           });
-          this.setState({ groupNames: groupNames, currentGroupIndex: 0 });
+          this.setState({ groupNames: groupNames, currentGroupIndex: 0, role: "STUDENT_GROUP" });
         }
       });
     }
@@ -74,6 +79,9 @@ class InnerComponent extends Component {
     const { timetables } = this.props;
 
     const timetable = timetables[1].dayTimetables;
+    const timetablePresent = Object.keys(timetable).map(key => timetable[key])
+        .filter(tt => tt.length > 0)
+        .length > 0
     return (
       <Tab
         heading={
@@ -88,7 +96,8 @@ class InnerComponent extends Component {
       >
         <Content style={{ backgroundColor: '#CED8DA' }}>
           <View style={{ alignSelf: 'center' }}>
-            <Text>Неделя {timetables[1].weekNumber}</Text>
+            {timetablePresent ? <Text>Неделя {timetables[1].weekNumber}</Text>
+                : <Text>Расписание отсутвует</Text> }
           </View>
           {Object.keys(timetable).map((key, index) =>
             timetable[key] && timetable[key][0] ? (
@@ -148,6 +157,9 @@ class InnerComponent extends Component {
     const { currentTab, styles } = this.state;
     const { timetables } = this.props;
     const timetable = timetables[0].dayTimetables;
+    const timetablePresent = Object.keys(timetable).map(key => timetable[key])
+        .filter(tt => tt.length > 0)
+        .length > 0
     return (
       <Tab
         heading={
@@ -162,7 +174,8 @@ class InnerComponent extends Component {
       >
         <Content style={{ backgroundColor: '#CED8DA' }}>
           <View style={{ alignSelf: 'center' }}>
-            <Text>Неделя {timetables[0].weekNumber}</Text>
+            {timetablePresent ? <Text>Неделя {timetables[0].weekNumber}</Text>
+                : <Text>Расписание отсутвует</Text> }
           </View>
           {Object.keys(timetable).map((key, index) =>
             timetable[key] && timetable[key][0] ? (
@@ -198,7 +211,12 @@ class InnerComponent extends Component {
 
   onHandleSubmit = () => {
     const { searchedText } = this.state;
-    this.props.getSearchedTimetable(searchedText, this.props.token);
+    if (searchedText.length > 0) {
+      this.props.getSearchedTimetable(searchedText, this.props.token);
+    } else {
+      const { groupId, role } = this.state
+      if (role === "STUDENT_GROUP") this.props.getTimetable({id : groupId, type: "STUDENT_GROUP"}, this.props.token);
+    }
   };
 
   _renderSearchBar = () => {
