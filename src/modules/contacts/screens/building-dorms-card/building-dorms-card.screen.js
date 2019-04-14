@@ -1,6 +1,7 @@
 import React from 'react';
 import * as NB from 'native-base';
 import { View, Linking } from 'react-native';
+import MapView from 'react-native-maps';
 import { connect } from 'react-redux';
 import { FooterSection, CustomIcon } from '../../../shared';
 import { styles } from './styles';
@@ -52,6 +53,11 @@ class InnerComponent extends React.Component {
               <NB.Text style={styles.titleStyle}>{item.address}</NB.Text>
             </View>
           </NB.Col>
+        </NB.Grid>
+        <NB.Grid>
+          <MapView
+            style={{ flex: 1 }}
+          />
         </NB.Grid>
       </NB.Container>
     );
