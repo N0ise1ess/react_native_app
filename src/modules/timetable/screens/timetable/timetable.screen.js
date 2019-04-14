@@ -97,7 +97,7 @@ class InnerComponent extends Component {
         <Content style={{ backgroundColor: '#CED8DA' }}>
           <View style={{ alignSelf: 'center' }}>
             {timetablePresent ? <Text>Неделя {timetables[1].weekNumber}</Text>
-                : <Text>Расписание отсутвует</Text> }
+                : <Text>Расписание отсутствует</Text> }
           </View>
           {Object.keys(timetable).map((key, index) =>
             timetable[key] && timetable[key][0] ? (
@@ -175,7 +175,7 @@ class InnerComponent extends Component {
         <Content style={{ backgroundColor: '#CED8DA' }}>
           <View style={{ alignSelf: 'center' }}>
             {timetablePresent ? <Text>Неделя {timetables[0].weekNumber}</Text>
-                : <Text>Расписание отсутвует</Text> }
+                : <Text>Расписание отсутствует</Text> }
           </View>
           {Object.keys(timetable).map((key, index) =>
             timetable[key] && timetable[key][0] ? (
