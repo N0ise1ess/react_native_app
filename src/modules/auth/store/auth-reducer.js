@@ -18,6 +18,7 @@ export const authReducer = (state = initialState, action) => {
     case types.LOGIN_PENDING:
       return {
         ...state,
+        errorMessage: null,
         authLoading: true,
       };
     case types.LOGIN_FAILURE:
