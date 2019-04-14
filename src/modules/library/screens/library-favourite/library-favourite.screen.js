@@ -2,9 +2,16 @@ import { styles } from './styles';
 import { connect } from 'react-redux';
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
+import Modal from 'react-native-modalbox';
 import { Keyboard, FlatList, View } from 'react-native';
 import { CustomIcon, FooterSection } from '../../../shared';
 import { Navigation } from 'react-native-navigation';
+
+const shortContent = 'Рассмотрены основные экономико-математические методы и модели анализа, '
+  + 'оптимизации ресурсов и принятия решений в разнообразных условиях определенности, риска '
+  + 'и неопределенности и их применение в производстве, экономике, финансах и бизнесе. '
+  + 'Исследованы типовые и усложненные экономико-математические модели задач математического '
+  + 'программирования, статистического анализа данных, ...';
 
 const collections = [
   {
@@ -84,21 +91,24 @@ class InnerComponent extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      activeBook: null,
       searchedText: '',
       books: [],
+      isOpen: false,
+      isRequestSent: false,
       step: 0,
     };
     Navigation.events().bindComponent(this);
   }
 
   render() {
-    const { styles, books } = this.state;
+    const { styles, books, activeBook, isOpen, isRequestSent } = this.state;
     const { collectionLoading } = this.props;
 
     const booksPresented = books && books.length > 0;
     return (
       <Container style={styles.container}>
-        {booksPresented ? (
+        {booksPresented && !activeBook ? (
           <Item style={styles.searchBar}>
             <Icon name="ios-search" style={styles.searchIcon} />
             <Input
@@ -113,18 +123,52 @@ class InnerComponent extends Component {
           </Item>
         ) : null}
         <Content ref={(node) => (this.content = node)}>
-          {collectionLoading ? (
-            <Spinner color="blue" style={styles.spinner} />
-          ) : booksPresented ? (
-            this._renderBooksList()
-          ) : (
-            this._renderCollection()
-          )}
+          {collectionLoading && <Spinner color="blue" style={styles.spinner} />}
+          {!collectionLoading && !activeBook &&  (booksPresented ? this._renderBooksList() : this._renderCollection())}
+          {activeBook && this._renderBookView()}
         </Content>
         <FooterSection {...this.props} />
+        <Modal
+          backdrop={true}
+          backdropPressToClose={false}
+          isOpen={isOpen}
+          onClosed={() => this.setState({isOpen: false})}
+          style={[styles.modal]}
+          position={"center"}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              {isRequestSent ? 'Книга успешно добавлена' : 'Подтвердите добавление книги в запрос на выдачу литературы'}
+            </Text>
+            <View style={styles.modalButtons}>
+              {!isRequestSent && <Button onPress={() => this.setState({isOpen: false})} style={[styles.modalButton, styles.buttonCancel]}><Text>ОТМЕНА</Text></Button>}
+              <Button onPress={() => this.setState({isRequestSent: true, isOpen: !isRequestSent})} style={[styles.modalButton, styles.buttonConfirm, isRequestSent && styles.buttonConfirmFull]}><Text>ГОТОВО</Text></Button>
+            </View>
+            <CustomIcon name="close1" style={styles.modalCloseIcon} />
+          </View>
+        </Modal>
       </Container>
     );
   }
+
+  _renderBookView = () => {
+    const { styles, isRequestSent } = this.state;
+    const { author, additionalInfo, name } = this.state.activeBook;
+
+    return <View style={styles.bookViewerSection}>
+      <View style={styles.bookActionButtons}>
+        <CustomIcon name="star" style={styles.actionButton} />
+        {!isRequestSent && <Button style={styles.actionButton} onPress={() => this.setState({isOpen: true})}>
+          <Icon type="FontAwesome" name="plus" style={styles.buttonText} />
+        </Button>}
+      </View>
+      <Text style={[styles.authorName, styles.bookViewText]}>{author}</Text>
+      <Text style={[styles.titleStyle, styles.bookViewText]}>{name}</Text>
+      <Text style={[styles.authorName, styles.bookViewText]}>{additionalInfo}</Text>
+      <Text style={[styles.authorName, styles.bookViewText]}>{shortContent}</Text>
+      <Text style={styles.keyWordsText}>Ключевые слова</Text>
+      <Button style={styles.readButton}><Text style={styles.readButtonText}>Читать</Text></Button>
+    </View>;
+  };
 
   _renderCollection = () => {
     const { styles } = this.state;
@@ -168,7 +212,9 @@ class InnerComponent extends Component {
         data={books}
         keyExtractor={(item, index) => item.id}
         renderItem={({ item, index }) => (
-          <ListItem style={[styles.listItemStyle, styles.marginTop0]} button onPress={() => {}}>
+          <ListItem button
+            style={[styles.listItemStyle, styles.marginTop0]}
+            onPress={() => this.setState({ activeBook: item })}>
             <View style={styles.listItem}>
               <View style={styles.booksListItemContainer}>
                 <View>
@@ -207,16 +253,30 @@ class InnerComponent extends Component {
 
   _handleBackButton = () => {
     const { step } = this.state;
-    if (step > 0) {
-      this.setState({ books: [], step: 0 });
-      Navigation.mergeOptions(this.props.componentId, {
-        topBar: {
-          title: {
-            text: 'Избранное',
+    switch (step) {
+      case 2:
+        this.setState({ books: [], step: 1, activeBookPath: [] });
+        Navigation.mergeOptions(this.props.componentId, {
+          topBar: {
+            title: {
+              text: 'Избранное',
+            },
           },
-        },
-      });
-    } else Navigation.pop(this.props.componentId);
+        });
+        break
+      case 1:
+        this.setState({ books: [], step: 0 });
+        Navigation.mergeOptions(this.props.componentId, {
+          topBar: {
+            title: {
+              text: 'Избранное',
+            },
+          },
+        });
+        break
+      default:
+        Navigation.pop(this.props.componentId);
+    }
   };
 
   onHandleSubmit = () => {

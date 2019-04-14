@@ -18,7 +18,7 @@ before_script:
 
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
-  - npm install
+  - yarn
   - cp ~/my-release-key.keystore ./android/app
   - cd android
   - chmod +x ./gradlew

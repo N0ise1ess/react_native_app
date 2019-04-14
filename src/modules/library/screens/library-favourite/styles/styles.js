@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import { getSizeFonts, fontSettings } from '../../../../shared';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const styles = (fontSize) =>
   StyleSheet.create({
@@ -105,4 +105,125 @@ export const styles = (fontSize) =>
       fontFamily: 'MyriadPro-Regular',
       fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
     },
+    bookViewerSection: {
+      backgroundColor: '#fff',
+      flex: 1,
+      padding: 50,
+      paddingRight: 20,
+    },
+    bookActionButtons: {
+      position: 'absolute',
+      right: 20,
+      top: 40,
+    },
+    actionButton: {
+      color: '#fff',
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: '#1c88f3',
+      justifyContent: 'center',
+      textAlign: 'center',
+      width: 40,
+      height: 40,
+      lineHeight: 40,
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      marginTop: 10,
+      borderRadius: 20,
+    },
+    keyWordsText: {
+      color: '#1d88f3',
+      marginTop: 20,
+      fontWeight: 'bold',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+    },
+    bookViewText: {
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      marginBottom: 10,
+      paddingRight: 50,
+    },
+    readButton: {
+      alignSelf: 'flex-end',
+      alignItems: 'center',
+      flexDirection: 'row',
+      backgroundColor: '#eb4043',
+      borderRadius: 20,
+      marginTop: 10,
+      width: '40%',
+    },
+    readButtonText: {
+      alignSelf: 'center',
+      textAlign: 'center',
+      justifyContent: 'center',
+      width: '100%',
+    },
+    modal: {
+      width: 320,
+      height: 240,
+      alignSelf: 'flex-start',
+      justifyContent: 'center',
+      position: 'absolute',
+      top: - height / 5 + 30,
+    },
+    modalContent: {
+      width: 300,
+      height: 220,
+      alignSelf: 'center',
+      borderWidth: 1,
+      borderColor: '#000',
+    },
+    modalText: {
+      padding: 30,
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      alignSelf: 'center',
+    },
+    modalCloseIcon: {
+      backgroundColor: '#fff',
+      textAlign: 'center',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      position: 'absolute',
+      height: 22,
+      width: 25,
+      right: -5,
+      top: -3,
+      bottom: 0,
+    },
+    modalButtons: {
+      position: 'absolute',
+      bottom: 20,
+      flexDirection: 'row',
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    modalButton: {
+      marginBottom: 10,
+      marginTop: 10,
+      borderRadius: 15,
+      paddingBottom: 0,
+      paddingTop: 0,
+      justifyContent: 'center',
+      width: 100,
+      height: 35,
+      borderColor: '#fff'
+    },
+    buttonCancel: {
+      backgroundColor: '#1669f9',
+      marginRight: 10,
+    },
+    buttonConfirm: {
+      backgroundColor: '#ff003c',
+    },
+    buttonConfirmFull: {
+      width: '90%',
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    buttonText: {
+      width: '100%',
+      justifyContent: 'center',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_16, fontSize),
+      alignSelf: 'center',
+      textAlign: 'center',
+    }
   });
