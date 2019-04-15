@@ -1,6 +1,7 @@
 import React from 'react';
 import * as NB from 'native-base';
 import { View, Linking } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { FooterSection, CustomIcon } from '../../../shared';
 import { styles } from './styles';
@@ -53,6 +54,22 @@ class InnerComponent extends React.Component {
             </View>
           </NB.Col>
         </NB.Grid>
+        {item.x && item.y && <MapView
+          style={{ flex: 1 }}
+          region={{
+            latitude: item.x,
+            longitude: item.y,
+            latitudeDelta: 0.0022,
+            longitudeDelta: 0.0021,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: item.x,
+              longitude: item.y,
+            }}
+          />
+        </MapView>}
       </NB.Container>
     );
   }

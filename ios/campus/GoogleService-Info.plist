@@ -2,39 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>29314139662-iblnnhalakve36ei2j08ioaa4dqn4un5.apps.googleusercontent.com</string>
+	<string>1053260502113-7jsudhei2094ur9biajc9i84088ui40f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.29314139662-iblnnhalakve36ei2j08ioaa4dqn4un5</string>
+	<string>com.googleusercontent.apps.1053260502113-7jsudhei2094ur9biajc9i84088ui40f</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDdpnwdJXb7Hopd0_BwT5Hu4QyA5-NB5Fo</string>
+	<string>AIzaSyBREqd06jYOqJsEVCKVHij9GX94A7STmYA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>29314139662</string>
+	<string>1053260502113</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>ru.campus.testCampus</string>
 	<key>PROJECT_ID</key>
-	<string>notification-service-604db</string>
+	<string>notifications-95391</string>
 	<key>STORAGE_BUCKET</key>
-	<string>notification-service-604db.appspot.com</string>
+	<string>notifications-95391.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:29314139662:ios:6225bc42a81652ab</string>
+	<string>1:1053260502113:ios:6225bc42a81652ab</string>
 	<key>DATABASE_URL</key>
-	<string>https://notification-service-604db.firebaseio.com</string>
+	<string>https://notifications-95391.firebaseio.com</string>
 </dict>
 </plist>
