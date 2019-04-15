@@ -193,6 +193,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
     implementation project(':react-native-navigation')
+    implementation project(':react-native-maps')
 }
 
 // Run this once to be able to run the application with BUCK
