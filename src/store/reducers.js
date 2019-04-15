@@ -23,9 +23,9 @@ export default combineReducers({
   contactsReducer,
   loadingScreen: loadingReducer,
   personalitiesReducer,
-  questionnairesReducer,
-  scratchBookReducer,
-  settingsReducer,
+  questionnaires: questionnairesReducer,
+  scratchBook: scratchBookReducer,
+  settings: settingsReducer,
   timetableReducer,
   wifi: wifiReducer,
 });
