@@ -13,6 +13,16 @@ export const financesReducer = (state = initialState, action) => {
         ...state,
         scholarships: action.payload,
       };
+    case types.FINANCE_DEBTS_SUCCESS:
+    return {
+      ...state,
+      debts: action.payload,
+    };
+    case types.FINANCE_STIPEND_SUCCESS:
+    return {
+      ...state,
+      stipend: action.payload,
+    };
     default:
       return state;
   }
