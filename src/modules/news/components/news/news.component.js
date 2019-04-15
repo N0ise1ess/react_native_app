@@ -43,7 +43,7 @@ export const News = props => {
   return (
     <TouchableOpacity activeOpacity={1} style={style.cardItem} disabled={!props.onPress} onPress={props.onPress}>
       <Card>
-        {props.image && <Image style={style.imageStyle} source={{ uri: `data:image/png;base64,${props.image}` }} />}
+        {props.image && <Image style={style.imageStyle} source={{ uri: props.image }} />}
         {props.time && (
           <CardItem style={style.sectionTime}>
             <Text style={style.timeStyle}>

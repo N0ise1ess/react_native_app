@@ -19,7 +19,7 @@ export class Tab extends React.PureComponent {
     fontSize={this.props.fontSize}
     title={item.title}
     time={item.time}
-    image={item.image}
+    image={item.img_url}
     description={item.text}
     isTruncate={true}
     onPress={() => Navigation.push(this.props.componentId, {
@@ -30,7 +30,7 @@ export class Tab extends React.PureComponent {
             newsType: 'news',
             title: item.title,
             time: item.time,
-            image: item.image,
+            image: item.img_url,
             description: item.text,
           }
         }
