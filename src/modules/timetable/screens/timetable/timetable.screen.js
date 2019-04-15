@@ -17,7 +17,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { CustomIcon, FooterSection } from '../../../shared';
+import { CustomIcon, FooterSection, throttle } from '../../../shared';
 import { getSearchedTimetable, getTimetable } from '../../store/timetable-actions';
 import { styles } from './styles';
 
@@ -209,12 +209,8 @@ class InnerComponent extends Component {
         <Input
           style={styles.searchInput}
           placeholder="Поиск по расписанию"
-          value={this.state.searchedText}
-          onChangeText={(text) => this.setState({ searchedText: text })}
+          onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
         />
-        <Button transparent onPress={this.onHandleSubmit}>
-          <Text>Найти</Text>
-        </Button>
       </Item>
     );
   };
