@@ -4,7 +4,7 @@ import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text 
 import React, { Component } from 'react';
 import Modal from 'react-native-modalbox';
 import { Keyboard, FlatList, View } from 'react-native';
-import { CustomIcon, FooterSection } from '../../../shared';
+import { CustomIcon, FooterSection, throttle } from '../../../shared';
 import { Navigation } from 'react-native-navigation';
 
 const shortContent = 'Рассмотрены основные экономико-математические методы и модели анализа, '
@@ -114,12 +114,8 @@ class InnerComponent extends Component {
             <Input
               style={styles.searchInput}
               placeholder="Поиск"
-              value={this.state.searchedText}
-              onChangeText={(text) => this.setState({ searchedText: text })}
+              onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
             />
-            <Button transparent onPress={this.onHandleSubmit}>
-              <Text style={styles.btnFind}>Найти</Text>
-            </Button>
           </Item>
         ) : null}
         <Content ref={(node) => (this.content = node)}>
@@ -280,7 +276,7 @@ class InnerComponent extends Component {
   };
 
   onHandleSubmit = () => {
-    Keyboard.dismiss();
+    // Keyboard.dismiss();
   };
 }
 

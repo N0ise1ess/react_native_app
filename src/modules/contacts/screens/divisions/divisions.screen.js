@@ -1,11 +1,11 @@
 import { Button, Container, Content, Icon, Input, Item, ListItem, Spinner, Text } from 'native-base';
 import React, { Component } from 'react';
-import { FlatList, Keyboard, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 
-import { CustomIcon, FooterSection } from '../../../shared';
+import { CustomIcon, FooterSection, throttle } from '../../../shared';
 import { getDepartments, setOpenedIdItemDivisions } from '../../store/contacts-actions';
 import { DivisionInfo } from './division.info/division.info';
 import { styles } from './styles';
@@ -55,12 +55,8 @@ class InnerComponent extends Component {
           <Input
             style={styles.searchInput}
             placeholder="Поиск по подразделениям"
-            value={this.state.searchedText}
-            onChangeText={(text) => this.setState({ searchedText: text })}
+            onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
           />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text style={{ color: '#163D7D' }}>Найти</Text>
-          </Button>
         </Item>
         <Content ref={(node) => (this.content = node)}>
           {departmentsLoading ? (
@@ -159,9 +155,7 @@ class InnerComponent extends Component {
     } else Navigation.pop(this.props.componentId);
   };
 
-  onHandleSubmit = () => {
-    Keyboard.dismiss();
-    const { searchedText } = this.state;
+  onHandleSubmit = (searchedText) => {
     this.props.getDepartments(searchedText.trim());
     this.props.setOpenedIdItemDivisions('');
     this.setState({ stepStack: [] });

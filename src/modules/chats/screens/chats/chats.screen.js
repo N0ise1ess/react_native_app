@@ -4,7 +4,7 @@ import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { img_account, img_students } from '../../../../assets/images';
-import { FooterSection } from '../../../shared';
+import { FooterSection, throttle } from '../../../shared';
 import { styles } from './styles';
 
 const itemList = [
@@ -72,12 +72,8 @@ class InnerComponent extends Component {
           <Input
             style={styles.searchInput}
             placeholder="Поиск по ФИО или должности"
-            value={this.state.searchedText}
-            onChangeText={(text) => this.setState({ searchedText: text })}
+            // onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
           />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
-          </Button>
         </Item>
         <Content>
           <List

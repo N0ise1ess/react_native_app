@@ -4,7 +4,7 @@ import { FlatList, Keyboard, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 
-import { CustomIcon, FooterSection } from '../../../shared';
+import { CustomIcon, FooterSection, throttle } from '../../../shared';
 import { styles } from './styles';
 
 const collections = [
@@ -108,12 +108,8 @@ class InnerComponent extends Component {
           <Input
             style={styles.searchInput}
             placeholder="Поиск по коллекции"
-            value={this.state.searchedText}
-            onChangeText={(text) => this.setState({ searchedText: text })}
+            onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
           />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text style={styles.btnFind}>Найти</Text>
-          </Button>
         </Item>
         <Content ref={(node) => (this.content = node)}>
           {collectionLoading ? (
@@ -228,7 +224,7 @@ class InnerComponent extends Component {
   };
 
   onHandleSubmit = () => {
-    Keyboard.dismiss();
+    //
   };
 }
 
