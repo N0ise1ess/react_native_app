@@ -1,6 +1,6 @@
 import { Container, Content, List, Tab, TabHeading, Tabs, Text } from 'native-base';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { CustomIcon, FooterSection } from '../../../shared';
@@ -94,6 +94,15 @@ class InnerComponent extends Component {
 
     return (
       <Content style={styles.container}>
+        <View style={styles.slider}>
+          <TouchableOpacity >
+            <CustomIcon name="arrow_left" style={styles.iconStyle} />
+          </TouchableOpacity>
+          <Text style={styles.textSlider}>test</Text>
+          <TouchableOpacity >
+            <CustomIcon name="arrow_right" style={styles.iconStyle} />
+          </TouchableOpacity>
+        </View>
         <List
           dataArray={list}
           renderRow={(item) => (
@@ -103,8 +112,8 @@ class InnerComponent extends Component {
                   {item.passed ? (
                     <CustomIcon name="ok" style={[styles.markIcon, styles.okIcon]} />
                   ) : (
-                    <View style={[styles.markIcon, styles.redCircle]} />
-                  )}
+                      <View style={[styles.markIcon, styles.redCircle]} />
+                    )}
                   <Text style={styles.title}>{item.title}</Text>
                 </View>
                 <Text style={styles.textStyle}>{item.type}</Text>
