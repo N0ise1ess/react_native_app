@@ -1,4 +1,4 @@
-import { Container, Content, List, ListItem, Text } from 'native-base';
+import {Button, Container, Content, List, ListItem, Text} from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -48,7 +48,7 @@ class InnerComponent extends Component {
     const { userStatus, navigation, token } = this.props;
     return (
       <Container style={styles.container}>
-        <Content>
+        <Content contentContainerStyle={styles.content}>
           <List
             style={styles.listStyle}
             dataArray={itemList}
@@ -68,6 +68,9 @@ class InnerComponent extends Component {
               </ListItem>
             )}
           />
+          <Button rounded style={styles.buttonStyle}>
+            <Text>Добавить</Text>
+          </Button>
         </Content>
         <FooterSection {...this.props} />
       </Container>
