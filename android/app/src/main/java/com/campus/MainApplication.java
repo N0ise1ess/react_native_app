@@ -3,6 +3,7 @@ package com.campus;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnta.clear.ClearCachePackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
@@ -49,6 +50,7 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new ClearCachePackage(),
         new MapsPackage(),
         new RNFirebasePackage(),
         new RNFirebaseMessagingPackage(),

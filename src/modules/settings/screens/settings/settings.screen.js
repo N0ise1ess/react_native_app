@@ -2,7 +2,6 @@ import { Container, Content, List, ListItem, Text } from 'native-base';
 import React, { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
-
 import { logout } from '../../../auth/store/auth-actions';
 import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';

@@ -2,10 +2,11 @@ import { Button, Container, Label, ListItem } from 'native-base';
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Slider from 'react-native-slider';
+import clear from 'react-native-clear-app-cache'
 import { connect } from 'react-redux';
-
 import * as actions from '../../store/settings-actions';
 import { styles } from './styles';
+import { CustomSnackbar } from '../../../shared';
 
 class Settings extends Component {
   static options(passProps) {
@@ -22,6 +23,8 @@ class Settings extends Component {
     super(props);
     this.state = {
       styles: styles(props.fontSize),
+      sizeCacheNumber: 0,
+      sizeCacheUnit: 'kB',
     };
   }
 
@@ -29,8 +32,14 @@ class Settings extends Component {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
 
+  async componentWillMount() {
+    await clear.getAppCacheSize((value, unit) => {
+      this.setState({ sizeCacheNumber: value, sizeCacheUnit: unit, })
+    })
+  }
+
   render() {
-    const { styles } = this.state;
+    const { styles, sizeCacheUnit, sizeCacheNumber } = this.state;
     return (
       <Container style={styles.container}>
         <ListItem button style={styles.listItemStyle}>
@@ -63,12 +72,15 @@ class Settings extends Component {
           <View style={styles.textRam}>
             <Text style={styles.textRam_title}>Занимаемая память</Text>
             <View style={styles.textRam_description}>
-              <Text style={styles.textRam_number}>25</Text>
-              <Text style={styles.textRam_size}>GB</Text>
+              <Text style={styles.textRam_number}>{sizeCacheNumber}</Text>
+              <Text style={styles.textRam_size}>{sizeCacheUnit}</Text>
             </View>
           </View>
           <View style={styles.buttonClear_box}>
-            <Button block rounded style={styles.buttonClear}>
+            <Button block rounded style={styles.buttonClear} onPress={() => clear.clearAppCache(() => {
+              this.setState({sizeCacheNumber: 0, sizeCacheUnit: 'kB'});
+              CustomSnackbar.show({ title: 'Clear!' });
+            })}>
               <Text style={styles.buttonClear_text}>ОЧИСТИТЬ</Text>
             </Button>
           </View>
