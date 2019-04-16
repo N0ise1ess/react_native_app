@@ -178,6 +178,7 @@ def increaseVersionCodeOnRelease() {
 }
 
 dependencies {
+    compile project(':react-native-clear-app-cache')
     compile(project(':react-native-firebase')) { transitive = false }
     compile project(':react-native-splash-screen')
     compile project(':react-native-snackbar')
