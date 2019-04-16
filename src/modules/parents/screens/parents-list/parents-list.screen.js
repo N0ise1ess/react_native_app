@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { img_parent } from '../../../../assets/images';
 import { FooterSection } from '../../../shared';
 import { styles } from './styles';
+import {Navigation} from "react-native-navigation";
 
 const itemList = [
   {
@@ -52,7 +53,11 @@ class InnerComponent extends Component {
             style={styles.listStyle}
             dataArray={itemList}
             renderRow={(item) => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Parent')}>
+              <ListItem button style={styles.listItemStyle} onPress={() => Navigation.push(this.props.componentId, {
+                component: {
+                  name: 'Parent'
+                },
+              })}>
                 <Image source={img_parent} style={styles.imageStyle} />
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
@@ -62,7 +67,7 @@ class InnerComponent extends Component {
             )}
           />
         </Content>
-        <FooterSection {...this.props} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }
