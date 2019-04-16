@@ -26,7 +26,8 @@ class InnerComponent extends Component {
       styles: styles(props.fontSize),
       groupNames: [],
       currentGroupIndex: -1,
-      finances: null
+      finances: null,
+      isPressed: false,
     };
   }
 
@@ -60,14 +61,25 @@ class InnerComponent extends Component {
   componentDidUpdate(props) {
     this.props.fontSize !== props.fontSize && this.setState({ styles: styles(this.props.fontSize) });
   }
+  changeStatus = () => {
+    this.setState({
+      isPressed: true
+    })
+  }
+  goBack = () => {
+    this.setState({
+      isPressed: false
+    })
+  }
 
   render() {
-  
+    
+    console.log('12312312312312', this.props)
     const { userStatus, finances } = this.props;
-    const { currentTab, styles, groupNames } = this.state;
+    const { currentTab, styles, groupNames, isPressed} = this.state;
     // TODO fix 3350 to 0 after testing
-    payments = finances.payments[0] ? finances.payments[0].charges : 1000
-    const debt = finances && finances[0] ? finances[0].debt : 3350;
+    const debt = finances && finances[0] ? finances[0].debt : 600; // just for test, there are no data in new api for debts
+    console.log('1-1--1-1-1-1-', debt)
 
     // TODO check what field holds amount of finances[0].charges ?
     const renderPayment = () => {
@@ -77,8 +89,13 @@ class InnerComponent extends Component {
         <Tab
           heading={
             <TabHeading style={styles.tabHeaderStyle}>
-              <View style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
-                {this._upperCase('Оплата')}
+            
+              <View onPress={() => this.goBack()} style={[styles.tabHeadingStyle, styles.tabHeadingLeft, currentTab === 0 && styles.activeTabStyle]}>
+                <TouchableOpacity onPress={() => this.goBack()}>
+                <Text>
+                  {this._upperCase('Оплата')}
+                </Text>
+                </TouchableOpacity>
               </View>
             </TabHeading>
           }
@@ -86,10 +103,11 @@ class InnerComponent extends Component {
           <Content style={{ backgroundColor: '#CED8DA' }}>
             {!finances ? (
               <Spinner color="blue" />
-            ) : (
+            ) : debt > 0 && isPressed === false ? (
+              <TouchableOpacity onPress={() => this.changeStatus()}>
               <List
-                dataArray={payments}
-                // dataArray={[{ amount: 600 }, { amount: 2750 }]}
+                // dataArray={payments}
+                dataArray={[{ amount: 600 }]}
                 renderRow={(item, sectionId, index) => (
                   <View style={[styles.listStyle, index === '0' ? { marginTop: 0 } : {}]}>
                     <View>
@@ -99,26 +117,52 @@ class InnerComponent extends Component {
                           fontSize: getSizeFonts(fontSettings.FONT_SIZE_14, this.props.fontSize),
                         }}
                       >
-                        Обучение, {this.getSemesterNumber('29-10-18')} семестр
-                        {item.cost}
+                        Задолженность по оплате {'\n'}за обучение
                       </Text>
                       <Text style={styles.deadline}>
                         Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
-                      {/* <Text style={styles.paymentAmount}>{item.amount} ₽</Text> */}
+                      <Text style={styles.paymentAmount}>{item.amount} ₽</Text>
                     </View>
                   </View>
                 )}
               />
-            )}
-            {debt > 0 && currentTab === 0 ? (
-              <View style={[styles.listStyle, { backgroundColor: '#e91b47', height: 50 }]}>
+              </TouchableOpacity>
+            ) : isPressed === true ? 
+            <View>
+            <List
+                // dataArray={payments}
+                dataArray={[{ amount: 600 }]}
+                renderRow={(item, sectionId, index) => (
+                  <View style={[styles.listStyle, index === '0' ? { marginTop: 0 } : {}]}>
+                    <View>
+                      <Text
+                        style={{
+                          fontWeight: 'bold',
+                          fontSize: getSizeFonts(fontSettings.FONT_SIZE_14, this.props.fontSize),
+                        }}
+                      >
+                        Обучение, 3 семестр
+                      </Text>
+                      <Text style={styles.deadline}>
+                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
+                      </Text>
+                    </View>
+                    <View style={this.state.styles.debtSection}>
+                      <Text style={styles.paymentAmount}>{item.amount} ₽</Text>
+                    </View>
+                  </View>
+                )}
+              />
+            <View style={[styles.listStyle, { backgroundColor: '#e91b47', height: 50 }]}>
                 <Text style={styles.debtText}>К оплате</Text>
-                <Text style={[styles.paymentAmount, { color: 'white' }]}> ₽</Text>
+                <Text style={[styles.paymentAmount, { color: 'white' }]}>{debt} ₽</Text>
               </View>
-            ) : null}
+            </View>
+            :
+            <Text style={{marginLeft:10}}>Нет Задолженности</Text>}
           </Content>
         </Tab>
       );
@@ -137,8 +181,9 @@ class InnerComponent extends Component {
           }
         >
           <Content style={{ backgroundColor: '#CED8DA' }}>
+          { finances.stipend && finances.stipend.length !== 0 ?
             <List
-              dataArray={finances.scholarships}
+              dataArray={finances.stipend}
               renderRow={(item) => (
                 <View style={styles.listStyle}>
                   <View>
@@ -155,6 +200,11 @@ class InnerComponent extends Component {
                 </View>
               )}
             />
+          : 
+          <Text style={{marginLeft: 10}}>
+            Нет Стипендии
+          </Text>
+          }
           </Content>
         </Tab>
       );
