@@ -202,7 +202,7 @@ class InnerComponent extends Component {
             />
           : 
           <Text style={{marginLeft: 10}}>
-            Нет Стипендии
+            Информация отсутствует
           </Text>
           }
           </Content>
