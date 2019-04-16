@@ -135,6 +135,9 @@ export const styles = (fontSize = 0) =>
         paddingLeft: 20,
         paddingRight: 20,
       },
+      titleContainer: {
+        alignSelf: 'flex-start'
+      },
       title: {
         marginBottom: 10,
         color: '#1462b5',

@@ -90,10 +90,10 @@ class innerComponent extends React.Component {
     const {styles} = this.state
     return (
         <View style={styles.formContainer}>
-          <View>
-            <Text style={styles.title}>Личные данные</Text>
-          </View>
           <Form style={styles.form}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Личные данные</Text>
+            </View>
             {this.upperCaseWord('Фамилия:', true)}
             <Field name="surname" placeholder="Иванов" iconName="user" type="username" iconRight={true}
                    component={this.renderInput}/>
