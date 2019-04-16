@@ -178,6 +178,7 @@ def increaseVersionCodeOnRelease() {
 }
 
 dependencies {
+    compile project(':react-native-clear-app-cache')
     compile(project(':react-native-firebase')) { transitive = false }
     compile project(':react-native-splash-screen')
     compile project(':react-native-snackbar')
@@ -193,6 +194,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:15.0.2"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
     implementation project(':react-native-navigation')
+    implementation project(':react-native-maps')
 }
 
 // Run this once to be able to run the application with BUCK

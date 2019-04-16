@@ -6,7 +6,7 @@ import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
 
 import { img_teacher } from '../../../../assets/images';
-import { FooterSection } from '../../../shared';
+import { FooterSection, throttle } from '../../../shared';
 import { findPersonalityByName, updatePersonalityByName } from '../../store/personalities-actions';
 import { styles } from './styles';
 
@@ -102,12 +102,8 @@ class InnerComponent extends Component {
           <Input
             style={styles.searchInput}
             placeholder="Поиск по ФИО"
-            value={this.state.searchedText}
-            onChangeText={(text) => this.setState({ searchedText: text })}
+            onChangeText={(text) => throttle(() => this.onHandleSubmit(text))}
           />
-          <Button transparent onPress={this.onHandleSubmit}>
-            <Text>Найти</Text>
-          </Button>
         </Item>
         <View style={{ flex: 4, flexDirection: 'row' }}>
           <Animated.View style={[{ width: sidebarWidth }]}>

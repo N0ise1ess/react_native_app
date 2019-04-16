@@ -1,4 +1,6 @@
 rootProject.name = 'campus'
+include ':react-native-clear-app-cache'
+project(':react-native-clear-app-cache').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-clear-app-cache/android')
 include ':react-native-firebase'
 project(':react-native-firebase').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-firebase/android')
 include ':react-native-splash-screen'
@@ -15,7 +17,8 @@ include ':react-native-svg'
 project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
 include ':react-native-gesture-handler'
 project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 include ':app'
 include ':react-native-navigation'
 project(':react-native-navigation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-navigation/lib/android/app/')

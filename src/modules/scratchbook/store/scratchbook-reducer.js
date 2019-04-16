@@ -1,7 +1,7 @@
 import * as types from './scratchbook-action-types';
 import { initialState } from './scratchbook-initial-state';
 
-export const scratchBookReducer = (state = initialState.scratchBook, action) => {
+export const scratchBookReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_DISCIPLINE_LIST_PROGRESS_SUCCESS:
       return {

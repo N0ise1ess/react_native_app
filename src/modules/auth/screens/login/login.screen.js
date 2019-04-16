@@ -50,7 +50,10 @@ class InnerComponent extends React.Component {
         },
       ]);
     }
-    this.props.errorMessage !== newProps.errorMessage && this.showToast(newProps.errorMessage);
+
+    newProps.errorMessage &&
+    this.props.errorMessage !== newProps.errorMessage && 
+    this.showToast(newProps.errorMessage);
   }
 
   onButtonPress = async () => {

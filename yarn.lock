@@ -4699,6 +4699,10 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
+react-native-clear-app-cache@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-clear-app-cache/-/react-native-clear-app-cache-1.0.4.tgz#510cfd1b51025ac4d7adf93c9cc8baf1ba1b3778"
+
 react-native-collapsible@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.4.0.tgz#ec03cac361178319b77bb9993b73677356dd89d2"
@@ -4763,10 +4767,13 @@ react-native-keyboard-aware-scroll-view@0.5.0:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
 
+react-native-maps@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.24.0.tgz#6627942e9357768c96ddd22bf66d7e88084d19b0"
+
 react-native-modalbox@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/react-native-modalbox/-/react-native-modalbox-1.7.1.tgz#cdb623ecd1cbe8699a450217c25b2d6666dc63e6"
-  integrity sha512-Jqn12MKQaT5OSb1uMAEeDQF02xHS+WWdgKl55ecoIknrDy+FIoC3fXHMEoRZH6agADDg9eVBqx8w+P7+EwXTbQ==
   dependencies:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
