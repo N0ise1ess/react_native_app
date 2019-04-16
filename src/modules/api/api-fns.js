@@ -68,6 +68,23 @@ export function financePaymentApi(token) {
   });
 }
 
+export function financeDebtsApi(token) {
+  return axios.get(endpoints.finance.debts, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+
+export function financeStipendApi(token) {
+  return axios.get(endpoints.finance.stipend, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export function financeScholarshipsApi(token) {
   return axios.get(endpoints.finance.scholarships, {
     headers: {
