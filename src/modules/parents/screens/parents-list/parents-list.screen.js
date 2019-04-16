@@ -68,7 +68,11 @@ class InnerComponent extends Component {
               </ListItem>
             )}
           />
-          <Button rounded style={styles.buttonStyle}>
+          <Button rounded style={styles.buttonStyle} onPress={() => Navigation.push(this.props.componentId, {
+            component: {
+              name: 'ParentSignUp'
+            },
+          })}>
             <Text>Добавить</Text>
           </Button>
         </Content>

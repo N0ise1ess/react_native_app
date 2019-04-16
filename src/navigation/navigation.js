@@ -55,6 +55,7 @@ export const registerScreens = () => {
   Navigation.registerComponentWithRedux(`Chat`, () => Modules.ChatScreen, Provider, store);
   Navigation.registerComponentWithRedux(`Parents`, () => Modules.ParentsListScreen, Provider, store);
   Navigation.registerComponentWithRedux(`Parent`, () => Modules.ParentScreen, Provider, store);
+  Navigation.registerComponentWithRedux(`ParentSignUp`, () => Modules.ParentSignupScreen, Provider, store);
   Navigation.registerComponentWithRedux(`WifiAccess`, () => Modules.WifiAccessScreen, Provider, store);
   Navigation.registerComponentWithRedux(`Reports`, () => Modules.ReportsScreen, Provider, store);
   Navigation.registerComponentWithRedux(`NotificationSettings`, () => Modules.NotificationSettingsScreen, Provider, store);
