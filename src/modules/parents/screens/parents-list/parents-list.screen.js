@@ -58,7 +58,9 @@ class InnerComponent extends Component {
                   name: 'Parent'
                 },
               })}>
-                <Image source={img_parent} style={styles.imageStyle} />
+                <View style={styles.btnImageStyle}>
+                  <Image source={img_parent} style={styles.imageStyle} />
+                </View>
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
                   <Text style={styles.textStyle}>{item.position}</Text>
