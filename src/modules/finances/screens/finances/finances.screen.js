@@ -120,7 +120,7 @@ class InnerComponent extends Component {
                         Задолженность по оплате {'\n'}за обучение
                       </Text>
                       <Text style={styles.deadline}>
-                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
+                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>Информация отсутствует</Text>
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
@@ -144,10 +144,10 @@ class InnerComponent extends Component {
                           fontSize: getSizeFonts(fontSettings.FONT_SIZE_14, this.props.fontSize),
                         }}
                       >
-                        Обучение, 3 семестр
+                        Информация отсутствует
                       </Text>
                       <Text style={styles.deadline}>
-                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>29.10.18</Text>
+                        Оплатить до <Text style={{ fontWeight: 'bold', fontSize: 12 }}>Информация отсутствует</Text>
                       </Text>
                     </View>
                     <View style={this.state.styles.debtSection}>
