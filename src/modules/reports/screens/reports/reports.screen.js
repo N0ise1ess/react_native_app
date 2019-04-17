@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { CustomIcon, FooterSection } from '../../../shared';
 import { styles } from './styles';
+import * as actions from '../../store/reports-actions';
 
 const statementsList = [
   {
@@ -184,7 +185,8 @@ const mapStateToProps = (state) => {
   return {
     ...state.authReducer,
     ...state.settings,
+    ...state.reports,
   };
 };
 
-export const ReportsScreen = connect(mapStateToProps)(InnerComponent);
+export const ReportsScreen = connect(mapStateToProps, {...actions})(InnerComponent);

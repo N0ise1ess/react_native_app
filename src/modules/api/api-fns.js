@@ -289,3 +289,30 @@ export function sendRequestLibraryApi(payload) {
     },
   })
 }
+
+export function getYearsOfReports(token) {
+  let response = await fetch(endpoints.reports.getReports, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status }; 
+}
+
+export function getReportsOfYear(payload) {
+  let response = await fetch(endpoints.reports.getReports, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${payload.token}`,
+    },
+    body: {
+      ...payload.data
+    },
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status }; 
+}
