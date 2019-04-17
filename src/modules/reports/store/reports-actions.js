@@ -1,7 +1,7 @@
 import * as api from '../../api';
 import * as types from './reports-action-types';
 
-export const getYearsOfReports = (token) => dispatch => {
+export const getYearsOfReports = (token) => async dispatch => {
   dispatch({type: types.GET_YEARS_OF_REPORTS_PENDING});
   try {
     let { data } = await api.getYearsOfReports(token);
@@ -15,7 +15,7 @@ export const getYearsOfReports = (token) => dispatch => {
   }
 };
 
-export const getReportsOfYear = (token, yearInfo) => dispatch => {
+export const getReportsOfYear = (token, yearInfo) => async dispatch => {
     dispatch({type: types.GET_REPORTS_OF_YEARS_PENDING});
     try {
       let { data } = await api.getReportsOfYear({token, data: yearInfo});
