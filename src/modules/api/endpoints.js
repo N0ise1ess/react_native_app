@@ -87,4 +87,7 @@ export const endpoints = {
   scratchBook: {
     getDisciplineListProgress: 'http://opencode.su/campus/integration/api/student/getDisciplineListProgress',
   },
+  reports: {
+    getReports: 'http://opencode.su/campus/integration/api/report',
+  }
 };
