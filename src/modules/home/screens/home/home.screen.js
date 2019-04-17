@@ -72,11 +72,11 @@ const cardList = [
         route: 'PersonalRating',
         image: img_rating,
       },
-      // {
-      //   title: 'Родители',
-      //   route: 'Parents',
-      //   image: img_parent,
-      // },
+      {
+        title: 'Родители',
+        route: 'Parents',
+        image: img_parent,
+      },
       {
         title: 'Персоналии',
         route: 'Personalities',
@@ -91,8 +91,11 @@ const cardList = [
         title: 'Доступ к Wi-Fi',
         route: 'WifiAccess',
         image: img_wifi,
-      },
-      //todo: убрать этот пункт, когда блок родителей вернется в меню (он выводится ниже)
+      }
+    ],
+  },
+  {
+    list: [
       {
         title: 'Ведомости\nи отчеты',
         route: 'Reports',
@@ -100,16 +103,6 @@ const cardList = [
       },
     ],
   },
-  // todo: раскоментировать, когда блок родителей вернется в меню
-  // {
-  //   list: [
-  //     {
-  //       title: 'Ведомости\nи отчеты',
-  //       route: 'Reports',
-  //       image: img_reports,
-  //     },
-  //   ],
-  // },
 ];
 
 const cardGuestList = [
