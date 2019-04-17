@@ -290,7 +290,7 @@ export function sendRequestLibraryApi(payload) {
   })
 }
 
-export function getYearsOfReports(token) {
+export async function getYearsOfReports(token) {
   let response = await fetch(endpoints.reports.getReports, {
     method: 'GET',
     headers: {
@@ -302,7 +302,7 @@ export function getYearsOfReports(token) {
   return { data, status }; 
 }
 
-export function getReportsOfYear(payload) {
+export async function getReportsOfYear(payload) {
   let response = await fetch(endpoints.reports.getReports, {
     method: 'POST',
     headers: {
