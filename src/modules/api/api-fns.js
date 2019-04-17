@@ -68,6 +68,23 @@ export function financePaymentApi(token) {
   });
 }
 
+export function financeDebtsApi(token) {
+  return axios.get(endpoints.finance.debts, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+
+export function financeStipendApi(token) {
+  return axios.get(endpoints.finance.stipend, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export function financeScholarshipsApi(token) {
   return axios.get(endpoints.finance.scholarships, {
     headers: {
@@ -271,4 +288,31 @@ export function sendRequestLibraryApi(payload) {
       Authorization: `Bearer ${payload.token}`,
     },
   })
+}
+
+export function getYearsOfReports(token) {
+  let response = await fetch(endpoints.reports.getReports, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status }; 
+}
+
+export function getReportsOfYear(payload) {
+  let response = await fetch(endpoints.reports.getReports, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${payload.token}`,
+    },
+    body: {
+      ...payload.data
+    },
+  });
+  let status = response.status;
+  let data = await response.json();
+  return { data, status }; 
 }

@@ -2,11 +2,18 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import { getSizeFonts, fontSettings } from '../../../../shared';
 
+const { width, height } = Dimensions.get("window")
+
 export const styles = (fontSize) =>
   StyleSheet.create({
     container: {
       backgroundColor: '#CED8DA',
       flex: 1,
+      height: '100%'
+    },
+    content: {
+      flex:1,
+      height: '100%'
     },
     iconStyle: {
       width: 40,
@@ -21,9 +28,7 @@ export const styles = (fontSize) =>
       height: 40,
       resizeMode: 'contain',
       tintColor: '#4099F4',
-      borderWidth: 1,
-      borderColor: '#4099F4',
-      borderRadius: 20,
+      borderColor: 'transparent',
       marginLeft: 15,
       marginRight: 15,
     },
@@ -41,7 +46,7 @@ export const styles = (fontSize) =>
     listStyle: {},
     columnStyle: {
       flexDirection: 'column',
-      alignItems: 'flex-start',
+      alignItems: 'flex-start'
     },
     titleStyle: {
       fontWeight: 'bold',
@@ -53,8 +58,9 @@ export const styles = (fontSize) =>
       fontFamily: 'MyriadPro-Regular',
       fontSize: getSizeFonts(fontSettings.FONT_SIZE_12, fontSize),
       fontWeight: '300',
-      color: '#000',
+      color: 'grey',
       alignSelf: 'flex-start',
+      marginTop: 5
     },
     //Search tabSectionStyle
     searchBar: {
@@ -69,5 +75,26 @@ export const styles = (fontSize) =>
     },
     searchIcon: {
       color: '#4D6270',
+    },
+    btnImageStyle: {
+      borderRadius: width * 0.12,
+      height: width * 0.12,
+      width: width * 0.12,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'transparent',
+      borderColor: '#4099F4',
+      borderWidth: 1,
+      marginRight: 20,
+      marginLeft: 10,
+    },
+    buttonStyle: {
+      position: 'relative',
+      left: width / 2 - 3,
+      bottom: 20,
+      paddingLeft: 25,
+      paddingRight: 25,
+      margin: 5,
+      backgroundColor: '#e91b47',
     },
   });

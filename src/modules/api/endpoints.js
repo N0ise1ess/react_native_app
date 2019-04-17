@@ -10,6 +10,11 @@ export const endpoints = {
     document: 'http://opencode.su/campus/integration/api/finance/document',
     /** Стипендия */
     scholarships: 'http://opencode.su/campus/integration/api/finance/stipend',
+    /** Задолженности */
+    debts: 'http://opencode.su/campus/integration/api/finance/debts',
+    /** Ситпендии */
+    stipend: 'http://opencode.su/campus/integration/api/finance/stipend'
+    
   },
   /** Расписание */
   timetable: {
@@ -82,4 +87,7 @@ export const endpoints = {
   scratchBook: {
     getDisciplineListProgress: 'http://opencode.su/campus/integration/api/student/getDisciplineListProgress',
   },
+  reports: {
+    getReports: 'http://opencode.su/campus/integration/api/report',
+  }
 };

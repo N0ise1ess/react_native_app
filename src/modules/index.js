@@ -17,7 +17,7 @@ export {
 export { LoadingScreen } from './loading';
 export { NewsScreen, NewsDetailsScreen } from './news';
 export { NotificationsScreen } from './notifications';
-export { ParentScreen, ParentsListScreen } from './parents';
+export { ParentScreen, ParentsListScreen, ParentSignupScreen } from './parents';
 export { PersonalitiesScreen, PersonalityScreen } from './personalities';
 export { PersonalRatingScreen } from './personal-rating';
 export { QuestionnairesScreen, QuestionnairesStep } from './questionnaires';

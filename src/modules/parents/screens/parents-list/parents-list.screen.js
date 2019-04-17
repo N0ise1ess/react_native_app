@@ -1,4 +1,4 @@
-import { Container, Content, List, ListItem, Text } from 'native-base';
+import {Button, Container, Content, List, ListItem, Text} from 'native-base';
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { img_parent } from '../../../../assets/images';
 import { FooterSection } from '../../../shared';
 import { styles } from './styles';
+import {Navigation} from "react-native-navigation";
 
 const itemList = [
   {
@@ -47,13 +48,19 @@ class InnerComponent extends Component {
     const { userStatus, navigation, token } = this.props;
     return (
       <Container style={styles.container}>
-        <Content>
+        <Content contentContainerStyle={styles.content}>
           <List
             style={styles.listStyle}
             dataArray={itemList}
             renderRow={(item) => (
-              <ListItem button style={styles.listItemStyle} onPress={() => navigation.navigate('Parent')}>
-                <Image source={img_parent} style={styles.imageStyle} />
+              <ListItem button style={styles.listItemStyle} onPress={() => Navigation.push(this.props.componentId, {
+                component: {
+                  name: 'Parent'
+                },
+              })}>
+                <View style={styles.btnImageStyle}>
+                  <Image source={img_parent} style={styles.imageStyle} />
+                </View>
                 <View style={styles.columnStyle}>
                   <Text style={styles.titleStyle}>{item.fullName}</Text>
                   <Text style={styles.textStyle}>{item.position}</Text>
@@ -61,8 +68,15 @@ class InnerComponent extends Component {
               </ListItem>
             )}
           />
+          <Button rounded style={styles.buttonStyle} onPress={() => Navigation.push(this.props.componentId, {
+            component: {
+              name: 'ParentSignUp'
+            },
+          })}>
+            <Text>Добавить</Text>
+          </Button>
         </Content>
-        <FooterSection {...this.props} navigate={navigation.navigate} />
+        <FooterSection {...this.props} />
       </Container>
     );
   }
