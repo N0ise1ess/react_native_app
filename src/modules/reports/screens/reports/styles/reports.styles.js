@@ -18,6 +18,22 @@ export const styles = (fontSize) =>
       marginTop: 5,
       marginLeft: 0,
     },
+    iconStyle: {
+      color: '#58739d',
+      fontSize: getSizeFonts(fontSettings.FONT_SIZE_18, fontSize),
+      paddingRight: 10,
+      alignSelf: 'center',
+    },
+    textSlider: {
+      color: '#486694'
+    },
+    slider: {
+      marginTop: 20,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      padding: 5,
+    },
     title: {
       fontSize: getSizeFonts(fontSettings.FONT_SIZE_14, fontSize),
       flexWrap: 'wrap',
